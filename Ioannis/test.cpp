@@ -4,7 +4,7 @@ int main() {
 
 using namespace std;
 
-cout << "Brook Kittipon" << endl;
+cout << "Yulong Gu, Eric" << endl;
 
 return 0;
 
