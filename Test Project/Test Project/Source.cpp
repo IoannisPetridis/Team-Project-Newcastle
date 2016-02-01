@@ -5,6 +5,7 @@ int main() {
 	using std::endl;
 
 	cout << "This is Yulong" << endl;
+	cout << "Testing Testing" << endl;
 	
 	return 0;
 }
