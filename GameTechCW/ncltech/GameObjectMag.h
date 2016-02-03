@@ -25,7 +25,6 @@ protected:
 	void		AddGameObject(GameObject* game_object);
 	void		RemoveGameObject(GameObject* game_object);
 
-private:
 	GameObject*			m_RootGameObject;
 };
 
