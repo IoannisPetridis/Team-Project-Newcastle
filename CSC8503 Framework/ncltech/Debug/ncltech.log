@@ -1,0 +1,39 @@
+﻿Build started 17/12/2015 17:22:30.
+     1>Project "C:\Users\CMDAdmin\Documents\Visual Studio 2013\Projects\CSC8503 Framework\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PhysicsEngine.cpp
+         PhysicsEngine.cpp
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\octree.h(105): warning C4244: 'initializing' : conversion from 'const double' to 'float', possible loss of data
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\octree.h(473): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\octree.h(475): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\octree.h(509): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\octree.h(577): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\physicsengine.cpp(215): warning C4002: too many actual parameters for macro 'max'
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\physicsengine.cpp(273): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\physicsengine.cpp(282): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\physicsengine.cpp(426): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\physicsengine.cpp(450): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\cmdadmin\documents\visual studio 2013\projects\csc8503 framework\ncltech\physicsengine.cpp(480): warning C4804: '<' : unsafe use of type 'bool' in operation
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\CMDAdmin\Documents\Visual Studio 2013\Projects\CSC8503 Framework\Game Technologies\Debug\ncltech.lib" /NOLOGO Debug\CollisionDetection.obj
+         Debug\CommonMeshes.obj
+         Debug\Constraint.obj
+         Debug\CuboidCollisionShape.obj
+         Debug\NCLDebug.obj
+         Debug\GameObject.obj
+         Debug\Hull.obj
+         Debug\Manifold.obj
+         Debug\PhysicsEngine.obj
+         Debug\PhysicsObject.obj
+         Debug\PiramidCollisionShape.obj
+         Debug\Scene.obj
+         Debug\SimpleMeshObject.obj
+         Debug\Source.obj
+         Debug\SphereCollisionShape.obj
+         Debug\TorusCollisionShape.obj
+         ncltech.vcxproj -> C:\Users\CMDAdmin\Documents\Visual Studio 2013\Projects\CSC8503 Framework\Game Technologies\Debug\ncltech.lib
+     1>Done Building Project "C:\Users\CMDAdmin\Documents\Visual Studio 2013\Projects\CSC8503 Framework\ncltech\ncltech.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.76
