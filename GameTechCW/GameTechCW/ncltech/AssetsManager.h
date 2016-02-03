@@ -1,5 +1,6 @@
 #pragma once
 #include "../nclgl/Mesh.h"
+#include "../nclgl/OBJMesh.h"
 
 class Scene;
 

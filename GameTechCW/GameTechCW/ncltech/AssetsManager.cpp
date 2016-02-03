@@ -1,5 +1,4 @@
 #include "AssetsManager.h"
-#include "../nclgl/OBJMesh.h"
 
 Mesh* AssetsManager::m_pPlane	= NULL;
 Mesh* AssetsManager::m_pCube	= NULL;
