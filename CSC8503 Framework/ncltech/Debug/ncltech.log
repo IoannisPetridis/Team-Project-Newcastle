@@ -1,0 +1,58 @@
+﻿Build started 02/02/2016 18:09:05.
+     1>Project "C:\Users\CMDAdmin\Desktop\CSC8503 Framework\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CollisionDetection.cpp CommonMeshes.cpp Constraint.cpp CuboidCollisionShape.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp PhysicsEngine.cpp PhysicsObject.cpp PiramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp Source.cpp SphereCollisionShape.cpp TorusCollisionShape.cpp
+         TorusCollisionShape.cpp
+         SphereCollisionShape.cpp
+         Source.cpp
+         SimpleMeshObject.cpp
+         Scene.cpp
+         PiramidCollisionShape.cpp
+         PhysicsObject.cpp
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\physicsobject.cpp(28): warning C4305: '=' : truncation from 'double' to 'float'
+         PhysicsEngine.cpp
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\octree.h(53): warning C4244: 'initializing' : conversion from 'const double' to 'float', possible loss of data
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\octree.h(110): warning C4154: deletion of an array expression; conversion to pointer supplied
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\octree.h(143): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\octree.h(145): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\octree.h(181): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\octree.h(243): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\physicsengine.cpp(230): warning C4002: too many actual parameters for macro 'max'
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\physicsengine.cpp(290): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\physicsengine.cpp(451): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\physicsengine.cpp(476): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\physicsengine.cpp(506): warning C4804: '<' : unsafe use of type 'bool' in operation
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\physicsengine.cpp(507): warning C4804: '<' : unsafe use of type 'bool' in operation
+         Manifold.cpp
+         Hull.cpp
+         GameObject.cpp
+         NCLDebug.cpp
+         CuboidCollisionShape.cpp
+         Constraint.cpp
+         CommonMeshes.cpp
+         CollisionDetection.cpp
+         Generating Code...
+     1>c:\users\cmdadmin\desktop\csc8503 framework\ncltech\collisiondetection.cpp(308): warning C4715: 'CollisionDetection::BuildCollisionManifold' : not all control paths return a value
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\CMDAdmin\Desktop\CSC8503 Framework\Game Technologies\Debug\ncltech.lib" /NOLOGO Debug\CollisionDetection.obj
+         Debug\CommonMeshes.obj
+         Debug\Constraint.obj
+         Debug\CuboidCollisionShape.obj
+         Debug\NCLDebug.obj
+         Debug\GameObject.obj
+         Debug\Hull.obj
+         Debug\Manifold.obj
+         Debug\PhysicsEngine.obj
+         Debug\PhysicsObject.obj
+         Debug\PiramidCollisionShape.obj
+         Debug\Scene.obj
+         Debug\SimpleMeshObject.obj
+         Debug\Source.obj
+         Debug\SphereCollisionShape.obj
+         Debug\TorusCollisionShape.obj
+         ncltech.vcxproj -> C:\Users\CMDAdmin\Desktop\CSC8503 Framework\Game Technologies\Debug\ncltech.lib
+     1>Done Building Project "C:\Users\CMDAdmin\Desktop\CSC8503 Framework\ncltech\ncltech.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.26
