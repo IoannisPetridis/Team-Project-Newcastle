@@ -23,6 +23,8 @@ public:
 protected:
 
 	void		AddGameObject(GameObject* game_object);
+	//update from Eric2
+	void		DiscardGameObject();
 
 	
 private:
