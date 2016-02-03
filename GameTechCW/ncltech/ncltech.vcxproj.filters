@@ -125,5 +125,8 @@
     <ClInclude Include="AssetsManager.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectMag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

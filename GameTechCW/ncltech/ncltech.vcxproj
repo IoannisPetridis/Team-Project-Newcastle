@@ -93,6 +93,7 @@
     <ClInclude Include="CollisionShape.h" />
     <ClInclude Include="Constraint.h" />
     <ClInclude Include="CuboidCollisionShape.h" />
+    <ClInclude Include="GameObjectMag.h" />
     <ClInclude Include="NCLDebug.h" />
     <ClInclude Include="DistanceConstraint.h" />
     <ClInclude Include="GameObject.h" />

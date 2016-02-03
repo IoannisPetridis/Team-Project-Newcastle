@@ -37,7 +37,7 @@ int main()
 	//Initialise the PhysicsEngine
 	PhysicsEngine::Instance();
 
-	//Initialise the Scene
+	//Initialise the Scene, complete scene graph list
 	scene = new MyScene(Window::GetWindow());
 	if (!scene->HasInitialised())
 	{
@@ -58,10 +58,13 @@ int main()
 		engine_timer.GetTimedMS();
 
 		if (!PhysicsEngine::Instance()->IsGameover()) {
+
 			PhysicsEngine::Instance()->Update(dt);
+			
 			float physics_ms = engine_timer.GetTimedMS();
 
 			scene->UpdateScene(dt);
+			
 			if (PhysicsEngine::Instance()->IsGameover()) {
 				continue;
 			}
@@ -77,6 +80,7 @@ int main()
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Graphics Timestep: %5.2fms (%5.2f FPS)", dt * 1000.0f, 1.0f / dt);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Update: %5.2fms", physics_ms);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Scene Update  : %5.2fms", update_ms);
+			
 			scene->RenderScene();
 		}
 		else {
@@ -104,6 +108,7 @@ int main()
 						+ LB_name[i] + "\t" + LB_score[i]);
 				}
 			}
+
 			scene->RenderScene();
 		}
 
