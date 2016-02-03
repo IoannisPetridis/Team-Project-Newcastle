@@ -1,0 +1,11 @@
+﻿Build started 03/02/2016 04:14:35.
+     1>Project "C:\Users\Yulong\Documents\GitHub\Team-Project-Newcastle\GameTechCW\GameTechCW\GameTechnologies\EngineManagers\EngineManagers.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\ncltech\AssetsManager.cpp
+         AssetsManager.cpp
+     1>c:\users\yulong\documents\github\team-project-newcastle\gametechcw\gametechcw\nclgl\OGLRenderer.h(22): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+     1>Done Building Project "C:\Users\Yulong\Documents\GitHub\Team-Project-Newcastle\GameTechCW\GameTechCW\GameTechnologies\EngineManagers\EngineManagers.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.32

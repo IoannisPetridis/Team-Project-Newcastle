@@ -1,26 +1,3 @@
-/******************************************************************************
-Class: Scene
-Implements: OGLRenderer
-Author:Pieran Marris <p.marris@newcastle.ac.uk>, Rich Davison <richard.davison4@newcastle.ac.uk> and YOU!
-Description: For this module, you are being provided with a basic working
-Renderer - to give you more time to work on your physics and AI!
-
-It is basically the Renderer from the Graphics For Games Module as it was
-by Tutorial 7 - Scene Management. It will split nodes up into those that are
-opaque and transparent, and render accordingly.
-
-The only new bits are the ability to search for Game Object's by their name,
-this is not a fast function but does allow some ability to talk between objects in a more
-complicated scene.
-
-
-		(\_/)								-_-_-_-_-_-_-_,------,
-		( '_')								_-_-_-_-_-_-_-|   /\_/\   NYANYANYAN
-	 /""""""""""""\=========     -----D		-_-_-_-_-_-_-~|__( ^ .^) /
-	/"""""""""""""""""""""""\				_-_-_-_-_-_-_-""  ""
-....\_@____@____@____@____@_/
-
-*//////////////////////////////////////////////////////////////////////////////
 #include <nclgl/OGLRenderer.h>
 #include <nclgl/Camera.h>
 #include <nclgl/Shader.h>

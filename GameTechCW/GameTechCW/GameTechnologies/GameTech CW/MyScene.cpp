@@ -10,7 +10,7 @@
 
 #include <ncltech\SimpleMeshObject.h>
 #include <ncltech\PhysicsEngine.h>
-#include <ncltech\CommonMeshes.h>
+#include <ncltech\AssetsManager.h>
 #include <ncltech\NCLDebug.h>
 #include <ncltech\CollisionShape.h>
 #include <ncltech\Constraint.h>
@@ -89,25 +89,10 @@ bool MyScene::InitialiseGL()
 	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -9.81f, 0.0f));		
 	PhysicsEngine::Instance()->SetDampingFactor(0.988f);						
 	
-	m_TargetTexture = SOIL_load_OGL_texture(TEXTUREDIR"target.tga", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-	glBindTexture(GL_TEXTURE_2D, m_TargetTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST); //No linear interpolation to get crisp checkerboard no matter the scalling
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	m_ThrowTex = SOIL_load_OGL_texture(TEXTUREDIR"brick.tga", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-	glBindTexture(GL_TEXTURE_2D, m_ThrowTex);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST); //No linear interpolation to get crisp checkerboard no matter the scalling
-	glBindTexture(GL_TEXTURE_2D, 0);
 
 	//Create Ground
 	SimpleMeshObject* ground  = new SimpleMeshObject("Ground");
-	ground->SetMesh(CommonMeshes::Cube(), false);
+	ground->SetMesh(AssetsManager::Cube(), false);
 	ground->SetLocalTransform(Matrix4::Scale(Vector3(34.0f, 2.0f, 34.0f)));
 	ground->SetColour(Vector4(0.2f, 1.0f, 0.5f, 1.0f));
 	ground->SetBoundingRadius(80.0f * 80.f);
@@ -120,8 +105,8 @@ bool MyScene::InitialiseGL()
 	
 	//Plane in Rest State
 	target = new SimpleMeshObject("mPlane");
-	target->SetMesh(CommonMeshes::Cube(), false);
-	target->SetTexture(m_TargetTexture, false);
+	target->SetMesh(AssetsManager::Cube(), false);
+	target->SetTexture(AssetsManager::m_TargetTexture, false);
 	target->SetLocalTransform(Matrix4::Scale(Vector3(0.1f, 2.0f, 2.f)));
 	target->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	target->SetBoundingRadius(4.0f);
@@ -139,8 +124,8 @@ bool MyScene::InitialiseGL()
 	this->AddGameObject(target);
 	
 	target = new SimpleMeshObject("mPlane_contrast");
-	target->SetMesh(CommonMeshes::Cube(), false);
-	target->SetTexture(m_TargetTexture, false);
+	target->SetMesh(AssetsManager::Cube(), false);
+	target->SetTexture(AssetsManager::m_TargetTexture, false);
 	target->SetLocalTransform(Matrix4::Scale(Vector3(0.1f, 2.0f, 2.f)));
 	target->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	target->SetBoundingRadius(4.0f);
@@ -155,7 +140,7 @@ bool MyScene::InitialiseGL()
 
 	//Sphere in Rest State
 	m_Sphere = new SimpleMeshObject("mSphere");
-	m_Sphere->SetMesh(CommonMeshes::Sphere(), false);
+	m_Sphere->SetMesh(AssetsManager::Sphere(), false);
 	m_Sphere->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
 	m_Sphere->SetColour(Vector4(1.0f, 0.2f, 0.5f, 1.0f));
 	m_Sphere->SetBoundingRadius(1.0f);
@@ -169,7 +154,7 @@ bool MyScene::InitialiseGL()
 	this->AddGameObject(m_Sphere);
 
 	m_Sphere = new SimpleMeshObject("mSphere_contrast");
-	m_Sphere->SetMesh(CommonMeshes::Sphere(), false);
+	m_Sphere->SetMesh(AssetsManager::Sphere(), false);
 	m_Sphere->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
 	m_Sphere->SetColour(Vector4(1.0f, 0.2f, 0.5f, 1.0f));
 	m_Sphere->SetBoundingRadius(1.0f);
@@ -185,7 +170,7 @@ bool MyScene::InitialiseGL()
 	//box
 	{
 		target = new SimpleMeshObject("box");
-		target->SetMesh(CommonMeshes::Cube(), false);
+		target->SetMesh(AssetsManager::Cube(), false);
 		target->SetLocalTransform(Matrix4::Scale(Vector3(0.1f, 2.0f, 2.f)));
 		target->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		target->SetBoundingRadius(4.0f);
@@ -196,7 +181,7 @@ bool MyScene::InitialiseGL()
 		target->Physics()->SetPosition(Vector3(10.0f, 2.0f, -15.0f));
 		this->AddGameObject(target);
 		target = new SimpleMeshObject("box");
-		target->SetMesh(CommonMeshes::Cube(), false);
+		target->SetMesh(AssetsManager::Cube(), false);
 		target->SetLocalTransform(Matrix4::Scale(Vector3(0.1f, 2.0f, 2.f)));
 		target->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		target->SetBoundingRadius(4.0f);
@@ -210,7 +195,7 @@ bool MyScene::InitialiseGL()
 		target->Physics()->SetOrientation(rot);
 		this->AddGameObject(target);
 		target = new SimpleMeshObject("box");
-		target->SetMesh(CommonMeshes::Cube(), false);
+		target->SetMesh(AssetsManager::Cube(), false);
 		target->SetLocalTransform(Matrix4::Scale(Vector3(0.1f, 2.0f, 2.f)));
 		target->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		target->SetBoundingRadius(4.0f);
@@ -224,7 +209,7 @@ bool MyScene::InitialiseGL()
 		target->Physics()->SetOrientation(rot);
 		this->AddGameObject(target);
 		target = new SimpleMeshObject("box");
-		target->SetMesh(CommonMeshes::Cube(), false);
+		target->SetMesh(AssetsManager::Cube(), false);
 		target->SetLocalTransform(Matrix4::Scale(Vector3(0.1f, 2.0f, 2.f)));
 		target->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		target->SetBoundingRadius(4.0f);
@@ -243,7 +228,7 @@ bool MyScene::InitialiseGL()
 	Target_Pos = Vector3(0.0f, 4.0f, 0.0f);
 
 	goal = new SimpleMeshObject("goal_shape");
-	goal->SetMesh(new OBJMesh(MESHDIR"tardis.obj"), false);
+	goal->SetMesh(AssetsManager::Tardis(), false);
 	goal->SetLocalTransform(Matrix4::Scale(Vector3(0.75f, 0.75f, 0.75f)));
 	goal->SetColour(Vector4(0.2f, 0.2f, 1.0f, 1.0f));
 	goal->SetBoundingRadius(2.5f);
@@ -251,7 +236,7 @@ bool MyScene::InitialiseGL()
 	this->AddGameObject(goal);
 
 	goal = new SimpleMeshObject("goal");
-	goal->SetMesh(CommonMeshes::Cube(), false);
+	goal->SetMesh(AssetsManager::Cube(), false);
 	goal->SetLocalTransform(Matrix4::Scale(Vector3(0.0f, 0.0f, 0.0f)));
 	goal->SetColour(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
 	goal->Physics()->SetPosition(Target_Pos + Vector3(0.0f, 0.5f, 0.0f));
@@ -259,7 +244,7 @@ bool MyScene::InitialiseGL()
 	this->AddGameObject(goal);
 
 	goal = new SimpleMeshObject("bulb");
-	goal->SetMesh(CommonMeshes::Cube(), false);
+	goal->SetMesh(AssetsManager::Cube(), false);
 	goal->SetColour(Vector4(0.0f, 0.0f, 0.0f, 0.0f));
 	goal->SetLocalTransform(Matrix4::Scale(Vector3(0.0f, 0.0f, 0.0f)));
 	goal->Physics()->SetPosition(Target_Pos + Vector3(0.0f, 2.7f, 0.0f));
@@ -268,8 +253,8 @@ bool MyScene::InitialiseGL()
 
 	//The goal keeper
 	target = new SimpleMeshObject("gk");
-	target->SetMesh(CommonMeshes::Cube(), false);
-	target->SetTexture(m_TargetTexture, false);
+	target->SetMesh(AssetsManager::Cube(), false);
+	target->SetTexture(AssetsManager::m_TargetTexture, false);
 	target->SetLocalTransform(Matrix4::Scale(Vector3(0.1f, 0.7f, 0.7f)));
 	target->SetColour(Vector4(0.4f, 0.4f, 0.6f, 1.0f));
 	target->SetBoundingRadius(2.0f);
@@ -282,7 +267,7 @@ bool MyScene::InitialiseGL()
 	this->AddGameObject(target);
 
 	SimpleMeshObject* point = new SimpleMeshObject("point");
-	point->SetMesh(CommonMeshes::Sphere(), false);
+	point->SetMesh(AssetsManager::Sphere(), false);
 	point->SetLocalTransform(Matrix4::Scale(Vector3(0.001f, 0.001f, 0.001f)));
 	point->SetColour(Vector4(0.1f, 0.1f, 0.1f, 0.0f));
 	point->SetBoundingRadius(0.1f);
@@ -298,7 +283,7 @@ bool MyScene::InitialiseGL()
 	PhysicsEngine::Instance()->AddConstraint(cons);
 
 	point = new SimpleMeshObject("point_2");
-	point->SetMesh(CommonMeshes::Sphere(), false);
+	point->SetMesh(AssetsManager::Sphere(), false);
 	point->SetLocalTransform(Matrix4::Scale(Vector3(0.001f, 0.001f, 0.001f)));
 	point->SetColour(Vector4(0.1f, 0.1f, 0.1f, 0.0f));
 	point->SetBoundingRadius(0.1f);
@@ -319,7 +304,7 @@ bool MyScene::InitialiseGL()
 		float softness_offset = 2.0f;
 
 		throw_S = new SimpleMeshObject("tardis_top");
-		throw_S->SetMesh(CommonMeshes::Cube(), false);
+		throw_S->SetMesh(AssetsManager::Cube(), false);
 		throw_S->SetColour(Vector4(1.0f, 0.3f, 0.5f, 0.0f));
 		throw_S->SetBoundingRadius(1.0f);
 		throw_S->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 0.2f, 1.0f)));
@@ -331,7 +316,7 @@ bool MyScene::InitialiseGL()
 		SimpleMeshObject* lastObject = throw_S;
 
 		throw_S = new SimpleMeshObject("tardis_body");
-		throw_S->SetMesh(CommonMeshes::Cube(), false);
+		throw_S->SetMesh(AssetsManager::Cube(), false);
 		throw_S->SetColour(Vector4(1.0f, 0.3f, 0.5f, 0.0f));
 		throw_S->SetBoundingRadius(1.0f);
 		throw_S->SetLocalTransform(Matrix4::Scale(Vector3(0.7f, 1.1f, 0.7f)));
@@ -359,7 +344,7 @@ bool MyScene::InitialiseGL()
 		lastObject = throw_S;
 
 		throw_S = new SimpleMeshObject("tardis_bot");
-		throw_S->SetMesh(CommonMeshes::Cube(), false);
+		throw_S->SetMesh(AssetsManager::Cube(), false);
 		throw_S->SetColour(Vector4(1.0f, 0.3f, 0.5f, 0.0f));
 		throw_S->SetBoundingRadius(1.0f);
 		throw_S->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 0.2f, 1.0f)));
@@ -437,8 +422,8 @@ void MyScene::UpdateScene(float msec)
 		cooldown = true;
 
 		throw_S = new SimpleMeshObject("ThrowSphere");
-		throw_S->SetMesh(CommonMeshes::Sphere(), false);
-		throw_S->SetTexture(m_ThrowTex, false);
+		throw_S->SetMesh(AssetsManager::Sphere(), false);
+		throw_S->SetTexture(AssetsManager::m_ThrowTex, false);
 		throw_S->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
 		throw_S->SetColour(Vector4(1.0f, 0.3f, 0.5f, 1.0f));
 		throw_S->SetBoundingRadius(1.0f);
@@ -484,8 +469,8 @@ void MyScene::UpdateScene(float msec)
 	if (!Window::GetKeyboard()->KeyHeld(KEYBOARD_Q) 
 		&& start_strong > 0.0f) {
 		throw_S = new SimpleMeshObject("ThrowSphere");
-		throw_S->SetMesh(CommonMeshes::Sphere(), false);
-		throw_S->SetTexture(m_ThrowTex, false);
+		throw_S->SetMesh(AssetsManager::Sphere(), false);
+		throw_S->SetTexture(AssetsManager::m_ThrowTex, false);
 		throw_S->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
 		throw_S->SetColour(Vector4(1.0f, 0.3f, 0.5f, 1.0f));
 		throw_S->SetBoundingRadius(1.0f);

@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "CommonMeshes.h"
+#include "AssetsManager.h"
 #include "NCLDebug.h"
 #include "PhysicsEngine.h"
 #include <algorithm>
@@ -7,7 +7,7 @@
 Scene::Scene(Window& window) : OGLRenderer(window)
 {	
 	//used as friend class
-	CommonMeshes::InitializeMeshes();
+	AssetsManager::InitializeMeshes();
 
 	m_DebugShader = new Shader(SHADERDIR"debugVertex.glsl", SHADERDIR"debugFragment.glsl");
 	if (!m_DebugShader->LinkProgram()){
@@ -56,7 +56,7 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 
 Scene::~Scene()
 {
-	CommonMeshes::ReleaseMeshes();
+	AssetsManager::ReleaseMeshes();
 
 	if (m_DefaultLightShader)
 	{

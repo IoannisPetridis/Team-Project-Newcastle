@@ -72,8 +72,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetsManager.cpp" />
     <ClCompile Include="CollisionDetection.cpp" />
-    <ClCompile Include="CommonMeshes.cpp" />
     <ClCompile Include="Constraint.cpp" />
     <ClCompile Include="CuboidCollisionShape.cpp" />
     <ClCompile Include="NCLDebug.cpp" />
@@ -88,9 +88,9 @@
     <ClCompile Include="SphereCollisionShape.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetsManager.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="CollisionShape.h" />
-    <ClInclude Include="CommonMeshes.h" />
     <ClInclude Include="Constraint.h" />
     <ClInclude Include="CuboidCollisionShape.h" />
     <ClInclude Include="NCLDebug.h" />

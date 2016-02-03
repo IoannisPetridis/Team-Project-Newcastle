@@ -60,9 +60,6 @@
     <ClCompile Include="Manifold.cpp">
       <Filter>Source Files\Physics\Constraints</Filter>
     </ClCompile>
-    <ClCompile Include="CommonMeshes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NCLDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -73,6 +70,9 @@
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsObject.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetsManager.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,9 +110,6 @@
     <ClInclude Include="Constraint.h">
       <Filter>Header Files\Physics\Constraints</Filter>
     </ClInclude>
-    <ClInclude Include="CommonMeshes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NCLDebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,6 +120,9 @@
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsObject.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetsManager.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
