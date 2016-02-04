@@ -1,0 +1,14 @@
+ai_toggle = 1
+travese_toggle = 1
+gameover = 0
+ai_state = 1
+cooldown = 0
+ballnum = 50
+diff = 1
+T_counter = 0
+DebugMode = 2
+Str_c = 0
+score = 0
+friction = 0.5
+start_strong = -1.0
+timer = 0.0

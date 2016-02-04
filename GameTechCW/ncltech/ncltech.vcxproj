@@ -85,13 +85,13 @@
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SimpleMeshObject.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="SphereCollisionShape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetsManager.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="CollisionShape.h" />
+    <ClInclude Include="ConfigFileLoader.h" />
     <ClInclude Include="Constraint.h" />
     <ClInclude Include="ControlHandler.h" />
     <ClInclude Include="CuboidCollisionShape.h" />

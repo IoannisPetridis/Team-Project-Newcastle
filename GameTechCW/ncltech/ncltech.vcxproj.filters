@@ -31,11 +31,14 @@
     <Filter Include="Source Files\Physics\CollisionShapes">
       <UniqueIdentifier>{39bf44f8-0ca5-45ad-a15b-56a39b267895}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{47f6397b-9493-4d21-aac7-a5b6e4c98575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Uitility">
+      <UniqueIdentifier>{5e8d4656-e976-440f-a8c0-a58c6eb2891d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="ControlHandler.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigFileLoader.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

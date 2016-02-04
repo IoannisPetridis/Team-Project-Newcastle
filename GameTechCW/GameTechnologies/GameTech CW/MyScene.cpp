@@ -1,4 +1,5 @@
 #include "MyScene.h"
+#include "../../ncltech/ConfigFileLoader.h"
 #include <math.h>
 #include <fstream>
 #include <string>
@@ -35,7 +36,7 @@ bool MyScene::InitialiseGL()
 	m_Camera->SetPosition(Vector3(-10.0f, 4.0f, 0.0f));
 	m_Camera->SetYaw(-90.0f);
 
-	//Fucntionality
+	//Config file loader to load up the Fucntionality
 	ai_toggle = true;
 	travese_toggle = true;
 	gameover = false;
@@ -79,6 +80,8 @@ bool MyScene::InitialiseGL()
 		target,
 		goal,
 		plane);
+
+	m_RootGameObject->FindGameObject("");
 
 	return true;
 }
