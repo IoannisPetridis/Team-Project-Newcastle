@@ -1,9 +1,27 @@
-﻿Build started 03/02/2016 18:30:44.
+﻿Build started 04/02/2016 00:35:51.
      1>Project "C:\Users\Yulong\Documents\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
-     1>Lib:
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameObjectMag.cpp
+         GameObjectMag.cpp
+       Lib:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Yulong\Documents\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\AssetsManager.obj
+         Release\CollisionDetection.obj
+         Release\Constraint.obj
+         Release\CuboidCollisionShape.obj
+         Release\GameObjectMag.obj
+         Release\NCLDebug.obj
+         Release\GameObject.obj
+         Release\Hull.obj
+         Release\Manifold.obj
+         Release\PhysicsEngine.obj
+         Release\PhysicsObject.obj
+         Release\Scene.obj
+         Release\SimpleMeshObject.obj
+         Release\Source.obj
+         Release\SphereCollisionShape.obj
          ncltech.vcxproj -> C:\Users\Yulong\Documents\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib
      1>Done Building Project "C:\Users\Yulong\Documents\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.04
+Time Elapsed 00:00:01.65

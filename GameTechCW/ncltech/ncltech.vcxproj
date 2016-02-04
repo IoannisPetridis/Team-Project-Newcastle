@@ -76,6 +76,7 @@
     <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="Constraint.cpp" />
     <ClCompile Include="CuboidCollisionShape.cpp" />
+    <ClCompile Include="GameObjectMag.cpp" />
     <ClCompile Include="NCLDebug.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hull.cpp" />
