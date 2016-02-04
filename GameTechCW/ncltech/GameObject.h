@@ -35,6 +35,7 @@ class GameObject
 {
 	//This are the only class that can manually set the world transform
 	friend class Scene;
+	friend class MyScene;
 
 public:
 	GameObject(const std::string& name = "");
@@ -66,7 +67,6 @@ public:
 protected:
 	virtual void OnRenderObject()				{};				//Handles OpenGL calls to Render the object
 	virtual void OnUpdateObject(float dt)		{};				//Override to handle things like AI etc on update loop
-
 
 protected:
 	std::string					m_Name;

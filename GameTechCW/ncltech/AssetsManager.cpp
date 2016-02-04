@@ -1,14 +1,19 @@
 #include "AssetsManager.h"
 
+
+//Mesh Assets
 Mesh* AssetsManager::m_pPlane	= NULL;
 Mesh* AssetsManager::m_pCube	= NULL;
 Mesh* AssetsManager::m_pSphere	= NULL;
 Mesh* AssetsManager::m_Tardis	= NULL;
 
+//Texture Assets
 GLuint AssetsManager::m_CheckerboardTex = 0;
 GLuint AssetsManager::m_TargetTexture = 0;
 GLuint AssetsManager::m_ThrowTex = 0;
 
+//GameObject Assets
+SimpleMeshObject* AssetsManager::GOIstance;
 
 void AssetsManager::InitializeMeshes()
 {
@@ -34,12 +39,20 @@ void AssetsManager::ReleaseMeshes()
 	if (m_pPlane != NULL)
 	{
 		glDeleteTextures(1, &m_CheckerboardTex);
+		glDeleteTextures(1, &m_TargetTexture);
+		glDeleteTextures(1, &m_ThrowTex);
+
 		delete m_pPlane;
 		delete m_pCube;
 		delete m_pSphere;
+		delete m_Tardis;
 	}
 
 	m_pPlane = NULL;
+	m_pPlane = NULL;
+	m_pCube  = NULL;
+	m_pSphere= NULL;
+	m_Tardis = NULL;
 }
 
 //should be able to modify glTexParameteri 

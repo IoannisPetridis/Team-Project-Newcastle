@@ -41,10 +41,8 @@ protected:
 	SimpleMeshObject*	goal;
 	Plane*				plane;
 
-	////////////
 	GameObjectMag* GOM;
-	////////////
-
+	
 	std::vector<Vector3> m_TrajectoryPoints;
 	std::vector<string> LB_name;
 	std::vector<string> LB_score;

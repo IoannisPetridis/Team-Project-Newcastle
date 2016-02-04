@@ -30,6 +30,7 @@ public:
 	GLuint  GetTexture()	{ return m_Texture; }
 protected:
 	void	OnRenderObject() override;				//Handles OpenGL calls to Render the object
+	void	OnUpdateObject(float dt) override;
 
 protected:
 	bool	m_DeleteMeshOnCleanup, m_DeleteTexOnCleanup;

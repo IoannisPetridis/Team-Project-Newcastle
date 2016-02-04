@@ -18,12 +18,7 @@ class MyScene;
 
 class GameObjectMag {
 public:
-	void	GOMInit(Scene* m_scene,
-		SimpleMeshObject*&	m_Sphere,
-		SimpleMeshObject*&	throw_S,
-		SimpleMeshObject*&	target,
-		SimpleMeshObject*&	goal,
-		Plane*&				plane);
+	void	GOMInit(Scene* m_scene);
 	
 	void	BuildNodeLists(GameObject* node, Scene* m_scene);
 	void	SortNodeLists(Scene* m_scene);

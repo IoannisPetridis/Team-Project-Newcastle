@@ -39,6 +39,8 @@ int main()
 
 	//Initialise the Scene, complete scene graph list
 	scene = new MyScene(Window::GetWindow());
+
+
 	if (!scene->HasInitialised())
 	{
 		return Quit(true, "Renderer failed to initialise!");
@@ -64,6 +66,8 @@ int main()
 			float physics_ms = engine_timer.GetTimedMS();
 
 			scene->UpdateScene(dt);
+			//update camera
+			//update OnUpdateObject
 			
 			if (PhysicsEngine::Instance()->IsGameover()) {
 				continue;

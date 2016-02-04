@@ -1,4 +1,4 @@
-﻿Build started 2/4/2016 3:04:42 PM.
+﻿Build started 2/4/2016 4:37:42 PM.
      1>Project "C:\Users\CMDAdmin\Documents\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (Tutorial1 - Integration.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -11,12 +11,6 @@
          Generating code
      1>c:\users\cmdadmin\documents\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(335): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
          Finished generating code
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBufferSubData imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewActiveTexture imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBindBuffer imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniform1i imported
@@ -27,6 +21,12 @@
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBufferData imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUseProgram imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBufferSubData imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewActiveTexture imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBindBuffer imported
      1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewCheckFramebufferStatus imported
      1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewUniform3fv imported
      1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewBindFramebuffer imported
@@ -47,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.56
+Time Elapsed 00:00:02.63

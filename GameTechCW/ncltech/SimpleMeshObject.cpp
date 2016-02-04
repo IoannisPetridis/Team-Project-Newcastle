@@ -24,6 +24,11 @@ SimpleMeshObject::~SimpleMeshObject()
 	}
 }
 
+void	SimpleMeshObject::OnUpdateObject(float dt) {
+	
+}
+
+
 void SimpleMeshObject::SetMesh(Mesh* mesh, bool deleteOnCleanup)
 {
 	m_pMesh = mesh;
