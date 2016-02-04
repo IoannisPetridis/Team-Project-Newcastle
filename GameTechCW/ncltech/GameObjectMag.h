@@ -25,9 +25,9 @@ public:
 		SimpleMeshObject*&	goal,
 		Plane*&				plane);
 	
-	void	BuildNodeLists(GameObject* node, Scene* r_scene);
-	void	SortNodeLists();
-	void	ClearNodeLists();
+	void	BuildNodeLists(GameObject* node, Scene* m_scene);
+	void	SortNodeLists(Scene* m_scene);
+	void	ClearNodeLists(Scene* m_scene);
 
 	GameObject* FindGameObject(const std::string& name);
 
