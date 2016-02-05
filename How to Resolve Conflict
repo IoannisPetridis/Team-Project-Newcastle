@@ -1,4 +1,0 @@
-If there are more than one good people trying to change the contents of a shared file in master branch, and after commiting in their own branch, try to merge their changes with the master branch, it will cause the conflit.
-conflit need to be resovled before the contents of master branch being actually updated, here is the solution to resolve the conflit mannuly by using git shell.
-
-https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/
