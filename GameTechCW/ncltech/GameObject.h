@@ -36,6 +36,7 @@ class GameObject
 	//This are the only class that can manually set the world transform
 	friend class Scene;
 	friend class MyScene;
+	friend class ActionHandler;
 
 public:
 	GameObject(const std::string& name = "");

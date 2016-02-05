@@ -13,7 +13,9 @@ GLuint AssetsManager::m_TargetTexture = 0;
 GLuint AssetsManager::m_ThrowTex = 0;
 
 //GameObject Assets
-SimpleMeshObject* AssetsManager::GOIstance;
+SimpleMeshObject* AssetsManager::GOInstance;
+//Player* Assetsmanager::PlayerInstance;
+
 
 void AssetsManager::InitializeMeshes()
 {

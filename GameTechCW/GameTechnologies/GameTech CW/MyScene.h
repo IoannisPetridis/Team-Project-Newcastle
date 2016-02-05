@@ -71,6 +71,7 @@ protected:
 	bool travese_toggle;
 	bool cooldown;
 	bool gameover;
+	bool Camerefix;
 
 	string filename;
 	GameTimer engine_timer;

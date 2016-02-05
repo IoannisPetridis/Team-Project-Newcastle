@@ -19,6 +19,7 @@ struct FrustrumSortingObject
 class Scene : public OGLRenderer
 {
 	friend class GameObjectMag;
+	friend class ActionHandler;
 public:
 	Scene(Window& window);
 	~Scene();

@@ -29,18 +29,24 @@ int main()
 	//-------------------
 
 	//Initialise the Window
-	if (!Window::Initialise("GameTech CW", 1280, 800, false))
+	if (!Window::Initialise("Engine", 1280, 800, false))
 	{
 		return Quit(true, "Window failed to initialise!");
 	}
 
 	//Initialise the PhysicsEngine
+	//Create GameObject Iterate Root Node upon which the GameObject List will be built
 	PhysicsEngine::Instance();
 
 	//Initialise the Scene, complete scene graph list
+	//All Game Assets will be pre-loaded in
+	//by initialising GameAssetsManager
 	scene = new MyScene(Window::GetWindow());
-
-
+	
+	//Initialise the ActionHandler Instnace
+	ActionHandler::Instance();
+	ActionHandler::Instance()->SetDefaultScene(scene);
+	
 	if (!scene->HasInitialised())
 	{
 		return Quit(true, "Renderer failed to initialise!");
@@ -60,14 +66,22 @@ int main()
 		engine_timer.GetTimedMS();
 
 		if (!PhysicsEngine::Instance()->IsGameover()) {
-
+			
+			//ActionHandler
+			//Update AI, ControlHandler etc
+			//by updating 
+			//overridden OnUpdateObject for each GameObject sub-class 
+			//such as Player, AI, Static Object, Dynamic Object etc
+			ActionHandler::Instance()->Update(dt);
+			
+			//Update Physics Properties, Resolve collision, apply impluse
 			PhysicsEngine::Instance()->Update(dt);
 			
 			float physics_ms = engine_timer.GetTimedMS();
 
+			//Update Graphic Properties, Camera etc
+			//By updating OnRenderObject
 			scene->UpdateScene(dt);
-			//update camera
-			//update OnUpdateObject
 			
 			if (PhysicsEngine::Instance()->IsGameover()) {
 				continue;
@@ -75,8 +89,7 @@ int main()
 
 			float update_ms = engine_timer.GetTimedMS();
 
-			//PhysicsEngine::Instance()->SetCollisionDetectionDis();
-
+			//Debug Data
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Engine: %s (Press P to toggle)", PhysicsEngine::Instance()->IsPaused() ? "Paused" : "Enabled");
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "--------------------------------");
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Collision Detection Distance: " + std::to_string(PhysicsEngine::Instance()->GetCollisionDetectionDis()));
@@ -85,8 +98,12 @@ int main()
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Update: %5.2fms", physics_ms);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Scene Update  : %5.2fms", update_ms);
 			
+			//Render the Scene
 			scene->RenderScene();
+
 		}
+
+
 		else {
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "GameOver!");
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Press H to check LeaderBoard, ESC to shut down the window.");

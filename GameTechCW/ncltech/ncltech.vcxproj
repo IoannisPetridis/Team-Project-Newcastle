@@ -72,6 +72,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionHandler.cpp" />
     <ClCompile Include="AssetsManager.cpp" />
     <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="Constraint.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="SphereCollisionShape.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionHandler.h" />
     <ClInclude Include="AssetsManager.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="CollisionShape.h" />

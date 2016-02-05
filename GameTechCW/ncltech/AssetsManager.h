@@ -22,7 +22,7 @@ public:
 	static GLuint m_TargetTexture;
 	static GLuint m_ThrowTex;
 
-	static SimpleMeshObject* GOIstance;
+	static SimpleMeshObject* GOInstance;
 
 	//AssetsLoader:
 	static GLuint LoadTexture(string Tex_name);

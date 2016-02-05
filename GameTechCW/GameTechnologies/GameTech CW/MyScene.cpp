@@ -36,10 +36,15 @@ bool MyScene::InitialiseGL()
 
 	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, 0.0f, 0.0f));
 	PhysicsEngine::Instance()->SetDampingFactor(0.988f);
-	m_Camera->SetPosition(Vector3(-10.0f, 4.0f, 0.0f));
-	m_Camera->SetYaw(-90.0f);
+
+	m_Camera->SetPosition(Vector3(24.f, 13.f, 9.f));
+	m_Camera->SetYaw(90.0f);
 
 	//Config file loader to load up the Fucntionality
+	bool shadow = true;
+	bool Motion_blur = true;
+	bool replay = true;
+	Camerefix = true;
 	ai_toggle = true;
 	travese_toggle = true;
 	gameover = false;
@@ -71,9 +76,28 @@ void MyScene::UpdateScene(float msec)
 	Proj_dir.y = sin(m_Camera->GetPitch() * PI / 180.0f);
 	Proj_dir.Normalise();
 
-	GameObject* car = m_RootGameObject->FindGameObject("car");
-	car->Physics()->SetPosition(m_Camera->GetPosition()
-		+ (Proj_dir * 15));
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_1)) {
+		Camerefix = !Camerefix;
+	}
+	if (Camerefix) {
+		m_Camera->SetPosition(this->FindGameObject("car")->Physics()->GetPosition() -
+			Proj_dir * 15.0f);
+	}
+
+	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
+		+ " Y:"
+		+ std::to_string((int)m_Camera->GetPosition().y)
+		+ " Z:"
+		+ std::to_string((int)m_Camera->GetPosition().z)
+		+ " Pitch:"
+		+ std::to_string((float)m_Camera->GetPitch())
+		+ " Yaw:"
+		+ std::to_string((float)m_Camera->GetYaw())
+		+ " cord:" 
+		+ std::to_string((float)Proj_dir.x) + " "
+		+ std::to_string((float)Proj_dir.y) + " "
+		+ std::to_string((float)Proj_dir.z) + " "
+		);
 
 }
 
