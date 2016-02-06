@@ -71,7 +71,7 @@ public:
 	*/
 	float	GetParticleRate()				{return particleRate;}
 	void	SetParticleRate(float rate)		{particleRate = rate;}
-
+	void ParticleEmitter::setTextureToBall();
 	/*
 	How long each particle lives for!
 	*/
@@ -144,5 +144,7 @@ protected:
 	std::vector<Particle*>	freeList;	//'Spare' particles stay in here...
 	ParticleEmitter*					m_Parent;
 	std::vector<ParticleEmitter*>		m_Children;
+	//Texture List
+	GLuint	ballTexture;
 };
 

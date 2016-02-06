@@ -22,12 +22,12 @@ ParticleEmitter::ParticleEmitter(void)	{
 	largestSize = 0;
 	sourcePos.ToZero();
 	m_Parent = NULL;
-
+	texture = NULL;
 	/*
 	Each particle is a white dot, which has an alpha fade on it,
 	so the edges fade to 0.0 alpha.
 	*/
-	texture = SOIL_load_OGL_texture("../../Textures/particle.tga",
+	ballTexture = SOIL_load_OGL_texture("../../Textures/particle.tga",
 	SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID,SOIL_FLAG_COMPRESS_TO_DXT);
 
 	//texture = SOIL_load_OGL_texture(TEXTUREDIR"nyan.png",
@@ -45,6 +45,11 @@ ParticleEmitter::~ParticleEmitter(void)	{
 	for(std::vector<Particle *>::iterator i = freeList.begin(); i != freeList.end(); ++i) {
 		delete (*i);
 	}
+}
+
+void ParticleEmitter::setTextureToBall()	
+{
+	texture = ballTexture;
 }
 
 /*
