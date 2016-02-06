@@ -20,6 +20,8 @@ ParticleEmitter::ParticleEmitter(void)	{
 	particleSpeed = 0.2f;
 	numLaunchParticles = 10;
 	largestSize = 0;
+	sourcePos.ToZero();
+	m_Parent = NULL;
 
 	/*
 	Each particle is a white dot, which has an alpha fade on it,
@@ -140,11 +142,17 @@ Particle* ParticleEmitter::GetFreeParticle()	{
 	p->direction.z += ((RAND()-RAND()) * particleVariance);*/
 
 	p->direction.Normalise();	//Keep its direction normalised!
-	p->position.ToZero();
-
+	//p->position.ToZero();
+	p->position = sourcePos;
 	return p;	//return the new particle :-)
 }
+void ParticleEmitter::AddChildParticle(ParticleEmitter* child)
+{
+	
+	child->m_Parent = this;
 
+	m_Children.push_back(child);
+}
 /*
 If we end up with more particles than space in graphics memory, we must
 allocate some new graphics memory!

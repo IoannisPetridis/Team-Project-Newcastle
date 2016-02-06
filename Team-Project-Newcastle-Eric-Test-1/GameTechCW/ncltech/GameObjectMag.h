@@ -46,5 +46,5 @@ protected:
 	void		AddGameObject(GameObject* game_object);
 	void		RemoveGameObject(GameObject* game_object);
 
-	GameObject*			m_RootGameObject;
+	//GameObject*			m_RootGameObject;
 };

@@ -45,7 +45,7 @@ GameObject*			GameObject::FindGameObject(const std::string& name)
 	return NULL;
 }
 
-void				GameObject::AddChildObject(GameObject* child)
+void GameObject::AddChildObject(GameObject* child)
 {
 	m_Children.push_back(child);
 	child->m_Parent = this;

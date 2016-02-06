@@ -111,6 +111,10 @@ public:
 	void	SetDirection(const Vector3 dir) {initialDirection = dir;}
 	Vector3 GetDirection()					{return initialDirection;}
 
+	void	SetSourcePosition(Vector3 dir) { sourcePos = dir; }
+	Vector3 GetSourcePosition()					{ return sourcePos; }
+	std::vector<ParticleEmitter*>& GetChildren() { return m_Children; }
+	void AddChildParticle(ParticleEmitter* child);
 protected:
 	/*
 	This is the magic of our free list. If there's a particle 'spare',
@@ -135,8 +139,10 @@ protected:
 	float nextParticleTime;		//How long until we next spit out some particles?
 
 	unsigned int largestSize;	//How large has our particle array become?
-
+	Vector3 sourcePos;
 	std::vector<Particle*>	particles;	//Active particles stay in here :)
 	std::vector<Particle*>	freeList;	//'Spare' particles stay in here...
+	ParticleEmitter*					m_Parent;
+	std::vector<ParticleEmitter*>		m_Children;
 };
 

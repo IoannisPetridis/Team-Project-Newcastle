@@ -45,6 +45,10 @@ protected:
 	void	DrawNode(GameObject* n);
 
 	void	UpdateNode(float dt, GameObject* n);
+
+	void	AddParticleObject(ParticleEmitter* particleobject);
+	void	DrawParticleList(ParticleEmitter* particleobject);
+	void	UpdateParticleList(float dt, ParticleEmitter* n);
 protected:
 	Camera*				m_Camera;
 	Shader*				m_DebugShader;
@@ -68,5 +72,6 @@ protected:
 	float   m_SpecularIntensity;
 	Mesh* quad = Mesh::GenerateQuad();
 	ParticleEmitter*	emitter;
-
+	ParticleEmitter*	emitter1;
+	ParticleEmitter*	m_RootParticleList;
 };

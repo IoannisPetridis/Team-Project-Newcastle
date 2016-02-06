@@ -6,6 +6,21 @@ void	GameObjectMag::GOMInit(Scene* m_scene,
 	SimpleMeshObject*&	target,
 	SimpleMeshObject*&	goal,
 	Plane*&				plane) {
+
+for (int i = 0; i < 10; i++)
+	{
+	ParticleEmitter* rainbow = new ParticleEmitter();
+
+	rainbow->SetParticleSize(1.0f);
+	rainbow->SetParticleVariance(1.0f);
+	rainbow->SetLaunchParticles(16.0f);
+	rainbow->SetParticleLifetime(100.0f);
+	rainbow->SetParticleSpeed(0.1f);
+	
+	rainbow->SetSourcePosition(Vector3(10+(i*10), 10, 10));
+	m_scene->AddParticleObject(rainbow);
+	}
+
 	SimpleMeshObject* ground = new SimpleMeshObject("Ground");
 
 	ground->SetMesh(AssetsManager::Cube(), false);
