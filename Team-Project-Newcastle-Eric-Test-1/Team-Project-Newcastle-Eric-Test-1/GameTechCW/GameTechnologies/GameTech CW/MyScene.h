@@ -15,7 +15,7 @@
 //#include <ncltech\SphereCollisionShape.h>
 //#include <ncltech\CuboidCollisionShape.h>
 //#include <ncltech\CollisionDetection.h>
-#include <fmod.hpp>
+#include <FMOD\inc\fmod.hpp>
 #include "../../ncltech/GameObjectMag.h"
 
 class GameObjectMag;
