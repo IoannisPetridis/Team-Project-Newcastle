@@ -58,6 +58,8 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 		return;
 	}
 
+	m_RootParticleList = new ParticleEmitter();
+
 	m_Camera = new Camera();
 	m_RootGameObject = new GameObject();	//root is created here
 
@@ -271,6 +273,53 @@ void Scene::RenderScene()
 	NCLDebug::DrawDebugLists();
 	NCLDebug::ClearDebugLists();
 
+	/////////////////////////////////////////////////
+	//PARTICLE
+	/////////////////////////////////////////////////
+	//glClearColor(0, 0, 0, 1);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_FALSE);
+	SetCurrentShader(m_ParticleShader);
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
+
+	DrawParticleList(m_RootParticleList);
+
+	/*glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitter->GetParticleSize());
+	emitter->SetParticleSize(0.5f);
+	emitter->SetParticleVariance(1.0f);
+	emitter->SetLaunchParticles(16.0f);
+	emitter->SetParticleLifetime(100.0f);
+	emitter->SetParticleSpeed(0.1f);
+	emitter->SetSourcePosition(Vector3(0, 0, 0));
+	UpdateShaderMatrices();
+
+	emitter->Draw();*/
+
+
+	//-------------------------------------------------------------
+	//SetCurrentShader(m_ParticleShader);
+	//glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
+
+
+
+	/*glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitter1->GetParticleSize());
+	emitter1->SetParticleSize(5.0f);
+	emitter1->SetParticleVariance(1.0f);
+	emitter1->SetLaunchParticles(16.0f);
+	emitter1->SetParticleLifetime(100.0f);
+	emitter1->SetParticleSpeed(0.1f);
+	emitter1->SetSourcePosition(Vector3(10, 10, 10));
+	UpdateShaderMatrices();
+
+	emitter1->Draw();*/
+
+
+	/////////////////////////////////////////////////
+	glDepthMask(GL_TRUE);
+
+
+
 	//Present our Screen
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	PresentScreenFBO();
@@ -280,10 +329,36 @@ void Scene::RenderScene()
 	SwapBuffers();
 }
 
+
+void Scene::DrawParticleList(ParticleEmitter* n)
+{
+	for (auto emitterChild : n->GetChildren()) {
+
+		glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitterChild->GetParticleSize());
+
+		UpdateShaderMatrices();
+
+		emitterChild->Draw();
+	}
+}
+//
+void Scene::UpdateParticleList(float dt, ParticleEmitter* cNode)
+{
+	//cNode->OnUpdateObject(dt);
+	for (auto child : cNode->GetChildren()) {
+		child->Update(dt* 100.f);
+	}
+}
+//
+void Scene::AddParticleObject(ParticleEmitter* particle_object)
+{
+	m_RootParticleList->AddChildParticle(particle_object);
+}
 void Scene::UpdateScene(float dt)
 {
 	m_Camera->UpdateCamera(dt * 1000.f);
 	UpdateNode(dt, m_RootGameObject);
+	UpdateParticleList(dt, m_RootParticleList);
 }
 
 
