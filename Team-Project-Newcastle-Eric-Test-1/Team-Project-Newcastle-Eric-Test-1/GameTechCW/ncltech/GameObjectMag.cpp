@@ -8,6 +8,17 @@ void	GameObjectMag::GOMInit(Scene* m_scene)
 	Proj_dir.y = sin(m_scene->m_Camera->GetPitch() * PI / 180.0f);
 	Proj_dir.Normalise();
 
+	ParticleEmitter* rainbow = new ParticleEmitter();
+
+	rainbow->SetParticleSize(1.0f);
+	rainbow->SetParticleVariance(1.0f);
+	rainbow->SetLaunchParticles(16.0f);
+	rainbow->SetParticleLifetime(100.0f);
+	rainbow->SetParticleSpeed(0.1f);
+
+	rainbow->SetSourcePosition(Vector3(10 , 10, 10));
+	m_scene->AddParticleObject(rainbow);
+
 	AssetsManager::GOInstance = new SimpleMeshObject("ground");
 
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);

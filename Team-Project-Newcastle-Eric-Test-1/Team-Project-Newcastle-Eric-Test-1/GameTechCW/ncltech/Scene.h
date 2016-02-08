@@ -5,7 +5,7 @@
 
 #include "TSingleton.h"
 #include "GameObject.h"
-
+#include "../GameTechnologies/GameTech CW/ParticleEmitter.h"	//A new class!
 struct FrustrumSortingObject
 {
 	float		camera_distance;
@@ -44,6 +44,10 @@ protected:
 	void	DrawNode(GameObject* n);
 
 	void	UpdateNode(float dt, GameObject* n);
+
+	void	AddParticleObject(ParticleEmitter* particleobject);
+	void	DrawParticleList(ParticleEmitter* particleobject);
+	void	UpdateParticleList(float dt, ParticleEmitter* n);
 protected:
 	Camera*				m_Camera;
 	Shader*				m_DebugShader;
@@ -67,5 +71,6 @@ protected:
 	float   m_SpecularIntensity;
 	Mesh* quad = Mesh::GenerateQuad();
 
+	ParticleEmitter*	m_RootParticleList;
 
 };
