@@ -7,7 +7,7 @@ last frame (default value is for simplicities sake...)
 */
 void Camera::UpdateCamera(float msec)	{
 	float dt = msec * 0.001f;
-	float speed = 3.5f * dt; //1.5m per second
+	float speed = 50.f * dt; //1.5m per second
 
 	//Update the mouse by how much
 	if (Window::GetMouse()->ButtonDown(MOUSE_LEFT))

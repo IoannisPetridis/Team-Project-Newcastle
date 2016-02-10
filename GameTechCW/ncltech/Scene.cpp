@@ -28,7 +28,37 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	if (!m_ShadowVolumeShader->LinkProgram()){
 		return;
 	}
+	////*******************************
+	////**		CUBE MAP			**
+	////*******************************
+	////for sky box
+	m_skyboxShader = new Shader(SHADERDIR"skyboxVertex.glsl", SHADERDIR"skyboxFragment.glsl");
+	if (!m_skyboxShader->LinkProgram()){
+		return;
+	}
 
+	cubeMap = SOIL_load_OGL_cubemap(
+		TEXTUREDIR"skyBox/sky_pos_z.jpg",
+		TEXTUREDIR"skyBox/sky_neg_z.jpg",
+		TEXTUREDIR"skyBox/sky_pos_y.jpg",
+		TEXTUREDIR"skyBox/sky_neg_y.jpg",
+		TEXTUREDIR"skyBox/sky_neg_x.jpg",
+		TEXTUREDIR"skyBox/sky_pos_x.jpg",
+		SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
+
+	if (!cubeMap)
+	{
+		return;
+	}
+	m_ParticleShader = new Shader(SHADERDIR"ParticleVertex.glsl",
+		SHADERDIR"ParticleFragment.glsl",
+		SHADERDIR"ParticleGeometry.glsl");
+
+	if (!m_ParticleShader->LinkProgram()) {
+		return;
+	}
+
+	m_RootParticleList = new ParticleEmitter();
 
 	m_Camera = new Camera();
 	m_RootGameObject = new GameObject();	//root is created here
@@ -162,6 +192,32 @@ void Scene::RenderScene()
 
 	glClearColor(clearcolor.x, clearcolor.y, clearcolor.z, clearcolor.w);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	/////////////////////////////////////////////////
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+	glDepthFunc(GL_ALWAYS);
+	glDepthMask(GL_FALSE);//disable the depth buffer, it won't write on depth buffer
+	SetCurrentShader(m_skyboxShader);//set skyboxShader to be currentShader
+
+
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "cubeTex"), 0);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap);
+
+	UpdateShaderMatrices(); //update "modelMatrix" "viewMatrix" "projMatrix" "textureMatrix"
+
+
+	SetTextureRepeating(quad->GetTexture(), true);
+	quad->Draw(false);
+
+	glUseProgram(0);
+	glDepthMask(GL_TRUE);//enable depth buffer
+
+	glDepthFunc(GL_LEQUAL);
+	/////////////////////////////////////////////////
+
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_DEPTH_CLAMP);
@@ -217,6 +273,53 @@ void Scene::RenderScene()
 	NCLDebug::DrawDebugLists();
 	NCLDebug::ClearDebugLists();
 
+	/////////////////////////////////////////////////
+	//PARTICLE
+	/////////////////////////////////////////////////
+	//glClearColor(0, 0, 0, 1);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_FALSE);
+	SetCurrentShader(m_ParticleShader);
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
+
+	DrawParticleList(m_RootParticleList);
+
+	/*glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitter->GetParticleSize());
+	emitter->SetParticleSize(0.5f);
+	emitter->SetParticleVariance(1.0f);
+	emitter->SetLaunchParticles(16.0f);
+	emitter->SetParticleLifetime(100.0f);
+	emitter->SetParticleSpeed(0.1f);
+	emitter->SetSourcePosition(Vector3(0, 0, 0));
+	UpdateShaderMatrices();
+
+	emitter->Draw();*/
+
+
+	//-------------------------------------------------------------
+	//SetCurrentShader(m_ParticleShader);
+	//glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
+
+
+
+	/*glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitter1->GetParticleSize());
+	emitter1->SetParticleSize(5.0f);
+	emitter1->SetParticleVariance(1.0f);
+	emitter1->SetLaunchParticles(16.0f);
+	emitter1->SetParticleLifetime(100.0f);
+	emitter1->SetParticleSpeed(0.1f);
+	emitter1->SetSourcePosition(Vector3(10, 10, 10));
+	UpdateShaderMatrices();
+
+	emitter1->Draw();*/
+
+
+	/////////////////////////////////////////////////
+	glDepthMask(GL_TRUE);
+
+
+
 	//Present our Screen
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	PresentScreenFBO();
@@ -226,10 +329,36 @@ void Scene::RenderScene()
 	SwapBuffers();
 }
 
+
+void Scene::DrawParticleList(ParticleEmitter* n)
+{
+	for (auto emitterChild : n->GetChildren()) {
+
+		glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitterChild->GetParticleSize());
+
+		UpdateShaderMatrices();
+
+		emitterChild->Draw();
+	}
+}
+//
+void Scene::UpdateParticleList(float dt, ParticleEmitter* cNode)
+{
+	//cNode->OnUpdateObject(dt);
+	for (auto child : cNode->GetChildren()) {
+		child->Update(dt* 100.f);
+	}
+}
+//
+void Scene::AddParticleObject(ParticleEmitter* particle_object)
+{
+	m_RootParticleList->AddChildParticle(particle_object);
+}
 void Scene::UpdateScene(float dt)
 {
 	m_Camera->UpdateCamera(dt * 1000.f);
 	UpdateNode(dt, m_RootGameObject);
+	UpdateParticleList(dt, m_RootParticleList);
 }
 
 

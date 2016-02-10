@@ -1,6 +1,7 @@
 #pragma once
 #include "../nclgl/Mesh.h"
 #include "../nclgl/OBJMesh.h"
+#include "SimpleMeshObject.h"
 
 class Scene;
 
@@ -20,6 +21,8 @@ public:
 	static GLuint m_CheckerboardTex;
 	static GLuint m_TargetTexture;
 	static GLuint m_ThrowTex;
+
+	static SimpleMeshObject* GOInstance;
 
 	//AssetsLoader:
 	static GLuint LoadTexture(string Tex_name);

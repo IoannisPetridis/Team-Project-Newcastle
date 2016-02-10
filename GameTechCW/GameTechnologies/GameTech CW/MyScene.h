@@ -15,7 +15,7 @@
 //#include <ncltech\SphereCollisionShape.h>
 //#include <ncltech\CuboidCollisionShape.h>
 //#include <ncltech\CollisionDetection.h>
-
+#include <FMOD\inc\fmod.hpp>
 #include "../../ncltech/GameObjectMag.h"
 
 class GameObjectMag;
@@ -41,10 +41,8 @@ protected:
 	SimpleMeshObject*	goal;
 	Plane*				plane;
 
-	////////////
 	GameObjectMag* GOM;
-	////////////
-
+	
 	std::vector<Vector3> m_TrajectoryPoints;
 	std::vector<string> LB_name;
 	std::vector<string> LB_score;
@@ -73,7 +71,30 @@ protected:
 	bool travese_toggle;
 	bool cooldown;
 	bool gameover;
+	bool Camerefix;
 
 	string filename;
 	GameTimer engine_timer;
+
+
+
+	FMOD_RESULT result;
+	FMOD::System *system2;
+
+	FMOD::Sound *sound1, *sound2;
+
+	FMOD::Channel   *channel1 = 0, *channel2 = 0;
+	void            *extradriverdata = 0;
+	bool             listenerflag = true;
+	
+
+	FMOD_VECTOR LastPosition;
+	FMOD_VECTOR CameraPosition;
+	FMOD_VECTOR CameraForward;
+	FMOD_VECTOR CameraUp;
+	FMOD_VECTOR CameraVelocity;
+
+	const int   INTERFACE_UPDATETIME = 50;      // 50ms update for interface
+	const float DISTANCEFACTOR = 1.0f;
+
 };

@@ -32,8 +32,6 @@ public:
 		}
 	}
 
-
-
 protected:
 	//Only allow the class to be created and destroyed by itself
 	TSingleton() {}

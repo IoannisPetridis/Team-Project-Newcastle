@@ -12,11 +12,11 @@ PhysicsEngine::PhysicsEngine()
 	m_UpdateAccum		= 0.0f;
 	m_Gravity			=  Vector3(0.0f, -9.81f, 0.0f);
 	m_DampingFactor		= 1.0f;
-	CollisionDetectionDis = 50.0f;
+	CollisionDetectionDis = 500.0f;
 
 	DEBUGDRAW_CONSTRAINTS = false;
 	DEBUGDRAW_MANIFOLDS = false;
-	DEBUGDRAW_COLLISIONVOLUMES = false;
+	DEBUGDRAW_COLLISIONVOLUMES = true;
 }
 
 PhysicsEngine::~PhysicsEngine()
@@ -305,7 +305,7 @@ void PhysicsEngine::OctreeBuild() {
 		for (auto sub : m_PhysicsObjects) {
 			if (sub != obj) {
 				//if the object is ground, then always deem it as a child for another object
-				if (sub->name == "ground"){
+				if (sub->name == "ground") {
 						str->children.push_back(sub);
 					}
 				else{

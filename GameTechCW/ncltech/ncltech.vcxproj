@@ -72,15 +72,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionHandler.cpp" />
+    <ClCompile Include="ArbitraryAI.cpp" />
     <ClCompile Include="AssetsManager.cpp" />
     <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="Constraint.cpp" />
     <ClCompile Include="CuboidCollisionShape.cpp" />
     <ClCompile Include="GameObjectMag.cpp" />
+    <ClCompile Include="GuardState.cpp" />
+    <ClCompile Include="HomeState.cpp" />
     <ClCompile Include="NCLDebug.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hull.cpp" />
     <ClCompile Include="Manifold.cpp" />
+    <ClCompile Include="OffState.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -88,7 +93,10 @@
     <ClCompile Include="SphereCollisionShape.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionHandler.h" />
+    <ClInclude Include="ArbitraryAI.h" />
     <ClInclude Include="AssetsManager.h" />
+    <ClInclude Include="BaseState.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="CollisionShape.h" />
     <ClInclude Include="ConfigFileLoader.h" />
@@ -96,11 +104,14 @@
     <ClInclude Include="ControlHandler.h" />
     <ClInclude Include="CuboidCollisionShape.h" />
     <ClInclude Include="GameObjectMag.h" />
+    <ClInclude Include="GuardState.h" />
+    <ClInclude Include="HomeState.h" />
     <ClInclude Include="NCLDebug.h" />
     <ClInclude Include="DistanceConstraint.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hull.h" />
     <ClInclude Include="Manifold.h" />
+    <ClInclude Include="OffState.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="Scene.h" />

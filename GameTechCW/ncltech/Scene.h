@@ -5,7 +5,7 @@
 
 #include "TSingleton.h"
 #include "GameObject.h"
-
+#include "../GameTechnologies/GameTech CW/ParticleEmitter.h"	//A new class!
 struct FrustrumSortingObject
 {
 	float		camera_distance;
@@ -19,6 +19,7 @@ struct FrustrumSortingObject
 class Scene : public OGLRenderer
 {
 	friend class GameObjectMag;
+	friend class ActionHandler;
 public:
 	Scene(Window& window);
 	~Scene();
@@ -43,11 +44,17 @@ protected:
 	void	DrawNode(GameObject* n);
 
 	void	UpdateNode(float dt, GameObject* n);
+
+	void	AddParticleObject(ParticleEmitter* particleobject);
+	void	DrawParticleList(ParticleEmitter* particleobject);
+	void	UpdateParticleList(float dt, ParticleEmitter* n);
 protected:
 	Camera*				m_Camera;
 	Shader*				m_DebugShader;
 	Shader			   *m_DefaultLightShader, *m_DefaultShadowShader;
 	Shader*				m_ShadowVolumeShader;
+	Shader*				m_skyboxShader;
+	Shader*				m_ParticleShader;
 
 	GameObject*			m_RootGameObject;
 
@@ -57,10 +64,13 @@ protected:
 
 	GLuint	m_ScreenTexWidth, m_ScreenTexHeight;
 	GLuint  m_ScreenDTex, m_ScreenCTex, m_ScreenFBO;
-
+	GLuint	cubeMap;
 	Vector3 m_AmbientColour;
 	Vector3 m_InvLightDirection;
 	Vector4 clearcolor;
 	float   m_SpecularIntensity;
+	Mesh* quad = Mesh::GenerateQuad();
+
+	ParticleEmitter*	m_RootParticleList;
 
 };
