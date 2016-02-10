@@ -67,7 +67,9 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	m_RootGameObject->m_Scene = this;
 
 	m_AmbientColour = Vector3(0.2f, 0.2f, 0.2f);
-	m_InvLightDirection = Vector3(0.5f, 1.0f, -0.8f);
+	//m_InvLightDirection = Vector3(0.5f, 1.0f, -0.8f);
+	m_InvLightDirection = Vector3(1.0f, 1.0f, 1.0f);
+	//m_SpecularIntensity = 128.0f;
 	m_SpecularIntensity = 128.0f;
 
 	m_InvLightDirection.Normalise();

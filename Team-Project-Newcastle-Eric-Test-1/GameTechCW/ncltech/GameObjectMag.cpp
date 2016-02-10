@@ -10,7 +10,7 @@ void	GameObjectMag::GOMInit(Scene* m_scene,
 for (int i = 0; i < 10; i++)
 	{
 	ParticleEmitter* rainbow = new ParticleEmitter();
-
+	rainbow->setTextureToBall();
 	rainbow->SetParticleSize(1.0f);
 	rainbow->SetParticleVariance(1.0f);
 	rainbow->SetLaunchParticles(16.0f);
