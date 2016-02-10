@@ -12,108 +12,178 @@ void	GameObjectMag::GOMInit(Scene* m_scene)
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground1");//Floor
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 1.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f,0.0f,0.0f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol1";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.0f, 1.0f, 150.0f)));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 150.0f)));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground2");  //Right Bottom
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol2";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 35.5f, -184.f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.f, 1.0f, 50.0f)));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 50.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(-135, 0, 0));
-
 
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground3"); //Left Bottom
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, -0.f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, -0.f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol3";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 34.f, 184.5f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.f, 1.0f, 50.0f)));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 50.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(135, 0, 0));
-
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground4");  //right Middle
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 20.0f, 1.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 20.0f, 1.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, 0));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol4";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 91.f, -219.f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.f, 20.0f, 1.0f)));
-
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 20.0f, 1.0f)));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground5"); //Left Middle
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 20.0f, 1.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 20.0f, 1.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, 0));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol5";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 89.f, 219.f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.f, 20.0f, 1.0f)));
-
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 20.0f, 1.0f)));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground6"); //Left top
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol6";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 145.f, 185.f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.f, 1.0f, 50.0f)));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 50.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(45, 0, 0));
-
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground7"); //Right top
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false); 
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol7";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 145.5f, -184.5f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.f, 1.0f, 50.0f)));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 50.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(-45, 0, 0));
-
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground8");// Roof
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(150.f, 1.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name="groundcol8";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 180.f, 0.0f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(150.f, 1.0f, 150.0f)));
-
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 150.0f)));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	AssetsManager::GOInstance = new SimpleMeshObject("ground9"); //Back Bottom
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0, 50.f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+
+	AssetsManager::GOInstance->Physics()->name = "groundcol9";
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-235.0f, 35.f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0, 50.f, 150.0f)));
+	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, 45));
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	AssetsManager::GOInstance = new SimpleMeshObject("ground10"); //Back Middle
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0, 20.f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+
+	AssetsManager::GOInstance->Physics()->name = "groundcol10";
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-270.0f, 90.f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0, 20.f, 150.0f)));
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	AssetsManager::GOInstance = new SimpleMeshObject("ground11"); //Back top
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0, 50.f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+	
+	AssetsManager::GOInstance->Physics()->name = "groundcol11";
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-235.0f, 145.f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0, 50.f, 150.0f)));
+	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, 135));
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+
+
+	AssetsManager::GOInstance = new SimpleMeshObject("ground12"); //Front top
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0, 50.f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+
+	AssetsManager::GOInstance->Physics()->name = "groundcol12";
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(235.0F, 35.0F, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0, 50.f, 150.0f)));
+	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, -45));
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	AssetsManager::GOInstance = new SimpleMeshObject("ground13"); //Front Middle
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0, 20.f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+
+	AssetsManager::GOInstance->Physics()->name = "groundcol13";
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(270.0f, 90.f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0, 20.f, 150.0f)));
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+
+	AssetsManager::GOInstance = new SimpleMeshObject("ground14"); //Front top
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0, 50.f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
+	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+
+	AssetsManager::GOInstance->Physics()->name = "groundcol14";
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(235.0f, 145.f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0, 50.f, 150.0f)));
+	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, -135));
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+
+
+
 
 	AssetsManager::GOInstance = new SimpleMeshObject("car");
 
