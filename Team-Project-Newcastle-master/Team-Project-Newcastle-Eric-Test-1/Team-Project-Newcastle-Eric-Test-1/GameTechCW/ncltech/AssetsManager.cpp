@@ -43,6 +43,7 @@ void AssetsManager::InitializeMeshes()
 		m_pSphere->SetTexture(m_CheckerboardTex);
 		m_pCube->SetTexture(m_glass);
 		m_pCube->SetBumpMap(m_glassBump);
+		
 	}
 }
 

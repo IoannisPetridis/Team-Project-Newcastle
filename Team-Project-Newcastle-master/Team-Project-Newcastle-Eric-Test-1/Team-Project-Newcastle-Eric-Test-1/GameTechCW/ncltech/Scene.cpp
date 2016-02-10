@@ -9,7 +9,8 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	//used as friend class
 	AssetsManager::InitializeMeshes();
 
-
+	//SetTextureRepeating(quad->GetTexture(), true);
+	//SetTextureRepeating(AssetsManager::m_pCube->GetTexture(), true);
 	/*m_DebugShader = new Shader(SHADERDIR"debugVertex.glsl", SHADERDIR"debugFragment.glsl");
 	if (!m_DebugShader->LinkProgram()){
 		return;
@@ -62,7 +63,8 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	{
 		return;
 	}
-	/*m_ParticleShader = new Shader(SHADERDIR"ParticleVertex.glsl",
+	SetTextureRepeating(quad->GetTexture(), true);
+	m_ParticleShader = new Shader(SHADERDIR"ParticleVertex.glsl",
 		SHADERDIR"ParticleFragment.glsl",
 		SHADERDIR"ParticleGeometry.glsl");
 
@@ -70,7 +72,7 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 		return;
 	}
 
-	m_RootParticleList = new ParticleEmitter();*/
+	m_RootParticleList = new ParticleEmitter();
 
 	m_Camera = new Camera();
 	m_RootGameObject = new GameObject();	//root is created here
@@ -87,7 +89,7 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	m_ScreenCTex = NULL;
 	m_ScreenFBO = NULL;
 	BuildScreenFBO();
-
+	
 	/*clearcolor = Vector4(0.6f, 0.6f, 0.6f, 1.f);
 	glClearColor(clearcolor.x, clearcolor.y, clearcolor.z, clearcolor.w);*/
 
@@ -95,18 +97,18 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 
 	init = true;
 
-	lightList.push_back(Light(Vector3(0, 300, 0),//position
+	lightList.push_back(Light(Vector3(5, 300, 0),//position
 		Vector4(1, 1, 1, 1), //light color
-		200.0f //light radius
-		, 5.0f // brightness
+		600.0f //light radius
+		, 2.0f // brightness
 		, Vector3(1, 1, 1)
 		));
-	//lightList.push_back(Light(Vector3(0, 0, 0),//position
-	//	Vector4(1, 1, 1, 1), //light color
-	//	50.0f //light radius
-	//	, 5.0f // brightness
-	//	, Vector3(1, 1, 1)
-	//	));
+	lightList.push_back(Light(Vector3(0, 1.5f, 0),//position
+		Vector4(1, 1, 1, 1), //light color
+		1.0f //light radius
+		, 50.0f // brightness
+		, Vector3(1, 1, 1)
+		));
 	//lightList.push_back(Light(Vector3(-36.3696, -72.7393, 58.1914),//position
 	//	Vector4(1, 1, 1, 1), //light color
 	//	500.0f //light radius
@@ -124,26 +126,54 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	//SHADOW
 	///////////////////////////////////////////////////////////////
 	//start Shadow
-	glGenTextures(1, &shadowTex);
-	glBindTexture(GL_TEXTURE_2D, shadowTex);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glGenTextures(1, &shadowTex);
+	//glBindTexture(GL_TEXTURE_2D, shadowTex);
+	//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOWSIZE, SHADOWSIZE, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	//compare between depth texture and depth buffer
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOWSIZE, SHADOWSIZE, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	////compare between depth texture and depth buffer
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
 
-	glBindTexture(GL_TEXTURE_2D, 0);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 
-	glGenFramebuffers(1, &shadowFBO);
+	//glGenFramebuffers(1, &shadowFBO);
 
-	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTex, 0);
+	//glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTex, 0);
 
-	glDrawBuffer(GL_NONE);//no need to attatch the colour infomation
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//glDrawBuffer(GL_NONE);//no need to attatch the colour infomation
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	//end Shadow
+	//eric Shadow
+	//generate shadow texture 
+	for (int i = 0; i < 6; i++) {
+		glGenTextures(1, &shadowTexs[i]);
+		glBindTexture(GL_TEXTURE_2D, shadowTexs[i]);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+			SHADOWSIZE, SHADOWSIZE, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE,
+			GL_COMPARE_R_TO_TEXTURE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	//end
+
+	//create shadow FBO and bind depth texture
+	glGenFramebuffers(1, &shadowFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+	for (int i = 0; i < 6; i++) {
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTexs[i], 0);
+		glDrawBuffer(GL_NONE);
+	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//end
+
+	//end eric
 	glEnable(GL_DEPTH_TEST);
 
 	///////////////////////////////////////////////////////////////
@@ -184,10 +214,15 @@ Scene::~Scene()
 		 delete ShadowShader;
 		 ShadowShader = NULL;
 	}
-	 if (m_skyboxShader)
+	if (m_skyboxShader)
 	{
-		 delete m_skyboxShader;
-		 m_skyboxShader = NULL;
+		delete m_skyboxShader;
+		m_skyboxShader = NULL;
+	}
+	if (m_ParticleShader)
+	{
+		delete m_ParticleShader;
+		m_ParticleShader = NULL;
 	}
 	if (m_Camera)
 	{
@@ -204,7 +239,9 @@ Scene::~Scene()
 	glDeleteTextures(1, &m_ScreenDTex);
 	glDeleteTextures(1, &m_ScreenCTex);
 	glDeleteFramebuffers(1, &m_ScreenFBO);
-
+	for (int i = 0; i < 6; i++) {
+		glDeleteTextures(1, &shadowTexs[i]);
+	}
 	NCLDebug::ReleaseShaders();
 }
 
@@ -282,23 +319,23 @@ void Scene::RenderScene()
 	//glDisable(GL_CULL_FACE);
 	//glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	//glDepthFunc(GL_ALWAYS);
-	//glDepthMask(GL_FALSE);//disable the depth buffer, it won't write on depth buffer
-	//SetCurrentShader(m_skyboxShader);//set skyboxShader to be currentShader
+	glDepthMask(GL_FALSE);//disable the depth buffer, it won't write on depth buffer
+	SetCurrentShader(m_skyboxShader);//set skyboxShader to be currentShader
 
 
-	//glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "cubeTex"), 0);
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "cubeTex"), 0);
 
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap);
 
-	//UpdateShaderMatrices(); //update "modelMatrix" "viewMatrix" "projMatrix" "textureMatrix"
+	UpdateShaderMatrices(); //update "modelMatrix" "viewMatrix" "projMatrix" "textureMatrix"
 
 
-	//SetTextureRepeating(quad->GetTexture(), true);
-	//quad->Draw(false);
+	
+	quad->Draw(false);
 
-	//glUseProgram(0);
-	//glDepthMask(GL_TRUE);//enable depth buffer
+	glUseProgram(0);
+	glDepthMask(GL_TRUE);//enable depth buffer
 
 	//glDepthFunc(GL_LEQUAL);
 	///////////////////////////////////////////////////
@@ -311,7 +348,7 @@ void Scene::RenderScene()
 	//glEnable(GL_BLEND);
 	//glDepthFunc(GL_LEQUAL);
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+	
 	//Build Render List
 	BuildNodeLists(m_RootGameObject);
 	SortNodeLists();
@@ -354,9 +391,9 @@ void Scene::RenderScene()
 	for (int i = 0; i < 6;i++)
 	{
 	
-	DrawShadowScene();
+	DrawShadowScene(i);
 	//viewMatrix = Matrix4::BuildViewMatrix((lightList.at(0)).GetPosition(), Vector3(0,0,0));
-	DrawCominedScene();
+	DrawCominedScene(i);
 	}
 	
 	//UpdateShaderMatrices();
@@ -380,17 +417,18 @@ void Scene::RenderScene()
 	//PARTICLE
 	/////////////////////////////////////////////////
 	
-	
-	//glEnable(GL_DEPTH_TEST);
-	//glDepthMask(GL_FALSE);
-	//SetCurrentShader(m_ParticleShader);
-	//glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_FALSE);
+	SetCurrentShader(m_ParticleShader);
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
 
-	//DrawParticleList(m_RootParticleList);
+	DrawParticleList(m_RootParticleList);
 
 
 	/////////////////////////////////////////////////
-	//glDepthMask(GL_TRUE);
+	glDepthMask(GL_TRUE);
 
 
 
@@ -403,20 +441,42 @@ void Scene::RenderScene()
 	SwapBuffers();
 }
 
-void Scene::DrawShadowScene()
+void Scene::DrawShadowScene(int loop)
 {
+	Matrix4 tempMatrix = Matrix4::Translation(Vector3((200 * 200) / 2.0f, -100.0f,( 200 * 200 )/ 2));
+	Vector3 translate = Vector3((lightList.at(0)).GetPosition());
+	Matrix4 pushMatrix = Matrix4::Translation(translate);
+	Matrix4 popMatrix = Matrix4::Translation(-translate);
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTexs[loop], 0);
 	glClear(GL_DEPTH_BUFFER_BIT);
+	glDrawBuffer(GL_NONE);
 	glViewport(0, 0, SHADOWSIZE, SHADOWSIZE);
 
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 
 	SetCurrentShader(ShadowShader);
+
+	if (loop < 4) {
+		tempMatrix = pushMatrix *
+			Matrix4::Rotation(90.0f * loop, Vector3(0.0f, 1.0f, 0.0f))
+			* popMatrix;
+	}
+	else {
+		tempMatrix = pushMatrix *
+			Matrix4::Rotation(90.0f * (loop == 4 ? 1 : -1), Vector3(1.0f, 0.0f, 0.0f))
+			* popMatrix;
+	}
 	//from the light to the middle of the height map
 	//viewMatrix = Matrix4::BuildViewMatrix(lightList.at(10).GetPosition(), MiddleOfScene);
 
-	viewMatrix = Matrix4::BuildViewMatrix(lightList.at(0).GetPosition(), Vector3(0,0,0));
-	textureMatrix = biasMatrix * (projMatrix * viewMatrix);
+	Vector3 pos = tempMatrix.GetPositionVector();
+	viewMatrix = Matrix4::BuildViewMatrix((lightList.at(0)).GetPosition(), pos);
+	//ShadowTransMatrix = biasMatrix*(projMatrix * viewMatrix);
+
+	//viewMatrix = Matrix4::BuildViewMatrix(lightList.at(0).GetPosition(), Vector3(0,0,0));
+	//textureMatrix = biasMatrix * (projMatrix * viewMatrix);
 	(lightList.at(0)).SetlightViewProjMat(biasMatrix * (projMatrix * viewMatrix));
 
 	//Texture matrix is really  = biasMatrix * (light proj Matrix * light view Matrix)
@@ -432,7 +492,7 @@ void Scene::DrawShadowScene()
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
-void Scene::DrawCominedScene()
+void Scene::DrawCominedScene(int loop)
 {
 	SetCurrentShader(SceneShader);
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
@@ -443,14 +503,14 @@ void Scene::DrawCominedScene()
 	SetShaderLightList(lightList);
 
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, shadowTex);
+	glBindTexture(GL_TEXTURE_2D, shadowTexs[loop]);
 
 	viewMatrix = m_Camera->BuildViewMatrix();
 
 	UpdateShaderMatrices();
 
 	//draw the object
-	DrawNodes(false);
+	DrawNodes(true);
 
 	glUseProgram(0);
 }
@@ -482,7 +542,7 @@ void Scene::UpdateScene(float dt)
 {
 	m_Camera->UpdateCamera(dt * 1000.f);
 	UpdateNode(dt, m_RootGameObject);
-	//UpdateParticleList(dt, m_RootParticleList);
+	UpdateParticleList(dt, m_RootParticleList);
 }
 
 

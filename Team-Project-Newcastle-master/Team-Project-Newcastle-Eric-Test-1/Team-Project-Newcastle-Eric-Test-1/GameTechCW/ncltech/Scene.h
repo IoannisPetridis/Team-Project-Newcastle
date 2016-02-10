@@ -28,8 +28,8 @@ public:
 	void AddGameObject(GameObject* game_object);	
 	GameObject* FindGameObject(const std::string& name);
 	void SetClearColor(Vector4 color) { clearcolor = color; }
-	void DrawShadowScene();
-	void DrawCominedScene();
+	void DrawShadowScene(int loop);
+	void DrawCominedScene(int loop);
 	virtual bool InitialiseGL()				{ return true; };
 	virtual void RenderScene();
 	virtual void UpdateScene(float dt); //This is msec * 0.001f (e.g time relative to seconds not milliseconds
@@ -79,5 +79,6 @@ protected:
 
 	GLuint shadowTex;
 	GLuint shadowFBO;
+	GLuint shadowTexs[6];
 
 };
