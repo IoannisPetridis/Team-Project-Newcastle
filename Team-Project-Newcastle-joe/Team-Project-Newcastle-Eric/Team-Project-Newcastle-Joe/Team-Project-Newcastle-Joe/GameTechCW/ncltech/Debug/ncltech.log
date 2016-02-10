@@ -1,0 +1,31 @@
+﻿Build started 10/02/2016 16:00:05.
+     1>Project "C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp
+         ActionHandler.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\ActionHandler.obj
+         Debug\ArbitraryAI.obj
+         Debug\AssetsManager.obj
+         Debug\CollisionDetection.obj
+         Debug\Constraint.obj
+         Debug\CuboidCollisionShape.obj
+         Debug\GameObjectMag.obj
+         Debug\GuardState.obj
+         Debug\HomeState.obj
+         Debug\NCLDebug.obj
+         Debug\GameObject.obj
+         Debug\Hull.obj
+         Debug\Manifold.obj
+         Debug\OffState.obj
+         Debug\PhysicsEngine.obj
+         Debug\PhysicsObject.obj
+         Debug\Scene.obj
+         Debug\SimpleMeshObject.obj
+         Debug\SphereCollisionShape.obj
+         ncltech.vcxproj -> C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.71
