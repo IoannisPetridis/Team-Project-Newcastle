@@ -7,6 +7,7 @@
 #include "../ncltech/CollisionShape.h"
 #include "../ncltech/CuboidCollisionShape.h"
 #include "../ncltech/SphereCollisionShape.h"
+#include "../ncltech//PyramidCOllisionShape.h"
 //#include "Scene.h"
 #include "ActionHandler.h"
 #include <ncltech\PhysicsEngine.h>

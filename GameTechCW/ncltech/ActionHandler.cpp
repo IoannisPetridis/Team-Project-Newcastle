@@ -32,3 +32,4 @@ void ActionHandler::Update(float dt) {
 	ControllerHandle();
 	(m_scene->m_RootParticleList->GetChildren())[0]->SetSourcePosition(m_scene->FindGameObject("car")->Physics()->GetPosition());
 }
+

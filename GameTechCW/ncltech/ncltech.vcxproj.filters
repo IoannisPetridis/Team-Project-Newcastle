@@ -108,6 +108,9 @@
     <ClCompile Include="OffState.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
+    <ClCompile Include="PyramidCollisionShape.cpp">
+      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="OffState.h">
       <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PyramidCOllisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

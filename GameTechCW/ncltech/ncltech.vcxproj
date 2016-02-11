@@ -88,6 +88,7 @@
     <ClCompile Include="OffState.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
+    <ClCompile Include="PyramidCollisionShape.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SimpleMeshObject.cpp" />
     <ClCompile Include="SphereCollisionShape.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="OffState.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PhysicsObject.h" />
+    <ClInclude Include="PyramidCOllisionShape.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SimpleMeshObject.h" />
     <ClInclude Include="SphereCollisionShape.h" />
