@@ -93,6 +93,9 @@
     <ClCompile Include="ArbitraryAI.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerControlledObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="ArbitraryAI.h">
       <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControlledObject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

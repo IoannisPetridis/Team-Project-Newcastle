@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{ac6d0ab1-55b0-4fc3-aa69-dfe156d32bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics\Constraints">
+      <UniqueIdentifier>{6e2bc176-e49e-4787-a6ab-e90c1a3e4fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics\CollisionShapes">
+      <UniqueIdentifier>{565b8c19-9d3a-4b0d-b389-90aa6b527c08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{41fd562a-f1c9-410f-8bd0-42ead3a30f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics\Constraints">
+      <UniqueIdentifier>{f5ee26b8-b9a6-4d7e-8e98-9358df5c5b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics\CollisionShapes">
+      <UniqueIdentifier>{39bf44f8-0ca5-45ad-a15b-56a39b267895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{47f6397b-9493-4d21-aac7-a5b6e4c98575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Uitility">
+      <UniqueIdentifier>{5e8d4656-e976-440f-a8c0-a58c6eb2891d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI">
+      <UniqueIdentifier>{f976e221-e023-45d0-9a38-052d0e276d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI">
+      <UniqueIdentifier>{b9d098be-04e2-4694-afc5-c7406c00622b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Network">
+      <UniqueIdentifier>{e5a813e6-01ea-4093-9713-1cdeb005a726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{c86b0ca8-3bac-4e02-aee6-4ca956eb303b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\Defensive AI">
+      <UniqueIdentifier>{50b49d95-5507-4e51-8b3c-955df2ba9b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\Defensive AI">
+      <UniqueIdentifier>{1dcd367c-fed5-4926-a890-66a510d0f9ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\Neutral AI">
+      <UniqueIdentifier>{6814bd5e-b059-4a02-ab05-84311570bbbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\Aggressive AI">
+      <UniqueIdentifier>{b1864609-c945-4a4d-9060-1938959ad59e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\Common Classes">
+      <UniqueIdentifier>{f65c6acf-7225-4269-86e8-ea01114c3bb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\Neutral AI">
+      <UniqueIdentifier>{2a2f80eb-c979-4185-b7c6-ca83f4b535cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\Aggressive AI">
+      <UniqueIdentifier>{80ea9e40-2cbe-4430-bbf5-f474ba29f6fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\Common Classes">
+      <UniqueIdentifier>{08e33f50-c2b5-4c1a-9669-d7da51fd8bc5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMeshObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hull.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Constraint.cpp">
+      <Filter>Source Files\Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="CuboidCollisionShape.cpp">
+      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollisionShape.cpp">
+      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Manifold.cpp">
+      <Filter>Source Files\Physics\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="NCLDebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionDetection.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObject.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectMag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetsManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Defend.cpp">
+      <Filter>Source Files\AI\Defensive AI</Filter>
+    </ClCompile>
+    <ClCompile Include="DefensiveAI.cpp">
+      <Filter>Source Files\AI\Defensive AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Patrol.cpp">
+      <Filter>Source Files\AI\Defensive AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Punt.cpp">
+      <Filter>Source Files\AI\Defensive AI</Filter>
+    </ClCompile>
+    <ClCompile Include="OffState.cpp">
+      <Filter>Source Files\AI\Common Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Chase.cpp">
+      <Filter>Source Files\AI\Neutral AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Dribble.cpp">
+      <Filter>Source Files\AI\Neutral AI</Filter>
+    </ClCompile>
+    <ClCompile Include="NeutralAI.cpp">
+      <Filter>Source Files\AI\Neutral AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AggressiveAI.cpp">
+      <Filter>Source Files\AI\Aggressive AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files\AI\Aggressive AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PuntPlayer.cpp">
+      <Filter>Source Files\AI\Aggressive AI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMeshObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TSingleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CuboidCollisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="DistanceConstraint.h">
+      <Filter>Header Files\Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="Manifold.h">
+      <Filter>Header Files\Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="Constraint.h">
+      <Filter>Header Files\Physics\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="NCLDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetection.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsEngine.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObject.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectMag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetsManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigFileLoader.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefensiveAI.h">
+      <Filter>Header Files\AI\Defensive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Defend.h">
+      <Filter>Header Files\AI\Defensive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Patrol.h">
+      <Filter>Header Files\AI\Defensive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Punt.h">
+      <Filter>Header Files\AI\Defensive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="OffState.h">
+      <Filter>Header Files\AI\Common Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files\AI\Common Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="NeutralAI.h">
+      <Filter>Header Files\AI\Neutral AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Chase.h">
+      <Filter>Header Files\AI\Neutral AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Dribble.h">
+      <Filter>Header Files\AI\Neutral AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AggressiveAI.h">
+      <Filter>Header Files\AI\Aggressive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PuntPlayer.h">
+      <Filter>Header Files\AI\Aggressive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Header Files\AI\Aggressive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AggressiveBaseState.h">
+      <Filter>Header Files\AI\Aggressive AI</Filter>
+    </ClInclude>
+    <ClInclude Include="NeutralBaseState.h">
+      <Filter>Header Files\AI\Neutral AI</Filter>
+    </ClInclude>
+    <ClInclude Include="DefensiveBaseState.h">
+      <Filter>Header Files\AI\Defensive AI</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
