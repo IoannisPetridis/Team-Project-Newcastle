@@ -54,9 +54,9 @@ void Audio::AddSound(const char* file, FMOD_VECTOR pos, FMOD_VECTOR vel, FMOD_RE
 	result = channel->set3DAttributes(&pos, &vel);
 	
 	result = channel->setVolume(volume);
-	result = channel->setFrequency(2724441000.0f);
+	
 	result = system->playSound(sound, 0, paused, &channel);
 
-
+	result = system->update();
 
 }

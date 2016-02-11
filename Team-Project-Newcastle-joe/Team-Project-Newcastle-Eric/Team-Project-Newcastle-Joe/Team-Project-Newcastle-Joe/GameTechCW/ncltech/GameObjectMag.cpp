@@ -86,5 +86,8 @@ void	GameObjectMag::GOMInit(Scene* m_scene)
 		AssetsManager::GOInstance->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f));
 
 	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+
+	
 }
 

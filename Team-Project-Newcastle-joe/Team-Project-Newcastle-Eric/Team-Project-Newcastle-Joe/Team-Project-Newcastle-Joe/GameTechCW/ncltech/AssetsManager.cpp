@@ -35,6 +35,9 @@ void AssetsManager::InitializeMeshes()
 		m_pPlane->SetTexture(m_CheckerboardTex);
 		m_pCube->SetTexture(m_CheckerboardTex);
 		m_pSphere->SetTexture(m_CheckerboardTex);
+
+
+		
 	}
 }
 

@@ -286,7 +286,7 @@ void Scene::RenderScene()
 	SetCurrentShader(m_ParticleShader);
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
 
-	//DrawParticleList(m_RootParticleList);
+	DrawParticleList(m_RootParticleList);
 
 	/*glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitter->GetParticleSize());
 	emitter->SetParticleSize(0.5f);
@@ -306,16 +306,16 @@ void Scene::RenderScene()
 
 
 
-	/*glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitter1->GetParticleSize());
-	emitter1->SetParticleSize(5.0f);
-	emitter1->SetParticleVariance(1.0f);
-	emitter1->SetLaunchParticles(16.0f);
-	emitter1->SetParticleLifetime(100.0f);
-	emitter1->SetParticleSpeed(0.1f);
-	emitter1->SetSourcePosition(Vector3(10, 10, 10));
-	UpdateShaderMatrices();
+	//glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "particleSize"), emitter1->GetParticleSize());
+	//emitter1->SetParticleSize(5.0f);
+	//emitter1->SetParticleVariance(1.0f);
+	//emitter1->SetLaunchParticles(16.0f);
+	//emitter1->SetParticleLifetime(100.0f);
+	//emitter1->SetParticleSpeed(0.1f);
+	//emitter1->SetSourcePosition(Vector3(10, 10, 10));
+	//UpdateShaderMatrices();
 
-	emitter1->Draw();*/
+	//emitter1->Draw();
 
 
 	/////////////////////////////////////////////////

@@ -2,6 +2,7 @@
 #include "../nclgl/Mesh.h"
 #include "../nclgl/OBJMesh.h"
 #include "SimpleMeshObject.h"
+#include <FMOD\inc\fmod.hpp>
 
 class Scene;
 
@@ -29,6 +30,7 @@ public:
 	static Mesh* LoadMesh(string Mesh_name, string type);
 	static OBJMesh* LoadOBJMesh(string Mesh_name);
 
+
 protected:
 	static void InitializeMeshes();
 	static void ReleaseMeshes();
@@ -38,4 +40,5 @@ protected:
 	static Mesh* m_pSphere;
 	static Mesh* m_pPlane;
 	static Mesh* m_Tardis;
+	
 };

@@ -73,8 +73,9 @@ bool MyScene::InitialiseGL()
 	result = system2->createSound(SOUNDSDIR"crash.wav", FMOD_3D, 0, &sound2);
 	result = sound2->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
 
-	result = system2->createSound(SOUNDSDIR"car.wav", FMOD_LOOP_NORMAL, 0, &sound3);
-	//result = sound3->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
+	result = system2->createSound(SOUNDSDIR"car.wav", FMOD_3D, 0, &sound3);
+	result = sound3->setMode(FMOD_LOOP_NORMAL);
+	result = sound3->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
 	result = channel3->setVolume(5.5f);
 
 	result = system2->playSound(sound3, 0, true, &channel3);
@@ -109,7 +110,7 @@ void MyScene::UpdateScene(float msec)
 		FMOD_VECTOR pos = { temp->begin()->objectA->GetPosition().x, temp->begin()->objectA->GetPosition().y, temp->begin()->objectA->GetPosition().z };
 		FMOD_VECTOR vel = { 0.f, 0.f, 0.f };
 		float volume = temp->begin()->objectA->GetLinearVelocity().Length()*0.1f;
-
+		
 		
 		float time = engine_timer.GetTimedMS();
 
@@ -130,13 +131,13 @@ void MyScene::UpdateScene(float msec)
 	temp->clear();
 
 
-	//FMOD_VECTOR Carpos = { this->FindGameObject("car")->Physics()->GetPosition().x, this->FindGameObject("car")->Physics()->GetPosition().y, this->FindGameObject("car")->Physics()->GetPosition().z };
-	//FMOD_VECTOR Carvel = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
+	FMOD_VECTOR Carpos = { this->FindGameObject("car")->Physics()->GetPosition().x, this->FindGameObject("car")->Physics()->GetPosition().y, this->FindGameObject("car")->Physics()->GetPosition().z };
+	FMOD_VECTOR Carvel = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
 	//FMOD_VECTOR Carvel = { 0.0f, 0.0f, 0.0f };
-	//result = channel3->set3DAttributes(&Carpos, &Carvel);
+	result = channel3->set3DAttributes(&Carpos, &Carvel);
 
-	float carspeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length()*0.01;
-	result = channel3->setFrequency(20000.f + carspeed*20000);
+	float carspeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
+	result = channel3->setFrequency(20000.f + carspeed * 200);
 	result = channel3->setVolume(carspeed);
 	result = system2->update();
 	result = channel3->setPaused(false);

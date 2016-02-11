@@ -33,7 +33,7 @@ int main()
 	{
 		return Quit(true, "Window failed to initialise!");
 	}
-
+	
 	//Initialise the PhysicsEngine
 	//Create GameObject Iterate Root Node upon which the GameObject List will be built
 	PhysicsEngine::Instance();
@@ -43,6 +43,8 @@ int main()
 	//by initialising GameAssetsManager
 	scene = new MyScene(Window::GetWindow());
 	//scene(gom);
+	
+
 	
 	//Initialise the ActionHandler Instnace
 	ActionHandler::Instance();
