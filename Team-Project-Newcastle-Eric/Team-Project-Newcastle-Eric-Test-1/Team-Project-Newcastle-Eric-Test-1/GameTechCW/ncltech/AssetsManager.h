@@ -22,6 +22,9 @@ public:
 	static GLuint m_CheckerboardTex;
 	static GLuint m_TargetTexture;
 	static GLuint m_ThrowTex;
+	static GLuint m_ThrowTexBUMP;
+	static GLuint m_Glass;
+	static GLuint m_GlassBUMP;
 
 	static SimpleMeshObject* GOInstance;
 	static SimpleMeshObject* Camera_Entity;

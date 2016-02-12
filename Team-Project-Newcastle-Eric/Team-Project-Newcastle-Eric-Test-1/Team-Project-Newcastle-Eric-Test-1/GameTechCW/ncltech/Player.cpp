@@ -68,7 +68,7 @@ void Player::CameraControl() {
 
 		float dis_1 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground"));
 		if (dis_1 < 0.4f) {
-			if (P_camera->GetPitch() > 2.0f) P_camera->SetPitch(2.0f);
+			//if (P_camera->GetPitch() > 2.0f) P_camera->SetPitch(2.0f);
 		}
 
 		//along the -Z axis

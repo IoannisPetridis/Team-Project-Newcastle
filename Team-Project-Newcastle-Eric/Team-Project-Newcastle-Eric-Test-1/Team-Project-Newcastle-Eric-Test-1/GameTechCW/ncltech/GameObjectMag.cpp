@@ -24,10 +24,13 @@ void	GameObjectMag::GOMInit(Scene* m_scene)
 	//End
 
 {
+		
 	AssetsManager::GOInstance = new SimpleMeshObject("ground");//Floor
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetBumpMap(AssetsManager::m_GlassBUMP, false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));
-	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 0.2f));
+	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 1.0f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "ground";
@@ -203,7 +206,7 @@ void	GameObjectMag::GOMInit(Scene* m_scene)
 		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
 		//settexture&bumpMap
 		AssetsManager::Player_1->SetTexture(AssetsManager::m_ThrowTex, false);
-		AssetsManager::Player_1->SetBumpMap(AssetsManager::m_ThrowTex, false);
+		AssetsManager::Player_1->SetBumpMap(AssetsManager::m_ThrowTexBUMP, false);
 		//
 		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
 		AssetsManager::Player_1->SetColour(Vector4(0.2f, 1.0f, 0.5f, 1.0f));

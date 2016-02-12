@@ -258,7 +258,18 @@ void OGLRenderer::SetTextureRepeating( GLuint target, bool repeating )	{
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeating ? GL_REPEAT : GL_CLAMP);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
-
+void OGLRenderer::SetShaderLightList(const vector<Light> l)
+{
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "lightSize"), l.size());
+	for (int i = 0; i < l.size(); i++)
+	{
+		glUniform3fv(glGetUniformLocation(currentShader->GetProgram(), "lightPos[0]") + i, 1, (float*)&l[i].GetPosition());
+		glUniform4fv(glGetUniformLocation(currentShader->GetProgram(), "lightColour[0]") + i, 1, (float*)&l[i].GetColour());
+		glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "lightRadius[0]") + i, l[i].GetRadius());
+		glUniform1f(glGetUniformLocation(currentShader->GetProgram(), "bright[0]") + i, l[i].GetBright());
+		glUniform3fv(glGetUniformLocation(currentShader->GetProgram(), "isOn[0]") + i, 1, (float*)&l[i].GetIsOn());
+	}
+}
 //void OGLRenderer::SetShaderLight(const Light &l) {
 //	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(), "lightPos")   ,1,(float*)&l.GetPosition());
 //	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(), "lightColour"),1,(float*)&l.GetColour());

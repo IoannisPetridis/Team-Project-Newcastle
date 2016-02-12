@@ -68,7 +68,7 @@ void main(void){
 	 for(int i=1;i<lightSize;i++)
 	 {
 		 incident = normalize(lightPos[i]-IN.worldPos);
-		 lambert = max(0.0,dot(incident,IN.normal));
+		 lambert = max(0.0,dot(incident,normal));
 		 dist = length(lightPos[i] - IN.worldPos);
 			atten = 1.0 - clamp(dist/lightRadius[i],0.0,1.0);
 		
@@ -79,7 +79,7 @@ void main(void){
 		 halfDir = normalize(incident + viewDir);
 
 		 //calculate the specular reflection
-		 rFactor = max(0.0,dot(halfDir,IN.normal));
+		 rFactor = max(0.0,dot(halfDir,normal));
 		 //shiny
 		 sFactor =pow(rFactor,25.0);
 		 shadow = 1.0; // New !
