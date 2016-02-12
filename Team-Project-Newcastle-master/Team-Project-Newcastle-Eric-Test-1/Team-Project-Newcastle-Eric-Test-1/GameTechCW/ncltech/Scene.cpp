@@ -97,7 +97,7 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 
 	init = true;
 
-	lightList.push_back(Light(Vector3(5, 300, 0),//position
+	lightList.push_back(Light(Vector3(0, 180, 0),//position
 		Vector4(1, 1, 1, 1), //light color
 		600.0f //light radius
 		, 2.0f // brightness
@@ -148,9 +148,9 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	//end Shadow
 	//eric Shadow
 	//generate shadow texture 
-	for (int i = 0; i < 6; i++) {
-		glGenTextures(1, &shadowTexs[i]);
-		glBindTexture(GL_TEXTURE_2D, shadowTexs[i]);
+	//for (int i = 0; i < 6; i++) {
+		glGenTextures(1, &shadowTex);
+		glBindTexture(GL_TEXTURE_2D, shadowTex);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -160,16 +160,16 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE,
 			GL_COMPARE_R_TO_TEXTURE);
 		glBindTexture(GL_TEXTURE_2D, 0);
-	}
+	//}
 	//end
 
 	//create shadow FBO and bind depth texture
 	glGenFramebuffers(1, &shadowFBO);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-	for (int i = 0; i < 6; i++) {
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTexs[i], 0);
+	//for (int i = 0; i < 6; i++) {
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTex, 0);
 		glDrawBuffer(GL_NONE);
-	}
+	//}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	//end
 
@@ -239,9 +239,9 @@ Scene::~Scene()
 	glDeleteTextures(1, &m_ScreenDTex);
 	glDeleteTextures(1, &m_ScreenCTex);
 	glDeleteFramebuffers(1, &m_ScreenFBO);
-	for (int i = 0; i < 6; i++) {
-		glDeleteTextures(1, &shadowTexs[i]);
-	}
+	//for (int i = 0; i < 6; i++) {
+	glDeleteTextures(1, &shadowTex);
+	//}
 	NCLDebug::ReleaseShaders();
 }
 
@@ -316,8 +316,8 @@ void Scene::RenderScene()
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	/////////////////////////////////////////////////
-	//glDisable(GL_CULL_FACE);
-	//glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	//glDepthFunc(GL_ALWAYS);
 	glDepthMask(GL_FALSE);//disable the depth buffer, it won't write on depth buffer
 	SetCurrentShader(m_skyboxShader);//set skyboxShader to be currentShader
@@ -344,10 +344,10 @@ void Scene::RenderScene()
 	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_DEPTH_CLAMP);
 	//glEnable(GL_STENCIL_TEST);
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 	//glEnable(GL_BLEND);
 	//glDepthFunc(GL_LEQUAL);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	//Build Render List
 	BuildNodeLists(m_RootGameObject);
@@ -388,13 +388,12 @@ void Scene::RenderScene()
 	viewMatrix = m_Camera->BuildViewMatrix();
 	projMatrix = Matrix4::Perspective(1.0f, 1000.0f, (float)width / (float)height, 45.0f);
 
-	for (int i = 0; i < 6;i++)
-	{
-	
-	DrawShadowScene(i);
-	//viewMatrix = Matrix4::BuildViewMatrix((lightList.at(0)).GetPosition(), Vector3(0,0,0));
-	DrawCominedScene(i);
-	}
+	//for (int i = 0; i < 6; i++)
+	//{
+
+		DrawShadowScene();
+		DrawCominedScene();
+	//}
 	
 	//UpdateShaderMatrices();
 
@@ -441,15 +440,15 @@ void Scene::RenderScene()
 	SwapBuffers();
 }
 
-void Scene::DrawShadowScene(int loop)
+void Scene::DrawShadowScene()
 {
-	Matrix4 tempMatrix = Matrix4::Translation(Vector3((200 * 200) / 2.0f, -100.0f,( 200 * 200 )/ 2));
+	Matrix4 tempMatrix = Matrix4::Translation(Vector3((200 * 150) / 2.0f, -90.0f,( 200 * 150 )/ 2));
 	Vector3 translate = Vector3((lightList.at(0)).GetPosition());
 	Matrix4 pushMatrix = Matrix4::Translation(translate);
 	Matrix4 popMatrix = Matrix4::Translation(-translate);
-	
+	translate += Vector3(-5, -180, 0); //top
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTexs[loop], 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowTex, 0);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glDrawBuffer(GL_NONE);
 	glViewport(0, 0, SHADOWSIZE, SHADOWSIZE);
@@ -458,7 +457,7 @@ void Scene::DrawShadowScene(int loop)
 
 	SetCurrentShader(ShadowShader);
 
-	if (loop < 4) {
+	/*if (loop < 4) {
 		tempMatrix = pushMatrix *
 			Matrix4::Rotation(90.0f * loop, Vector3(0.0f, 1.0f, 0.0f))
 			* popMatrix;
@@ -467,12 +466,28 @@ void Scene::DrawShadowScene(int loop)
 		tempMatrix = pushMatrix *
 			Matrix4::Rotation(90.0f * (loop == 4 ? 1 : -1), Vector3(1.0f, 0.0f, 0.0f))
 			* popMatrix;
-	}
+	}*/
+	//if (loop == 0)
+	//	translate += Vector3(-5,-90,0); //top
+	//if (loop == 1)
+	//	translate += Vector3(-5, 90,0); // floor
+	//if (loop == 2)
+	//	translate += Vector3(200,-5,0);
+	//if (loop == 3)
+	//	translate += Vector3(-200,-5,0);
+	//if (loop == 4)
+	//	translate += Vector3(0,-5,150);
+	//if (loop == 5)
+	//	translate += Vector3(0,-5,-150);
+
 	//from the light to the middle of the height map
 	//viewMatrix = Matrix4::BuildViewMatrix(lightList.at(10).GetPosition(), MiddleOfScene);
-
-	Vector3 pos = tempMatrix.GetPositionVector();
-	viewMatrix = Matrix4::BuildViewMatrix((lightList.at(0)).GetPosition(), pos);
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 200.0f);
+	//Vector3 pos = tempMatrix.GetPositionVector();
+	//Vector3 pos = translate;
+	//translate += Vector3(-5,-5,-5);
+	//cout << translate << endl;
+	viewMatrix = Matrix4::BuildViewMatrix((lightList.at(0)).GetPosition(), translate);
 	//ShadowTransMatrix = biasMatrix*(projMatrix * viewMatrix);
 
 	//viewMatrix = Matrix4::BuildViewMatrix(lightList.at(0).GetPosition(), Vector3(0,0,0));
@@ -492,20 +507,25 @@ void Scene::DrawShadowScene(int loop)
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
-void Scene::DrawCominedScene(int loop)
+void Scene::DrawCominedScene()
 {
 	SetCurrentShader(SceneShader);
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "diffuseTex"), 0);
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "bumpTex"), 1);
-	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "shadowTex"), 2);
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(), "shadowTex1"), 2);
 	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(), "cameraPos"), 1, (float*)&m_Camera->GetPosition());
 
 	SetShaderLightList(lightList);
 
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, shadowTexs[loop]);
-
+	glBindTexture(GL_TEXTURE_2D, shadowTex);
+	//glActiveTexture(GL_TEXTURE3);
+	//glBindTexture(GL_TEXTURE_2D, shadowTexs[0]);
+	projMatrix = Matrix4::Perspective(1.0f, 1000.0f, (float)width / (float)height, 45.0f);
 	viewMatrix = m_Camera->BuildViewMatrix();
+	/*Vector3 translate = Vector3((lightList.at(0)).GetPosition());
+	translate += Vector3(0, 90, 0);
+	viewMatrix = Matrix4::BuildViewMatrix((lightList.at(0)).GetPosition(), translate);*/
 
 	UpdateShaderMatrices();
 

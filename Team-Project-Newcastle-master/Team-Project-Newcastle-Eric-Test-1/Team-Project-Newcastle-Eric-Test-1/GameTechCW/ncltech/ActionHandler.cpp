@@ -13,17 +13,22 @@ void ActionHandler::SetDefaultScene(Scene* scene) {
 
 void ActionHandler::ControllerHandle() {
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_I)) {
-		m_scene->FindGameObject("car")->Physics()->
-			SetForce(m_scene->FindGameObject("car")->Physics()->GetForce() + Vector3(-2.f, 0.f, 0.f));
+		m_scene->FindGameObject("car")->Physics()->SetPosition(m_scene->FindGameObject("car")->Physics()->GetPosition() + Vector3(-2.f, 0.f, 0.f));
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_J)) {
-		m_scene->FindGameObject("car")->Physics()->SetForce(m_scene->FindGameObject("car")->Physics()->GetForce() + Vector3(0.f, 0.f, 2.f));
+		m_scene->FindGameObject("car")->Physics()->SetPosition(m_scene->FindGameObject("car")->Physics()->GetPosition() + Vector3(0.f, 0.f, 2.f));
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_K)) {
-		m_scene->FindGameObject("car")->Physics()->SetForce(m_scene->FindGameObject("car")->Physics()->GetForce() + Vector3(2.f, 0.f, 0.f));
+		m_scene->FindGameObject("car")->Physics()->SetPosition(m_scene->FindGameObject("car")->Physics()->GetPosition() + Vector3(2.f, 0.f, 0.f));
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_L)) {
-		m_scene->FindGameObject("car")->Physics()->SetForce(m_scene->FindGameObject("car")->Physics()->GetForce() + Vector3(0.f, 0.f, -2.f));
+		m_scene->FindGameObject("car")->Physics()->SetPosition(m_scene->FindGameObject("car")->Physics()->GetPosition() + Vector3(0.f, 0.f, -2.f));
+	}
+	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_9)) {
+		m_scene->FindGameObject("car")->Physics()->SetPosition(m_scene->FindGameObject("car")->Physics()->GetPosition() + Vector3(0.f, 2.f, 0.f));
+	}
+	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_0)) {
+		m_scene->FindGameObject("car")->Physics()->SetPosition(m_scene->FindGameObject("car")->Physics()->GetPosition() + Vector3(0.f, -2.f, 0.f));
 	}
 
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_T)) {

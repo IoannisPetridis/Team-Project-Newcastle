@@ -1,6 +1,7 @@
 #version 150
 uniform sampler2D diffuseTex;
-uniform sampler2DShadow shadowTex;
+uniform sampler2DShadow shadowTex1;
+uniform samplerCube gShadowMap;
 uniform sampler2D bumpTex;
 
 uniform vec3 cameraPos;
@@ -49,7 +50,8 @@ void main(void){
 		
 		float shadow = 1.0; // New !
 		if( IN.shadowProj . w > 0.0) { // New !
-		shadow = textureProj ( shadowTex , IN.shadowProj );
+		shadow = textureProj ( shadowTex1 , IN.shadowProj );
+		
 		 //shadow = 0;
 		}
 		 lambert *= shadow; // New !
@@ -82,7 +84,7 @@ void main(void){
 		 sFactor =pow(rFactor,25.0);
 		 shadow = 1.0; // New !
 		 if( IN.shadowProj . w > 0.0) { // New !
-		 shadow = textureProj ( shadowTex , IN.shadowProj );
+		 shadow = textureProj ( shadowTex1 , IN.shadowProj );
 		 }
 		  lambert *= shadow; // New !
 		
