@@ -78,30 +78,11 @@ protected:
 	GameTimer engine_timer;
 	GameTimer Audio_Timer;
 
-
-
-	FMOD_RESULT result;
-	FMOD::System *AudioSystem;
-
-	FMOD::Sound *Car, *Crash, *Ball , *Wall;
-
-	FMOD::Channel   *channel1 = 0, *channel2 = 0, *channel3 = 0, *channel4;
-	void            *extradriverdata = 0;
-	bool             listenerflag = true;
-	
-
-	FMOD_VECTOR LastPosition;
-	FMOD_VECTOR CameraPosition;
-	FMOD_VECTOR CameraForward;
-	FMOD_VECTOR CameraUp;
-	FMOD_VECTOR CameraVelocity;
 	FMOD_VECTOR CarPosition;
 	FMOD_VECTOR CarVelocity;
-	FMOD_VECTOR SoundPosition;
-	FMOD_VECTOR SoundVelocity;
+	
 
-	const int   INTERFACE_UPDATETIME = 50;      // 50ms update for interface
-	const float DISTANCEFACTOR = 1.0f;
+	
 
 	float damage = 0.0f;
 	float time;

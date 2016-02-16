@@ -3,7 +3,7 @@
 #include <nclgl/Camera.h>
 #include <nclgl/Shader.h>
 #include <nclgl/Frustum.h>
-
+#include "../GameTechnologies/GameTech CW/Audio.h"
 #include "TSingleton.h"
 #include "GameObject.h"
 #include "../GameTechnologies/GameTech CW/ParticleEmitter.h"	//A new class!

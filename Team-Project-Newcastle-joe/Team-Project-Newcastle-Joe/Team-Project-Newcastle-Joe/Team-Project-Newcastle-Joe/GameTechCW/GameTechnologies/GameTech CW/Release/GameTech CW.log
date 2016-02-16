@@ -1,13 +1,8 @@
-﻿Build started 15/02/2016 17:34:25.
+﻿Build started 16/02/2016 13:19:37.
      1>Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../FMOD/inc/ /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Audio.cpp main.cpp MyScene.cpp ParticleEmitter.cpp
-         Audio.cpp
-         main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../FMOD/inc/ /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MyScene.cpp
          MyScene.cpp
-         ParticleEmitter.cpp
-     1>ParticleEmitter.cpp(137): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>ParticleEmitter.cpp(138): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Release\GameTech CW.exe" /NOLOGO /LIBPATH:../FMOD/lib/ ncltech.lib nclgl.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib fmod_vc.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Release\GameTech CW.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Release\GameTech CW.lib" /MACHINE:X86 /SAFESEH Release\Audio.obj
          Release\main.obj
@@ -26,13 +21,13 @@
      1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewBufferSubData imported
      1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
      1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
+     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniform1i imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniform1f imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUseProgram imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
      1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniform1i imported
      1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewCheckFramebufferStatus imported
      1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewUniform3fv imported
      1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewBindFramebuffer imported
@@ -53,4 +48,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.84
+Time Elapsed 00:00:03.49

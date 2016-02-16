@@ -9,6 +9,8 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 {	
 	//used as friend class
 	AssetsManager::InitializeMeshes();
+	Audio::InitialiseAudio();
+	Audio::LoadSounds();
 
 	m_DebugShader = new Shader(SHADERDIR"debugVertex.glsl", SHADERDIR"debugFragment.glsl");
 	if (!m_DebugShader->LinkProgram()){
@@ -88,7 +90,7 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 Scene::~Scene()
 {
 	AssetsManager::ReleaseMeshes();
-	
+	Audio::ReleaseAudio();
 
 	if (m_DefaultLightShader)
 	{

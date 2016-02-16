@@ -64,24 +64,10 @@ bool MyScene::InitialiseGL()
 	//Initialize all game objects
 	GOM->GOMInit(this);
 
-	//audio
-	result = FMOD::System_Create(&AudioSystem);
-	result = AudioSystem->init(100, FMOD_INIT_3D_RIGHTHANDED, extradriverdata);
-
-	result = AudioSystem->createSound(SOUNDSDIR"crash.wav", FMOD_3D, 0, &Crash);
-	result = Crash->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
-
-	result = AudioSystem->createSound(SOUNDSDIR"car.wav", FMOD_3D, 0, &Car);
-	result = Car->setMode(FMOD_LOOP_NORMAL);
-	result = Car->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
-
-	result = AudioSystem->createSound(SOUNDSDIR"ball.wav", FMOD_3D, 0, &Ball);
-	result = Ball->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
-
-	result = AudioSystem->playSound(Car, 0, true, &channel3);
-
-	Audio_Timer.GetTimedMS();
+	//Audio
 	
+	
+	Audio_Timer.GetTimedMS();
 
 	return true;
 }
@@ -100,49 +86,23 @@ void MyScene::UpdateScene(float msec)
 
 	//AUDIO
 
-	Audio* audio = new Audio;
 	std::vector<CollisionPair>* temp = PhysicsEngine::Instance()->GetCollisionPair();
 	
 	for (auto m = temp->begin(); m != temp->end(); ++m)
 	{
 		time = Audio_Timer.GetTimedMS();
-
-		if (m->objectA->name == "car" &&  m->objectB->name == "cube"){
-			if (time > 50){
-				CarPosition = { m->objectA->GetPosition().x, m->objectA->GetPosition().y, m->objectA->GetPosition().z };
-				CarVelocity = { m->objectA->GetLinearVelocity().x, m->objectA->GetLinearVelocity().y, m->objectA->GetLinearVelocity().z };
-				float volume = m->objectA->GetLinearVelocity().Length()*0.1f;
-				audio->AddSound(CarPosition, CarVelocity, result, AudioSystem, channel2, Crash, volume);
-			}
-		}
-
-		if (m->objectA->name == "car" &&  m->objectB->name == "ball"){
-			if (time > 50){
-				SoundVelocity = { m->objectA->GetPosition().x, m->objectA->GetPosition().y, m->objectA->GetPosition().z };
-				FMOD_VECTOR vel = { 0.f, 0.f, 0.f };
-				float volume = m->objectA->GetLinearVelocity().Length()*10.f;
-				audio->AddSound(SoundPosition, vel, result, AudioSystem, channel4, Ball, volume);
-			}
-		}
+		Audio::CollisionSound(m->objectA, m->objectB, time);
 	}
-
 	temp->clear();
-	
-
 	
 	CarPosition = { this->FindGameObject("car")->Physics()->GetPosition().x, this->FindGameObject("car")->Physics()->GetPosition().y, this->FindGameObject("car")->Physics()->GetPosition().z };
 	CarVelocity = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
-	result = channel3->set3DAttributes(&CarPosition, &CarVelocity);
+	float CarSpeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
 
-	float carspeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
-	result = channel3->setFrequency(20000.f + carspeed * 200);
-	result = channel3->setVolume(carspeed);
-	result = AudioSystem->update();
-	result = channel3->setPaused(false);
+	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f+CarSpeed, Audio::channel3);
+	Audio::GetCameraInfo(m_Camera);
 
-	audio->GetCameraInfo(m_Camera, result, AudioSystem);
-
-	//END AUDIO
+	////END AUDIO
 
 	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
 		+ " Y:"

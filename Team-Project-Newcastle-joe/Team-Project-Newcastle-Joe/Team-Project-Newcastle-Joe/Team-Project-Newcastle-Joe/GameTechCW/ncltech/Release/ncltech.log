@@ -1,30 +1,8 @@
-﻿Build started 15/02/2016 17:34:16.
+﻿Build started 16/02/2016 13:06:52.
      1>Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
-         ActionHandler.cpp
-     1>ActionHandler.cpp(29): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>ActionHandler.cpp(60): warning C4305: 'argument' : truncation from 'double' to 'float'
-         ArbitraryAI.cpp
-         AssetsManager.cpp
-         CollisionDetection.cpp
-         Constraint.cpp
-         CuboidCollisionShape.cpp
-         GameObjectMag.cpp
-     1>GameObjectMag.cpp(18): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         GuardState.cpp
-         HomeState.cpp
-         NCLDebug.cpp
-         GameObject.cpp
-         Hull.cpp
-         Manifold.cpp
-         OffState.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PhysicsEngine.cpp
          PhysicsEngine.cpp
-         PhysicsObject.cpp
-         Player.cpp
-         Scene.cpp
-         SimpleMeshObject.cpp
-         SphereCollisionShape.cpp
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\ActionHandler.obj
          Release\ArbitraryAI.obj
@@ -51,4 +29,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:09.18
+Time Elapsed 00:00:01.41
