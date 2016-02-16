@@ -64,9 +64,6 @@ bool MyScene::InitialiseGL()
 	//Initialize all game objects
 	GOM->GOMInit(this);
 
-	//Audio
-	
-	
 	Audio_Timer.GetTimedMS();
 
 	return true;
@@ -98,7 +95,6 @@ void MyScene::UpdateScene(float msec)
 	CarPosition = { this->FindGameObject("car")->Physics()->GetPosition().x, this->FindGameObject("car")->Physics()->GetPosition().y, this->FindGameObject("car")->Physics()->GetPosition().z };
 	CarVelocity = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
 	float CarSpeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
-
 	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f+CarSpeed, Audio::channel3);
 	Audio::GetCameraInfo(m_Camera);
 

@@ -1,5 +1,5 @@
-﻿Build started 15/02/2016 17:17:06.
-     1>Project "C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\nclgl\nclgl.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 16/02/2016 15:27:41.
+     1>Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\nclgl\nclgl.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp CubeRobot.cpp Frustum.cpp GameTimer.cpp Keyboard.cpp Matrix3.cpp Matrix4.cpp MD5Anim.cpp MD5FileData.cpp MD5Mesh.cpp MD5Node.cpp Mesh.cpp Mouse.cpp OBJMesh.cpp OGLRenderer.cpp Plane.cpp Quaternion.cpp SceneNode.cpp Shader.cpp Window.cpp
          Window.cpp
@@ -24,7 +24,7 @@
          Camera.cpp
          Generating Code...
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\nclgl.lib" /NOLOGO Debug\Camera.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Debug\nclgl.lib" /NOLOGO Debug\Camera.obj
          Debug\CubeRobot.obj
          Debug\Frustum.obj
          Debug\GameTimer.obj
@@ -44,9 +44,9 @@
          Debug\SceneNode.obj
          Debug\Shader.obj
          Debug\Window.obj
-         nclgl.vcxproj -> C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\nclgl.lib
-     1>Done Building Project "C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\nclgl\nclgl.vcxproj" (Rebuild target(s)).
+         nclgl.vcxproj -> D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Debug\nclgl.lib
+     1>Done Building Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\nclgl\nclgl.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:08.47
+Time Elapsed 00:00:08.42

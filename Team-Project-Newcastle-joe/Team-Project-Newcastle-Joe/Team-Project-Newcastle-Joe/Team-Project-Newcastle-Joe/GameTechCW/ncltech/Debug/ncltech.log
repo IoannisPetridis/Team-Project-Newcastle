@@ -1,34 +1,11 @@
-﻿Build started 15/02/2016 17:17:15.
-     1>Project "C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 16/02/2016 16:04:47.
+     1>Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
-         SphereCollisionShape.cpp
-         SimpleMeshObject.cpp
-         Scene.cpp
-         Player.cpp
-         PhysicsObject.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PhysicsEngine.cpp
          PhysicsEngine.cpp
-         OffState.cpp
-         Manifold.cpp
-         Hull.cpp
-         GameObject.cpp
-         NCLDebug.cpp
-         HomeState.cpp
-         GuardState.cpp
-         GameObjectMag.cpp
-     1>c:\users\b2029074\desktop\team-project-newcastle-eric(1)\team-project-newcastle-eric\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\gameobjectmag.cpp(18): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         CuboidCollisionShape.cpp
-         Constraint.cpp
-         CollisionDetection.cpp
-         AssetsManager.cpp
-         ArbitraryAI.cpp
-         ActionHandler.cpp
-     1>c:\users\b2029074\desktop\team-project-newcastle-eric(1)\team-project-newcastle-eric\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\actionhandler.cpp(29): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\b2029074\desktop\team-project-newcastle-eric(1)\team-project-newcastle-eric\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\actionhandler.cpp(60): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Generating Code...
-     1>c:\users\b2029074\desktop\team-project-newcastle-eric(1)\team-project-newcastle-eric\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\physicsengine.cpp(352): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
+     1>d:\team project\team-project-newcastle\team-project-newcastle-joe\team-project-newcastle-joe\team-project-newcastle-joe\team-project-newcastle-joe\gametechcw\ncltech\physicsengine.cpp(359): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\ActionHandler.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\ActionHandler.obj
          Debug\ArbitraryAI.obj
          Debug\AssetsManager.obj
          Debug\CollisionDetection.obj
@@ -48,9 +25,9 @@
          Debug\Scene.obj
          Debug\SimpleMeshObject.obj
          Debug\SphereCollisionShape.obj
-         ncltech.vcxproj -> C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\ncltech.lib
-     1>Done Building Project "C:\Users\b2029074\Desktop\Team-Project-Newcastle-Eric(1)\Team-Project-Newcastle-Eric\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\ncltech\ncltech.vcxproj" (Rebuild target(s)).
+         ncltech.vcxproj -> D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\Team-Project-Newcastle-Joe\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:10.17
+Time Elapsed 00:00:00.81

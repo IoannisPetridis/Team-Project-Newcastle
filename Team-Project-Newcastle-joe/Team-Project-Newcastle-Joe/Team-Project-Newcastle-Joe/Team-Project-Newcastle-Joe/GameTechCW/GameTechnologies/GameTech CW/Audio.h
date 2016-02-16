@@ -18,7 +18,7 @@ public:
 	static void GetCameraInfo(Camera* camera);
 	static void AddSound(FMOD_VECTOR pos, FMOD_VECTOR vel, FMOD::Channel* channel1, FMOD::Sound *sound1, float volume);
 	static void GetVelocity(PhysicsObject* object, FMOD_VECTOR velocity);
-	static  FMOD_VECTOR GetPosition(PhysicsObject object);
+	static  FMOD_VECTOR GetPosition(PhysicsObject* object);
 
 	static void InitialiseAudio();
 	static void ReleaseAudio();
