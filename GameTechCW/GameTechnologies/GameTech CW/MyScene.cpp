@@ -34,7 +34,7 @@ bool MyScene::InitialiseGL()
 {
 	/*PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -9.81f, 0.0f));*/
 
-	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, 0.0f, 0.0f));
+	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -9.81f, 0.0f));
 	PhysicsEngine::Instance()->SetDampingFactor(0.988f);
 
 	m_Camera->SetPosition(Vector3(24.f, 13.f, 9.f));

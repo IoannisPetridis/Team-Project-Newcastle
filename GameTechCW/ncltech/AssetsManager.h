@@ -17,6 +17,7 @@ public:
 	static Mesh* Cube()			{ return m_pCube; }
 	static Mesh* Sphere()		{ return m_pSphere; }
 	static Mesh* Tardis()		{ return m_Tardis; }
+	static Mesh* Triangle()		{ return m_triangle; }
 
 	static GLuint m_CheckerboardTex;
 	static GLuint m_TargetTexture;
@@ -38,6 +39,7 @@ protected:
 	static Mesh* m_pSphere;
 	static Mesh* m_pPlane;
 	static Mesh* m_Tardis;
+	static Mesh* m_triangle;
 
 
 };

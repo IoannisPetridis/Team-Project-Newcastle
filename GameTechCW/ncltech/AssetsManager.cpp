@@ -6,6 +6,7 @@ Mesh* AssetsManager::m_pPlane	= NULL;
 Mesh* AssetsManager::m_pCube	= NULL;
 Mesh* AssetsManager::m_pSphere	= NULL;
 Mesh* AssetsManager::m_Tardis	= NULL;
+Mesh* AssetsManager::m_triangle = NULL;
 
 //Texture Assets
 GLuint AssetsManager::m_CheckerboardTex = 0;
@@ -31,8 +32,10 @@ void AssetsManager::InitializeMeshes()
 
 		m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		m_pCube = new OBJMesh(MESHDIR"cube.obj");
-		m_pSphere = new OBJMesh(MESHDIR"Back.obj");
+		m_pSphere = new OBJMesh(MESHDIR"sphere.obj");
 		m_Tardis = new OBJMesh(MESHDIR"tardis.obj");
+		m_triangle = new OBJMesh(MESHDIR"Back.obj");
+
 
 		m_pPlane->SetTexture(m_CheckerboardTex);
 		m_pCube->SetTexture(m_CheckerboardTex);
@@ -52,6 +55,7 @@ void AssetsManager::ReleaseMeshes()
 		delete m_pCube;
 		delete m_pSphere;
 		delete m_Tardis;
+		delete m_triangle;
 	}
 
 	m_pPlane = NULL;
