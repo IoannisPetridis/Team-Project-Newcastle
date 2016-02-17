@@ -1,30 +1,24 @@
-﻿Build started 2/17/2016 4:48:01 PM.
+﻿Build started 2/17/2016 5:14:30 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp GameObject.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
          ActionHandler.cpp
      1>ActionHandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
          ArbitraryAI.cpp
          AssetsManager.cpp
          CollisionDetection.cpp
-         Constraint.cpp
-         CuboidCollisionShape.cpp
+         GameObject.cpp
          GameObjectMag.cpp
      1>GameObjectMag.cpp(24): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
          GuardState.cpp
          HomeState.cpp
-         NCLDebug.cpp
-         GameObject.cpp
-         Hull.cpp
          Manifold.cpp
          OffState.cpp
          PhysicsEngine.cpp
          PhysicsObject.cpp
          Player.cpp
-         PyramidCollisionShape.cpp
          Scene.cpp
          SimpleMeshObject.cpp
-         Compiling...
          SphereCollisionShape.cpp
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\ActionHandler.obj
@@ -53,4 +47,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:10.11
+Time Elapsed 00:00:07.79
