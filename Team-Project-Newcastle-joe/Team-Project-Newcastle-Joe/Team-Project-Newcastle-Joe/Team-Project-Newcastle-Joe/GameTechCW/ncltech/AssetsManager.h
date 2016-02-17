@@ -18,18 +18,19 @@ public:
 	static Mesh* Cube()			{ return m_pCube; }
 	static Mesh* Sphere()		{ return m_pSphere; }
 	static Mesh* Tardis()		{ return m_Tardis; }
+	static Mesh* Triangle()		{ return m_Triangle; }
 
 	static GLuint m_CheckerboardTex;
 	static GLuint m_TargetTexture;
 	static GLuint m_ThrowTex;
+	static GLuint m_ThrowTexBUMP;
+	static GLuint m_Glass;
+	static GLuint m_GlassBUMP;
 
 	static SimpleMeshObject* GOInstance;
 	static SimpleMeshObject* Camera_Entity;
 	static GameObject* GOTemp;
 	static Player*	Player_1;
-
-	static int Tweat;
-
 
 	//AssetsLoader:
 	static GLuint LoadTexture(string Tex_name);
@@ -45,4 +46,5 @@ protected:
 	static Mesh* m_pSphere;
 	static Mesh* m_pPlane;
 	static Mesh* m_Tardis;
+	static Mesh* m_Triangle;
 };

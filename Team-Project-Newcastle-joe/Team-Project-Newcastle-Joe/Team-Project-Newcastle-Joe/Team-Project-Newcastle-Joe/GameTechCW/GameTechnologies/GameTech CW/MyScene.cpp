@@ -22,17 +22,11 @@ MyScene::MyScene(Window& window) : Scene(window)
 
 MyScene::~MyScene()
 {
-	//delete any texture used
-	if (m_TargetTexture)
-	{
-		glDeleteTextures(1, &m_TargetTexture);
-		m_TargetTexture = NULL;
-	}
 }
 
 bool MyScene::InitialiseGL()
 {
-	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -9.81f, 0.0f));
+	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -14.81f, 0.0f));
 	//PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, 0.0f, 0.0f));
 	PhysicsEngine::Instance()->SetDampingFactor(0.988f);
 
@@ -63,9 +57,7 @@ bool MyScene::InitialiseGL()
 	
 	//Initialize all game objects
 	GOM->GOMInit(this);
-
 	Audio_Timer.GetTimedMS();
-
 	return true;
 }
 
@@ -81,23 +73,30 @@ void MyScene::UpdateScene(float msec)
 	//Camera Control
 	AssetsManager::Player_1->CameraControl();
 
-	//AUDIO
+	std::vector<CollisionPair>* temp = PhysicsEngine::Instance()->GetVPair();
 
-	std::vector<CollisionPair>* temp = PhysicsEngine::Instance()->GetCollisionPair();
+	
 	
 	for (auto m = temp->begin(); m != temp->end(); ++m)
 	{
-		time = Audio_Timer.GetTimedMS();
-		Audio::CollisionSound(m->objectA, m->objectB, time);
+		if (m->objectA->name.find("ground") != string::npos || m->objectB->name.find("ground") != string::npos) {}
+		else{
+			time = Audio_Timer.GetTimedMS();
+			cout << time << " " << m->objectA->name << " colliding with :  " << m->objectB->name << endl;
+			Audio::CollisionSound(m->objectA, m->objectB, time);
+		}
 	}
 	temp->clear();
-	
+
 	CarPosition = { this->FindGameObject("car")->Physics()->GetPosition().x, this->FindGameObject("car")->Physics()->GetPosition().y, this->FindGameObject("car")->Physics()->GetPosition().z };
 	CarVelocity = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
 	float CarSpeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
-	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f+CarSpeed, Audio::channel3);
-	Audio::GetCameraInfo(m_Camera);
 
+	//CarPosition = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
+	//CarVelocity = { AssetsManager::Player_1->Physics()->GetLinearVelocity().x, AssetsManager::Player_1->Physics()->GetLinearVelocity().y, AssetsManager::Player_1->Physics()->GetLinearVelocity().z };
+	//float CarSpeed = AssetsManager::Player_1->Physics()->GetLinearVelocity().Length();
+	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);
+	Audio::GetCameraInfo(m_Camera);
 	////END AUDIO
 
 	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
@@ -120,3 +119,6 @@ void MyScene::RenderScene()
 {
 	Scene::RenderScene();
 }
+
+
+

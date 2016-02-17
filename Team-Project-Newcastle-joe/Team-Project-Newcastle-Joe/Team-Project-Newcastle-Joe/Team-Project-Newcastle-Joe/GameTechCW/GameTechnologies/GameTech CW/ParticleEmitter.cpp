@@ -130,16 +130,16 @@ Particle* ParticleEmitter::GetFreeParticle()	{
 	//free list, it'll still have the values of its 'previous life'
 
 
-
-	p->colour		= Vector4(RAND(),RAND(),RAND(),1.0);
+	p->colour = Vector4(1.0f, 1.0f, 1.0f, 1.0);
+	//p->colour		= Vector4(RAND(),RAND(),RAND(),1.0);
 	p->direction	= initialDirection;
 
 	p->direction.x = 1.0* particleVariance;
 	p->direction.y = (1.0 - RAND())* particleVariance;
 	p->direction.z = (RAND() - RAND())* particleVariance;
-	/*p->direction.x += ((RAND()-RAND()) * particleVariance);
-	p->direction.y += ((RAND()-RAND()) * particleVariance);
-	p->direction.z += ((RAND()-RAND()) * particleVariance);*/
+	//p->direction.x += ((RAND()-RAND()) * particleVariance);
+	//p->direction.y += ((RAND()-RAND()) * particleVariance);
+	//p->direction.z += ((RAND()-RAND()) * particleVariance);
 
 	p->direction.Normalise();	//Keep its direction normalised!
 	//p->position.ToZero();

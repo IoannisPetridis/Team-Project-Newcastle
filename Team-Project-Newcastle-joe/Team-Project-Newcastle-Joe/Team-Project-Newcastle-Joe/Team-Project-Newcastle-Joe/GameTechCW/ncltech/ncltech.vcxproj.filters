@@ -111,6 +111,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PyramidCollisionShape.cpp">
+      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PyramidCollisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

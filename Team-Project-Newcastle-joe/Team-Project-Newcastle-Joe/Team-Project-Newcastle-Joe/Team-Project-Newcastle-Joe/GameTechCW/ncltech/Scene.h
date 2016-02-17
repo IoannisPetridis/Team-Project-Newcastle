@@ -3,11 +3,12 @@
 #include <nclgl/Camera.h>
 #include <nclgl/Shader.h>
 #include <nclgl/Frustum.h>
-#include "../GameTechnologies/GameTech CW/Audio.h"
+#include <nclgl/Light.h>
 #include "TSingleton.h"
 #include "GameObject.h"
 #include "../GameTechnologies/GameTech CW/ParticleEmitter.h"	//A new class!
-
+//#define SHADOWSIZE 2048 // new
+#define SHADOWSIZE 4096 // new
 struct FrustrumSortingObject
 {
 	float		camera_distance;
@@ -15,6 +16,9 @@ struct FrustrumSortingObject
 
 	static bool CompareByCameraDistance(const FrustrumSortingObject& a, const FrustrumSortingObject& b)  {
 		return (a.camera_distance < b.camera_distance) ? true : false;
+	}
+	static bool CompareByCameraDistance_Transparent(const FrustrumSortingObject& a, const FrustrumSortingObject& b)  {
+		return (a.camera_distance > b.camera_distance) ? true : false;
 	}
 };
 
@@ -31,10 +35,14 @@ public:
 	GameObject* FindGameObject(const std::string& name);
 
 	void SetClearColor(Vector4 color) { clearcolor = color; }
-
+	void DrawShadowScene();
+	void DrawCominedScene();
 	virtual bool InitialiseGL()				{ return true; };
 	virtual void RenderScene();
 	virtual void UpdateScene(float dt); //This is msec * 0.001f (e.g time relative to seconds not milliseconds
+	
+	std::vector<GameObject*> ReadGroundList() const;
+
 protected:
 	void	BuildScreenFBO();
 	void	PresentScreenFBO();
@@ -58,6 +66,8 @@ protected:
 	Shader*				m_DebugShader;
 	Shader			   *m_DefaultLightShader, *m_DefaultShadowShader;
 	Shader*				m_ShadowVolumeShader;
+	Shader*				SceneShader;
+	Shader*				ShadowShader;
 	Shader*				m_skyboxShader;
 	Shader*				m_ParticleShader;
 
@@ -78,4 +88,7 @@ protected:
 	Mesh* quad = Mesh::GenerateQuad();
 
 	ParticleEmitter*	m_RootParticleList;
+	vector<Light> lightList;
+	GLuint shadowTex;
+	GLuint shadowFBO;
 };

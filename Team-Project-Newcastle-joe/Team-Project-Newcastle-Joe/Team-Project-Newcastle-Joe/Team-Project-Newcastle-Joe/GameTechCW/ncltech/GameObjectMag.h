@@ -6,6 +6,7 @@
 #include "../ncltech/CollisionShape.h"
 #include "../ncltech/CuboidCollisionShape.h"
 #include "../ncltech/SphereCollisionShape.h"
+#include <ncltech\PyramidCollisionShape.h>
 #include "ActionHandler.h"
 #include <ncltech\PhysicsEngine.h>
 #include <ncltech\NCLDebug.h>

@@ -42,11 +42,11 @@ int main()
 	//All Game Assets will be pre-loaded in
 	//by initialising GameAssetsManager
 	scene = new MyScene(Window::GetWindow());
-	
+
 	//Initialise the ActionHandler Instnace
 	ActionHandler::Instance();
 	ActionHandler::Instance()->SetDefaultScene(scene);
-	
+
 	if (!scene->HasInitialised())
 	{
 		return Quit(true, "Renderer failed to initialise!");
@@ -67,24 +67,14 @@ int main()
 
 		if (!PhysicsEngine::Instance()->IsGameover()) {
 			
-			//ActionHandler
-			//Update AI, ControlHandler etc
-			//by updating 
-			//overridden OnUpdateObject for each GameObject sub-class 
-			//such as Player, AI, Static Object, Dynamic Object etc
+			PhysicsEngine::Instance()->Feedback();
 			ActionHandler::Instance()->Update(dt);
-			//ActionHandler::Instance()->ControlUpdate(1);
-
-			//Update Physics Properties, Resolve collision, apply impluse
 			PhysicsEngine::Instance()->Update(dt);
-			AssetsManager::Player_1->NormalCal();
-		
+
 			float physics_ms = engine_timer.GetTimedMS();
 
-			//Update Graphic Properties, Camera etc
-			//By updating OnRenderObject
 			scene->UpdateScene(dt);
-			
+
 			if (PhysicsEngine::Instance()->IsGameover()) {
 				continue;
 			}
@@ -99,9 +89,11 @@ int main()
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Graphics Timestep: %5.2fms (%5.2f FPS)", dt * 1000.0f, 1.0f / dt);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Update: %5.2fms", physics_ms);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Scene Update  : %5.2fms", update_ms);
-			
+
 			//Render the Scene
 			scene->RenderScene();
+
+			PhysicsEngine::Instance()->PhysicsEngineClear();
 		}
 	}
 

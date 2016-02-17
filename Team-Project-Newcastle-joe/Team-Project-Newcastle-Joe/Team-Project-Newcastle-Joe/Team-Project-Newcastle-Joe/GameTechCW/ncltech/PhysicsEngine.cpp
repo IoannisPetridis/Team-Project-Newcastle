@@ -3,7 +3,6 @@
 #include "GameObject.h"
 #include "CollisionDetection.h"
 #include "AssetsManager.h"
-
 #include <nclgl\Window.h>
 
 PhysicsEngine::PhysicsEngine()
@@ -42,6 +41,10 @@ PhysicsEngine::~PhysicsEngine()
 	m_Manifolds.clear();
 }
 
+void PhysicsEngine::PhysicsEngineClear() {
+	ClearCPair();
+}
+
 void PhysicsEngine::AddPhysicsObject(PhysicsObject* obj)
 {
 	m_PhysicsObjects.push_back(obj);
@@ -71,22 +74,20 @@ void PhysicsEngine::Update(float deltaTime)
 
 void PhysicsEngine::UpdatePhysics()
 {
+	SolveConstraints();
+	UpdatePhysicsObjects();
+}
+
+void PhysicsEngine::Feedback() {
 	for (Manifold* m : m_Manifolds)
 	{
 		delete m;
 	}
 	m_Manifolds.clear();
 
-	//Check for collisions
 	OctreeBuild();
 	BroadPhaseCollisions();
 	NarrowPhaseCollisions();
-
-	//Solve collision constraints
-	SolveConstraints();
-
-	//Update movement
-	UpdatePhysicsObjects();
 }
 
 void PhysicsEngine::DebugRender()
@@ -184,32 +185,43 @@ void PhysicsEngine::BroadPhaseCollisions()
 
 	m_Collision = false;
 
-	//This is a brute force broadphase, basically compiling a list to check every object against every other object
 	for (size_t i = 0; i < m_PhysicsObjects.size() - 1; ++i)
 	{
 		for (size_t j = i + 1; j < m_PhysicsObjects.size(); ++j)
 		{
 			objA = m_PhysicsObjects[i];
 			objB = m_PhysicsObjects[j];
-			if (objA->name.substr(0, 6) == "ground" && objB->name.substr(0, 6) == "ground"){
-			}
-			else{
-				//Check they both have collision shapes
-				if (objA->GetCollisionShape() != NULL
-					&& objB->GetCollisionShape() != NULL)
-				{
-					//check if objA is a child of objB
-					if (OctreeCheck(objB, objA)) {
+
+			if (objA->name.find("ground") != string::npos && objB->name.find("ground") != string::npos) continue;
+		
+			else {
+				if (OctreeCheck(objB, objA)) {
+					//Check they both have collision shapes
+					if (objA->GetCollisionShape() != NULL
+						&& objB->GetCollisionShape() != NULL)
+					{
 						CollisionPair cp;
 						cp.objectA = objA;
 						cp.objectB = objB;
 						m_BroadphaseCollisionPairs.push_back(cp);
+						
 					}
 				}
-
 			}
 		}
 	}
+}
+
+bool PhysicsEngine::CheckCollision(PhysicsObject* obja, PhysicsObject* objb) {
+	if (CPairList.size() != 0) {
+		for (auto& m : CPairList) {
+			if ((m.objectA == obja && m.objectB == objb) ||
+				(m.objectA == objb && m.objectB == obja)) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 void PhysicsEngine::NarrowPhaseCollisions()
@@ -219,7 +231,6 @@ void PhysicsEngine::NarrowPhaseCollisions()
 		CollisionData coldata;
 		CollisionShape *shapeA, *shapeB;
 
-
 		for (CollisionPair& cp : m_BroadphaseCollisionPairs)
 		{
 			shapeA = cp.objectA->GetCollisionShape();
@@ -227,32 +238,20 @@ void PhysicsEngine::NarrowPhaseCollisions()
 
 			if (CollisionDetection::Instance()->CheckCollision(cp.objectA, cp.objectB, shapeA, shapeB, &coldata))
 			{
+				if (cp.objectA->IsEnabled()) { cp.objectA->ToggleEnable(); }
+				if (cp.objectB->IsEnabled()) { cp.objectB->ToggleEnable(); }
 
-			
-					if (cp.objectA->IsEnabled()) { cp.objectA->ToggleEnable(); }
-					if (cp.objectB->IsEnabled()) { cp.objectB->ToggleEnable(); }
+				bool okA = cp.objectA->m_OnCollisionCallback(cp.objectB);
+				bool okB = cp.objectB->m_OnCollisionCallback(cp.objectA);
 
-					bool okA = cp.objectA->m_OnCollisionCallback(cp.objectB);
-					bool okB = cp.objectB->m_OnCollisionCallback(cp.objectA);
-
-					cp.objectA->verletVel.push_back(cp.objectA->GetLinearVelocity());
-					cp.objectB->verletVel.push_back(cp.objectB->GetLinearVelocity());
-
-					if (okA && okB)
-					{
-						if (cp.objectA->name.substr(0, 6) != "ground" && cp.objectB->name.substr(0, 6) != "ground") {
-
-
-							//	cout << "Collision Between :" << cp.objectA->name.substr(0, 6) << endl;
-							cp.collisionstate = true;
-							CollidedPair.push_back(cp);
-
-
-						}
-						else {
-							CollidedPair_Ground.push_back(cp);
-						}
-
+				if (okA && okB)
+				{
+					/*if (cp.objectA->name.substr(0, 6) == "ground" || cp.objectB->name.substr(0, 6) == "ground"){
+					}*/
+					
+						CPairList.push_back(cp);
+						VPairList.push_back(cp);
+					
 						Manifold* manifold = new Manifold(cp.objectA, cp.objectB);
 						if (CollisionDetection::Instance()->BuildCollisionManifold(cp.objectA, cp.objectB, shapeA, shapeB, coldata, manifold))
 						{
@@ -263,37 +262,11 @@ void PhysicsEngine::NarrowPhaseCollisions()
 							delete manifold;
 						}
 					}
-
-					//traversable
-					//Set opposite force which is proportional to respective body friction
-					//to cancel incoming velocity of projectile
-					//consume up all gravity when projectile is inside tardis
-					else {
-						if (cp.objectA->name == "TS" || cp.objectB->name == "TS") {
-							if (okA) {
-								Vector3 gravity = m_Gravity *
-									(1 / cp.objectA->GetInverseMass());
-								cp.objectA->SetForce(
-									-cp.objectA->GetLinearVelocity()
-									* cp.objectB->GetFriction() - gravity
-									);
-							}
-							if (okB) {
-								Vector3 gravity = m_Gravity *
-									(1 / cp.objectB->GetInverseMass());
-								cp.objectB->SetForce(
-									-cp.objectB->GetLinearVelocity()
-									* cp.objectA->GetFriction() - gravity);
-							}
-						}
-					}
-					//complete
-
 				}
-			}
+			
 		}
 	}
-
+}
 
 void PhysicsEngine::SolveConstraints()
 {

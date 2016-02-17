@@ -39,7 +39,6 @@ it is fine!
 
 #define SOLVER_ITERATIONS 20
 
-
 #define FALSE	0
 #define TRUE	1
 
@@ -47,7 +46,6 @@ struct CollisionPair	//Forms the output of the broadphase collision detection
 {
 	PhysicsObject* objectA;
 	PhysicsObject* objectB;
-	bool		collisionstate;
 };
 
 struct OctreeStr
@@ -71,6 +69,9 @@ public:
 	//Update Physics Engine
 	void Update(float deltaTime);			//Remember DeltaTime is 'seconds' since last update not milliseconds
 	
+	//NEWNEWNEW
+	void Feedback();				//feedback collision data before actually resolve and integration 
+
 	//Debug draw all physics objects, manifolds and constraints
 	void DebugRender();
 
@@ -95,16 +96,22 @@ public:
 	float GetCollisionDetectionDis()	{ return CollisionDetectionDis; }
 	void  SetCollisionDetectionDis(float n)	{ CollisionDetectionDis = n; }
 
-	//std::vector<CollisionPair>& GetCollisionPair() { return CollidedPair; };
-	std::vector<CollisionPair>* GetCollisionPair() { return &CollidedPair; };
-	std::vector<CollisionPair>& GetCollisionPair_Ground() { return CollidedPair_Ground; };
+	//check if there is a collision between objA and objB, if there is, 
+	//return true
+	bool CheckCollision(PhysicsObject* obja, PhysicsObject* objb);
+
+	//return a copy of narrowphase collision pair list exclude ground to ground collision
+	std::vector<CollisionPair>* GetVPair() { return &VPairList; }
+	std::vector<CollisionPair> GetCPair() { return CPairList; }
+
+	//Clear all per-frame data
+	void PhysicsEngineClear();
 
 	void toggledebugdraw() {
 		DEBUGDRAW_CONSTRAINTS = !DEBUGDRAW_CONSTRAINTS;
 		DEBUGDRAW_MANIFOLDS = !DEBUGDRAW_MANIFOLDS;
 		DEBUGDRAW_COLLISIONVOLUMES = !DEBUGDRAW_COLLISIONVOLUMES;
 	}
-
 
 protected:
 	PhysicsEngine();
@@ -119,7 +126,6 @@ protected:
 	//Handles narrowphase collision detection
 	void NarrowPhaseCollisions();
 	void NarrowPhaseCollisionsBatch(size_t batch_start, size_t batch_end); //<--- The worker function for multithreading
-
 
 	//Updates all physics objects position, orientation, velocity etc (default method uses symplectic euler integration)
 	void UpdatePhysicsObjects();	
@@ -136,17 +142,18 @@ protected:
 	float CollisionDetectionDis;
 
 protected:
+	void ClearCPair() { CPairList.clear(); }
+
+protected:
 	bool		m_IsPaused;
 	bool		m_Gameover;
-
 	bool		m_Collision;
 
-	std::vector<CollisionPair> CollidedPair;
-	std::vector<CollisionPair> CollidedPair_Ground;
+	std::vector<CollisionPair> CPairList;
+	std::vector<CollisionPair> VPairList;
 
 	float		m_UpdateTimestep, m_UpdateAccum;
 	
-
 	Vector3		m_Gravity;
 	float		m_DampingFactor;
 
@@ -155,6 +162,7 @@ protected:
 	std::vector<PhysicsObject*> m_PhysicsObjects;
 
 	std::vector<Constraint*>	m_Constraints;			// Misc constraints between pairs of objects
+	
 	std::vector<Manifold*>		m_Manifolds;			// Contact constraints between pairs of objects
 
 	std::mutex					m_ManifoldsMutex;

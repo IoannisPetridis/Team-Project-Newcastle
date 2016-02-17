@@ -17,7 +17,7 @@
 //#include <ncltech\CollisionDetection.h>
 #include <FMOD\inc\fmod.hpp>
 #include "../../ncltech/GameObjectMag.h"
-#include "Audio.h"
+#include <ncltech\Audio.h>
 
 class GameObjectMag;
 
@@ -33,28 +33,9 @@ public:
 	void UpdateScene(float dt)  override;
 
 protected:
-	GLuint				m_TargetTexture;
-	GLuint				m_ThrowTex;
-
-	SimpleMeshObject*	m_Sphere;
-	SimpleMeshObject*	throw_S;
-	SimpleMeshObject*	target;
-	SimpleMeshObject*	goal;
-	Plane*				plane;
-
 	GameObjectMag* GOM;
 	
-	std::vector<Vector3> m_TrajectoryPoints;
-	std::vector<string> LB_name;
-	std::vector<string> LB_score;
-	std::vector<GameObject*> subshapes;
-
 	Vector3 Proj_dir;
-	Vector3	Target_Pos;
-	Vector3 GK_Pos;
-	
-	Vector3 planenormal;
-	Vector3 GK_Init_Pos;
 
 	int T_counter;
 	int Str_c;
@@ -80,11 +61,7 @@ protected:
 
 	FMOD_VECTOR CarPosition;
 	FMOD_VECTOR CarVelocity;
-	
-
-	
 
 	float damage = 0.0f;
 	float time;
-
 };

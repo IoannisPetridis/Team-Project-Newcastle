@@ -16,8 +16,9 @@ public:
 	void ControllerHandle_Force(Player* P, KeyboardKeys key, Vector3 force, float& timer);
 	void ControllerHandle_Torque(Player* P, KeyboardKeys key, Vector3 force, float& timer);
 	void ControllerHandle_Ori(Player* P, KeyboardKeys key, Vector3 Axis, float degree);
-	void ControllerHandle_Jump(Player* P, KeyboardKeys key, Vector3 force, float& timer, float& energybar);
-
+	void ControllerHandle_Jump(Player* P, KeyboardKeys key);
+	void Flip(Player* P);
+	
 	void AIPort();
 
 	Scene* GetScene() const { return m_scene; }
@@ -28,7 +29,10 @@ public:
 protected:
 	Scene* m_scene;
 	
-	int timersize;
-	float timer[6];
+	float timer[3];
+
+	bool Inair;
+	bool doubleJump;
+
 	GameTimer engine_timer;
 };

@@ -1,8 +1,12 @@
 #pragma once
-#include "../nclgl/Camera.h"
+#include <nclgl\Camera.h>
 #include "SimpleMeshObject.h"
 #include "AssetsManager.h"
 #include "Scene.h"
+#include "NCLDebug.h"
+#include "CollisionDetection.h"
+#include "Hull.h"
+#include "PhysicsEngine.h"
 
 class Player : public SimpleMeshObject {
 	friend class ActionHandler;
@@ -11,8 +15,6 @@ public:
 	~Player();
 
 	void CameraControl();
-	void IDPlayerFaces();
-	void RotateLock();
 
 	void Replay();
 	void TronEffect();
@@ -22,7 +24,7 @@ public:
 
 	Vector3 GetCameraDir() const { return Camera_Dir; }
 
-//Initialization data
+	//Initialization data
 protected:
 	Camera* P_camera;
 	Vector3 Camera_Dir;
@@ -36,21 +38,23 @@ protected:
 
 	void	OnUpdateObject(float dt) override {};
 
-//utility
+	//utility
 protected:
 	float DisWalltoPlayer(GameObject* wall);
 
-//Camera Control Toggle
+	//Camera Control Toggle
 protected:
 	Vector3 Proj_dir;
-	float FT_Pitch; //first touch pitch
-	float FT_dis;	//first touch distance
-	int FT_Timer;
 
 	void CameraFollowPlayerFunc();
 	bool CameraFollowPlayer = false;
 
 	void CameraTrackObjFunc(GameObject* go);
 	bool CameraTrackObj = false;
+
+	void CameraTrackOriFunc();
+	bool CameraTrackOri = false;
+
+protected:
 
 };

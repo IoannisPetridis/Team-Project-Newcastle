@@ -6,7 +6,6 @@ uniform vec3  ambientColour;
 uniform vec3  invLightDir;			//Directional Light
 uniform vec3  cameraPos;
 uniform float specularIntensity;
-uniform float levels = 3.0f;
 
 in Vertex	{
 	vec3 worldPos;
@@ -27,16 +26,6 @@ void main(void)	{
 	float dFactor       = max(0.0, dot(invLightDir , normal )) ;
     float sFactor       = pow(rFactor , specularIntensity );
 	   
-	   
-	   	float level = floor(sFactor * levels);
-	sFactor = level / levels;
-	
-	float level2 = floor(dFactor * levels);
-	dFactor = level2 / levels;
-	float level3 = floor(rFactor * levels);
-	rFactor = level3 / levels;
-	
-	
 //Colour Computations
 	vec4 texColour  = texture(diffuseTex, IN.texCoord);
 	vec3 diffColour = IN.colour.rgb * texColour.rgb;
