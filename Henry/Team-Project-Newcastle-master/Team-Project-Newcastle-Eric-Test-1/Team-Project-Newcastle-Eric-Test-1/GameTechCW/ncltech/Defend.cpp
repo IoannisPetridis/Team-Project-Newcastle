@@ -2,36 +2,58 @@
 #include <ncltech\Scene.h>
 
 void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put the logic behind the state
-	Vector3 BallPosition, AIPosition, GoalPosition, DefendNode, DirGoalBall, DirAIDefNode;
+	Vector3 DefendNode, DirectionVector;
 	float DistGoalBall;
 
 	Arb->SetColour(Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 
-	BallPosition = Vector3(20.0f, 0.0f, 20.0f);
-	GoalPosition = Vector3(0.0f, 0.0f, 0.0f);
 	AIPosition = Arb->Physics()->GetPosition();
+	BallPosition = Arb->scene->FindGameObject("Ball")->Physics()->GetPosition();
+	GoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
 
-	DirGoalBall = BallPosition - GoalPosition;
-	DistGoalBall = DirGoalBall.Length();
-	DirGoalBall.Normalise();
+	DefendNode = NodeCalculation(Arb);
+	DirectionVector = DirectionCalculation(Arb, DefendNode);
 
-	DefendNode = DirGoalBall * DistGoalBall * 0.2;
-
-	DirAIDefNode = DefendNode - AIPosition;
-	DirAIDefNode.Normalise();
-
-	Arb->Physics()->SetForce(DirAIDefNode * 15);
-
+	Arb->Physics()->SetForce(DirectionVector * 5);
+	
 	CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
 }
 
 void Defend::CheckTriggers(DefensiveAI* Arb) {
-	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_Q)) { //puts AI to off state on keypress (3 integer denotes off state)
-		Arb->SetState(3);
-	}
+	float MagDistBallGoal;
+	MagDistBallGoal = (GoalPosition - BallPosition).LengthSquared();
 
-	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_E)) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
+	if (MagDistBallGoal > 750) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
 		Arb->SetState(2);
 	}
 
+	if (MagDistBallGoal < 200) {
+		Arb->SetState(3);
+	}
+}
+
+//Defend = 1
+//Patrol = 2
+//Punt = 3
+//Off = 4
+
+Vector3 Defend::NodeCalculation(DefensiveAI* Arb) {
+	Vector3 GoalBallVec, defendnode;
+	float DistGoalBall;
+
+	GoalBallVec = BallPosition - GoalPosition;
+	DistGoalBall = GoalBallVec.Length();
+	GoalBallVec.Normalise();
+
+	defendnode = GoalBallVec * DistGoalBall * 0.2;
+
+	return defendnode;
+}
+
+Vector3 Defend::DirectionCalculation(DefensiveAI* Arb, Vector3 node) {
+	Vector3 directionvector;
+	directionvector = node - AIPosition;
+	directionvector.Normalise();
+
+	return directionvector;
 }

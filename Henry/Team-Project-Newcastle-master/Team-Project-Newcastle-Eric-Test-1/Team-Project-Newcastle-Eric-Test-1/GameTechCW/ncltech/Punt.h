@@ -6,16 +6,14 @@
 
 class Punt : public BaseState { //guard state, trying to block player from tardis
 public:
-	Punt();
+	Punt(){};
 	~Punt() {};
 
 	void CheckTriggers(DefensiveAI* Arb) override;
 	void ForceCalculator(DefensiveAI* Arb) override;
+	Vector3 NodeCalculation(DefensiveAI* Arb);
+	Vector3 DirectionCalculation(DefensiveAI* Arb, Vector3 node);
 
 private:
-	//Scene* m_scene;
 
-	float MagDistBallGoal;
-
-	Vector3 PatrolNode, AIPosition;
 };

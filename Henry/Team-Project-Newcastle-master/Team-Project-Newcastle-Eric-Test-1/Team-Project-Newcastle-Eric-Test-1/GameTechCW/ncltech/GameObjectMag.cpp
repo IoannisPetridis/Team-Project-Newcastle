@@ -43,50 +43,63 @@ void	GameObjectMag::GOMInit(Scene* m_scene)
 
 	AssetsManager::GOInstance->Physics()->name = "car";
 	AssetsManager::GOInstance->Physics()->SetInverseMass(0.2f);
-	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
-
-	m_scene->AddGameObject(AssetsManager::GOInstance);
-
-	AssetsManager::GOInstance = new DefensiveAI("DefensiveAI");
-
-	m_scene->AddGameObject(AssetsManager::GOInstance);
-
-	AssetsManager::GOInstance = new NeutralAI("NeutralAI");
-
-	m_scene->AddGameObject(AssetsManager::GOInstance);
-
-	AssetsManager::GOInstance = new AggressiveAI("AggressiveAI");
-
-	m_scene->AddGameObject(AssetsManager::GOInstance);
-
-	AssetsManager::GOInstance = new SimpleMeshObject("TestCube1");
-
-	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
-	AssetsManager::GOInstance->SetColour(Vector4(0.0f, 0.0f, 0.0f, 1.0f));
-	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
-
-	AssetsManager::GOInstance->Physics()->name = "TestCube1";
-	AssetsManager::GOInstance->Physics()->SetInverseMass(0.2f);
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(20.0f, 0.0f, 20.0f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
-	AssetsManager::GOInstance = new SimpleMeshObject("TestCube2");
+	AssetsManager::GOInstance = new SimpleMeshObject("Ball");
 
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
 	AssetsManager::GOInstance->SetColour(Vector4(0.0f, 0.0f, 0.0f, 1.0f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
-	AssetsManager::GOInstance->Physics()->name = "TestCube2";
+	AssetsManager::GOInstance->Physics()->name = "Ball";
+	AssetsManager::GOInstance->Physics()->SetInverseMass(0.2f);
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(50.0f, 0.0f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
+
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	AssetsManager::GOInstance = new SimpleMeshObject("FriendlyGoal");
+
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::GOInstance->SetColour(Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+
+	AssetsManager::GOInstance->Physics()->name = "FriendlyGoal";
 	AssetsManager::GOInstance->Physics()->SetInverseMass(0.2f);
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
+	AssetsManager::GOInstance = new SimpleMeshObject("EnemyGoal");
+
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::GOInstance->SetColour(Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
+
+	AssetsManager::GOInstance->Physics()->name = "EnemyGoal";
+	AssetsManager::GOInstance->Physics()->SetInverseMass(0.2f);
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(60.0f, 0.0f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
+
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	AssetsManager::GOInstance = new NeutralAI("NeutralAI", m_scene);
+
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	/*AssetsManager::GOInstance = new NeutralAI("NeutralAI");
+
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+	AssetsManager::GOInstance = new AggressiveAI("AggressiveAI");
+
+	m_scene->AddGameObject(AssetsManager::GOInstance);*/
 }
 

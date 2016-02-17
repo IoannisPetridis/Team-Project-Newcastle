@@ -11,7 +11,20 @@ void OffState::ForceCalculator(DefensiveAI* Arb) { //here is where you would put
 }
 
 void OffState::CheckTriggers(DefensiveAI* Arb) {
-	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_Q)) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_E)) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
+		Arb->SetState(1);
+	}
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_R)) {
 		Arb->SetState(2);
 	}
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_T)) {
+		Arb->SetState(3);
+	}
 }
+
+//Defend = 1
+//Patrol = 2
+//Punt = 3
+//Off = 4

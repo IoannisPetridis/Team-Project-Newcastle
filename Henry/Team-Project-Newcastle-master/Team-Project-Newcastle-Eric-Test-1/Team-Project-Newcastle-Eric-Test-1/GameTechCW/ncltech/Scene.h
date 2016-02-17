@@ -1,3 +1,4 @@
+#pragma once
 #include <nclgl/OGLRenderer.h>
 #include <nclgl/Camera.h>
 #include <nclgl/Shader.h>

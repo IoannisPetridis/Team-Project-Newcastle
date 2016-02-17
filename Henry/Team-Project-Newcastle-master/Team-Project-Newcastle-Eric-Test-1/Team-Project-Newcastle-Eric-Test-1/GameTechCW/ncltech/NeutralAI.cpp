@@ -13,7 +13,7 @@
 #include "Chase.h"
 #include "Dribble.h"
 
-NeutralAI::NeutralAI(const std::string& name) : SimpleMeshObject(name) {
+NeutralAI::NeutralAI(const std::string& name, Scene* m_scene) : SimpleMeshObject(name) {
 
 	//camera = cameraInstance; //i kept in the camera pointer as i imagine most of our AI's will use camera position eventually 
 
@@ -40,7 +40,7 @@ NeutralAI::NeutralAI(const std::string& name) : SimpleMeshObject(name) {
 
 	//1 == home state, 2 == guard state
 
-	//scene = m_scene;
+	scene = m_scene;
 
 	currentState = new Chase(); //sets the initial current state for the first frame (actually instantiates the state when the state is changed, so you dont have inactive states instantiated and sitting in memory doing nothing, ie rather than creating all states at startup and just changing the pointed, create and delkete states as they are used
 }
@@ -66,3 +66,6 @@ void NeutralAI::SetState(int setStateEnum) { //sets the state of the AI (when yo
 		currentState = new Dribble();
 	}
 }
+
+//Chase == 1
+//Dribble == 2
