@@ -111,6 +111,9 @@
     <ClCompile Include="PyramidCollisionShape.cpp">
       <Filter>Source Files\Physics\CollisionShapes</Filter>
     </ClCompile>
+    <ClCompile Include="CylinderCollisionShape.cpp">
+      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -189,6 +192,9 @@
       <Filter>Header Files\AI</Filter>
     </ClInclude>
     <ClInclude Include="PyramidCOllisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CylinderCollisionShape.h">
       <Filter>Header Files\Physics\CollisionShapes</Filter>
     </ClInclude>
   </ItemGroup>

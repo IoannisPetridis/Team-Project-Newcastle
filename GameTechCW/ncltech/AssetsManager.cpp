@@ -7,11 +7,14 @@ Mesh* AssetsManager::m_pCube	= NULL;
 Mesh* AssetsManager::m_pSphere	= NULL;
 Mesh* AssetsManager::m_Tardis	= NULL;
 Mesh* AssetsManager::m_triangle = NULL;
+Mesh* AssetsManager::m_ground	= NULL;
+Mesh* AssetsManager::m_car		= NULL;
 
 //Texture Assets
 GLuint AssetsManager::m_CheckerboardTex = 0;
 GLuint AssetsManager::m_TargetTexture = 0;
 GLuint AssetsManager::m_ThrowTex = 0;
+GLuint AssetsManager::m_groundTex = 0;
 
 //GameObject Assets
 SimpleMeshObject* AssetsManager::GOInstance;
@@ -26,20 +29,25 @@ void AssetsManager::InitializeMeshes()
 {
 	if (m_pPlane == NULL)
 	{
-		m_CheckerboardTex = LoadTexture("checkerboard.tga");
+		m_CheckerboardTex = LoadTexture("wood.jpg");
+		m_groundTex = LoadTexture("ground.jpg");
 		m_TargetTexture = LoadTexture("target.tga");
 		m_ThrowTex = LoadTexture("brick.tga");
 
 		m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		m_ground = new OBJMesh(MESHDIR"cube.obj");
 		m_pCube = new OBJMesh(MESHDIR"cube.obj");
 		m_pSphere = new OBJMesh(MESHDIR"sphere.obj");
 		m_Tardis = new OBJMesh(MESHDIR"tardis.obj");
-		m_triangle = new OBJMesh(MESHDIR"Back.obj");
-
+		m_triangle = new OBJMesh(MESHDIR"back_both.obj");
+		m_car = new OBJMesh(MESHDIR"/police_car/police_car.obj");
+		m_ground->SetTexture(m_groundTex);
 
 		m_pPlane->SetTexture(m_CheckerboardTex);
 		m_pCube->SetTexture(m_CheckerboardTex);
 		m_pSphere->SetTexture(m_CheckerboardTex);
+		m_triangle->SetTexture(m_CheckerboardTex);
+		m_car->SetTexture(m_CheckerboardTex);
 	}
 }
 
@@ -47,6 +55,7 @@ void AssetsManager::ReleaseMeshes()
 {
 	if (m_pPlane != NULL)
 	{
+		glDeleteTextures(1, &m_groundTex);
 		glDeleteTextures(1, &m_CheckerboardTex);
 		glDeleteTextures(1, &m_TargetTexture);
 		glDeleteTextures(1, &m_ThrowTex);
@@ -56,6 +65,8 @@ void AssetsManager::ReleaseMeshes()
 		delete m_pSphere;
 		delete m_Tardis;
 		delete m_triangle;
+		delete m_ground;
+		delete m_car;
 	}
 
 	m_pPlane = NULL;
@@ -63,6 +74,8 @@ void AssetsManager::ReleaseMeshes()
 	m_pCube  = NULL;
 	m_pSphere= NULL;
 	m_Tardis = NULL;
+	m_ground = NULL;
+	m_car	 = NULL;
 }
 
 //should be able to modify glTexParameteri 

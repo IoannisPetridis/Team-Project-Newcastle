@@ -18,10 +18,13 @@ public:
 	static Mesh* Sphere()		{ return m_pSphere; }
 	static Mesh* Tardis()		{ return m_Tardis; }
 	static Mesh* Triangle()		{ return m_triangle; }
+	static Mesh* Ground()		{ return m_ground; }
+	static Mesh* Car()			{ return m_car; }
 
 	static GLuint m_CheckerboardTex;
 	static GLuint m_TargetTexture;
 	static GLuint m_ThrowTex;
+	static GLuint m_groundTex;
 
 	static SimpleMeshObject* GOInstance;
 
@@ -40,6 +43,7 @@ protected:
 	static Mesh* m_pPlane;
 	static Mesh* m_Tardis;
 	static Mesh* m_triangle;
-
+	static Mesh* m_ground;
+	static Mesh* m_car;
 
 };
