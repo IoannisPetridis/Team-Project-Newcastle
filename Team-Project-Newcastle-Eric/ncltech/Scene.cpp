@@ -639,11 +639,19 @@ void Scene::DrawNodes(bool drawTransparentObjects)
 
 void Scene::DrawNode(GameObject* n)
 {
+	if (n->GetName() == "ground")
+	{
+		textureMatrix = Matrix4::Scale(Vector3(10.0f, 10.0f, 10.0f));
+	}
+	else
+	{
+		textureMatrix.ToIdentity();
+	}
 	modelMatrix.ToIdentity();
 	Matrix4 temp = (lightList.at(0)).GetlightViewProjMat()  * n->m_WorldTransform;
-	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "textureMatrix"), 1, false, *&temp.values);
+	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "textureMatrix"), 1, false, *&textureMatrix.values);
 
-	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "testMatrix"), 1, false, *&temp.values);
+	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "lightViewProjMat"), 1, false, *&temp.values);
 	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "modelMatrix"), 1, false, (float*)&n->m_WorldTransform);
 	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(), "nodeColour"), 1, (float*)&n->GetColour());
 
