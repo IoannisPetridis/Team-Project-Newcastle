@@ -96,6 +96,10 @@ Window::Window(std::string title, int sizeX, int sizeY, bool fullScreen)	{
 		}
 	}
 
+	//makes the window open in centre of screen
+	position.x = (1920.0f - sizeX) / 2.0f; //1920 - window width, /2
+	position.y = (1080.0f - sizeY) / 2.0f; //1080 - win height /2
+
 	windowHandle = CreateWindowEx(fullScreen ? WS_EX_TOPMOST : NULL,
 	WINDOWCLASS,    // name of the window class
 	title.c_str(),   // title of the window

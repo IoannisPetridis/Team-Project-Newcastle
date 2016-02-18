@@ -2,10 +2,64 @@
 #include <ncltech\PhysicsEngine.h>
 #include <ncltech\NCLDebug.h>
 #include "MyScene.h"
+#include "dialog.h"
+#include "mainwindow.h"
 
 //#include "../../Networking Server/Networking Server/Server.h"
 
+
+//qt includes
+#include "..\..\Qt\include\QtCore\QtPlugin"
+#include "..\..\Qt\include\QtCore\qcoreapplication.h"
+#include "..\..\Qt\include\QtWidgets\qapplication.h"
+#include "..\..\Qt\include\QtWidgets\qstylefactory.h"
+
+//initialises qt window (called in main)
+int main2(int argc, char *argv[])
+{
+	//QApp manages GUI control flow & settings
+	QApplication a(argc, argv);
+
+	//window theme
+	//QApplication::setStyle(QStyleFactory::create("Fusion"));
+
+	//loads base window, sets size & opacity & icon & title
+	MainWindow w;
+	w.setWindowTitle("Rocket League V2");
+	w.setFixedSize(480, 400); //width x height
+
+	w.setWindowOpacity(0.8);
+	w.setWindowIcon(QIcon("../../Qt/Icons/sicklogo.bmp"));
+	w.setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+
+	//finds primary screen height and width
+	QScreen *screen = QGuiApplication::primaryScreen();
+	QRect screensize = screen->availableGeometry();
+	int centreX = (screensize.width() - w.width()) / 2.f;
+	int centreY = (screensize.height() - w.height()) / 2.f;
+
+	////sets qt window to centre of screen
+	QPoint screencoords;
+	screencoords.setX(centreX);
+	screencoords.setY(centreY);
+	w.move(screencoords);
+
+	w.show();
+
+	return a.exec();
+}
+
+//= = = = = =
+//ACCESS THE PLAYER'S STATS AT:
+//MainWindow::playersize
+//MainWindow::playerskill
+//MainWindow::playertexture
+//MainWindow::playername
+//= = = = = =
+
+
 Scene* scene = NULL;
+Scene* Loading_scene = NULL;
 
 int Quit(bool pause = false, const string &reason = "") {
 	if (scene)
@@ -35,6 +89,15 @@ int main()
 	{
 		return Quit(true, "Window failed to initialise!");
 	}
+
+	//~~~QT SHIT~~~ (UNCOMMENT THIS IF THE WINDOW IS ANNOYING YOU)
+	char *argv[] = { "windowinwindow", "arg1", "arg2", NULL };	//argv array with ptrs to strings, given values by the environment
+	int argc = sizeof(argv) / sizeof(char*)-1; 	//argc is the no. of usable elements in argv inc. the program name
+	main2(argc, argv); 	//call the qt window
+	//~~~ END QT SHIT~~~
+
+	
+
 
 	//Initialise the PhysicsEngine
 	//Create GameObject Iterate Root Node upon which the GameObject List will be built
