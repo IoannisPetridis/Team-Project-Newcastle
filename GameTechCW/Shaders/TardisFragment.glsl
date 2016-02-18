@@ -5,11 +5,11 @@ uniform sampler2D bumpTex;
 
 uniform vec3 cameraPos;
 uniform int lightSize;
-uniform vec4 lightColour[20];
-uniform vec3 lightPos[20];
-uniform float lightRadius[20];
-uniform float bright[20];
-uniform vec3 isOn[20];
+uniform vec4 lightColour[60];
+uniform vec3 lightPos[60];
+uniform float lightRadius[60];
+uniform float bright[60];
+uniform vec3 isOn[60];
 uniform float fadeValue;
 
 

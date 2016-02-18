@@ -6,12 +6,14 @@ Mesh* AssetsManager::m_pCube	= NULL;
 Mesh* AssetsManager::m_pSphere	= NULL;
 Mesh* AssetsManager::m_Tardis	= NULL;
 Mesh* AssetsManager::m_Triangle = NULL;
-
+Mesh* AssetsManager::m_ground = NULL;
 //Texture Assets
 GLuint AssetsManager::m_CheckerboardTex = 0;
 GLuint AssetsManager::m_TargetTexture = 0;
 GLuint AssetsManager::m_ThrowTex = 0;
 GLuint AssetsManager::m_ThrowTexBUMP = 0;
+GLuint AssetsManager::m_FieldBUMP = 0;
+GLuint AssetsManager::m_Field = 0;
 GLuint AssetsManager::m_Glass = 0;
 GLuint AssetsManager::m_GlassBUMP = 0;
 
@@ -28,31 +30,41 @@ Player*	AssetsManager::Player_1;
 
 void AssetsManager::InitializeMeshes()
 {
-	m_CheckerboardTex = LoadTexture("checkerboard.tga");
+	m_CheckerboardTex = LoadTexture("wood.jpg");
+	
 	m_TargetTexture = LoadTexture("target.tga");
 	m_ThrowTex = LoadTexture("brick.tga");
 	m_Glass = LoadTexture("grass.jpg");
 	m_GlassBUMP = LoadTexture("grassDOT.png");
 	m_ThrowTexBUMP = LoadTexture("brickDOT.jpg");
-	
+	m_Field = LoadTexture("ground.jpg");
+	m_FieldBUMP = LoadTexture("fieldDOT.jpg");
+
 	m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pCube = new OBJMesh(MESHDIR"cube.obj");
+	m_ground = new OBJMesh(MESHDIR"cube.obj");
 	m_pSphere = new OBJMesh(MESHDIR"sphere.obj");
 	m_Tardis = new OBJMesh(MESHDIR"tardis.obj");
 	
+	
 	//added
-	m_Triangle = new OBJMesh(MESHDIR"Back.obj");
+	m_Triangle = new OBJMesh(MESHDIR"back_both.obj");
+	
+	m_ground->SetTexture(m_Field);
+	m_ground->SetBumpMap(m_FieldBUMP);
 
 	m_pPlane->SetTexture(m_CheckerboardTex);
 	m_pCube->SetTexture(m_CheckerboardTex);
 	m_pSphere->SetTexture(m_CheckerboardTex);
-	
+	m_Triangle->SetTexture(m_CheckerboardTex);
 }
 
 void AssetsManager::ReleaseMeshes()
 {
 	if (m_pPlane != NULL)
 	{
+		glDeleteTextures(1, &m_FieldBUMP);
+		glDeleteTextures(1, &m_Field);
 		glDeleteTextures(1, &m_CheckerboardTex);
 		glDeleteTextures(1, &m_TargetTexture);
 		glDeleteTextures(1, &m_ThrowTex);
@@ -64,6 +76,7 @@ void AssetsManager::ReleaseMeshes()
 		delete m_pCube;
 		delete m_pSphere;
 		delete m_Tardis;
+		delete m_ground;
 	}
 
 	m_pPlane = NULL;
@@ -71,6 +84,8 @@ void AssetsManager::ReleaseMeshes()
 	m_pCube  = NULL;
 	m_pSphere= NULL;
 	m_Tardis = NULL;
+	m_ground = NULL;
+
 }
 
 //should be able to modify glTexParameteri 

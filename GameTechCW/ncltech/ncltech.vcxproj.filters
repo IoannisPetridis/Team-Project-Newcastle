@@ -123,6 +123,9 @@
     <ClCompile Include="..\Networking\Networking\Client.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
+    <ClCompile Include="CylinderCollisionShape.cpp">
+      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="..\Networking\Networking\Client.h">
       <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="CylinderCollisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

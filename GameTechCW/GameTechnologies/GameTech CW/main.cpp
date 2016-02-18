@@ -3,6 +3,8 @@
 #include <ncltech\NCLDebug.h>
 #include "MyScene.h"
 
+//#include "../../Networking Server/Networking Server/Server.h"
+
 Scene* scene = NULL;
 
 int Quit(bool pause = false, const string &reason = "") {
@@ -53,6 +55,9 @@ int main()
 	}
 
 	GameTimer engine_timer;
+
+	//Server* server = new Server();
+	//server->runServer();
 
 	//Create main game-loop
 	while (Window::GetWindow().UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){

@@ -99,18 +99,114 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 
 	init = true;
 
-	lightList.push_back(Light(Vector3(0, 150, 0),//position
+	lightList.push_back(Light(Vector3(0, 180, 0),//position
 		Vector4(1, 1, 1, 1), //light color
 		600.0f //light radius
-		, 2.0f // brightness
+		, 1.0f // brightness
 		, Vector3(1, 1, 1)
 		));
-	lightList.push_back(Light(Vector3(0, 1.5f, 0),//position
+
+
+	lightList.push_back(Light(Vector3(222, -5, 0),//position
+		Vector4(1, 0, 0, 1), //light color
+		150.0f //light radius
+		, 3.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+
+	lightList.push_back(Light(Vector3(-222, -5, 0),//position
+		Vector4(0, 0, 1, 1), //light color
+		150.0f //light radius
+		, 3.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+
+	lightList.push_back(Light(Vector3(-200, 135, 145),//position
 		Vector4(1, 1, 1, 1), //light color
-		1.0f //light radius
-		, 50.0f // brightness
+		300.0f //light radius
+		, 1.0f // brightness
 		, Vector3(1, 1, 1)
 		));
+	lightList.push_back(Light(Vector3(-200, 135, -145),//position
+		Vector4(1, 1, 1, 1), //light color
+		300.0f //light radius
+		, 1.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+	lightList.push_back(Light(Vector3(200, 135, 145),//position
+		Vector4(1, 1, 1, 1), //light color
+		300.0f //light radius
+		, 1.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+	lightList.push_back(Light(Vector3(200, 135, -145),//position
+		Vector4(1, 1, 1, 1), //light color
+		300.0f //light radius
+		, 1.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+
+
+
+	////Draw BLUE
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	lightList.push_back(Light(Vector3(-200 - (i * 5), 5.0f + (i * 5), 54),//position
+	//		Vector4(0, 0, 1, 1), //light color
+	//		4.0f //light radius
+	//		, 50.0f // brightness
+	//		, Vector3(1, 1, 1)
+	//		));
+	//}
+	//for (int i = 0; i < 13; i++)
+	//{
+	//	lightList.push_back(Light(Vector3(-242, 45.0f, 54 - (i * 9)),//position
+	//		Vector4(0, 0, 1, 1), //light color
+	//		4.0f //light radius
+	//		, 50.0f // brightness
+	//		, Vector3(1, 1, 1)
+	//		));
+
+	//}
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	lightList.push_back(Light(Vector3(-200 - (i * 5), 5.0f + (i * 5), -54),//position
+	//		Vector4(0, 0, 1, 1), //light color
+	//		4.0f //light radius
+	//		, 50.0f // brightness
+	//		, Vector3(1, 1, 1)
+	//		));
+	//}
+
+	////Draw RED
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	lightList.push_back(Light(Vector3(200 + (i * 5), 5.0f + (i * 5), 54),//position
+	//		Vector4(1, 0, 0, 1), //light color
+	//		4.0f //light radius
+	//		, 50.0f // brightness
+	//		, Vector3(1, 1, 1)
+	//		));
+	//}
+	//for (int i = 0; i < 13; i++)
+	//{
+	//	lightList.push_back(Light(Vector3(242, 45.0f, 54 - (i * 9)),//position
+	//		Vector4(1, 0, 0, 1), //light color
+	//		4.0f //light radius
+	//		, 50.0f // brightness
+	//		, Vector3(1, 1, 1)
+	//		));
+
+	//}
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	lightList.push_back(Light(Vector3(200 + (i * 5), 5.0f + (i * 5), -54),//position
+	//		Vector4(1, 0, 0, 1), //light color
+	//		4.0f //light radius
+	//		, 50.0f // brightness
+	//		, Vector3(1, 1, 1)
+	//		));
+	//}
 	
 
 	glGenTextures(1, &shadowTex);
@@ -660,9 +756,9 @@ void Scene::DrawNode(GameObject* n)
 {
 	modelMatrix.ToIdentity();
 	Matrix4 temp = (lightList.at(0)).GetlightViewProjMat()  * n->m_WorldTransform;
-	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "textureMatrix"), 1, false, *&temp.values);
+	//glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "textureMatrix"), 1, false, *&temp.values);
 
-	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "testMatrix"), 1, false, *&temp.values);
+	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "lightViewProjMat"), 1, false, *&temp.values);
 	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "modelMatrix"), 1, false, (float*)&n->m_WorldTransform);
 	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(), "nodeColour"), 1, (float*)&n->GetColour());
 
