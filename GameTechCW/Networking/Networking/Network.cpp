@@ -1,5 +1,12 @@
 #include "Network.h"
 
+/*Converts a string to char*/
+char * Network::stringToCharStar(std::string str) {
+	char *result = new char[str.length() + 1];
+	strcpy_s(result, str.length()+1, str.c_str());
+	return result;
+}
+
 /*Initializes the Windows Sockets library*/
 int Network::init() {
 	int error = WSAStartup(MAKEWORD(HIGHVERSION, LOWVERSION), &wsaData);
@@ -79,7 +86,7 @@ int Network::addressing() {
 
 /*Creates a socket*/
 void Network::createSocket() {
-	if ((s = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol)) == INVALID_SOCKET) {
+	if ((listening_sock = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol)) == INVALID_SOCKET) {
 		printf("Unable to create a socket \n");
 		printf("Failed with error : %d\n%s\n", WSAGetLastError(), gai_strerror(WSAGetLastError()));
 		exit(1);
@@ -95,8 +102,8 @@ void Network::freeaddr() {
 }
 
 /*Receive the server's message*/
-void Network::receiveMessage(SOCKET s) {
-	if ((bytesreceived = recv(s, buff, BUFFSIZE - 1, 0)) == -1) {
+void Network::receiveMessage(SOCKET sock) {
+	if ((bytesreceived = recv(sock, buff, BUFFSIZE - 1, 0)) == -1) {
 		printf("Error receiving\n");
 		printf("Failed with error : %d\n%s\n", WSAGetLastError(), gai_strerror(WSAGetLastError()));
 	}
@@ -111,9 +118,13 @@ void Network::setMessage(char *msg) {
 	message = msg;
 }
 
+char * Network::getMessage() {
+	return message;
+}
+
 /*Send message to the server*/
-void Network::sendMessage() {
-	send(s, message, strlen(message), 0);
+void Network::sendMessage(SOCKET sock) {
+	send(sock, message, strlen(message), 0);
 }
 
 /*Network Constructor*/
@@ -126,6 +137,6 @@ Network::Network() {
 /*Network Destructor*/
 Network::~Network() {
 	freeaddr();
-	closesocket(s);
+	closesocket(listening_sock);
 	WSACleanup();
 }

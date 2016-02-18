@@ -72,6 +72,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Networking Server\Networking Server\Network.cpp" />
+    <ClCompile Include="..\Networking Server\Networking Server\Server.cpp" />
+    <ClCompile Include="..\Networking\Networking\Client.cpp" />
     <ClCompile Include="ActionHandler.cpp" />
     <ClCompile Include="ArbitraryAI.cpp" />
     <ClCompile Include="AssetsManager.cpp" />
@@ -95,6 +98,9 @@
     <ClCompile Include="SphereCollisionShape.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Networking Server\Networking Server\Network.h" />
+    <ClInclude Include="..\Networking Server\Networking Server\Server.h" />
+    <ClInclude Include="..\Networking\Networking\Client.h" />
     <ClInclude Include="ActionHandler.h" />
     <ClInclude Include="ArbitraryAI.h" />
     <ClInclude Include="AssetsManager.h" />

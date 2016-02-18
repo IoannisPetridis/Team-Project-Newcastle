@@ -114,6 +114,15 @@
     <ClCompile Include="PyramidCollisionShape.cpp">
       <Filter>Source Files\Physics\CollisionShapes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Networking Server\Networking Server\Network.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Networking Server\Networking Server\Server.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Networking\Networking\Client.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -196,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="PyramidCollisionShape.h">
       <Filter>Header Files\Physics\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Networking Server\Networking Server\Network.h">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Networking Server\Networking Server\Server.h">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Networking\Networking\Client.h">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

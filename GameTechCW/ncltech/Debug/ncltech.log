@@ -1,34 +1,42 @@
-﻿Build started 12/02/2016 00:39:33.
-     1>Project "D:\GitHub\Team-Project-Newcastle\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2/18/2016 2:31:31 PM.
+     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObject.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp Hull.cpp Manifold.cpp NCLDebug.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "..\Networking Server\Networking Server\Network.cpp" "..\Networking Server\Networking Server\Server.cpp" ..\Networking\Networking\Client.cpp ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
          SphereCollisionShape.cpp
          SimpleMeshObject.cpp
          Scene.cpp
+         PyramidCollisionShape.cpp
          Player.cpp
          PhysicsObject.cpp
          PhysicsEngine.cpp
          OffState.cpp
-         NCLDebug.cpp
          Manifold.cpp
          Hull.cpp
+         GameObject.cpp
+         NCLDebug.cpp
          HomeState.cpp
          GuardState.cpp
          GameObjectMag.cpp
-     1>d:\github\team-project-newcastle\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\gameobjectmag.cpp(18): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         GameObject.cpp
+     1>d:\github\team-project-newcastle\gametechcw\ncltech\gameobjectmag.cpp(24): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
          CuboidCollisionShape.cpp
          Constraint.cpp
          CollisionDetection.cpp
          AssetsManager.cpp
          ArbitraryAI.cpp
-         ActionHandler.cpp
-     1>d:\github\team-project-newcastle\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\actionhandler.cpp(28): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>d:\github\team-project-newcastle\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\actionhandler.cpp(58): warning C4305: 'argument' : truncation from 'double' to 'float'
          Generating Code...
-     1>d:\github\team-project-newcastle\team-project-newcastle-eric-test-1\team-project-newcastle-eric-test-1\gametechcw\ncltech\physicsengine.cpp(345): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
+     1>d:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
+         Compiling...
+         ActionHandler.cpp
+     1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Client.cpp
+         Server.cpp
+         Network.cpp
+         Generating Code...
        Lib:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GitHub\Team-Project-Newcastle\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\ActionHandler.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
+         Debug\Server.obj
+         Debug\Client.obj
+         Debug\ActionHandler.obj
          Debug\ArbitraryAI.obj
          Debug\AssetsManager.obj
          Debug\CollisionDetection.obj
@@ -45,12 +53,13 @@
          Debug\PhysicsEngine.obj
          Debug\PhysicsObject.obj
          Debug\Player.obj
+         Debug\PyramidCollisionShape.obj
          Debug\Scene.obj
          Debug\SimpleMeshObject.obj
          Debug\SphereCollisionShape.obj
-         ncltech.vcxproj -> D:\GitHub\Team-Project-Newcastle\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\GameTechnologies\Debug\ncltech.lib
-     1>Done Building Project "D:\GitHub\Team-Project-Newcastle\Team-Project-Newcastle-Eric-Test-1\Team-Project-Newcastle-Eric-Test-1\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
+         ncltech.vcxproj -> D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:11.42
+Time Elapsed 00:00:12.36
