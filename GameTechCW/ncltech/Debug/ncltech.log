@@ -1,15 +1,18 @@
-﻿Build started 2/18/2016 2:31:31 PM.
-     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2/18/2016 11:56:22 PM.
+     1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "..\Networking Server\Networking Server\Network.cpp" "..\Networking Server\Networking Server\Server.cpp" ..\Networking\Networking\Client.cpp ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp Client.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp Network.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp Server.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp Thread.cpp
+         Thread.cpp
          SphereCollisionShape.cpp
          SimpleMeshObject.cpp
+         Server.cpp
          Scene.cpp
          PyramidCollisionShape.cpp
          Player.cpp
          PhysicsObject.cpp
          PhysicsEngine.cpp
          OffState.cpp
+         Network.cpp
          Manifold.cpp
          Hull.cpp
          GameObject.cpp
@@ -17,28 +20,25 @@
          HomeState.cpp
          GuardState.cpp
          GameObjectMag.cpp
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\gameobjectmag.cpp(24): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>h:\github\team-project-newcastle\gametechcw\ncltech\gameobjectmag.cpp(24): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
          CuboidCollisionShape.cpp
          Constraint.cpp
+         Generating Code...
+     1>h:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
+         Compiling...
          CollisionDetection.cpp
+         Client.cpp
          AssetsManager.cpp
          ArbitraryAI.cpp
-         Generating Code...
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
-         Compiling...
          ActionHandler.cpp
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Client.cpp
-         Server.cpp
-         Network.cpp
+     1>h:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
          Generating Code...
+     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
-         Debug\Server.obj
-         Debug\Client.obj
-         Debug\ActionHandler.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\ActionHandler.obj
          Debug\ArbitraryAI.obj
          Debug\AssetsManager.obj
+         Debug\Client.obj
          Debug\CollisionDetection.obj
          Debug\Constraint.obj
          Debug\CuboidCollisionShape.obj
@@ -49,17 +49,20 @@
          Debug\GameObject.obj
          Debug\Hull.obj
          Debug\Manifold.obj
+         Debug\Network.obj
          Debug\OffState.obj
          Debug\PhysicsEngine.obj
          Debug\PhysicsObject.obj
          Debug\Player.obj
          Debug\PyramidCollisionShape.obj
          Debug\Scene.obj
+         Debug\Server.obj
          Debug\SimpleMeshObject.obj
          Debug\SphereCollisionShape.obj
-         ncltech.vcxproj -> D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib
-     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
+         Debug\Thread.obj
+         ncltech.vcxproj -> H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:12.36
+Time Elapsed 00:00:21.84

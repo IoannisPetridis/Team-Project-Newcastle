@@ -6,6 +6,9 @@
 #include <string>
 #include <queue>
 #include <iostream>
+#include <vector>
+#include <../ncltech/GameObject.h>
+#include <../ncltech/Thread.h>
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 
@@ -25,10 +28,10 @@
 
 struct gameObjectData {
 	std::string objName;
-	//Vector3 position;	//Calculated data
-	//Quaternion  orientation;	//Calculated data
-	//Vector3 inpForce;	//Before-calculation data
-	//Quaternion inpOrientation; //Before-calculation data
+	Vector3 position;	//Calculated data
+	Quaternion  orientation;	//Calculated data
+	Vector3 inpForce;	//Before-calculation data
+	Quaternion inpOrientation; //Before-calculation data
 };
 
 struct clientInfo {
@@ -38,7 +41,8 @@ struct clientInfo {
 };
 
 
-class Network {
+class Network : public Thread {
+	friend class GameObject;
 public:
 	Network();
 	~Network();

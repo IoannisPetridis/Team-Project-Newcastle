@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Network">
       <UniqueIdentifier>{c86b0ca8-3bac-4e02-aee6-4ca956eb303b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Threads">
+      <UniqueIdentifier>{552193be-37b4-4200-8dd3-9a4629d0a156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Threads">
+      <UniqueIdentifier>{0818f299-becd-470e-9f62-1e7769b68367}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -114,13 +120,16 @@
     <ClCompile Include="PyramidCollisionShape.cpp">
       <Filter>Source Files\Physics\CollisionShapes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Networking Server\Networking Server\Network.cpp">
+    <ClCompile Include="Thread.cpp">
+      <Filter>Source Files\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="Network.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\Networking Server\Networking Server\Server.cpp">
+    <ClCompile Include="Client.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\Networking\Networking\Client.cpp">
+    <ClCompile Include="Server.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
@@ -206,13 +215,16 @@
     <ClInclude Include="PyramidCollisionShape.h">
       <Filter>Header Files\Physics\CollisionShapes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Networking Server\Networking Server\Network.h">
+    <ClInclude Include="Thread.h">
+      <Filter>Header Files\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
       <Filter>Header Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="..\Networking Server\Networking Server\Server.h">
+    <ClInclude Include="Network.h">
       <Filter>Header Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="..\Networking\Networking\Client.h">
+    <ClInclude Include="Client.h">
       <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>

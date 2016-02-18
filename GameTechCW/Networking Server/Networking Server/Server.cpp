@@ -1,5 +1,4 @@
 #include "Server.h"
-#include <sstream>
 using namespace std;
 
 /*Binds the current socket*/
@@ -77,7 +76,7 @@ bool Server::acceptCon() {
 }
 
 /*Server run function*/
-void Server::runServer() {
+void Server::run() {
 	while (1) {
 		//cout << endl << "Waiting for connections..." << endl;
 		messageQueue->push_back("\nWaiting for connections...\n");

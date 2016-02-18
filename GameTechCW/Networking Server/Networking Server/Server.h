@@ -8,7 +8,7 @@ public:
 	void _stdcall bindSocket();
 	void _stdcall listenSocket();
 	bool _stdcall acceptCon();
-	void _stdcall runServer();
+	void _stdcall run();
 	char * _stdcall getLastClient();
 	std::vector<PCSTR> * getClientList();
 	SOCKET getListeningSocket();

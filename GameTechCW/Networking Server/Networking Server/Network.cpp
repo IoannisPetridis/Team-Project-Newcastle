@@ -1,5 +1,4 @@
 #include "Network.h"
-#include <vector>
 #include <sstream>
 
 /*Converts a string to char*/

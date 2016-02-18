@@ -1,69 +1,92 @@
-﻿Build started 2/18/2016 2:31:43 PM.
-     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2/18/2016 11:56:44 PM.
+     1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Tutorial1 - Integration.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../../FMOD/inc/ /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\ncltech\Audio.cpp main.cpp MyScene.cpp ParticleEmitter.cpp
          ParticleEmitter.cpp
-     1>d:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\particleemitter.cpp(137): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-     1>d:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\particleemitter.cpp(138): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>h:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\particleemitter.cpp(137): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>h:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\particleemitter.cpp(138): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
          MyScene.cpp
          main.cpp
          Audio.cpp
          Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.exe" /INCREMENTAL /NOLOGO /LIBPATH:../../FMOD/lib/ fmodL64_vc.lib fmodL_vc.lib fmod64_vc.lib fmod_vc.lib ncltech.lib nclgl.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.lib" /MACHINE:X86 Debug\Audio.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.exe" /INCREMENTAL /NOLOGO /LIBPATH:../../FMOD/lib/ kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.lib" /MACHINE:X86 Debug\Audio.obj
          Debug\main.obj
          Debug\MyScene.obj
          Debug\ParticleEmitter.obj
-         LINK : D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.exe not found or not built by the last incremental link; performing full link
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewActiveTexture imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewActiveTexture imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBindBuffer imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBufferData imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewBufferSubData imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBufferSubData imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewDeleteBuffers imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewDeleteBuffers imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGenBuffers imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
-     1>ParticleEmitter.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
-     1>ncltech.lib(Scene.obj) : warning LNK4217: locally defined symbol ___glewGetUniformLocation imported in function "public: void __thiscall std::_Vector_alloc<0,struct std::_Vec_base_types<struct FrustrumSortingObject,class std::allocator<struct FrustrumSortingObject> > >::_Alloc_proxy(void)" (?_Alloc_proxy@?$_Vector_alloc@$0A@U?$_Vec_base_types@UFrustrumSortingObject@@V?$allocator@UFrustrumSortingObject@@@std@@@std@@@std@@QAEXXZ)
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniform1f imported
-     1>ncltech.lib(Scene.obj) : warning LNK4217: locally defined symbol ___glewUniform1f imported in function "public: void __thiscall std::_Vector_alloc<0,struct std::_Vec_base_types<struct FrustrumSortingObject,class std::allocator<struct FrustrumSortingObject> > >::_Free_proxy(void)" (?_Free_proxy@?$_Vector_alloc@$0A@U?$_Vec_base_types@UFrustrumSortingObject@@V?$allocator@UFrustrumSortingObject@@@std@@@std@@@std@@QAEXXZ)
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniform1i imported
-     1>ncltech.lib(Scene.obj) : warning LNK4217: locally defined symbol ___glewUniform1i imported in function "public: void __thiscall std::_Vector_alloc<0,struct std::_Vec_base_types<struct FrustrumSortingObject,class std::allocator<struct FrustrumSortingObject> > >::_Free_proxy(void)" (?_Free_proxy@?$_Vector_alloc@$0A@U?$_Vec_base_types@UFrustrumSortingObject@@V?$allocator@UFrustrumSortingObject@@@std@@@std@@@std@@QAEXXZ)
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
-     1>ncltech.lib(Scene.obj) : warning LNK4217: locally defined symbol ___glewUniformMatrix4fv imported in function "public: void __thiscall std::_Vector_alloc<0,struct std::_Vec_base_types<struct FrustrumSortingObject,class std::allocator<struct FrustrumSortingObject> > >::_Free_proxy(void)" (?_Free_proxy@?$_Vector_alloc@$0A@U?$_Vec_base_types@UFrustrumSortingObject@@V?$allocator@UFrustrumSortingObject@@@std@@@std@@@std@@QAEXXZ)
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewUseProgram imported
-     1>ncltech.lib(Scene.obj) : warning LNK4217: locally defined symbol ___glewUseProgram imported in function "protected: void __thiscall std::vector<struct FrustrumSortingObject,class std::allocator<struct FrustrumSortingObject> >::_Destroy(struct FrustrumSortingObject *,struct FrustrumSortingObject *)" (?_Destroy@?$vector@UFrustrumSortingObject@@V?$allocator@UFrustrumSortingObject@@@std@@@std@@IAEXPAUFrustrumSortingObject@@0@Z)
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
-     1>ncltech.lib(NCLDebug.obj) : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewUniform3fv imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewUniform4fv imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewBindFramebuffer imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewBlitFramebuffer imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewCheckFramebufferStatus imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewDeleteFramebuffers imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewFramebufferTexture2D imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewGenFramebuffers imported
-     1>ncltech.lib(Scene.obj) : warning LNK4049: locally defined symbol ___glewTexImage2DMultisample imported
-     1>glew32.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32.lib(glew.obj)' or at 'D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\vc120.pdb'; linking object as if no debug info
-     1>SOIL.lib(image_DXT.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'SOIL.lib(image_DXT.obj)' or at 'D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\vc120.pdb'; linking object as if no debug info
-     1>SOIL.lib(image_helper.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'SOIL.lib(image_helper.obj)' or at 'D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\vc120.pdb'; linking object as if no debug info
-     1>SOIL.lib(SOIL.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'SOIL.lib(SOIL.obj)' or at 'D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\vc120.pdb'; linking object as if no debug info
-     1>SOIL.lib(stb_image_aug.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'SOIL.lib(stb_image_aug.obj)' or at 'D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\vc120.pdb'; linking object as if no debug info
-         GameTech CW.vcxproj -> D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.exe
-     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" (Build target(s)).
+     1>Audio.obj : error LNK2019: unresolved external symbol _FMOD_System_Create@4 referenced in function "enum FMOD_RESULT __cdecl FMOD::System_Create(class FMOD::System * *)" (?System_Create@FMOD@@YA?AW4FMOD_RESULT@@PAPAVSystem@1@@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::release(void)" (?release@System@FMOD@@QAG?AW4FMOD_RESULT@@XZ) referenced in function "public: static void __cdecl Audio::ReleaseAudio(void)" (?ReleaseAudio@Audio@@SAXXZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::init(int,unsigned int,void *)" (?init@System@FMOD@@QAG?AW4FMOD_RESULT@@HIPAX@Z) referenced in function "public: static void __cdecl Audio::InitialiseAudio(void)" (?InitialiseAudio@Audio@@SAXXZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::close(void)" (?close@System@FMOD@@QAG?AW4FMOD_RESULT@@XZ) referenced in function "public: static void __cdecl Audio::ReleaseAudio(void)" (?ReleaseAudio@Audio@@SAXXZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::update(void)" (?update@System@FMOD@@QAG?AW4FMOD_RESULT@@XZ) referenced in function "public: static void __cdecl Audio::GetCameraInfo(class Camera *)" (?GetCameraInfo@Audio@@SAXPAVCamera@@@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::set3DListenerAttributes(int,struct FMOD_VECTOR const *,struct FMOD_VECTOR const *,struct FMOD_VECTOR const *,struct FMOD_VECTOR const *)" (?set3DListenerAttributes@System@FMOD@@QAG?AW4FMOD_RESULT@@HPBUFMOD_VECTOR@@000@Z) referenced in function "public: static void __cdecl Audio::GetCameraInfo(class Camera *)" (?GetCameraInfo@Audio@@SAXPAVCamera@@@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::createSound(char const *,unsigned int,struct FMOD_CREATESOUNDEXINFO *,class FMOD::Sound * *)" (?createSound@System@FMOD@@QAG?AW4FMOD_RESULT@@PBDIPAUFMOD_CREATESOUNDEXINFO@@PAPAVSound@2@@Z) referenced in function "public: static void __cdecl Audio::LoadSounds(void)" (?LoadSounds@Audio@@SAXXZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::System::playSound(class FMOD::Sound *,class FMOD::ChannelGroup *,bool,class FMOD::Channel * *)" (?playSound@System@FMOD@@QAG?AW4FMOD_RESULT@@PAVSound@2@PAVChannelGroup@2@_NPAPAVChannel@2@@Z) referenced in function "public: static void __cdecl Audio::AddSound(struct FMOD_VECTOR,struct FMOD_VECTOR,class FMOD::Channel *,class FMOD::Sound *,float)" (?AddSound@Audio@@SAXUFMOD_VECTOR@@0PAVChannel@FMOD@@PAVSound@4@M@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::Sound::release(void)" (?release@Sound@FMOD@@QAG?AW4FMOD_RESULT@@XZ) referenced in function "public: static void __cdecl Audio::ReleaseAudio(void)" (?ReleaseAudio@Audio@@SAXXZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::Sound::set3DMinMaxDistance(float,float)" (?set3DMinMaxDistance@Sound@FMOD@@QAG?AW4FMOD_RESULT@@MM@Z) referenced in function "public: static void __cdecl Audio::LoadSounds(void)" (?LoadSounds@Audio@@SAXXZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::Sound::setMode(unsigned int)" (?setMode@Sound@FMOD@@QAG?AW4FMOD_RESULT@@I@Z) referenced in function "public: static void __cdecl Audio::LoadSounds(void)" (?LoadSounds@Audio@@SAXXZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::ChannelControl::setPaused(bool)" (?setPaused@ChannelControl@FMOD@@QAG?AW4FMOD_RESULT@@_N@Z) referenced in function "public: static void __cdecl Audio::AddSound(struct FMOD_VECTOR,struct FMOD_VECTOR,class FMOD::Channel *,class FMOD::Sound *,float)" (?AddSound@Audio@@SAXUFMOD_VECTOR@@0PAVChannel@FMOD@@PAVSound@4@M@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::ChannelControl::setVolume(float)" (?setVolume@ChannelControl@FMOD@@QAG?AW4FMOD_RESULT@@M@Z) referenced in function "public: static void __cdecl Audio::AddSound(struct FMOD_VECTOR,struct FMOD_VECTOR,class FMOD::Channel *,class FMOD::Sound *,float)" (?AddSound@Audio@@SAXUFMOD_VECTOR@@0PAVChannel@FMOD@@PAVSound@4@M@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::ChannelControl::set3DAttributes(struct FMOD_VECTOR const *,struct FMOD_VECTOR const *,struct FMOD_VECTOR const *)" (?set3DAttributes@ChannelControl@FMOD@@QAG?AW4FMOD_RESULT@@PBUFMOD_VECTOR@@00@Z) referenced in function "public: static void __cdecl Audio::AddSound(struct FMOD_VECTOR,struct FMOD_VECTOR,class FMOD::Channel *,class FMOD::Sound *,float)" (?AddSound@Audio@@SAXUFMOD_VECTOR@@0PAVChannel@FMOD@@PAVSound@4@M@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: enum FMOD_RESULT __stdcall FMOD::Channel::setFrequency(float)" (?setFrequency@Channel@FMOD@@QAG?AW4FMOD_RESULT@@M@Z) referenced in function "public: static void __cdecl Audio::UpdateSound(struct FMOD_VECTOR,struct FMOD_VECTOR,float,float,class FMOD::Channel *)" (?UpdateSound@Audio@@SAXUFMOD_VECTOR@@0MMPAVChannel@FMOD@@@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: __thiscall Matrix4::Matrix4(float * const)" (??0Matrix4@@QAE@QAM@Z) referenced in function "void __cdecl `dynamic initializer for 'biasMatrix''(void)" (??__EbiasMatrix@@YAXXZ)
+     1>main.obj : error LNK2001: unresolved external symbol "public: __thiscall Matrix4::Matrix4(float * const)" (??0Matrix4@@QAE@QAM@Z)
+     1>MyScene.obj : error LNK2001: unresolved external symbol "public: __thiscall Matrix4::Matrix4(float * const)" (??0Matrix4@@QAE@QAM@Z)
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol "public: __thiscall Matrix4::Matrix4(float * const)" (??0Matrix4@@QAE@QAM@Z)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: __thiscall Matrix4::~Matrix4(void)" (??1Matrix4@@QAE@XZ) referenced in function "void __cdecl `dynamic atexit destructor for 'biasMatrix''(void)" (??__FbiasMatrix@@YAXXZ)
+     1>main.obj : error LNK2001: unresolved external symbol "public: __thiscall Matrix4::~Matrix4(void)" (??1Matrix4@@QAE@XZ)
+     1>MyScene.obj : error LNK2001: unresolved external symbol "public: __thiscall Matrix4::~Matrix4(void)" (??1Matrix4@@QAE@XZ)
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol "public: __thiscall Matrix4::~Matrix4(void)" (??1Matrix4@@QAE@XZ)
+     1>Audio.obj : error LNK2019: unresolved external symbol "public: __thiscall PhysicsObject::~PhysicsObject(void)" (??1PhysicsObject@@QAE@XZ) referenced in function "struct FMOD_VECTOR __cdecl GetPosition(class PhysicsObject)" (?GetPosition@@YA?AUFMOD_VECTOR@@VPhysicsObject@@@Z)
+     1>main.obj : error LNK2019: unresolved external symbol "public: bool __thiscall OGLRenderer::HasInitialised(void)const " (?HasInitialised@OGLRenderer@@QBE_NXZ) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: bool __thiscall Keyboard::KeyDown(enum KeyboardKeys)" (?KeyDown@Keyboard@@QAE_NW4KeyboardKeys@@@Z) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: bool __thiscall Keyboard::KeyTriggered(enum KeyboardKeys)" (?KeyTriggered@Keyboard@@QAE_NW4KeyboardKeys@@@Z) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: __thiscall GameTimer::GameTimer(void)" (??0GameTimer@@QAE@XZ) referenced in function _main
+     1>MyScene.obj : error LNK2001: unresolved external symbol "public: __thiscall GameTimer::GameTimer(void)" (??0GameTimer@@QAE@XZ)
+     1>main.obj : error LNK2019: unresolved external symbol "public: float __thiscall GameTimer::GetTimedMS(void)" (?GetTimedMS@GameTimer@@QAEMXZ) referenced in function _main
+     1>MyScene.obj : error LNK2001: unresolved external symbol "public: float __thiscall GameTimer::GetTimedMS(void)" (?GetTimedMS@GameTimer@@QAEMXZ)
+     1>main.obj : error LNK2019: unresolved external symbol "public: static bool __cdecl Window::Initialise(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int,bool)" (?Initialise@Window@@SA_NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH_N@Z) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: static void __cdecl Window::Destroy(void)" (?Destroy@Window@@SAXXZ) referenced in function "int __cdecl Quit(bool,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?Quit@@YAH_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+     1>main.obj : error LNK2019: unresolved external symbol "public: bool __thiscall Window::UpdateWindow(void)" (?UpdateWindow@Window@@QAE_NXZ) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: void __thiscall PhysicsEngine::Update(float)" (?Update@PhysicsEngine@@QAEXM@Z) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: void __thiscall PhysicsEngine::Feedback(void)" (?Feedback@PhysicsEngine@@QAEXXZ) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: void __thiscall PhysicsEngine::PhysicsEngineClear(void)" (?PhysicsEngineClear@PhysicsEngine@@QAEXXZ) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "protected: __thiscall PhysicsEngine::PhysicsEngine(void)" (??0PhysicsEngine@@IAE@XZ) referenced in function "public: static class PhysicsEngine * __cdecl TSingleton<class PhysicsEngine>::Instance(void)" (?Instance@?$TSingleton@VPhysicsEngine@@@@SAPAVPhysicsEngine@@XZ)
+     1>MyScene.obj : error LNK2001: unresolved external symbol "protected: __thiscall PhysicsEngine::PhysicsEngine(void)" (??0PhysicsEngine@@IAE@XZ)
+     1>main.obj : error LNK2019: unresolved external symbol "public: static void __cdecl NCLDebug::AddStatusEntry(class Vector4 const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,...)" (?AddStatusEntry@NCLDebug@@SAXABVVector4@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ZZ) referenced in function _main
+     1>MyScene.obj : error LNK2001: unresolved external symbol "public: static void __cdecl NCLDebug::AddStatusEntry(class Vector4 const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,...)" (?AddStatusEntry@NCLDebug@@SAXABVVector4@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ZZ)
+     1>main.obj : error LNK2019: unresolved external symbol "public: __thiscall ActionHandler::ActionHandler(void)" (??0ActionHandler@@QAE@XZ) referenced in function "public: static class ActionHandler * __cdecl TSingleton<class ActionHandler>::Instance(void)" (?Instance@?$TSingleton@VActionHandler@@@@SAPAVActionHandler@@XZ)
+     1>main.obj : error LNK2019: unresolved external symbol "public: void __thiscall ActionHandler::SetDefaultScene(class Scene *)" (?SetDefaultScene@ActionHandler@@QAEXPAVScene@@@Z) referenced in function _main
+     1>main.obj : error LNK2019: unresolved external symbol "public: void __thiscall ActionHandler::Update(float)" (?Update@ActionHandler@@QAEXM@Z) referenced in function _main
+     1>main.obj : error LNK2001: unresolved external symbol "protected: static class Window * Window::window" (?window@Window@@1PAV1@A)
+     1>main.obj : error LNK2001: unresolved external symbol "protected: static class Keyboard * Window::keyboard" (?keyboard@Window@@1PAVKeyboard@@A)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: __thiscall Matrix4::Matrix4(void)" (??0Matrix4@@QAE@XZ) referenced in function "public: __thiscall MyScene::MyScene(class Window &)" (??0MyScene@@QAE@AAVWindow@@@Z)
+     1>MyScene.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall OGLRenderer::Resize(int,int)" (?Resize@OGLRenderer@@MAEXHH@Z)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: __thiscall Scene::Scene(class Window &)" (??0Scene@@QAE@AAVWindow@@@Z) referenced in function "public: __thiscall MyScene::MyScene(class Window &)" (??0MyScene@@QAE@AAVWindow@@@Z)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall Scene::~Scene(void)" (??1Scene@@UAE@XZ) referenced in function __unwindfunclet$??0MyScene@@QAE@AAVWindow@@@Z$0
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: class GameObject * __thiscall Scene::FindGameObject(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?FindGameObject@Scene@@QAEPAVGameObject@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) referenced in function "public: virtual void __thiscall MyScene::UpdateScene(float)" (?UpdateScene@MyScene@@UAEXM@Z)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: virtual void __thiscall Scene::RenderScene(void)" (?RenderScene@Scene@@UAEXXZ) referenced in function "public: virtual void __thiscall MyScene::RenderScene(void)" (?RenderScene@MyScene@@UAEXXZ)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: virtual void __thiscall Scene::UpdateScene(float)" (?UpdateScene@Scene@@UAEXM@Z) referenced in function "public: virtual void __thiscall MyScene::UpdateScene(float)" (?UpdateScene@MyScene@@UAEXM@Z)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "protected: void __thiscall Scene::UpdateWorldMatrices(class GameObject *,class Matrix4 const &)" (?UpdateWorldMatrices@Scene@@IAEXPAVGameObject@@ABVMatrix4@@@Z) referenced in function "public: __thiscall MyScene::MyScene(class Window &)" (??0MyScene@@QAE@AAVWindow@@@Z)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: void __thiscall Player::CameraControl(void)" (?CameraControl@Player@@QAEXXZ) referenced in function "public: virtual void __thiscall MyScene::UpdateScene(float)" (?UpdateScene@MyScene@@UAEXM@Z)
+     1>MyScene.obj : error LNK2019: unresolved external symbol "public: void __thiscall GameObjectMag::GOMInit(class Scene *)" (?GOMInit@GameObjectMag@@QAEXPAVScene@@@Z) referenced in function "public: virtual bool __thiscall MyScene::InitialiseGL(void)" (?InitialiseGL@MyScene@@UAE_NXZ)
+     1>MyScene.obj : error LNK2001: unresolved external symbol "public: static class Player * AssetsManager::Player_1" (?Player_1@AssetsManager@@2PAVPlayer@@A)
+     1>ParticleEmitter.obj : error LNK2019: unresolved external symbol "public: __thiscall Mesh::Mesh(void)" (??0Mesh@@QAE@XZ) referenced in function "public: __thiscall ParticleEmitter::ParticleEmitter(void)" (??0ParticleEmitter@@QAE@XZ)
+     1>ParticleEmitter.obj : error LNK2019: unresolved external symbol "public: virtual __thiscall Mesh::~Mesh(void)" (??1Mesh@@UAE@XZ) referenced in function __unwindfunclet$??0ParticleEmitter@@QAE@XZ$0
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Mesh::Draw(bool)" (?Draw@Mesh@@UAEX_N@Z)
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewActiveTexture
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewBindBuffer
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewBufferData
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewBufferSubData
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewDeleteBuffers
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewGenBuffers
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewEnableVertexAttribArray
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewVertexAttribPointer
+     1>ParticleEmitter.obj : error LNK2001: unresolved external symbol __imp____glewBindVertexArray
+     1>H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.exe : fatal error LNK1120: 59 unresolved externals
+     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:02.81
+Time Elapsed 00:00:05.17

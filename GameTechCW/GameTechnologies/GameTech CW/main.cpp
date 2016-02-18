@@ -1,6 +1,7 @@
 #include <nclgl\Window.h>
 #include <ncltech\PhysicsEngine.h>
 #include <ncltech\NCLDebug.h>
+//#include <ncltech\Server.h>
 #include "MyScene.h"
 
 Scene* scene = NULL;
@@ -53,6 +54,8 @@ int main()
 	}
 
 	GameTimer engine_timer;
+	//Server *server = new Server();
+	//server->run();
 
 	//Create main game-loop
 	while (Window::GetWindow().UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
