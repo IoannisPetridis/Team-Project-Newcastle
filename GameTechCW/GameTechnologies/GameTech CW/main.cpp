@@ -7,7 +7,6 @@
 
 //#include "../../Networking Server/Networking Server/Server.h"
 
-
 //qt includes
 #include "..\..\Qt\include\QtCore\QtPlugin"
 #include "..\..\Qt\include\QtCore\qcoreapplication.h"
@@ -95,18 +94,28 @@ int main()
 	int argc = sizeof(argv) / sizeof(char*)-1; 	//argc is the no. of usable elements in argv inc. the program name
 	main2(argc, argv); 	//call the qt window
 	//~~~ END QT SHIT~~~
-
 	
+	GameObjectMag* GOM_Loading = new GameObjectMag();
+	//0 loading screen
+	GOM_Loading->SetID(0);
+	Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
+
+	if (!Loading_scene->HasInitialised())
+	{
+		return Quit(true, "Loading Screen Renderer failed to initialise!");
+	}
+
+	Loading_scene->RenderScene();
 
 
 	//Initialise the PhysicsEngine
 	//Create GameObject Iterate Root Node upon which the GameObject List will be built
-	PhysicsEngine::Instance();
 
-	//Initialise the Scene, complete scene graph list
-	//All Game Assets will be pre-loaded in
-	//by initialising GameAssetsManager
-	scene = new MyScene(Window::GetWindow());
+	PhysicsEngine::Instance();
+	GameObjectMag* GOM_GamePlay = new GameObjectMag();
+	//1 gameplay screen
+	GOM_GamePlay->SetID(1);
+	scene = new MyScene(Window::GetWindow(), GOM_GamePlay);
 
 	//Initialise the ActionHandler Instnace
 	ActionHandler::Instance();

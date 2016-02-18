@@ -8,15 +8,13 @@
 
 #define PI 3.14159265f
 
-MyScene::MyScene(Window& window) : Scene(window)
+MyScene::MyScene(Window& window, GameObjectMag* gom) : Scene(window), GOM(gom)
 {
 	if (init == true)	{}
 		init = InitialiseGL();
 
 	UpdateWorldMatrices(m_RootGameObject, Matrix4());
-
-	GOM = new GameObjectMag();	//initialize the GOM
-
+	
 	PhysicsEngine::Instance()->SetUpdateTimestep(1.0f / 60.0f);		//60 Updates per second
 }
 
@@ -55,8 +53,14 @@ bool MyScene::InitialiseGL()
 	timer = 0.0f;
 	//end
 	
+	if (GOM->GetID() == 0) {
+		GOM->GOM_Loading(this);
+	}
+	else if (GOM->GetID() == 1) {
+		GOM->GOM_GamePlay(this);
+	}
+
 	//Initialize all game objects
-	GOM->GOMInit(this);
 	Audio_Timer.GetTimedMS();
 	return true;
 }
@@ -82,7 +86,7 @@ void MyScene::UpdateScene(float msec)
 		if (m->objectA->name.find("ground") != string::npos || m->objectB->name.find("ground") != string::npos) {}
 		else{
 			time = Audio_Timer.GetTimedMS();
-			cout << time << " " << m->objectA->name << " colliding with :  " << m->objectB->name << endl;
+			//cout << time << " " << m->objectA->name << " colliding with :  " << m->objectB->name << endl;
 			Audio::CollisionSound(m->objectA, m->objectB, time);
 		}
 	}

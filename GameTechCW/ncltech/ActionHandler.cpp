@@ -137,7 +137,7 @@ void ActionHandler::Update(float dt) {
 	(m_scene->m_RootParticleList->GetChildren())[0]->SetSourcePosition(m_scene->FindGameObject("car")->Physics()->GetPosition() +
 		m_scene->FindGameObject("car")->Physics()->GetOrientation().ToMatrix3() * Vector3(0, 0, 1));
 
-	Window::GetWindow().ShowOSPointer(true);
-	Window::GetWindow().LockMouseToWindow(false);
+	Window::GetWindow().ShowOSPointer(false);
+	Window::GetWindow().LockMouseToWindow(true);
 }
 

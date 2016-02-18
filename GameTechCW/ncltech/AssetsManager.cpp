@@ -14,6 +14,7 @@ GLuint AssetsManager::m_ThrowTex = 0;
 GLuint AssetsManager::m_ThrowTexBUMP = 0;
 GLuint AssetsManager::m_FieldBUMP = 0;
 GLuint AssetsManager::m_Field = 0;
+GLuint AssetsManager::m_Loading = 0;
 GLuint AssetsManager::m_Glass = 0;
 GLuint AssetsManager::m_GlassBUMP = 0;
 
@@ -39,6 +40,7 @@ void AssetsManager::InitializeMeshes()
 	m_ThrowTexBUMP = LoadTexture("brickDOT.jpg");
 	m_Field = LoadTexture("ground.jpg");
 	m_FieldBUMP = LoadTexture("fieldDOT.jpg");
+	m_Loading = LoadTexture("loading.tga");
 
 	m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pCube = new OBJMesh(MESHDIR"cube.obj");

@@ -27,7 +27,8 @@ public:
 	static GLuint m_ThrowTexBUMP;
 	static GLuint m_Field;
 	static GLuint m_FieldBUMP;
-	
+	static GLuint m_Loading;
+
 	static GLuint m_Glass;
 	static GLuint m_GlassBUMP;
 	static GLuint m_groundTex;

@@ -633,6 +633,7 @@ void Scene::AddParticleObject(ParticleEmitter* particle_object)
 {
 	m_RootParticleList->AddChildParticle(particle_object);
 }
+
 void Scene::UpdateScene(float dt)
 {
 	m_Camera->UpdateCamera(dt * 1000.f);

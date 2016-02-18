@@ -1,38 +1,18 @@
-﻿Build started 2/18/2016 6:29:44 PM.
-     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 2/18/2016 7:42:32 PM.
+     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "..\Networking Server\Networking Server\Network.cpp" "..\Networking Server\Networking Server\Server.cpp" ..\Networking\Networking\Client.cpp ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp CylinderCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
-         SphereCollisionShape.cpp
-         SimpleMeshObject.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp GameObjectMag.cpp PhysicsEngine.cpp Player.cpp Scene.cpp
          Scene.cpp
-         PyramidCollisionShape.cpp
          Player.cpp
-         PhysicsObject.cpp
          PhysicsEngine.cpp
-         OffState.cpp
-         Manifold.cpp
-         Hull.cpp
-         GameObject.cpp
-         NCLDebug.cpp
-         HomeState.cpp
-         GuardState.cpp
          GameObjectMag.cpp
      1>d:\github\team-project-newcastle\gametechcw\ncltech\gameobjectmag.cpp(24): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         CylinderCollisionShape.cpp
-         CuboidCollisionShape.cpp
-         Constraint.cpp
-         CollisionDetection.cpp
          AssetsManager.cpp
-         Generating Code...
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
-         Compiling...
          ArbitraryAI.cpp
          ActionHandler.cpp
      1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Client.cpp
-         Server.cpp
-         Network.cpp
          Generating Code...
+     1>d:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
          Debug\Server.obj
@@ -60,8 +40,8 @@
          Debug\SimpleMeshObject.obj
          Debug\SphereCollisionShape.obj
          ncltech.vcxproj -> D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib
-     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:12.64
+Time Elapsed 00:00:04.62

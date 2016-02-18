@@ -25,16 +25,15 @@ class MyScene : public Scene
 {
 	friend class GameObjectMag;
 public:
-	MyScene(Window& window);
+	MyScene(Window& window, GameObjectMag* gom);
 	~MyScene();
 
 	bool InitialiseGL()	override;
 	void RenderScene() override;
 	void UpdateScene(float dt)  override;
 
-protected:
-	GameObjectMag* GOM;
-	
+protected:	
+	GameObjectMag*		GOM;
 	Vector3 Proj_dir;
 
 	int T_counter;

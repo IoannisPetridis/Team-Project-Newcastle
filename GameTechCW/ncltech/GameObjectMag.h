@@ -19,9 +19,18 @@ class MyScene;
 
 class GameObjectMag {
 public:
-	void	GOMInit(Scene* m_scene);
+	void	GOM_Loading(Scene* m_scene);
+	void	GOM_GamePlay(Scene* m_scene);
+
+	void SetID(int i) { id = i; }
+	int GetID() const {
+		return id;
+	}
+
 
 protected:
+	int id;
+
 	void	GOphysicsSetting(
 		bool Gravity,
 		bool CollisionCheck
