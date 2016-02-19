@@ -75,7 +75,6 @@
     <ClCompile Include="ActionHandler.cpp" />
     <ClCompile Include="ArbitraryAI.cpp" />
     <ClCompile Include="AssetsManager.cpp" />
-    <ClCompile Include="Client.cpp" />
     <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="Constraint.cpp" />
     <ClCompile Include="CuboidCollisionShape.cpp" />
@@ -86,24 +85,20 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hull.cpp" />
     <ClCompile Include="Manifold.cpp" />
-    <ClCompile Include="Network.cpp" />
     <ClCompile Include="OffState.cpp" />
     <ClCompile Include="PhysicsEngine.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PyramidCollisionShape.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Server.cpp" />
     <ClCompile Include="SimpleMeshObject.cpp" />
     <ClCompile Include="SphereCollisionShape.cpp" />
-    <ClCompile Include="Thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ActionHandler.h" />
     <ClInclude Include="ArbitraryAI.h" />
     <ClInclude Include="AssetsManager.h" />
     <ClInclude Include="BaseState.h" />
-    <ClInclude Include="Client.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="CollisionShape.h" />
     <ClInclude Include="ConfigFileLoader.h" />
@@ -118,17 +113,14 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hull.h" />
     <ClInclude Include="Manifold.h" />
-    <ClInclude Include="Network.h" />
     <ClInclude Include="OffState.h" />
     <ClInclude Include="PhysicsEngine.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PyramidCollisionShape.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Server.h" />
     <ClInclude Include="SimpleMeshObject.h" />
     <ClInclude Include="SphereCollisionShape.h" />
-    <ClInclude Include="Thread.h" />
     <ClInclude Include="TSingleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -9,6 +9,19 @@
     <ClCompile Include="..\..\ncltech\Audio.cpp">
       <Filter>APP</Filter>
     </ClCompile>
+    <ClCompile Include="Network.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyScene.h" />
@@ -18,10 +31,29 @@
     <ClInclude Include="..\..\ncltech\Audio.h">
       <Filter>APP</Filter>
     </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="APP">
       <UniqueIdentifier>{9cdee8f6-5b6c-4e55-b377-8205f6e629b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{5c55e2a5-385b-4f35-a057-6a09c6a0547a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threads">
+      <UniqueIdentifier>{d6e48044-8bd2-48d2-9f5e-333f65e0f041}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

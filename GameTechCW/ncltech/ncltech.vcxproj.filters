@@ -120,18 +120,6 @@
     <ClCompile Include="PyramidCollisionShape.cpp">
       <Filter>Source Files\Physics\CollisionShapes</Filter>
     </ClCompile>
-    <ClCompile Include="Thread.cpp">
-      <Filter>Source Files\Threads</Filter>
-    </ClCompile>
-    <ClCompile Include="Network.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Server.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -214,18 +202,6 @@
     </ClInclude>
     <ClInclude Include="PyramidCollisionShape.h">
       <Filter>Header Files\Physics\CollisionShapes</Filter>
-    </ClInclude>
-    <ClInclude Include="Thread.h">
-      <Filter>Header Files\Threads</Filter>
-    </ClInclude>
-    <ClInclude Include="Server.h">
-      <Filter>Header Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network.h">
-      <Filter>Header Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Client.h">
-      <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
