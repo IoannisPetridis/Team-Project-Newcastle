@@ -5,13 +5,33 @@
 #include "dialog.h"
 #include "mainwindow.h"
 
-//#include "../../Networking Server/Networking Server/Server.h"
-
 //qt includes
 #include "..\..\Qt\include\QtCore\QtPlugin"
 #include "..\..\Qt\include\QtCore\qcoreapplication.h"
 #include "..\..\Qt\include\QtWidgets\qapplication.h"
 #include "..\..\Qt\include\QtWidgets\qstylefactory.h"
+//end
+
+Scene* scene = NULL;
+Scene* Loading_scene = NULL;
+Scene* Transition_scene = NULL;
+
+int Quit(bool pause = false, const string &reason = "") {
+	if (scene)
+	{
+		delete scene;
+		scene = NULL;
+	}
+
+	Window::Destroy();
+
+	if (pause) {
+		std::cout << reason << std::endl;
+		system("PAUSE");
+	}
+
+	return 0;
+}
 
 //initialises qt window (called in main)
 int main2(int argc, char *argv[])
@@ -56,27 +76,6 @@ int main2(int argc, char *argv[])
 //MainWindow::playername
 //= = = = = =
 
-
-Scene* scene = NULL;
-Scene* Loading_scene = NULL;
-
-int Quit(bool pause = false, const string &reason = "") {
-	if (scene)
-	{
-		delete scene;
-		scene = NULL;
-	}
-
-	Window::Destroy();
-
-	if (pause) {
-		std::cout << reason << std::endl;
-		system("PAUSE");
-	}
-
-	return 0;
-}
-
 int main()
 {
 	//-------------------
@@ -94,24 +93,18 @@ int main()
 	int argc = sizeof(argv) / sizeof(char*)-1; 	//argc is the no. of usable elements in argv inc. the program name
 	main2(argc, argv); 	//call the qt window
 	//~~~ END QT SHIT~~~
-	
-	GameObjectMag* GOM_Loading = new GameObjectMag();
-	//0 loading screen
-	GOM_Loading->SetID(0);
-	Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
 
-	if (!Loading_scene->HasInitialised())
 	{
-		return Quit(true, "Loading Screen Renderer failed to initialise!");
+		GameObjectMag* GOM_Loading = new GameObjectMag();
+		GOM_Loading->SetID(0);
+		Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
+		Loading_scene->RenderScene();
 	}
-
-	Loading_scene->RenderScene();
-
 
 	//Initialise the PhysicsEngine
 	//Create GameObject Iterate Root Node upon which the GameObject List will be built
-
 	PhysicsEngine::Instance();
+	
 	GameObjectMag* GOM_GamePlay = new GameObjectMag();
 	//1 gameplay screen
 	GOM_GamePlay->SetID(1);
@@ -127,9 +120,6 @@ int main()
 	}
 
 	GameTimer engine_timer;
-
-	//Server* server = new Server();
-	//server->runServer();
 
 	//Create main game-loop
 	while (Window::GetWindow().UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
@@ -170,10 +160,25 @@ int main()
 			//Render the Scene
 			scene->RenderScene();
 
+			{
+				int SC = ActionHandler::Instance()->ScoreCheck();
+				if (SC == 1) {
+					for (int i = 0; i < 50; i++) {
+						Loading_scene->RenderScene();
+					}
+				}
+				else if (SC == 2) {
+					for (int i = 0; i < 50; i++) {
+						Loading_scene->RenderScene();
+					}
+				}
+			}
+
 			PhysicsEngine::Instance()->PhysicsEngineClear();
 		}
 	}
 
 	//Cleanup
+	AssetsManager::ReleaseMeshes();
 	return Quit();
 }

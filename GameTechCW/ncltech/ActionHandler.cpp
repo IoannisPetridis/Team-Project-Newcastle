@@ -10,6 +10,38 @@ ActionHandler::ActionHandler() {
 	doubleJump = false;
 }
 
+int ActionHandler::ScoreCheck() {
+	if (m_scene->m_RootGameObject->FindGameObject("ball")) {
+		Vector3 pos = m_scene->m_RootGameObject->FindGameObject("ball")->Physics()->GetPosition();
+		if ((pos.x < -200.0f) &&
+			(pos.z > -50.0f && pos.z < 50.0f) &&
+			(pos.y > 0.0f && pos.z < 40.0f)) {
+			NCLDebug::Log(Vector3(1.0f, 0.0f, 0.0f),
+				"Red Score");
+
+			m_scene->m_RootGameObject->FindGameObject("ball")
+				->Physics()->SetPosition(Vector3(0.0f, 10.0f, 0.0f));
+			AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 10.0f, 10.0f));
+
+			return 1;
+		}
+
+		if ((pos.x > 200.0f) &&
+			(pos.z > -50.0f && pos.z < 50.0f) &&
+			(pos.y > 0.0f && pos.z < 40.0f)) {
+			NCLDebug::Log(Vector3(1.0f, 0.0f, 0.0f),
+				"Blue Score");
+
+			m_scene->m_RootGameObject->FindGameObject("ball")
+				->Physics()->SetPosition(Vector3(0.0f, 10.0f, 0.0f));
+			AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 10.0f, 10.0f));
+			return 2;
+		}
+	}
+
+	else return 0;
+}
+
 void ActionHandler::SetDefaultScene(Scene* scene) {
 	m_scene = scene;
 }
@@ -22,16 +54,16 @@ void ActionHandler::ControllerHandle_Force(Player* P, KeyboardKeys key, Vector3 
 		}
 		timer += engine_timer.GetTimedMS() * 100.0f;
 		timer = min(timer, 8.0f);
-		NCLDebug::Log(Vector3(1.0f, 1.0f, 0.0f), "Speed: " + std::to_string(timer));
+		//NCLDebug::Log(Vector3(1.0f, 1.0f, 0.0f), "Speed: " + std::to_string(timer));
 		P->Physics()->SetForce(force * timer);
 
 		force.Normalise();
-		NCLDebug::DrawThickLine(P->Physics()->GetPosition(), P->Physics()->GetPosition() + force,
-			0.02, Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		//NCLDebug::DrawThickLine(P->Physics()->GetPosition(), P->Physics()->GetPosition() + force,
+			//0.02, Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	}
 	if (!Window::GetKeyboard()->KeyHeld(key)
 		&& timer > 0.0f) {
-		NCLDebug::Log(Vector3(1.0f, 1.0f, 0.0f), "enter");
+		//NCLDebug::Log(Vector3(1.0f, 1.0f, 0.0f), "enter");
 		P->Physics()->SetForce(Vector3(0.0f, 0.0f, 0.0f));
 		timer = -1.0f;
 	}
@@ -59,9 +91,23 @@ void ActionHandler::ControllerHandle_Jump(Player* P, KeyboardKeys key) {
 	}
 
 	//Second Jump
-	if (Inair && !doubleJump && Window::GetKeyboard()->KeyTriggered(key)) {
-		P->Physics()->SetLinearVelocity(P->Physics()->GetLinearVelocity() + Vector3(0.0f, 10.0f, 0.0f));
-		doubleJump = true;
+	if (Inair && !doubleJump) {
+		if (Window::GetKeyboard()->KeyTriggered(key)){
+			P->Physics()->SetLinearVelocity(P->Physics()->GetLinearVelocity() + Vector3(0.0f, 10.0f, 0.0f));
+			doubleJump = true;
+		}
+		else if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_A)) {
+			P->Physics()->SetLinearVelocity(P->Physics()->GetLinearVelocity() + P->Left_normal * 10.0f);
+			doubleJump = true;
+		}
+		else if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_D)) {
+			P->Physics()->SetLinearVelocity(P->Physics()->GetLinearVelocity() + P->Right_normal * 10.0f);
+			doubleJump = true;
+		}
+		else if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_W)) {
+			P->Physics()->SetLinearVelocity(P->Physics()->GetLinearVelocity() + P->front_normal * 10.0f);
+			doubleJump = true;
+		}
 	}
 
 	//First Jump
@@ -83,57 +129,30 @@ void ActionHandler::Flip(Player *P) {
 }
 
 void ActionHandler::Update(float dt) {
+	NCLDebug::Log(Vector3(0.0f, 0.0f, 0.0f), std::to_string(AssetsManager::Player_1->Physics()->GetLinearVelocity().Length()));
+	
 	{
 		AssetsManager::Player_1->NormalCal();
+
 		Flip(AssetsManager::Player_1);
 		//Keyboard Control
-		ControllerHandle_Force(AssetsManager::Player_1, KEYBOARD_I,
+		ControllerHandle_Force(AssetsManager::Player_1, KEYBOARD_W,
 		AssetsManager::Player_1->front_normal * 150.0f, timer[0]);
 
-		ControllerHandle_Ori(AssetsManager::Player_1, KEYBOARD_J,
+		ControllerHandle_Ori(AssetsManager::Player_1, KEYBOARD_A,
 			Vector3(0.0f, 1.0f, 0.0f), 2.0f);
 
-		ControllerHandle_Force(AssetsManager::Player_1, KEYBOARD_K,
+		ControllerHandle_Force(AssetsManager::Player_1, KEYBOARD_S,
 			AssetsManager::Player_1->Rear_normal * 150.0f, timer[1]);
 
-		ControllerHandle_Ori(AssetsManager::Player_1, KEYBOARD_L,
+		ControllerHandle_Ori(AssetsManager::Player_1, KEYBOARD_D,
 			Vector3(0.0f, 1.0f, 0.0f), -2.0f);
 
-		ControllerHandle_Ori(AssetsManager::Player_1, KEYBOARD_U,
-			Vector3(1.0f, 0.0f, 0.0f), 2.0f);
-
-		ControllerHandle_Ori(AssetsManager::Player_1, KEYBOARD_O,
-			Vector3(1.0f, 0.0f, 0.0f), -2.0f);
-
-		ControllerHandle_Jump(AssetsManager::Player_1, KEYBOARD_Y);
+		ControllerHandle_Jump(AssetsManager::Player_1, KEYBOARD_SPACE);
 	}
 
-	//if (Window::GetKeyboard()->KeyHeld(KEYBOARD_T)) {
-	//	m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(-2.0f, 0, 0));
-	//	//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
-	//}
-	//if (Window::GetKeyboard()->KeyHeld(KEYBOARD_H)) {
-	//	m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, 0, 2.0f));
-	//	//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
-	//}
-	//if (Window::GetKeyboard()->KeyHeld(KEYBOARD_G)) {
-	//	m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(2.0f, 0, 0));
-	//	//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
-	//}
-	//if (Window::GetKeyboard()->KeyHeld(KEYBOARD_F)) {
-	//	m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, 0, -2.0f));
-	//	//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
-	//}
-	//if (Window::GetKeyboard()->KeyHeld(KEYBOARD_N)) {
-	//	m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, -2.0f, 0));
-	//	//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
-	//}
-	//if (Window::GetKeyboard()->KeyHeld(KEYBOARD_M)) {
-	//	m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, 2.0f, 0));
-	//	//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
-	//}
-
 	//spawn partical
+	(m_scene->m_RootParticleList->GetChildren())[0]->SetDirection(AssetsManager::Player_1->Rear_normal);
 	(m_scene->m_RootParticleList->GetChildren())[0]->SetSourcePosition(m_scene->FindGameObject("car")->Physics()->GetPosition() +
 		m_scene->FindGameObject("car")->Physics()->GetOrientation().ToMatrix3() * Vector3(0, 0, 1));
 

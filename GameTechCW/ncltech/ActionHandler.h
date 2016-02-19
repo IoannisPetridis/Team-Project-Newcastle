@@ -19,6 +19,8 @@ public:
 	void ControllerHandle_Jump(Player* P, KeyboardKeys key);
 	void Flip(Player* P);
 	
+	//return 1 for blue scoring, 2 for red scoring
+	int ScoreCheck();
 	void AIPort();
 
 	Scene* GetScene() const { return m_scene; }

@@ -134,9 +134,9 @@ Particle* ParticleEmitter::GetFreeParticle()	{
 	//p->colour		= Vector4(RAND(),RAND(),RAND(),1.0);
 	p->direction	= initialDirection;
 
-	p->direction.x = 1.0* particleVariance;
-	p->direction.y = (1.0 - RAND())* particleVariance;
-	p->direction.z = (RAND() - RAND())* particleVariance;
+	p->direction.x += 1.0* particleVariance;
+	p->direction.y += (1.0 - RAND())* particleVariance;
+	p->direction.z += (RAND() - RAND())* particleVariance;
 	//p->direction.x += ((RAND()-RAND()) * particleVariance);
 	//p->direction.y += ((RAND()-RAND()) * particleVariance);
 	//p->direction.z += ((RAND()-RAND()) * particleVariance);

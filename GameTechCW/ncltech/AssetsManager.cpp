@@ -17,7 +17,7 @@ GLuint AssetsManager::m_Field = 0;
 GLuint AssetsManager::m_Loading = 0;
 GLuint AssetsManager::m_Glass = 0;
 GLuint AssetsManager::m_GlassBUMP = 0;
-
+GLuint AssetsManager::m_WoodBUMP = 0;
 //GameObject Assets
 SimpleMeshObject* AssetsManager::GOInstance;
 SimpleMeshObject* AssetsManager::Camera_Entity;
@@ -38,9 +38,10 @@ void AssetsManager::InitializeMeshes()
 	m_Glass = LoadTexture("grass.jpg");
 	m_GlassBUMP = LoadTexture("grassDOT.png");
 	m_ThrowTexBUMP = LoadTexture("brickDOT.jpg");
-	m_Field = LoadTexture("ground.jpg");
-	m_FieldBUMP = LoadTexture("fieldDOT.jpg");
+	m_Field = LoadTexture("field.tga");
+	m_FieldBUMP = LoadTexture("fieldDOT.tga");
 	m_Loading = LoadTexture("loading.tga");
+	m_WoodBUMP = LoadTexture("woodDOT.tga");
 
 	m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pCube = new OBJMesh(MESHDIR"cube.obj");
@@ -59,6 +60,13 @@ void AssetsManager::InitializeMeshes()
 	m_pCube->SetTexture(m_CheckerboardTex);
 	m_pSphere->SetTexture(m_CheckerboardTex);
 	m_Triangle->SetTexture(m_CheckerboardTex);
+
+	m_pPlane->SetBumpMap(m_WoodBUMP);
+	m_pCube->SetBumpMap(m_WoodBUMP);
+	m_pSphere->SetBumpMap(m_WoodBUMP);
+	m_Triangle->SetBumpMap(m_WoodBUMP);
+
+
 }
 
 void AssetsManager::ReleaseMeshes()
@@ -98,8 +106,8 @@ GLuint AssetsManager::LoadTexture(string Tex_name) {
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST); //No linear interpolation to get crisp checkerboard no matter the scalling
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST); //No linear interpolation to get crisp checkerboard no matter the scalling
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
 	return temp;

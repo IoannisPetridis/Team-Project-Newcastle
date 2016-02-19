@@ -27,24 +27,24 @@ void Camera::UpdateCamera(float msec)	{
 		yaw -= 360.0f;
 	}
 
-	if(Window::GetKeyboard()->KeyDown(KEYBOARD_W)) {
+	if(Window::GetKeyboard()->KeyDown(KEYBOARD_I)) {
 		position += Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * speed;
 	}
-	if(Window::GetKeyboard()->KeyDown(KEYBOARD_S)) {
+	if(Window::GetKeyboard()->KeyDown(KEYBOARD_K)) {
 		position -= Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(0, 0, -1) * speed;
 	}
 
-	if(Window::GetKeyboard()->KeyDown(KEYBOARD_A)) {
+	if(Window::GetKeyboard()->KeyDown(KEYBOARD_J)) {
 		position += Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(-1, 0, 0) * speed;
 	}
-	if(Window::GetKeyboard()->KeyDown(KEYBOARD_D)) {
+	if(Window::GetKeyboard()->KeyDown(KEYBOARD_L)) {
 		position -= Matrix4::Rotation(yaw, Vector3(0, 1, 0)) * Vector3(-1, 0, 0) * speed;
 	}
 
-	if(Window::GetKeyboard()->KeyDown(KEYBOARD_SHIFT)) {
+	if(Window::GetKeyboard()->KeyDown(KEYBOARD_U)) {
 		position.y += speed;
 	}
-	if(Window::GetKeyboard()->KeyDown(KEYBOARD_SPACE)) {
+	if(Window::GetKeyboard()->KeyDown(KEYBOARD_O)) {
 		position.y -= speed;
 	}
 }

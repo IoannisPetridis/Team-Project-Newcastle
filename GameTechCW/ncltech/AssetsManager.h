@@ -31,6 +31,7 @@ public:
 
 	static GLuint m_Glass;
 	static GLuint m_GlassBUMP;
+	static GLuint m_WoodBUMP;
 	static GLuint m_groundTex;
 
 	static SimpleMeshObject* GOInstance;
@@ -44,10 +45,8 @@ public:
 	static Mesh* LoadMesh(string Mesh_name, string type);
 	static OBJMesh* LoadOBJMesh(string Mesh_name);
 
-protected:
 	static void InitializeMeshes();
 	static void ReleaseMeshes();
-
 protected:
 	static Mesh* m_pCube;
 	static Mesh* m_pSphere;

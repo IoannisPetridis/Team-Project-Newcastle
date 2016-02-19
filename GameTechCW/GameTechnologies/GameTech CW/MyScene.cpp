@@ -25,38 +25,16 @@ MyScene::~MyScene()
 bool MyScene::InitialiseGL()
 {
 	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -14.81f, 0.0f));
-	//PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, 0.0f, 0.0f));
 	PhysicsEngine::Instance()->SetDampingFactor(0.988f);
 
 	m_Camera->SetPosition(Vector3(24.f, 13.f, 9.f));
 	m_Camera->SetYaw(90.0f);
-
-	//Config file loader to load up the Fucntionality
-	bool shadow = true;
-	bool Motion_blur = true;
-	bool replay = true;
-
-	Camerefix = false;
-	ai_toggle = true;
-	travese_toggle = true;
-	gameover = false;
-	ai_state = true;
-	cooldown = false;
-	ballnum = 50;
-	diff = 1;
-	T_counter = 0;
-	DebugMode = 2;
-	Str_c = 0;
-	score = 0;
-	friction = 0.5f;
-	start_strong = -1.0f;
-	timer = 0.0f;
-	//end
 	
 	if (GOM->GetID() == 0) {
 		GOM->GOM_Loading(this);
 	}
 	else if (GOM->GetID() == 1) {
+		AssetsManager::InitializeMeshes();
 		GOM->GOM_GamePlay(this);
 	}
 
@@ -79,8 +57,6 @@ void MyScene::UpdateScene(float msec)
 
 	std::vector<CollisionPair>* temp = PhysicsEngine::Instance()->GetVPair();
 
-	
-	
 	for (auto m = temp->begin(); m != temp->end(); ++m)
 	{
 		if (m->objectA->name.find("ground") != string::npos || m->objectB->name.find("ground") != string::npos) {}
@@ -96,9 +72,6 @@ void MyScene::UpdateScene(float msec)
 	CarVelocity = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
 	float CarSpeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
 
-	//CarPosition = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
-	//CarVelocity = { AssetsManager::Player_1->Physics()->GetLinearVelocity().x, AssetsManager::Player_1->Physics()->GetLinearVelocity().y, AssetsManager::Player_1->Physics()->GetLinearVelocity().z };
-	//float CarSpeed = AssetsManager::Player_1->Physics()->GetLinearVelocity().Length();
 	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);
 	Audio::GetCameraInfo(m_Camera);
 	////END AUDIO
