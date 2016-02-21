@@ -47,6 +47,7 @@ public:
 
 	const std::string&	GetName()			{ return m_Name; }
 	std::vector<GameObject*>& GetChildren() { return m_Children; }
+	GameObject * GetParent() { return m_Parent; }
 	
 	GameObject*			FindGameObject(const std::string& name);
 	void				AddChildObject(GameObject* child);

@@ -15,10 +15,17 @@ bool Client::connection() {
 }
 
 void Client::run() {
-	std::string msg;//= "1*object*0.3*0.5*0.4*1.0*0.2*1.3*2*5*3*1*2*3*4";
+	std::string msg="1*";//= "1*object*0.3*0.5*0.4*1.0*0.2*1.3*2*5*3*1*2*3*4";
 	if (connection()) {
 		std::cout << "Please enter the message you want to send" << std::endl;
 		std::cin >> msg;
+		GameObject *g;
+		GameObject *parent = g->GetParent();
+		for (auto m : parent->GetChildren()) {
+			msg += m->GetName() + "*";
+			msg += (std::to_string(m->Physics()->GetPosition().x) + "*" + std::to_string(m->Physics()->GetPosition().y) + "*" + std::to_string(m->Physics()->GetPosition().z) + "*");
+			msg += (std::to_string(m->Physics()->GetOrientation().x) + "*" + std::to_string(m->Physics()->GetOrientation().y) + "*" + std::to_string(m->Physics()->GetOrientation().z) + "*" + std::to_string(m->Physics()->GetOrientation().w));
+		}
 		char * message = stringToCharStar(msg);
 		setMessage(message);
 		sendMessage(getListeningSocket());

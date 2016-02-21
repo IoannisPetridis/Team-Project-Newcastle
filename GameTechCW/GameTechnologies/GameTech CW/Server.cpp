@@ -86,26 +86,55 @@ void Server::run() {
 			getMessageQueue()->erase(getMessageQueue()->begin());
 		}
 		if (acceptCon()) {
-			while (1) {
-				std::string msg = "Your IP is: ";
-				std::string ip(getLastClient());
-				std::string mes = msg + ip;
-				char *message = stringToCharStar(mes);
-				setMessage(message);
-				receiveMessage(getIncSocket());
-				messageQueue->push_back("\n");
-				send(getIncSocket(), getMessage(), strlen(getMessage()), 0);
-				closesocket(getIncSocket());
-				while (!getMessageQueue()->empty()) {
-					std::cout << getMessageQueue()->front();
-					getMessageQueue()->erase(getMessageQueue()->begin());
-				}
-				break;
-			}
+			std::thread *t = new std::thread(&Server::thread_run, this);
+			//t->join();
+			//while (1) {
+				
+				//break;
+			//}
 			//server->bindSocket();
-			listenSocket();
+			//listenSocket();
 		}
 	}
+}
+
+void Server::thread_run() {
+	std::string msg = "1*";
+	/*std::string msg = "Your IP is: ";
+	std::string ip(getLastClient());
+	std::string mes = msg + ip;*/
+	receiveMessage(getIncSocket());
+	messageQueue->push_back("\n");
+
+	GameObject *g ;
+	GameObject *parent = g->GetParent();
+	for (auto m : parent->GetChildren()) {
+		msg += m->GetName() + "*";
+		msg += (std::to_string(m->Physics()->GetPosition().x) + "*" + std::to_string(m->Physics()->GetPosition().y) + "*" + std::to_string(m->Physics()->GetPosition().z) + "*");
+		msg += (std::to_string(m->Physics()->GetOrientation().x) + "*" + std::to_string(m->Physics()->GetOrientation().y) + "*" + std::to_string(m->Physics()->GetOrientation().z) + "*" + std::to_string(m->Physics()->GetOrientation().w));
+	}
+
+	for (auto &item : *clients) {
+		if (item.ip = last_client) {
+			for (auto &object : item.gameObjects) {
+				msg += object.objName + "*";
+				msg += std::to_string(object.position.x) + "*" + std::to_string(object.position.y) + "*" + std::to_string(object.position.z) + "*";
+				msg += std::to_string(object.orientation.x) + "*" + std::to_string(object.orientation.y) + "*" + std::to_string(object.orientation.z) + "*" + std::to_string(object.orientation.w);
+				//msg += std::to_string(object.inpForce.x) + "*" + std::to_string(object.inpForce.y) + "*" + std::to_string(object.inpForce.z) + "*";
+				//msg += std::to_string(object.inpOrientation.x) + "*" + std::to_string(object.inpOrientation.y) + "*" + std::to_string(object.inpOrientation.z) + "*" + std::to_string(object.inpOrientation.x) + "*" + std::to_string(object.inpOrientation.w) +"*";
+
+			}
+		}
+	}
+	char *message = stringToCharStar(msg);
+	setMessage(message);
+	send(getIncSocket(), getMessage(), strlen(getMessage()), 0);
+	closesocket(getIncSocket());
+	while (!getMessageQueue()->empty()) {
+		std::cout << getMessageQueue()->front();
+		getMessageQueue()->erase(getMessageQueue()->begin());
+	}
+	listenSocket();
 }
 
 /*Get the pointer to the vector containing all the clients*/
@@ -133,6 +162,20 @@ Server::Server() {
 	bindSocket();
 	freeaddrinfo(addr);
 	listenSocket();
+
+	
+	GameObject *g;
+	GameObject *parent = g->GetParent();
+	
+	for (auto m : parent->GetChildren()) {
+		for (auto &item : *clients) {
+			for (auto &object : item.gameObjects) {
+				object.objName = g.GetName();
+				object.position = m->Physics()->GetPosition;
+				object.orientation = m->Physics()->GetOrientation();
+			}
+		}
+	}
 }
 
 /*Server destructor*/

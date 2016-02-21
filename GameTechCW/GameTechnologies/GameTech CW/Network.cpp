@@ -119,82 +119,85 @@ void Network::receiveMessage(SOCKET sock) {
 		printf("Failed with error : %d\n%s\n", WSAGetLastError(), gai_strerror(WSAGetLastError()));
 	}
 	else {
-		//// //Start parsing the message
-		//for (int i = 0; i < BUFFSIZE; ++i) {
-		//	if (buff[i] == '*') {
-		//		buff[i] = ' ';
-		//	}
-		//}
-		//std::vector <std::string> data;
-		//std::stringstream ss(buff);
-		//std::string temp;
-		//std::string obj;
-		//while (ss >> temp) {
-		//	data.push_back(temp);
-		//}
-		////Now vector data contains the client's message information
-		//
-		//obj = data.at(1);	//objName
-		//std::string::size_type sz;
-		//
-		//switch (buff[0]) {
-		//case '0':	//Network initialization stuff
-		//	//Here the server gets to know if the client is ready to start playing the game, so he receives a message and sets that client's status accordingly in the clients vector
-		//	//Example message:	string msg = "0*1";
-		//	//0 for not ready, 1 for ready
-		//	for (auto &item : *clients) {
-		//		if (item.ip == last_client) {
-		//			if (data.at(1)=="1") {
-		//				item.ready = true;
-		//				messageQueue->push_back("Client (" + std::string(last_client) + ") is READY");
-		//			}
-		//			break;
-		//		}
-		//	}
-		//	break;
-		//case '1':	//Physics
-		//	//Vector3 pos = Vector3(data.at(2),data.at(3),data.at(4));
-		//	//Quaternion ori = Quaternion(data.at(5),data.at(6),data.at(7),data.at(8));
-		//	//Vector3 inpF = Vector3(data.at(9),data.at(10),data.at(11));
-		//	//Quaternion inpOri = Quaternion(data.at(12),data.at(13),data.at(14),data.at(15));
+		// //Start parsing the message
+		for (int i = 0; i < BUFFSIZE; ++i) {
+			if (buff[i] == '*') {
+				buff[i] = ' ';
+			}
+		}
+		std::vector <std::string> data;
+		std::stringstream ss(buff);
+		std::string temp;
+		std::string obj;
+		while (ss >> temp) {
+			data.push_back(temp);
+		}
+		//Now vector data contains the client's message information
+		
+		obj = data.at(1);	//objName
+		std::string::size_type sz;
+		
+		switch (buff[0]) {
+		case '0':	//Network initialization stuff
+			//Here the server gets to know if the client is ready to start playing the game, so he receives a message and sets that client's status accordingly in the clients vector
+			//Example message:	string msg = "0*1";
+			//0 for not ready, 1 for ready
+			for (auto &item : *clients) {
+				if (item.ip == last_client) {
+					if (data.at(1)=="1") {
+						item.ready = true;
+						messageQueue->push_back("Client (" + std::string(last_client) + ") is READY");
+					}
+					break;
+				}
+			}
+			break;
+		case '1':	//Physics
+			//Vector3 pos = Vector3(data.at(2),data.at(3),data.at(4));
+			//Quaternion ori = Quaternion(data.at(5),data.at(6),data.at(7),data.at(8));
+			//Vector3 inpF = Vector3(data.at(9),data.at(10),data.at(11));
+			//Quaternion inpOri = Quaternion(data.at(12),data.at(13),data.at(14),data.at(15));
 
-		//	/*This is how we get each gameObject:
+			/*This is how we get each gameObject:
 
-		//	for (auto &item : *clients) {
-		//		for (auto &object :item.gameObjects) {
-		//			//object.objName;
-		//			//object.position;
-		//			//object.orientation;
-		//			//object.inpForce;
-		//			//object.inpOrientation;
-		//		}
-		//	}
+			for (auto &item : *clients) {
+				for (auto &object :item.gameObjects) {
+					//object.objName;
+					//object.position;
+					//object.orientation;
+					//object.inpForce;
+					//object.inpOrientation;
+				}
+			}
 
-		//	*/
-		//	//Now sends all the object data in one message
-		//	for (auto &item : *clients) {
-		//		if (item.ip == last_client) {
-		//			for (auto &object : item.gameObjects) {
-		//				//if (object.objName == obj) {
-		//				for (int i = 2; i <= item.gameObjects.size()*15; i+=15) {
-		//					object.objName = data.at(i - 1);
-		//					object.position = Vector3(std::stof(data.at(i), &sz), std::stof(data.at(i + 1), &sz), std::stof(data.at(i + 2), &sz)); //calculated position
-		//					object.orientation = Quaternion(std::stof(data.at(i + 3), &sz), std::stof(data.at(i + 4), &sz), std::stof(data.at(i + 5), &sz), std::stof(data.at(i + 6), &sz)); //calculated orientation
-		//					object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
-		//					object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
-		//					break;
-		//				}
-		//				//}
-		//			}
-		//			break;
-		//		}
-		//	}
-		//	messageQueue->push_back("Data received from Client (" + std::string(last_client) + ")");
-		//	//Now the client's gameobjectData is filled with the proper data
-		//	break;
-		//case '2':	//Android
-		//	break;
-		//}
+			Example message of a scene with a total of 4 objects
+			1 lol 1 2 3 4 5 6 7 kaka 1 2 3 4 5 6 7 peos 1 2 3 4 5 6 7 eleos 1 2 3 4 5 6 7 
+
+			*/
+			//Now client and server send all the object data in one message and receive it likewise 
+			for (auto &item : *clients) {
+				if (item.ip == last_client) {
+					for (auto &object : item.gameObjects) {
+						//if (object.objName == obj) {
+						for (int i = 0; i < item.gameObjects.size()*8; i+=8) {	//This iteration should be correct! :S
+							object.objName = data.at(i+1);
+							object.position = Vector3(std::stof(data.at(i+2), &sz), std::stof(data.at(i + 3), &sz), std::stof(data.at(i + 4), &sz)); //calculated position
+							object.orientation = Quaternion(std::stof(data.at(i + 5), &sz), std::stof(data.at(i + 6), &sz), std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz)); //calculated orientation
+							//object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
+							//object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
+							break;
+						}
+						//}
+					}
+					break;
+				}
+			}
+			messageQueue->push_back("Data received from Client (" + std::string(last_client) + ")");
+			//Now the Client's and the Server's gameobjectData is filled with the proper data
+			break;
+		case '2':	//Android
+			break;
+		}
 		buff[bytesreceived] = '\0';
 		messageQueue->push_back("Message received. Received " + std::to_string(bytesreceived) + " bytes.\nMessage is: " + buff);
 		//printf("Message received. Received %d bytes.\nMessage is: %s", bytesreceived, buff);

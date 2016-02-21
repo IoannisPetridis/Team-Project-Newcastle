@@ -1,4 +1,5 @@
 #include "Network.h"
+#include <thread>
 
 class Server : public Network {
 public:
@@ -8,6 +9,7 @@ public:
 	void _stdcall listenSocket();
 	bool _stdcall acceptCon();
 	void  run();
+	void thread_run();
 	char * _stdcall getLastClient();
 	std::vector<PCSTR> * getClientList();
 	SOCKET getListeningSocket();
