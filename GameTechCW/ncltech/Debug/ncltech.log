@@ -1,0 +1,80 @@
+<<<<<<< HEAD
+﻿Build started 2/22/2016 5:46:47 PM.
+     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp
+         ActionHandler.cpp
+     1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(43): warning C4715: 'ActionHandler::ScoreCheck' : not all control paths return a value
+=======
+﻿Build started 20/02/2016 01:53:50.
+     1>Project "C:\Users\Yulong\Desktop\Team-Project-Newcastle-Eric\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "..\Networking Server\Networking Server\Network.cpp" "..\Networking Server\Networking Server\Server.cpp" ..\Networking\Networking\Client.cpp ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp CylinderCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp PiramidCollisionShape.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         SphereCollisionShape.cpp
+         SimpleMeshObject.cpp
+         Scene.cpp
+         Player.cpp
+         PiramidCollisionShape.cpp
+         PhysicsObject.cpp
+         PhysicsEngine.cpp
+         OffState.cpp
+         Manifold.cpp
+         Hull.cpp
+         GameObject.cpp
+         NCLDebug.cpp
+         HomeState.cpp
+         GuardState.cpp
+         GameObjectMag.cpp
+     1>c:\users\yulong\desktop\team-project-newcastle-eric\gametechcw\ncltech\gameobjectmag.cpp(18): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         CylinderCollisionShape.cpp
+         CuboidCollisionShape.cpp
+         Constraint.cpp
+         CollisionDetection.cpp
+         AssetsManager.cpp
+         Generating Code...
+     1>c:\users\yulong\desktop\team-project-newcastle-eric\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
+         Compiling...
+         ArbitraryAI.cpp
+         ActionHandler.cpp
+         Client.cpp
+         Server.cpp
+         Network.cpp
+         Generating Code...
+     1>c:\users\yulong\desktop\team-project-newcastle-eric\gametechcw\ncltech\actionhandler.cpp(43): warning C4715: 'ActionHandler::ScoreCheck' : not all control paths return a value
+>>>>>>> origin/Eric
+       Lib:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Yulong\Desktop\Team-Project-Newcastle-Eric\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
+         Debug\Server.obj
+         Debug\Client.obj
+         Debug\ActionHandler.obj
+         Debug\ArbitraryAI.obj
+         Debug\AssetsManager.obj
+         Debug\CollisionDetection.obj
+         Debug\Constraint.obj
+         Debug\CuboidCollisionShape.obj
+         Debug\CylinderCollisionShape.obj
+         Debug\GameObjectMag.obj
+         Debug\GuardState.obj
+         Debug\HomeState.obj
+         Debug\NCLDebug.obj
+         Debug\GameObject.obj
+         Debug\Hull.obj
+         Debug\Manifold.obj
+         Debug\OffState.obj
+         Debug\PhysicsEngine.obj
+         Debug\PhysicsObject.obj
+         Debug\PiramidCollisionShape.obj
+         Debug\Player.obj
+         Debug\Scene.obj
+         Debug\SimpleMeshObject.obj
+         Debug\SphereCollisionShape.obj
+         ncltech.vcxproj -> C:\Users\Yulong\Desktop\Team-Project-Newcastle-Eric\GameTechCW\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "C:\Users\Yulong\Desktop\Team-Project-Newcastle-Eric\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+<<<<<<< HEAD
+Time Elapsed 00:00:00.77
+=======
+Time Elapsed 00:00:15.01
+>>>>>>> origin/Eric
