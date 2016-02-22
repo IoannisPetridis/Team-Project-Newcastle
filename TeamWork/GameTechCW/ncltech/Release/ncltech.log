@@ -1,0 +1,37 @@
+﻿Build started 2/22/2016 2:22:46 PM.
+     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Scene.cpp
+         Scene.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\Network.obj
+         Release\Server.obj
+         Release\Client.obj
+         Release\ActionHandler.obj
+         Release\ArbitraryAI.obj
+         Release\AssetsManager.obj
+         Release\CollisionDetection.obj
+         Release\Constraint.obj
+         Release\CuboidCollisionShape.obj
+         Release\CylinderCollisionShape.obj
+         Release\GameObjectMag.obj
+         Release\GuardState.obj
+         Release\HomeState.obj
+         Release\NCLDebug.obj
+         Release\GameObject.obj
+         Release\Hull.obj
+         Release\Manifold.obj
+         Release\OffState.obj
+         Release\PhysicsEngine.obj
+         Release\PhysicsObject.obj
+         Release\PiramidCollisionShape.obj
+         Release\Player.obj
+         Release\Scene.obj
+         Release\SimpleMeshObject.obj
+         Release\SphereCollisionShape.obj
+         ncltech.vcxproj -> D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib
+     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.81
