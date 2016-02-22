@@ -153,8 +153,8 @@ void ActionHandler::Update(float dt) {
 
 	//spawn partical
 	(m_scene->m_RootParticleList->GetChildren())[0]->SetDirection(AssetsManager::Player_1->Rear_normal);
-	(m_scene->m_RootParticleList->GetChildren())[0]->SetSourcePosition(m_scene->FindGameObject("car")->Physics()->GetPosition() +
-		m_scene->FindGameObject("car")->Physics()->GetOrientation().ToMatrix3() * Vector3(0, 0, 1));
+	(m_scene->m_RootParticleList->GetChildren())[0]->SetSourcePosition(AssetsManager::Player_1->Physics()->GetPosition() +
+		AssetsManager::Player_1->Physics()->GetOrientation().ToMatrix3() * Vector3(0, 0, 1));
 
 	Window::GetWindow().ShowOSPointer(false);
 	Window::GetWindow().LockMouseToWindow(true);

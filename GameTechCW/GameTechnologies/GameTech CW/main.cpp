@@ -39,17 +39,15 @@ int main2(int argc, char *argv[])
 	//QApp manages GUI control flow & settings
 	QApplication a(argc, argv);
 
-	//window theme
-	//QApplication::setStyle(QStyleFactory::create("Fusion"));
-
-	//loads base window, sets size & opacity & icon & title
+	//loads base window
 	MainWindow w;
 	w.setWindowTitle("Rocket League V2");
 	w.setFixedSize(480, 400); //width x height
 
-	w.setWindowOpacity(0.8);
+	//w.setWindowOpacity(0.2);
 	w.setWindowIcon(QIcon("../../Qt/Icons/sicklogo.bmp"));
 	w.setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+	w.setAttribute(Qt::WA_TranslucentBackground);
 
 	//finds primary screen height and width
 	QScreen *screen = QGuiApplication::primaryScreen();
@@ -88,17 +86,23 @@ int main()
 		return Quit(true, "Window failed to initialise!");
 	}
 
+	{
+		GameObjectMag* GOM_Loading = new GameObjectMag();
+		GOM_Loading->SetID(0);
+		Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
+		Loading_scene->RenderScene();
+	}
+
+
 	//~~~QT SHIT~~~ (UNCOMMENT THIS IF THE WINDOW IS ANNOYING YOU)
 	char *argv[] = { "windowinwindow", "arg1", "arg2", NULL };	//argv array with ptrs to strings, given values by the environment
 	int argc = sizeof(argv) / sizeof(char*)-1; 	//argc is the no. of usable elements in argv inc. the program name
 	main2(argc, argv); 	//call the qt window
 	//~~~ END QT SHIT~~~
 
-	{
-		GameObjectMag* GOM_Loading = new GameObjectMag();
-		GOM_Loading->SetID(0);
-		Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
-		Loading_scene->RenderScene();
+	//if they clicked the exit button, don't progress
+	if (MainWindow::WannaExit){
+		return Quit();
 	}
 
 	//Initialise the PhysicsEngine
@@ -120,6 +124,8 @@ int main()
 	}
 
 	GameTimer engine_timer;
+
+	std::string PlayerName = MainWindow::playername;
 
 	//Create main game-loop
 	while (Window::GetWindow().UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
@@ -156,6 +162,8 @@ int main()
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Graphics Timestep: %5.2fms (%5.2f FPS)", dt * 1000.0f, 1.0f / dt);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Update: %5.2fms", physics_ms);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Scene Update  : %5.2fms", update_ms);
+
+			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "CURRENT PLAYER: " + MainWindow::playername);
 
 			//Render the Scene
 			scene->RenderScene();

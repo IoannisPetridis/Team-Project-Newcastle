@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include "mainwindow.h"
 
 #define PI 3.14159265f
 
@@ -37,6 +38,44 @@ bool MyScene::InitialiseGL()
 		AssetsManager::InitializeMeshes();
 		GOM->GOM_GamePlay(this);
 	}
+	
+	//{//Player_1
+	//	AssetsManager::Player_1 = new Player("car");
+	//	AssetsManager::Player_1->SetScene(this);
+	//	AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
+	//	//AssetsManager::Player_1->SetColour(Vector4(0.2f, 1.0f, 0.5f, 1.0f));
+
+	//	//3 choices of car texture
+	//	//these textures are just placeholders from what we had
+	//	if (MainWindow::playertexture == 1){
+	//		AssetsManager::Player_1->SetTexture(AssetsManager::m_ThrowTex, false); //wall texture
+	//		AssetsManager::Player_1->SetBumpMap(AssetsManager::m_ThrowTexBUMP, false);
+	//	}
+
+	//	if (MainWindow::playertexture == 2){
+	//		AssetsManager::Player_1->SetTexture(AssetsManager::m_CheckerboardTex, false); //wood texture
+	//	}
+
+	//	if (MainWindow::playertexture == 3){
+	//		AssetsManager::Player_1->SetTexture(AssetsManager::m_Field, false); //grass texture
+	//	}
+
+	//	//4 choices of car size, 1 2 3 4
+	//	AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(MainWindow::playersize, MainWindow::playersize, MainWindow::playersize)));
+	//	AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(MainWindow::playersize, MainWindow::playersize, MainWindow::playersize)));
+	//	AssetsManager::Player_1->SetBoundingRadius(MainWindow::playersize * MainWindow::playersize);
+
+	//	//rest of car
+	//	AssetsManager::Player_1->Physics()->name = "car";
+	//	AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
+	//	AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
+	//	Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
+	//	AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
+
+	//	this->AddGameObject(AssetsManager::Player_1);
+	//}
+
+
 
 	//Initialize all game objects
 	Audio_Timer.GetTimedMS();
@@ -68,9 +107,9 @@ void MyScene::UpdateScene(float msec)
 	}
 	temp->clear();
 
-	CarPosition = { this->FindGameObject("car")->Physics()->GetPosition().x, this->FindGameObject("car")->Physics()->GetPosition().y, this->FindGameObject("car")->Physics()->GetPosition().z };
-	CarVelocity = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
-	float CarSpeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
+	CarPosition = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
+	CarVelocity = { AssetsManager::Player_1->Physics()->GetLinearVelocity().x, AssetsManager::Player_1->Physics()->GetLinearVelocity().y, AssetsManager::Player_1->Physics()->GetLinearVelocity().z };
+	float CarSpeed = AssetsManager::Player_1->Physics()->GetLinearVelocity().Length();
 
 	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);
 	Audio::GetCameraInfo(m_Camera);

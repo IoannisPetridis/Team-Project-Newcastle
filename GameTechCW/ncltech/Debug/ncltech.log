@@ -1,8 +1,9 @@
-﻿Build started 2/19/2016 10:55:33 AM.
+﻿Build started 2/22/2016 5:46:47 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Scene.cpp
-         Scene.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp
+         ActionHandler.cpp
+     1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(43): warning C4715: 'ActionHandler::ScoreCheck' : not all control paths return a value
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
          Debug\Server.obj
@@ -24,8 +25,8 @@
          Debug\OffState.obj
          Debug\PhysicsEngine.obj
          Debug\PhysicsObject.obj
+         Debug\PiramidCollisionShape.obj
          Debug\Player.obj
-         Debug\PyramidCollisionShape.obj
          Debug\Scene.obj
          Debug\SimpleMeshObject.obj
          Debug\SphereCollisionShape.obj
@@ -34,4 +35,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.97
+Time Elapsed 00:00:00.77
