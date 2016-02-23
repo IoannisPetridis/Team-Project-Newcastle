@@ -1,4 +1,7 @@
 #include "Client.h"
+#include <ncltech\CuboidCollisionShape.h>
+#include <../ncltech/AssetsManager.h>
+#include <thread>
 
 /*Connection to server*/
 bool Client::connection() {
@@ -14,18 +17,50 @@ bool Client::connection() {
 	}
 }
 
+/*Sends the initial values to the server*/
+void Client::initial_run() {
+	//Get the player name from the GUI and the object's position and orientation
+	std::string msg = "0*1*player2*0*1*2*3*4*5*6";	//Network message, player2 is ready, Position is (0,1,2), Orientation is (3,4,5,6,7)
+	if (connection()) {
+		char * message = stringToCharStar(msg);
+		setMessage(message);
+		sendMessage(getListeningSocket());
+		receiveMessage(getListeningSocket());
+		std::cout << std::endl;
+	}
+	while (!start) {
+		std::thread *t = new std::thread(&Client::ready, this);
+		t->join();
+		delete t;
+	}
+	
+}
+
+/*Ask the server if everyone's ready to start updating*/
+void Client::ready() {
+	std::string msg = "3";
+	if (connection()) {
+		char * message = stringToCharStar(msg);
+		setMessage(message);
+		sendMessage(getListeningSocket());
+		receiveMessage(getListeningSocket());
+		std::cout << std::endl;
+	}
+}
+
+/*Send data to server for physics update*/
 void Client::run() {
 	std::string msg="1*";//= "1*object*0.3*0.5*0.4*1.0*0.2*1.3*2*5*3*1*2*3*4";
 	if (connection()) {
-		std::cout << "Please enter the message you want to send" << std::endl;
-		std::cin >> msg;
-		GameObject *g;
-		GameObject *parent = g->GetParent();
-		for (auto m : parent->GetChildren()) {
-			msg += m->GetName() + "*";
-			msg += (std::to_string(m->Physics()->GetPosition().x) + "*" + std::to_string(m->Physics()->GetPosition().y) + "*" + std::to_string(m->Physics()->GetPosition().z) + "*");
-			msg += (std::to_string(m->Physics()->GetOrientation().x) + "*" + std::to_string(m->Physics()->GetOrientation().y) + "*" + std::to_string(m->Physics()->GetOrientation().z) + "*" + std::to_string(m->Physics()->GetOrientation().w));
-		}
+		//std::cout << "Please enter the message you want to send" << std::endl;
+		//std::cin >> msg;
+		
+		//Here we need to find the object that belong to this player
+		GameObject *g = FindGameObject("car");
+		msg += "car*";
+		msg += (std::to_string(g->Physics()->GetPosition().x) + "*" + std::to_string(g->Physics()->GetPosition().y) + "*" + std::to_string(g->Physics()->GetPosition().z) + "*");
+		msg += (std::to_string(g->Physics()->GetOrientation().x) + "*" + std::to_string(g->Physics()->GetOrientation().y) + "*" + std::to_string(g->Physics()->GetOrientation().z) + "*" + std::to_string(g->Physics()->GetOrientation().w));
+
 		char * message = stringToCharStar(msg);
 		setMessage(message);
 		sendMessage(getListeningSocket());
@@ -33,6 +68,154 @@ void Client::run() {
 		std::cout << std::endl;
 		//closesocket(client->getIncSocket());
 		//closesocket(client->getListeningSocket());
+		delete g;
+	}
+}
+
+void Client::receiveMessage(SOCKET sock) {
+	if ((bytesreceived = recv(sock, buff, BUFFSIZE - 1, 0)) == -1) {
+		printf("Error receiving\n");
+		printf("Failed with error : %d\n%s\n", WSAGetLastError(), gai_strerror(WSAGetLastError()));
+	}
+	else {
+		// //Start parsing the message
+		for (int i = 0; i < BUFFSIZE; ++i) {
+			if (buff[i] == '*') {
+				buff[i] = ' ';
+			}
+		}
+		std::vector <std::string> data;
+		std::stringstream ss(buff);
+		std::string temp;
+		std::string obj;
+		while (ss >> temp) {
+			data.push_back(temp);
+		}
+		//Now vector data contains the client's message information
+
+		std::string::size_type sz;
+		GameObject *g = new GameObject();
+		switch (buff[0]) {
+		case '0':	//Network initialization stuff
+			//Here the server gets to know if the client is ready to start playing the game, so he receives a message and sets that client's status accordingly in the clients vector
+			//Example message:	string msg = "0*1";
+			//0 for not ready, 1 for ready
+			for (int i = 0; i < data.size()*8; i+=8) {
+				obj = data.at(i + 1);
+				if (g->FindGameObject(obj) == NULL) {
+					//Create a new physics object and mesh for the other players' cars
+					Vector3 pos = Vector3(std::stof(data.at(i + 2), &sz), std::stof(data.at(i + 3), &sz), std::stof(data.at(i + 4), &sz));
+					Quaternion ori = Quaternion(std::stof(data.at(i + 5), &sz), std::stof(data.at(i + 6), &sz), std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz));
+
+					IncomingPlayers.push_back(new Player(obj));
+					Player* Temp = IncomingPlayers.at(IncomingPlayers.size() - 1);
+					
+					//set scene
+					Temp->SetScene(g->GetScene());
+
+					Temp->SetMesh(AssetsManager::Cube(), false);
+					//settexture&bumpMap
+
+					Temp->SetTexture(AssetsManager::m_ThrowTex, false);
+					Temp->SetBumpMap(AssetsManager::m_ThrowTexBUMP, false);
+					//
+					Temp->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 1.0f, 5.0f)));
+					Temp->SetColour(Vector4(0.2f, 1.0f, 0.5f, 1.0f));
+					Temp->SetBoundingRadius(1.0f * 1.0f);
+
+					Temp->Physics()->name = obj;
+					Temp->Physics()->SetInverseMass(0.06f);
+					Temp->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
+					Temp->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 2.0f)));
+
+					Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
+
+					Temp->Physics()->SetInverseInertia(inertia);
+
+					g->GetScene()->AddGameObject(Temp);
+				}
+			}
+			break;
+		case '1':	//Physics
+			/*This is how we get each gameObject:
+
+			for (auto &item : *clients) {
+			for (auto &object :item.gameObjects) {
+			//object.objName;
+			//object.position;
+			//object.orientation;
+			//object.inpForce;
+			//object.inpOrientation;
+			}
+			}
+
+			Example message of a scene with a total of 4 objects
+			1 lol 1 2 3 4 5 6 7 kaka 1 2 3 4 5 6 7 peos 1 2 3 4 5 6 7 eleos 1 2 3 4 5 6 7
+
+			*/
+			////Now client and server send all the object data in one message and receive it likewise 
+			//The code below is for receiving all the items at once
+			//for (auto &item : *clients) {
+			//	if (item.ip == last_client) {
+			//		for (auto &object : item.gameObjects) {
+			//			//if (object.objName == obj) {
+			//			for (int i = 0; i < item.gameObjects.size()*8; i+=8) {	//This iteration should be correct! :S
+			//				object.objName = data.at(i+1);
+			//				object.position = Vector3(std::stof(data.at(i+2), &sz), std::stof(data.at(i + 3), &sz), std::stof(data.at(i + 4), &sz)); //calculated position
+			//				object.orientation = Quaternion(std::stof(data.at(i + 5), &sz), std::stof(data.at(i + 6), &sz), std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz)); //calculated orientation
+			//				//object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
+			//				//object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
+			//				//break;
+			//			}
+			//			//}
+			//		}
+			//		break;
+			//	}
+			//}
+
+			for (int i = 0; i < data.size() * 8; i += 8) {
+				obj = data.at(i + 1);
+				g->FindGameObject(obj)->Physics()->SetPosition(Vector3(std::stof(data.at(2), &sz), std::stof(data.at(3), &sz), std::stof(data.at(4), &sz)));
+				g->FindGameObject(obj)->Physics()->SetOrientation(Quaternion(std::stof(data.at(5), &sz), std::stof(data.at(6), &sz), std::stof(data.at(7), &sz), std::stof(data.at(8), &sz)));
+			}
+			/*
+			//The code below is for receiving just the player's car
+			for (auto &item : *clients) {
+				if (item.ip == last_client) {
+					//for (auto &object : item.gameObjects) {
+					//if (object.objName == obj) {
+					//for (int i = 0; i < item.gameObjects.size() * 8; i += 8) {	//This iteration should be correct! :S
+					//object.objName = data.at(i + 1);
+					item.gameObject.position = Vector3(std::stof(data.at(2), &sz), std::stof(data.at(3), &sz), std::stof(data.at(4), &sz)); //calculated position
+					item.gameObject.orientation = Quaternion(std::stof(data.at(5), &sz), std::stof(data.at(6), &sz), std::stof(data.at(7), &sz), std::stof(data.at(8), &sz)); //calculated orientation
+					//object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
+					//object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
+					//break;
+					//}
+					//}
+					//}
+					break;
+				} 
+			}
+			*/
+			messageQueue->push_back("Data received from Client (" + std::string(last_client) + ")");
+			//Now the Client's and the Server's gameobjectData is filled with the proper data
+			break;
+		case '2':	//Android
+			break;
+		case '3':
+			if (data.at(1) == "1") {
+				start = true;
+			}
+			else {
+				start = false;
+			}
+			break;
+		}
+		buff[bytesreceived] = '\0';
+		messageQueue->push_back("Message received. Received " + std::to_string(bytesreceived) + " bytes.\nMessage is: " + buff);
+		//printf("Message received. Received %d bytes.\nMessage is: %s", bytesreceived, buff);
+		delete g;
 	}
 }
 

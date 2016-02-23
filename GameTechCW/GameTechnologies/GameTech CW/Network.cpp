@@ -139,15 +139,18 @@ void Network::receiveMessage(SOCKET sock) {
 		
 		switch (buff[0]) {
 		case '0':	//Network initialization stuff
-			//Here the server gets to know if the client is ready to start playing the game, so he receives a message and sets that client's status accordingly in the clients vector
-			//Example message:	string msg = "0*1";
+			//Here the server gets to know if the client is ready to start playing the game, so he receives a message and sets that client's status accordingly
+			//Example message:	string msg = "0*1*car*Vector3*Quaternion";
 			//0 for not ready, 1 for ready
 			for (auto &item : *clients) {
-				if (item.ip == last_client) {
+				if (std::strcmp(item->ip,last_client)) {
 					if (data.at(1)=="1") {
-						item.ready = true;
-						messageQueue->push_back("Client (" + std::string(last_client) + ") is READY");
+						item->ready = true;
+						messageQueue->push_back("Client (" + std::string(last_client) + ") is READY\n");
 					}
+					item->gameObject.objName = data.at(2); //+ std::to_string(car_counter);
+					item->gameObject.position = Vector3(std::stof(data.at(3), &sz), std::stof(data.at(4), &sz), std::stof(data.at(5), &sz));
+					item->gameObject.orientation = Quaternion(std::stof(data.at(6), &sz), std::stof(data.at(7), &sz), std::stof(data.at(8), &sz), std::stof(data.at(9), &sz));
 					break;
 				}
 			}
@@ -173,29 +176,52 @@ void Network::receiveMessage(SOCKET sock) {
 			Example message of a scene with a total of 4 objects
 			1 lol 1 2 3 4 5 6 7 kaka 1 2 3 4 5 6 7 peos 1 2 3 4 5 6 7 eleos 1 2 3 4 5 6 7 
 
+			
+			////Now client and server send all the object data in one message and receive it likewise 
+			//The code below is for receiving all the items at once
+			//for (auto &item : *clients) {
+			//	if (item.ip == last_client) {
+			//		for (auto &object : item.gameObjects) {
+			//			//if (object.objName == obj) {
+			//			for (int i = 0; i < item.gameObjects.size()*8; i+=8) {	//This iteration should be correct! :S
+			//				object.objName = data.at(i+1);
+			//				object.position = Vector3(std::stof(data.at(i+2), &sz), std::stof(data.at(i + 3), &sz), std::stof(data.at(i + 4), &sz)); //calculated position
+			//				object.orientation = Quaternion(std::stof(data.at(i + 5), &sz), std::stof(data.at(i + 6), &sz), std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz)); //calculated orientation
+			//				//object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
+			//				//object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
+			//				//break;
+			//			}
+			//			//}
+			//		}
+			//		break;
+			//	}
+			//}
 			*/
-			//Now client and server send all the object data in one message and receive it likewise 
+			//The code below is for receiving just the player's car
 			for (auto &item : *clients) {
-				if (item.ip == last_client) {
-					for (auto &object : item.gameObjects) {
+				if (item->ip == last_client) {
+					//for (auto &object : item.gameObjects) {
 						//if (object.objName == obj) {
-						for (int i = 0; i < item.gameObjects.size()*8; i+=8) {	//This iteration should be correct! :S
-							object.objName = data.at(i+1);
-							object.position = Vector3(std::stof(data.at(i+2), &sz), std::stof(data.at(i + 3), &sz), std::stof(data.at(i + 4), &sz)); //calculated position
-							object.orientation = Quaternion(std::stof(data.at(i + 5), &sz), std::stof(data.at(i + 6), &sz), std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz)); //calculated orientation
+						//for (int i = 0; i < item.gameObjects.size() * 8; i += 8) {	//This iteration should be correct! :S
+							//object.objName = data.at(i + 1);
+							item->gameObject.position = Vector3(std::stof(data.at(2), &sz), std::stof(data.at(3), &sz), std::stof(data.at(4), &sz)); //calculated position
+							item->gameObject.orientation = Quaternion(std::stof(data.at(5), &sz), std::stof(data.at(6), &sz), std::stof(data.at(7), &sz), std::stof(data.at(8), &sz)); //calculated orientation
 							//object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
 							//object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
-							break;
-						}
+							//break;
 						//}
-					}
+						//}
+					//}
 					break;
 				}
 			}
+
 			messageQueue->push_back("Data received from Client (" + std::string(last_client) + ")");
 			//Now the Client's and the Server's gameobjectData is filled with the proper data
 			break;
 		case '2':	//Android
+			break;
+		case '3':
 			break;
 		}
 		buff[bytesreceived] = '\0';

@@ -64,6 +64,9 @@ public:
 	float			GetBoundingRadius()					{ return m_BoundingRadius; }
 
 	void SetScene(Scene* scene) { m_Scene = scene; }
+	Scene* GetScene() {
+		return m_Scene;
+	}
 	void RemoveFromScene();
 
 protected:

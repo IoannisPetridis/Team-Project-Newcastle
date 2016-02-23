@@ -70,8 +70,9 @@ void Game::run() {
 
 			PhysicsEngine::Instance()->Feedback();
 			ActionHandler::Instance()->Update(dt);
+			//Server sends data to client
 			PhysicsEngine::Instance()->Update(dt);
-
+			
 			float physics_ms = engine_timer.GetTimedMS();
 
 			scene->UpdateScene(dt);

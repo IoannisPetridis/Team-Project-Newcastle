@@ -37,12 +37,14 @@ struct gameObjectData {
 struct clientInfo {
 	PCSTR ip;
 	boolean ready = false;
-	std::vector<gameObjectData> gameObjects;
+	gameObjectData gameObject;
+	//std::vector<gameObjectData> gameObjects;
 };
 
 
-class Network {
-	friend class GameObject;
+class Network : public GameObject {
+	//friend class GameObject;
+	friend class GameObjectMag;
 public:
 	Network();
 	~Network();
@@ -57,6 +59,7 @@ public:
 	virtual void _stdcall sendMessage(SOCKET sock);
 	virtual void _stdcall receiveMessage(SOCKET sock);
 
+
 protected:
 	WSAData wsaData;
 	struct addrinfo *addr;
@@ -67,6 +70,6 @@ protected:
 	char buff[BUFFSIZE];
 	PCSTR HOST = "10.66.67.185"; //pointer to constant string
 	std::vector<PCSTR> *clientList;
-	std::vector<clientInfo> *clients;
-	char *last_client;	//Server knows the last client's IP
+	std::vector<clientInfo*> *clients;
+	PCSTR last_client;	//Server knows the last client's IP
 };

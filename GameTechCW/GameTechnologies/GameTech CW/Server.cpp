@@ -1,4 +1,6 @@
 #include "Server.h"
+#include <sstream>
+
 //#include "winsock2.h"
 //using namespace std;
 
@@ -66,9 +68,10 @@ bool Server::acceptCon() {
 			messageQueue->push_back("New IP: " + (std::string)new_client + "\n");
 			//cout << "New IP: " << new_client << endl;
 			clientList->push_back(new_client);
-			clientInfo newclient;
-			newclient.ip = new_client;
+			clientInfo *newclient = new clientInfo();
+			newclient->ip = new_client;
 			clients->push_back(newclient);
+
 		}
 		messageQueue->push_back("Accepted a new connection ...\n");
 		//printf("Accepted a new connection ...\n");
@@ -76,17 +79,145 @@ bool Server::acceptCon() {
 	}
 }
 
+/*Receive the message*/
+void Server::receiveMessage(SOCKET sock) {
+	if ((bytesreceived = recv(sock, buff, BUFFSIZE - 1, 0)) == -1) {
+		printf("Error receiving\n");
+		printf("Failed with error : %d\n%s\n", WSAGetLastError(), gai_strerror(WSAGetLastError()));
+	}
+	else {
+		// //Start parsing the message
+		for (int i = 0; i < BUFFSIZE; ++i) {
+			if (buff[i] == '*') {
+				buff[i] = ' ';
+			}
+		}
+		std::vector <std::string> data;
+		std::stringstream ss(buff);
+		std::string temp;
+		std::string obj;
+		while (ss >> temp) {
+			data.push_back(temp);
+		}
+		//Now vector data contains the client's message information
+
+		obj = data.at(1);	//objName
+		std::string::size_type sz;
+
+		switch (buff[0]) {
+		case '0':	//Network initialization stuff
+			//Here the server gets to know if the client is ready to start playing the game, so he receives a message and sets that client's status accordingly
+			//Example message:	string msg = "0*1*car*Vector3*Quaternion";
+			//0 for not ready, 1 for ready
+			for (auto &item : *clients) {
+				if (std::strcmp(item->ip, last_client)) {
+					if (data.at(1) == "1") {
+						item->ready = true;
+						messageQueue->push_back("Client (" + std::string(last_client) + ") is READY\n");
+					}
+					item->gameObject.objName = data.at(2); //+ std::to_string(car_counter);
+					item->gameObject.position = Vector3(std::stof(data.at(3), &sz), std::stof(data.at(4), &sz), std::stof(data.at(5), &sz));
+					item->gameObject.orientation = Quaternion(std::stof(data.at(6), &sz), std::stof(data.at(7), &sz), std::stof(data.at(8), &sz), std::stof(data.at(9), &sz));
+					break;
+				}
+			}
+			break;
+		case '1':	//Physics
+			/*This is how we get each gameObject:
+
+			for (auto &item : *clients) {
+			for (auto &object :item.gameObjects) {
+			//object.objName;
+			//object.position;
+			//object.orientation;
+			//object.inpForce;
+			//object.inpOrientation;
+			}
+			}
+
+			Example message of a scene with a total of 4 objects
+			1 lol 1 2 3 4 5 6 7 kaka 1 2 3 4 5 6 7 peos 1 2 3 4 5 6 7 eleos 1 2 3 4 5 6 7
+
+
+			////Now client and server send all the object data in one message and receive it likewise
+			//The code below is for receiving all the items at once
+			//for (auto &item : *clients) {
+			//	if (item.ip == last_client) {
+			//		for (auto &object : item.gameObjects) {
+			//			//if (object.objName == obj) {
+			//			for (int i = 0; i < item.gameObjects.size()*8; i+=8) {	//This iteration should be correct! :S
+			//				object.objName = data.at(i+1);
+			//				object.position = Vector3(std::stof(data.at(i+2), &sz), std::stof(data.at(i + 3), &sz), std::stof(data.at(i + 4), &sz)); //calculated position
+			//				object.orientation = Quaternion(std::stof(data.at(i + 5), &sz), std::stof(data.at(i + 6), &sz), std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz)); //calculated orientation
+			//				//object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
+			//				//object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
+			//				//break;
+			//			}
+			//			//}
+			//		}
+			//		break;
+			//	}
+			//}
+			*/
+			//The code below is for receiving just the player's car
+			for (auto &item : *clients) {
+				if (item->ip == last_client) {
+					//for (auto &object : item.gameObjects) {
+					//if (object.objName == obj) {
+					//for (int i = 0; i < item.gameObjects.size() * 8; i += 8) {	//This iteration should be correct! :S
+					//object.objName = data.at(i + 1);
+					item->gameObject.position = Vector3(std::stof(data.at(2), &sz), std::stof(data.at(3), &sz), std::stof(data.at(4), &sz)); //calculated position
+					item->gameObject.orientation = Quaternion(std::stof(data.at(5), &sz), std::stof(data.at(6), &sz), std::stof(data.at(7), &sz), std::stof(data.at(8), &sz)); //calculated orientation
+					//object.inpForce = Vector3(std::stof(data.at(i + 7), &sz), std::stof(data.at(i + 8), &sz), std::stof(data.at(i + 9), &sz)); //force applied for the next update
+					//object.inpOrientation = Quaternion(std::stof(data.at(i + 10), &sz), std::stof(data.at(i + 11), &sz), std::stof(data.at(i + 12), &sz), std::stof(data.at(i + 13), &sz)); //orientation for the next update
+					//break;
+					//}
+					//}
+					//}
+					break;
+				}
+			}
+
+			messageQueue->push_back("Data received from Client (" + std::string(last_client) + ")");
+			//Now the Client's and the Server's gameobjectData is filled with the proper data
+			break;
+		case '2':	//Android
+			break;
+		case '3':
+			break;
+		}
+		buff[bytesreceived] = '\0';
+		messageQueue->push_back("Message received. Received " + std::to_string(bytesreceived) + " bytes.\nMessage is: " + buff);
+		//printf("Message received. Received %d bytes.\nMessage is: %s", bytesreceived, buff);
+	}
+}
+
 /*Server run function*/
 void Server::run() {
 	while (1) {
-		//cout << endl << "Waiting for connections..." << endl;
+		//std::cout << std::endl << "Waiting for connections..." << std::endl;
 		messageQueue->push_back("\nWaiting for connections...\n");
 		while (!getMessageQueue()->empty()) {
 			std::cout << getMessageQueue()->front();
 			getMessageQueue()->erase(getMessageQueue()->begin());
 		}
 		if (acceptCon()) {
-			std::thread *t = new std::thread(&Server::thread_run, this);
+			if (clients->size() >= 2) {
+				for (auto ob : *clients) {
+					all_rdy = all_rdy && ob->ready;
+				}
+				std::thread *t2 = new std::thread(&Server::notify_client, this);
+				t2->join();
+			}
+			while (1) {
+				messageQueue->push_back("\nWaiting for connections...\n");
+				while (!getMessageQueue()->empty()) {
+					std::cout << getMessageQueue()->front();
+					getMessageQueue()->erase(getMessageQueue()->begin());
+				}
+				std::thread *t = new std::thread(&Server::thread_run, this);
+				t->join();
+			}
 			//t->join();
 			//while (1) {
 				
@@ -98,33 +229,56 @@ void Server::run() {
 	}
 }
 
+/*Notifies the client when everyone is ready to start updating*/
+void Server::notify_client() {
+	std::string msg = "3";
+	receiveMessage(getIncSocket());
+	if (all_rdy) {
+		msg += "*1";
+	}
+	else {
+		msg += "*0";
+	}
+	char *message = stringToCharStar(msg);
+	setMessage(message);
+	send(getIncSocket(), getMessage(), strlen(getMessage()), 0);
+	messageQueue->push_back("\nClient " + std::string(last_client) + " is notified\n");
+	closesocket(getIncSocket());
+	while (!getMessageQueue()->empty()) {
+		std::cout << getMessageQueue()->front();
+		getMessageQueue()->erase(getMessageQueue()->begin());
+	}
+	listenSocket();
+}
+
+/*Thread for updating physics*/
 void Server::thread_run() {
-	std::string msg = "1*";
+	std::string msg = "1";
 	/*std::string msg = "Your IP is: ";
 	std::string ip(getLastClient());
 	std::string mes = msg + ip;*/
 	receiveMessage(getIncSocket());
 	messageQueue->push_back("\n");
 
-	GameObject *g ;
+	/*GameObject *g ;
 	GameObject *parent = g->GetParent();
 	for (auto m : parent->GetChildren()) {
-		msg += m->GetName() + "*";
-		msg += (std::to_string(m->Physics()->GetPosition().x) + "*" + std::to_string(m->Physics()->GetPosition().y) + "*" + std::to_string(m->Physics()->GetPosition().z) + "*");
-		msg += (std::to_string(m->Physics()->GetOrientation().x) + "*" + std::to_string(m->Physics()->GetOrientation().y) + "*" + std::to_string(m->Physics()->GetOrientation().z) + "*" + std::to_string(m->Physics()->GetOrientation().w));
-	}
+	msg += m->GetName() + "*";
+	msg += (std::to_string(m->Physics()->GetPosition().x) + "*" + std::to_string(m->Physics()->GetPosition().y) + "*" + std::to_string(m->Physics()->GetPosition().z) + "*");
+	msg += (std::to_string(m->Physics()->GetOrientation().x) + "*" + std::to_string(m->Physics()->GetOrientation().y) + "*" + std::to_string(m->Physics()->GetOrientation().z) + "*" + std::to_string(m->Physics()->GetOrientation().w));
+	}*/
 
 	for (auto &item : *clients) {
-		if (item.ip = last_client) {
-			for (auto &object : item.gameObjects) {
-				msg += object.objName + "*";
-				msg += std::to_string(object.position.x) + "*" + std::to_string(object.position.y) + "*" + std::to_string(object.position.z) + "*";
-				msg += std::to_string(object.orientation.x) + "*" + std::to_string(object.orientation.y) + "*" + std::to_string(object.orientation.z) + "*" + std::to_string(object.orientation.w);
-				//msg += std::to_string(object.inpForce.x) + "*" + std::to_string(object.inpForce.y) + "*" + std::to_string(object.inpForce.z) + "*";
-				//msg += std::to_string(object.inpOrientation.x) + "*" + std::to_string(object.inpOrientation.y) + "*" + std::to_string(object.inpOrientation.z) + "*" + std::to_string(object.inpOrientation.x) + "*" + std::to_string(object.inpOrientation.w) +"*";
+		//if (item.ip = last_client) {
+		//for (auto &object : item.gameObjects) {
+		msg += "*" + item->gameObject.objName + "*";
+		msg += std::to_string(item->gameObject.position.x) + "*" + std::to_string(item->gameObject.position.y) + "*" + std::to_string(item->gameObject.position.z) + "*";
+		msg += std::to_string(item->gameObject.orientation.x) + "*" + std::to_string(item->gameObject.orientation.y) + "*" + std::to_string(item->gameObject.orientation.z) + "*" + std::to_string(item->gameObject.orientation.w);
+		//msg += std::to_string(object.inpForce.x) + "*" + std::to_string(object.inpForce.y) + "*" + std::to_string(object.inpForce.z) + "*";
+		//msg += std::to_string(object.inpOrientation.x) + "*" + std::to_string(object.inpOrientation.y) + "*" + std::to_string(object.inpOrientation.z) + "*" + std::to_string(object.inpOrientation.x) + "*" + std::to_string(object.inpOrientation.w) +"*";
 
-			}
-		}
+		//}
+		//}
 	}
 	char *message = stringToCharStar(msg);
 	setMessage(message);
@@ -132,7 +286,9 @@ void Server::thread_run() {
 	closesocket(getIncSocket());
 	while (!getMessageQueue()->empty()) {
 		std::cout << getMessageQueue()->front();
-		getMessageQueue()->erase(getMessageQueue()->begin());
+		if (!getMessageQueue()->empty()) {
+			getMessageQueue()->erase(getMessageQueue()->begin());
+		}
 	}
 	listenSocket();
 }
@@ -143,7 +299,7 @@ std::vector<PCSTR> *Server::getClientList() {
 }
 
 /*Return the last connected client's IP*/
-char * Server::getLastClient() {
+PCSTR Server::getLastClient() {
 	return last_client;
 }
 
@@ -158,24 +314,22 @@ SOCKET Server::getIncSocket() {
 /*Server constructor*/
 Server::Server() {
 	clientList = new std::vector<PCSTR>();
-	clients = new std::vector<clientInfo>();
+	clients = new std::vector<clientInfo*>();
 	bindSocket();
 	freeaddrinfo(addr);
 	listenSocket();
-
-	
-	GameObject *g;
+	/*GameObject *g;
 	GameObject *parent = g->GetParent();
-	
+
 	for (auto m : parent->GetChildren()) {
-		for (auto &item : *clients) {
-			for (auto &object : item.gameObjects) {
-				object.objName = g.GetName();
-				object.position = m->Physics()->GetPosition;
-				object.orientation = m->Physics()->GetOrientation();
-			}
-		}
+	for (auto &item : *clients) {
+	for (auto &object : item.gameObjects) {
+	object.objName = g.GetName();
+	object.position = m->Physics()->GetPosition;
+	object.orientation = m->Physics()->GetOrientation();
 	}
+	}
+	}*/
 }
 
 /*Server destructor*/

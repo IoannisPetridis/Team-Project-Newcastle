@@ -9,12 +9,15 @@ public:
 	void _stdcall listenSocket();
 	bool _stdcall acceptCon();
 	void  run();
+	void notify_client();
 	void thread_run();
-	char * _stdcall getLastClient();
+	void _stdcall receiveMessage(SOCKET sock);
+	PCSTR _stdcall getLastClient();
 	std::vector<PCSTR> * getClientList();
 	SOCKET getListeningSocket();
 	SOCKET getIncSocket();
 private:
+	bool all_rdy = true;
 	SOCKET inc = NULL;
 	struct sockaddr_storage inc_addr;
 	socklen_t inc_size = sizeof(inc_addr);

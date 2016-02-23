@@ -31,6 +31,7 @@ public:
 	static SimpleMeshObject* Camera_Entity;
 	static GameObject* GOTemp;
 	static Player*	Player_1;
+	static Player* Player_2;
 
 	//AssetsLoader:
 	static GLuint LoadTexture(string Tex_name);
