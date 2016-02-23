@@ -24,8 +24,17 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	m_scene->AddParticleObject(rainbow);
 	//End
 
+	//PowerUps
+	AssetsManager::BananaPowerUp = new SimpleMeshObject("banana");
+	AssetsManager::BananaPowerUp->SetMesh(AssetsManager::Banana(), false);
+	AssetsManager::BananaPowerUp->SetBoundingRadius(1.0f * 1.f);
+	AssetsManager::BananaPowerUp->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPowerUp->Physics()->name = "banana";
+	AssetsManager::BananaPowerUp->Physics()->SetInverseMass(0.06f);
+	AssetsManager::BananaPowerUp->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPowerUp->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
 
-	
+	//End PowerUps
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground");//Floor
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Ground(), false);

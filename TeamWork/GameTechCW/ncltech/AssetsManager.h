@@ -39,6 +39,7 @@ public:
 	static SimpleMeshObject* Camera_Entity;
 	static GameObject* GOTemp;
 	static Player*	Player_1;
+	static SimpleMeshObject* BananaPowerUp;
 
 
 	//AssetsLoader:

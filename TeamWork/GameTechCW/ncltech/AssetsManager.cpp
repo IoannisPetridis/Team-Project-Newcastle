@@ -25,6 +25,7 @@ SimpleMeshObject* AssetsManager::GOInstance;
 SimpleMeshObject* AssetsManager::Camera_Entity;
 GameObject* AssetsManager::GOTemp;
 Player*	AssetsManager::Player_1;
+SimpleMeshObject* AssetsManager::BananaPowerUp;
 
 //Player* Assetsmanager::PlayerInstance;
 //AI*	Assetsmanager::AIInstance;

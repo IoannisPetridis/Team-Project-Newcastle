@@ -79,13 +79,11 @@ void MyScene::UpdateScene(float msec)
 	////END AUDIO
 
 	//PowerUps
-	
-
-	//PowerUps::SetPowerUp("0", AssetsManager::Player_1);
+	//PowerUps::SetPowerUp("boost", AssetsManager::Player_1);
 
 
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B)){
-		PowerUps::AddPowerUp(this);
+		PowerUps::AddRandomPowerUp(this);
 	}
 
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_N)){

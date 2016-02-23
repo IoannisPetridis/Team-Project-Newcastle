@@ -1,33 +1,34 @@
-d:\github\team-project-newcastle\gametechcw\ncltech\release\vc120.pdb
-d:\github\team-project-newcastle\gametechcw\ncltech\release\simplemeshobject.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\scene.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\pyramidcollisionshape.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\player.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\physicsobject.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\physicsengine.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\offstate.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\manifold.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\hull.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\gameobject.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\ncldebug.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\homestate.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\guardstate.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\gameobjectmag.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\cuboidcollisionshape.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\constraint.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\collisiondetection.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\assetsmanager.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\arbitraryai.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\actionhandler.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\spherecollisionshape.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\client.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\server.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\network.obj
-d:\github\team-project-newcastle\gametechcw\gametechnologies\release\ncltech.lib
-d:\github\team-project-newcastle\gametechcw\ncltech\release\cylindercollisionshape.obj
-d:\github\team-project-newcastle\gametechcw\ncltech\release\ncltech.tlog\cl.command.1.tlog
-d:\github\team-project-newcastle\gametechcw\ncltech\release\ncltech.tlog\cl.read.1.tlog
-d:\github\team-project-newcastle\gametechcw\ncltech\release\ncltech.tlog\cl.write.1.tlog
-d:\github\team-project-newcastle\gametechcw\ncltech\release\ncltech.tlog\lib-link.read.1.tlog
-d:\github\team-project-newcastle\gametechcw\ncltech\release\ncltech.tlog\lib-link.write.1.tlog
-d:\github\team-project-newcastle\gametechcw\ncltech\release\ncltech.tlog\lib.command.1.tlog
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\vc120.pdb
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\physicsobject.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\physicsengine.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\offstate.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\manifold.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\hull.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\gameobject.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\ncldebug.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\homestate.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\guardstate.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\gameobjectmag.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\cylindercollisionshape.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\cuboidcollisionshape.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\constraint.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\collisiondetection.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\assetsmanager.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\arbitraryai.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\actionhandler.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\client.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\server.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\network.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\spherecollisionshape.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\simplemeshobject.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\scene.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\player.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\piramidcollisionshape.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\gametechnologies\release\ncltech.lib
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\pyramidcollisionshape.obj
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\ncltech.tlog\cl.command.1.tlog
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\ncltech.tlog\cl.read.1.tlog
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\ncltech.tlog\cl.write.1.tlog
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\ncltech.tlog\lib-link.read.1.tlog
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\ncltech.tlog\lib-link.write.1.tlog
+d:\team project\team-project-newcastle\teamwork\gametechcw\ncltech\release\ncltech.tlog\lib.command.1.tlog
