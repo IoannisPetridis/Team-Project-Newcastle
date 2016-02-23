@@ -1,0 +1,4 @@
+struct PS4ScreenBuffer  {
+	sce::Gnm::RenderTarget		colourTarget;
+	sce::Gnm::DepthRenderTarget depthTarget;
+}
