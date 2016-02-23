@@ -600,6 +600,33 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		m_scene->AddGameObject(AssetsManager::GOInstance);
 	}
 
+	//AIStuff(m_scene);
+}
+
+void	 GameObjectMag::GOM_Loading(Scene* m_scene) {
+	m_scene->m_Camera->SetPosition(Vector3(0.0f, 0.0f, 6.0f));
+	m_scene->m_Camera->SetYaw(-180.0f);
+
+	std::string filename = "loading.tga";
+	GLuint temp = SOIL_load_OGL_texture((TEXTUREDIR + filename).c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	glBindTexture(GL_TEXTURE_2D, temp);
+	glBindTexture(GL_TEXTURE_2D, temp);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	SimpleMeshObject* ground = new SimpleMeshObject("load");
+	ground->SetMesh(Mesh::GenerateQuad(), false);
+	ground->SetTexture(temp, false);
+
+	ground->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 200.0f, 0.0f)));
+	ground->Physics()->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
+	ground->SetColour(Vector4(1.0f, 1.0f, 1.f, 1.0f));
+	ground->SetBoundingRadius(80.0f * 80.f);
+
+	m_scene->AddGameObject(ground);
+}
+
+void GameObjectMag::AIStuff(Scene* m_scene) {
 	{
 		AssetsManager::GOInstance = new SimpleMeshObject("FriendlyGoal");
 
@@ -642,27 +669,4 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		AssetsManager::AggressiveAI = new AggressiveAI("AggressiveAI", m_scene);
 		m_scene->AddGameObject(AssetsManager::AggressiveAI);
 	}
-}
-
-void	 GameObjectMag::GOM_Loading(Scene* m_scene) {
-	m_scene->m_Camera->SetPosition(Vector3(0.0f, 0.0f, 6.0f));
-	m_scene->m_Camera->SetYaw(-180.0f);
-
-	std::string filename = "loading.tga";
-	GLuint temp = SOIL_load_OGL_texture((TEXTUREDIR + filename).c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-	glBindTexture(GL_TEXTURE_2D, temp);
-	glBindTexture(GL_TEXTURE_2D, temp);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	SimpleMeshObject* ground = new SimpleMeshObject("load");
-	ground->SetMesh(Mesh::GenerateQuad(), false);
-	ground->SetTexture(temp, false);
-
-	ground->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 200.0f, 0.0f)));
-	ground->Physics()->SetPosition(Vector3(0.0f, 0.0f, 5.0f));
-	ground->SetColour(Vector4(1.0f, 1.0f, 1.f, 1.0f));
-	ground->SetBoundingRadius(80.0f * 80.f);
-
-	m_scene->AddGameObject(ground);
 }
