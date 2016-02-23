@@ -25,7 +25,6 @@ void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 		DefendNode = NodeCalculation(Arb);
 		DefendNode.y = GroundHeight;
 
-		CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
 		iterator = 0;
 	}
 
@@ -36,6 +35,7 @@ void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
 
 	//cout << "defend" << endl;
+	CheckTriggers(Arb);
 }
 
 void Defend::CheckTriggers(DefensiveAI* Arb) {

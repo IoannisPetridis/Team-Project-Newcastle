@@ -23,10 +23,9 @@ void PuntPlayer::ForceCalculator(AggressiveAI* Arb) {
 	Arb->RotationCalculation(PuntPlayerNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
 
-	if (iterator == 10) {
+	//if (iterator == 10) {
 		CheckTriggers(Arb);
-		iterator = 0;
-	}
+	//}
 }
 
 void PuntPlayer::CheckTriggers(AggressiveAI* Arb) {

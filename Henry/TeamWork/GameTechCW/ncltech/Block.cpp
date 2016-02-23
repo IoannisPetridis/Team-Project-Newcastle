@@ -19,7 +19,7 @@ void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put t
 		BlockNode = NodeCalculation(Arb);
 		BlockNode.y = GroundHeight;
 
-		CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
+		 //check state triggers every frame to make sure the state does not need to be changed
 		iterator = 0;
 	}
 
@@ -29,7 +29,7 @@ void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put t
 	Arb->RotationCalculation(BlockNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
 
-	
+	CheckTriggers(Arb);
 }
 
 void Block::CheckTriggers(AggressiveAI* Arb) {

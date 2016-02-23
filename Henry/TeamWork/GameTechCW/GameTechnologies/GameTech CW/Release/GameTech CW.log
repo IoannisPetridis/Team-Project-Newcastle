@@ -1,4 +1,4 @@
-﻿Build started 23/02/2016 15:59:53.
+﻿Build started 23/02/2016 17:24:47.
      1>Project "D:\Team-Project-Newcastle\Henry\TeamWork\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (Tutorial1 - Integration.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>Link:
@@ -50,4 +50,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.95
+Time Elapsed 00:00:05.37

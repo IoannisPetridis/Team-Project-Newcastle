@@ -10,7 +10,7 @@ Patrol::Patrol(DefensiveAI* Arb) {
 		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
 		PPVector = Arb->DirectionCalculation(EnemyGoalPosition, FriendlyGoalPosition);
 
-		PatrolPoint = (FriendlyGoalPosition + (PPVector * 12.0) + Vector3(0.0f, 0.0f, 5.0f));
+		PatrolPoint = (FriendlyGoalPosition + (PPVector * 50.0) + Vector3(0.0f, 0.0f, 5.0f));
 		PatrolPoint.y = GroundHeight;
 		PatrolNode = PatrolPoint;
 		iterator = 9;
@@ -29,7 +29,7 @@ void Patrol::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 
 		PatrolNode = NodeCalculation(Arb);
 
-		CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
+		 //check state triggers every frame to make sure the state does not need to be changed
 		iterator = 0;
 	}
 
@@ -38,6 +38,8 @@ void Patrol::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 	Arb->DirectionVector = Arb->DirectionCalculation(PatrolNode, AIPosition);
 	Arb->RotationCalculation(PatrolNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
+
+	CheckTriggers(Arb);
 }
 
 void Patrol::CheckTriggers(DefensiveAI* Arb) {
@@ -66,8 +68,8 @@ Vector3 Patrol::NodeCalculation(DefensiveAI* Arb) {
 
 	if (MagAIPatrolNodeVec < 3) {
 		int A, B;
-		A = PatrolPoint.x + (rand() % 10 - 10);
-		B = PatrolPoint.z + (rand() % 10 - 10);
+		A = PatrolPoint.x + (rand() % 50 - 50);
+		B = PatrolPoint.z + (rand() % 50 - 50);
 		PatrolNode = Vector3(A, PatrolPoint.y, B);
 
 		//cout << A << " " << B << endl;

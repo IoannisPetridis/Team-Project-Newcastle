@@ -20,7 +20,7 @@ void Punt::ForceCalculator(DefensiveAI* Arb) {
 		PuntNode = NodeCalculation(Arb);
 		PuntNode.y = GroundHeight;
 
-		CheckTriggers(Arb);
+		
 		iterator = 0;
 	}
 
@@ -29,6 +29,8 @@ void Punt::ForceCalculator(DefensiveAI* Arb) {
 	Arb->DirectionVector = Arb->DirectionCalculation(PuntNode, AIPosition);
 	Arb->RotationCalculation(PuntNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
+
+	CheckTriggers(Arb);
 }
 
 void Punt::CheckTriggers(DefensiveAI* Arb) {

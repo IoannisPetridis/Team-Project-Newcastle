@@ -20,7 +20,7 @@ void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the 
 		ChaseNode = NodeCalculation(Arb);
 		ChaseNode.y = GroundHeight;
 
-		CheckTriggers(Arb);
+		
 		iterator = 0;
 	}
 
@@ -29,6 +29,8 @@ void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the 
 	Arb->DirectionVector = Arb->DirectionCalculation(ChaseNode, AIPosition);
 	Arb->RotationCalculation(ChaseNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
+
+	CheckTriggers(Arb);
 }
 
 void Chase::CheckTriggers(NeutralAI* Arb) {

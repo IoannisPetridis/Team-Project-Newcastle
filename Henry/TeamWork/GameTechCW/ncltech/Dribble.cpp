@@ -20,7 +20,6 @@ void Dribble::ForceCalculator(NeutralAI* Arb) { //here is where you would put th
 		DribbleNode = NodeCalculation(Arb);
 		DribbleNode.y = GroundHeight;
 
-		CheckTriggers(Arb);
 		iterator = 0;
 	}
 
@@ -29,6 +28,8 @@ void Dribble::ForceCalculator(NeutralAI* Arb) { //here is where you would put th
 	Arb->DirectionVector = Arb->DirectionCalculation(DribbleNode, AIPosition);
 	Arb->RotationCalculation(DribbleNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
+
+	CheckTriggers(Arb);
 }
 
 void Dribble::CheckTriggers(NeutralAI* Arb) {

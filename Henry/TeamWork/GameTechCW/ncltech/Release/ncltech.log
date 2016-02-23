@@ -1,16 +1,19 @@
-﻿Build started 23/02/2016 15:59:49.
+﻿Build started 23/02/2016 17:24:41.
      1>Project "D:\Team-Project-Newcastle\Henry\TeamWork\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Block.cpp Chase.cpp Defend.cpp Dribble.cpp Patrol.cpp Punt.cpp PuntPlayer.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp Block.cpp Chase.cpp Defend.cpp Dribble.cpp GameObjectMag.cpp Patrol.cpp Punt.cpp PuntPlayer.cpp
+         ActionHandler.cpp
          Block.cpp
          Chase.cpp
          Defend.cpp
      1>Defend.cpp(69): warning C4305: 'argument' : truncation from 'double' to 'const float'
          Dribble.cpp
+         GameObjectMag.cpp
+     1>GameObjectMag.cpp(18): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
          Patrol.cpp
-     1>Patrol.cpp(69): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Patrol.cpp(70): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>Patrol.cpp(71): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>Patrol.cpp(71): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Patrol.cpp(72): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Patrol.cpp(73): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
          Punt.cpp
          PuntPlayer.cpp
        Lib:
@@ -50,4 +53,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.57
+Time Elapsed 00:00:05.65
