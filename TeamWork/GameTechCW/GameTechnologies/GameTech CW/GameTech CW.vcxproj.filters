@@ -21,6 +21,7 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUps.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyScene.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="mainwindow.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="PowerUps.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="APP">

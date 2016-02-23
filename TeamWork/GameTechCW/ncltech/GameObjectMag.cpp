@@ -24,6 +24,9 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	m_scene->AddParticleObject(rainbow);
 	//End
 
+
+	
+
 	AssetsManager::GOInstance = new SimpleMeshObject("ground");//Floor
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Ground(), false);
 	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Field, false);
@@ -542,7 +545,6 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		AssetsManager::Player_1 = new Player("car");
 		//set scene
 		AssetsManager::Player_1->SetScene(m_scene);
-
 		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
 		//settexture&bumpMap
 		AssetsManager::Player_1->SetTexture(AssetsManager::m_ThrowTex, false);
@@ -555,7 +557,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		AssetsManager::Player_1->Physics()->name = "car";
 		AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
 		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
-		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 2.0f)));
+		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 		
 		Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
 		
@@ -596,7 +598,6 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		AssetsManager::GOInstance->Physics()->SetCollisionShape(new SphereCollisionShape(4.0f));
 		AssetsManager::GOInstance->Physics()->SetInverseInertia(
 			AssetsManager::GOInstance->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f));
-
 		m_scene->AddGameObject(AssetsManager::GOInstance);
 	}
 }

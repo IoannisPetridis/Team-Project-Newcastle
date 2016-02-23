@@ -130,6 +130,9 @@ int main()
 			PhysicsEngine::Instance()->SetPaused(!PhysicsEngine::Instance()->IsPaused());
 		}
 
+		
+
+
 		engine_timer.GetTimedMS();
 
 		if (!PhysicsEngine::Instance()->IsGameover()) {
@@ -156,6 +159,7 @@ int main()
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Graphics Timestep: %5.2fms (%5.2f FPS)", dt * 1000.0f, 1.0f / dt);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Update: %5.2fms", physics_ms);
 			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Scene Update  : %5.2fms", update_ms);
+			NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "PowerUp  :" + AssetsManager::Player_1->GetPowerUpState());
 
 			//Render the Scene
 			scene->RenderScene();

@@ -17,7 +17,7 @@ PhysicsEngine::PhysicsEngine()
 
 	DEBUGDRAW_CONSTRAINTS = false;
 	DEBUGDRAW_MANIFOLDS = false;
-	DEBUGDRAW_COLLISIONVOLUMES = false;
+	DEBUGDRAW_COLLISIONVOLUMES = true;
 }
 
 PhysicsEngine::~PhysicsEngine()

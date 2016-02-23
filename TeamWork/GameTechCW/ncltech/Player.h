@@ -24,6 +24,11 @@ public:
 
 	Vector3 GetCameraDir() const { return Camera_Dir; }
 
+	string PowerUpState = "No PowerUp";
+	void SetPowerUpState(string powerupname){ PowerUpState = powerupname; }
+	string GetPowerUpState(){ return PowerUpState; }
+	Vector3 GetPlayerRearNormal(){ return Rear_normal; }
+
 	//Initialization data
 protected:
 	Camera* P_camera;

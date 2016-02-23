@@ -40,6 +40,8 @@ bool MyScene::InitialiseGL()
 
 	//Initialize all game objects
 	Audio_Timer.GetTimedMS();
+	PowerUps::LoadPowerUps(AssetsManager::Player_1);
+
 	return true;
 }
 
@@ -67,7 +69,7 @@ void MyScene::UpdateScene(float msec)
 		}
 	}
 	temp->clear();
-
+	
 	CarPosition = { this->FindGameObject("car")->Physics()->GetPosition().x, this->FindGameObject("car")->Physics()->GetPosition().y, this->FindGameObject("car")->Physics()->GetPosition().z };
 	CarVelocity = { this->FindGameObject("car")->Physics()->GetLinearVelocity().x, this->FindGameObject("car")->Physics()->GetLinearVelocity().y, this->FindGameObject("car")->Physics()->GetLinearVelocity().z };
 	float CarSpeed = this->FindGameObject("car")->Physics()->GetLinearVelocity().Length();
@@ -75,6 +77,21 @@ void MyScene::UpdateScene(float msec)
 	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);
 	Audio::GetCameraInfo(m_Camera);
 	////END AUDIO
+
+	//PowerUps
+	
+
+	//PowerUps::SetPowerUp("0", AssetsManager::Player_1);
+
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B)){
+		PowerUps::AddPowerUp(this);
+	}
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_N)){
+		PowerUps::UsePowerUp(AssetsManager::Player_1, this);
+	}
+
 
 	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
 		+ " Y:"

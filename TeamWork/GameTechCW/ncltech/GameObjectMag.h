@@ -13,6 +13,7 @@
 #include <ncltech\Constraint.h>
 #include <ncltech\DistanceConstraint.h>
 #include <ncltech\CollisionDetection.h>
+#include <../GameTechCW/GameTechnologies/GameTech CW/PowerUps.h>
 
 
 class MyScene;

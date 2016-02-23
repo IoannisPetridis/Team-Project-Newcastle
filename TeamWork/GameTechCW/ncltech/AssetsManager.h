@@ -20,6 +20,7 @@ public:
 	static Mesh* Tardis()		{ return m_Tardis; }
 	static Mesh* Triangle()		{ return m_Triangle; }
 	static Mesh* Ground()		{ return m_ground; }
+	static Mesh* Banana()		{ return m_Banana; }
 
 	static GLuint m_CheckerboardTex;
 	static GLuint m_TargetTexture;
@@ -54,4 +55,5 @@ protected:
 	static Mesh* m_Tardis;
 	static Mesh* m_Triangle;
 	static Mesh* m_ground;
+	static Mesh* m_Banana;
 };

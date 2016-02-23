@@ -6,7 +6,9 @@ Mesh* AssetsManager::m_pCube	= NULL;
 Mesh* AssetsManager::m_pSphere	= NULL;
 Mesh* AssetsManager::m_Tardis	= NULL;
 Mesh* AssetsManager::m_Triangle = NULL;
-Mesh* AssetsManager::m_ground = NULL;
+Mesh* AssetsManager::m_ground   = NULL;
+Mesh* AssetsManager::m_Banana   = NULL;
+
 //Texture Assets
 GLuint AssetsManager::m_CheckerboardTex = 0;
 GLuint AssetsManager::m_TargetTexture = 0;
@@ -48,6 +50,7 @@ void AssetsManager::InitializeMeshes()
 	m_ground = new OBJMesh(MESHDIR"cube.obj");
 	m_pSphere = new OBJMesh(MESHDIR"sphere.obj");
 	m_Tardis = new OBJMesh(MESHDIR"tardis.obj");
+	m_Banana = new OBJMesh(MESHDIR"banana.obj");
 	
 	
 	//added
@@ -87,6 +90,7 @@ void AssetsManager::ReleaseMeshes()
 		delete m_pSphere;
 		delete m_Tardis;
 		delete m_ground;
+		delete m_Banana;
 	}
 
 	m_pPlane = NULL;
@@ -95,6 +99,7 @@ void AssetsManager::ReleaseMeshes()
 	m_pSphere= NULL;
 	m_Tardis = NULL;
 	m_ground = NULL;
+	m_Banana = NULL;
 
 }
 
