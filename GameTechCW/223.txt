@@ -2,3 +2,7 @@ struct PS4ScreenBuffer  {
 	sce::Gnm::RenderTarget		colourTarget;
 	sce::Gnm::DepthRenderTarget depthTarget;
 }
+
+Renderer:
+1.memeory allocation
+2.Buffer setting
