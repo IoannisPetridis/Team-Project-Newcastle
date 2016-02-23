@@ -3,18 +3,25 @@
 
 Block::Block() {
 	GroundHeight = 1.0f;
+	iterator = 9;
 }
 
 void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put the logic behind the state
-	Vector3 BlockNode;
 	float MagAINodeDist;
 
-	AIPosition = Arb->Physics()->GetPosition();
-	BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
-	EnemyPlayer1Position = Arb->scene->FindGameObject("car")->Physics()->GetPosition();
+	++iterator;
 
-	BlockNode = NodeCalculation(Arb);
-	BlockNode.y = GroundHeight;
+	if (iterator == 10) {
+		AIPosition = Arb->Physics()->GetPosition();
+		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
+		EnemyPlayer1Position = Arb->scene->FindGameObject("car")->Physics()->GetPosition();
+
+		BlockNode = NodeCalculation(Arb);
+		BlockNode.y = GroundHeight;
+
+		CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
+		iterator = 0;
+	}
 
 	MagAINodeDist = (BlockNode - AIPosition).Length();
 
@@ -22,7 +29,7 @@ void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put t
 	Arb->RotationCalculation(BlockNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
 
-	CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
+	
 }
 
 void Block::CheckTriggers(AggressiveAI* Arb) {

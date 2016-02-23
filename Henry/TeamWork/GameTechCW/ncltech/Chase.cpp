@@ -3,26 +3,32 @@
 
 Chase::Chase() {
 	GroundHeight = 1.0f;
+	iterator = 9;
 }
 
 void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
-	BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
-	EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
-	FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
-	AIPosition = Arb->Physics()->GetPosition();
+	++iterator;
 
-	ChaseNode = NodeCalculation(Arb);
-	ChaseNode.y = GroundHeight;
+	if (iterator == 10) {
+		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
+		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
+		FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
+		AIPosition = Arb->Physics()->GetPosition();
+
+		ChaseNode = NodeCalculation(Arb);
+		ChaseNode.y = GroundHeight;
+
+		CheckTriggers(Arb);
+		iterator = 0;
+	}
 
 	MagAINodeDist = (ChaseNode - AIPosition).Length();
 
 	Arb->DirectionVector = Arb->DirectionCalculation(ChaseNode, AIPosition);
 	Arb->RotationCalculation(ChaseNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
-
-	CheckTriggers(Arb);
 }
 
 void Chase::CheckTriggers(NeutralAI* Arb) {

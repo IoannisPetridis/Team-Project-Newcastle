@@ -28,4 +28,5 @@ public:
 
 private:
 	NeutralBaseState* currentState; //pointer to the current state of the state machine, ie u can use currentState in methods within ArbitraryAI to do broadly the same thing, while the implementation changes depending on which state currentState is actually pointing too
+	int iterator;
 };

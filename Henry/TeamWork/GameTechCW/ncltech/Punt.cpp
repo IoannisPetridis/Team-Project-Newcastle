@@ -2,30 +2,33 @@
 
 Punt::Punt() {
 	GroundHeight = 1.0f;
+	iterator = 9;
 }
 
 void Punt::ForceCalculator(DefensiveAI* Arb) {
-	Vector3 PuntNode;
 	float MagAINodeDist;
 
-	AIPosition = Arb->Physics()->GetPosition();
-	BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
-	AIBallVec = BallPosition - AIPosition;
-	MagAIBallDist = AIBallVec.Length();
-	AIBallVec.Normalise();
+	++iterator;
 
-	PuntNode = NodeCalculation(Arb);
-	PuntNode.y = GroundHeight;
+	if (iterator == 10) {
+		AIPosition = Arb->Physics()->GetPosition();
+		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
+		AIBallVec = BallPosition - AIPosition;
+		MagAIBallDist = AIBallVec.Length();
+		AIBallVec.Normalise();
+
+		PuntNode = NodeCalculation(Arb);
+		PuntNode.y = GroundHeight;
+
+		CheckTriggers(Arb);
+		iterator = 0;
+	}
 
 	MagAINodeDist = (PuntNode - AIPosition).Length();
 
 	Arb->DirectionVector = Arb->DirectionCalculation(PuntNode, AIPosition);
 	Arb->RotationCalculation(PuntNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
-
-	//cout << "punt" << endl;
-
-	CheckTriggers(Arb);
 }
 
 void Punt::CheckTriggers(DefensiveAI* Arb) {

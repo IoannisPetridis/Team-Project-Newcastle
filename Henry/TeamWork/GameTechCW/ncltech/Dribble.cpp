@@ -3,28 +3,32 @@
 
 Dribble::Dribble() {
 	GroundHeight = 1.0f;
+	iterator = 9;
 }
 
 void Dribble::ForceCalculator(NeutralAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
-	Arb->SetColour(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+	++iterator;
 
-	BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
-	EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
-	FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
-	AIPosition = Arb->Physics()->GetPosition();
+	if (iterator == 10) {
+		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
+		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
+		FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
+		AIPosition = Arb->Physics()->GetPosition();
 
-	DribbleNode = NodeCalculation(Arb);
-	DribbleNode.y = GroundHeight;
+		DribbleNode = NodeCalculation(Arb);
+		DribbleNode.y = GroundHeight;
+
+		CheckTriggers(Arb);
+		iterator = 0;
+	}
 
 	MagAINodeDist = (DribbleNode - AIPosition).Length();
 
 	Arb->DirectionVector = Arb->DirectionCalculation(DribbleNode, AIPosition);
 	Arb->RotationCalculation(DribbleNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
-
-	CheckTriggers(Arb);
 }
 
 void Dribble::CheckTriggers(NeutralAI* Arb) {

@@ -9,10 +9,13 @@ PuntPlayer::PuntPlayer(AggressiveAI* Arb) {
 
 	PuntPlayerNode = NodeCalculation(Arb);
 	PuntPlayerNode.y = GroundHeight;
+	iterator = 9;
 }
 
 void PuntPlayer::ForceCalculator(AggressiveAI* Arb) {
 	float MagAINodeDist;
+
+	++iterator;
 
 	MagAINodeDist = (PuntPlayerNode - AIPosition).Length();
 
@@ -20,7 +23,10 @@ void PuntPlayer::ForceCalculator(AggressiveAI* Arb) {
 	Arb->RotationCalculation(PuntPlayerNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
 
-	CheckTriggers(Arb);
+	if (iterator == 10) {
+		CheckTriggers(Arb);
+		iterator = 0;
+	}
 }
 
 void PuntPlayer::CheckTriggers(AggressiveAI* Arb) {

@@ -600,7 +600,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		m_scene->AddGameObject(AssetsManager::GOInstance);
 	}
 
-	//AIStuff(m_scene);
+	AIStuff(m_scene);
 }
 
 void	 GameObjectMag::GOM_Loading(Scene* m_scene) {
@@ -637,7 +637,7 @@ void GameObjectMag::AIStuff(Scene* m_scene) {
 
 		AssetsManager::GOInstance->Physics()->name = "FriendlyGoal";
 		AssetsManager::GOInstance->Physics()->SetInverseMass(0.06f);
-		AssetsManager::GOInstance->Physics()->SetPosition(Vector3(100.0f, 5.0f, 60.0f));
+		AssetsManager::GOInstance->Physics()->SetPosition(Vector3(190.0f, 5.0f, 0.0f));
 		AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 		AssetsManager::GOInstance->Physics()->SetInverseInertia(
 			AssetsManager::GOInstance->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f));
@@ -653,7 +653,7 @@ void GameObjectMag::AIStuff(Scene* m_scene) {
 
 		AssetsManager::GOInstance->Physics()->name = "EnemyGoal";
 		AssetsManager::GOInstance->Physics()->SetInverseMass(0.06f);
-		AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-100.0f, 5.0f, 60.0f));
+		AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-190.0f, 5.0f, 0.0f));
 		AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 		AssetsManager::GOInstance->Physics()->SetInverseInertia(
 			AssetsManager::GOInstance->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f));

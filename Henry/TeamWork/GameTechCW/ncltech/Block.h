@@ -14,6 +14,7 @@ public:
 	Vector3 NodeCalculation(AggressiveAI* Arb);
 
 private:
-	Vector3 AIPosition, EnemyGoalPosition, BallPosition, EnemyPlayer1Position, EnemyPlayer2Position, EnemyPlayer3Position;
+	Vector3 AIPosition, EnemyGoalPosition, BallPosition, EnemyPlayer1Position, EnemyPlayer2Position, EnemyPlayer3Position, BlockNode;
 	float GroundHeight;
+	int iterator;
 };

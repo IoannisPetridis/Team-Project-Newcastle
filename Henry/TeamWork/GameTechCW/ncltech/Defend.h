@@ -13,7 +13,7 @@ public:
 	Vector3 NodeCalculation(DefensiveAI* Arb);
 
 private:
-	Vector3 AIPosition, FriendlyGoalPosition, EnemyGoalPosition, BallPosition;
+	Vector3 AIPosition, FriendlyGoalPosition, EnemyGoalPosition, BallPosition, DefendNode;
 	float GroundHeight;
-
+	int iterator;
 };

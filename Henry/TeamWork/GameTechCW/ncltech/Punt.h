@@ -16,6 +16,7 @@ public:
 	void ControlInputCalculation(DefensiveAI* Arb, Vector3 directionvector, Vector3 puntnode);*/
 
 private:
-	Vector3 AIPosition, BallPosition, AIBallVec;
+	Vector3 AIPosition, BallPosition, AIBallVec, PuntNode;
 	float GroundHeight, MagAIBallDist;
+	int iterator;
 };

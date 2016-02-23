@@ -17,4 +17,5 @@ public:
 private:
 	Vector3 EnemyGoalPosition, FriendlyGoalPosition, BallPosition, AIPosition, ChaseNode;
 	float GroundHeight;
+	int iterator;
 };

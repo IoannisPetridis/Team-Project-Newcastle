@@ -13,6 +13,7 @@ Patrol::Patrol(DefensiveAI* Arb) {
 		PatrolPoint = (FriendlyGoalPosition + (PPVector * 12.0) + Vector3(0.0f, 0.0f, 5.0f));
 		PatrolPoint.y = GroundHeight;
 		PatrolNode = PatrolPoint;
+		iterator = 9;
 	}
 }
 
@@ -20,20 +21,23 @@ void Patrol::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 	Vector3 AIDistPatrolNode;
 	float MagAINodeDist;
 
-	AIPosition = Arb->Physics()->GetPosition();
-	BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
+	++iterator;
 
-	PatrolNode = NodeCalculation(Arb);
+	if (iterator == 10) {
+		AIPosition = Arb->Physics()->GetPosition();
+		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
+
+		PatrolNode = NodeCalculation(Arb);
+
+		CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
+		iterator = 0;
+	}
 
 	MagAINodeDist = (PatrolNode - AIPosition).Length();
 
 	Arb->DirectionVector = Arb->DirectionCalculation(PatrolNode, AIPosition);
 	Arb->RotationCalculation(PatrolNode);
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
-
-	//cout << "patrol" << endl;
-
-	CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
 }
 
 void Patrol::CheckTriggers(DefensiveAI* Arb) {

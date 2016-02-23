@@ -6,6 +6,18 @@ ActionHandler::ActionHandler() {
 	timer[1] = -1.0f;
 	timer[2] = 0.0f;
 
+	NAItimer[0] = -1.0f;
+	NAItimer[1] = -1.0f;
+	NAItimer[2] = 0.0f;
+
+	AAItimer[0] = -1.0f;
+	AAItimer[1] = -1.0f;
+	AAItimer[2] = 0.0f;
+
+	DAItimer[0] = -1.0f;
+	DAItimer[1] = -1.0f;
+	DAItimer[2] = 0.0f;
+
 	Inair = false;
 	doubleJump = false;
 }
@@ -152,7 +164,9 @@ void ActionHandler::Update(float dt) {
 	}
 
 	//AI
-	//AIUpdates();
+
+	AIUpdates();
+	
 
 	//spawn partical
 	(m_scene->m_RootParticleList->GetChildren())[0]->SetDirection(AssetsManager::Player_1->front_normal);

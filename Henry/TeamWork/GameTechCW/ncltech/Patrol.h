@@ -17,4 +17,5 @@ public:
 private:
 	float GroundHeight;
 	Vector3 PatrolPoint, PatrolNode, BallPosition, FriendlyGoalPosition, EnemyGoalPosition, AIPosition;
+	int iterator;
 };

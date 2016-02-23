@@ -26,4 +26,5 @@ public:
 	Vector3 Node, DirectionVector;
 private:
 	AggressiveBaseState* currentState;
+	int iterator;
 };

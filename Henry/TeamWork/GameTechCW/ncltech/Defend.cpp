@@ -7,19 +7,27 @@
 
 Defend::Defend() {
 	GroundHeight = 1.0f;
+	iterator = 9;
 }
 
 void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put the logic behind the state
-	Vector3 DefendNode;
 	float MagAINodeDist;
 
-	AIPosition = Arb->Physics()->GetPosition();
-	BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
-	FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
-	EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
+	++iterator;
 
-	DefendNode = NodeCalculation(Arb);
-	DefendNode.y = GroundHeight;
+	if (iterator == 10) {
+
+		AIPosition = Arb->Physics()->GetPosition();
+		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
+		FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
+		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
+
+		DefendNode = NodeCalculation(Arb);
+		DefendNode.y = GroundHeight;
+
+		CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
+		iterator = 0;
+	}
 
 	MagAINodeDist = (DefendNode - AIPosition).Length();
 
@@ -28,8 +36,6 @@ void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 	Arb->ForwardBackwardCalculation(MagAINodeDist);
 
 	//cout << "defend" << endl;
-
-	CheckTriggers(Arb); //check state triggers every frame to make sure the state does not need to be changed
 }
 
 void Defend::CheckTriggers(DefensiveAI* Arb) {
