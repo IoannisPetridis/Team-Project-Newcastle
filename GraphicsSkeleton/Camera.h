@@ -15,6 +15,7 @@ _-_-_-_-_-_-_-""  ""
 
 #include "./vectormath/scalar_cpp/vectormath_aos.h"
 #include "PS4RendererBase.h"
+#include "PS4Input.h"
 using namespace sce::Vectormath::Scalar::Aos;
 class Camera 	{
 public:

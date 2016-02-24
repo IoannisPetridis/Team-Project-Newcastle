@@ -20,16 +20,17 @@ void Camera::UpdateCamera(float msec, PS4Input* input)	{
 	}
 	
 		//Bounds check the pitch, to be between straight up and straight down ;)
-		pitch = min(pitch, 90.0f);
-		pitch = max(pitch, -90.0f);
+	//	pitch = min(pitch, 90.0f);
+	//	pitch = max(pitch, -90.0f);
+	//	std::cout << pitch << std::endl;
+		
 
-
-		if (yaw <0) {
+		/*if (yaw <0) {
 			yaw += 360.0f;
 		}
 		if (yaw > 360.0f) {
 			yaw -= 360.0f;
-		}
+		}*/
 
 		/*if ((input->GetAxis(1).y >= -1 && input->GetAxis(1).y <= 1) && !((input->GetAxis(1).y >= -0.1f) && (input->GetAxis(1).y <= 0.1f)))
 		{
@@ -44,7 +45,6 @@ void Camera::UpdateCamera(float msec, PS4Input* input)	{
 		{
 			position += Matrix4::rotationY(yaw) * Vector3(0, 0, 1)  * input->GetAxis(0).y * speed;
 			position += Matrix4::rotationY(yaw) * Vector3(1, 0, 0)  * input->GetAxis(0).x * speed;
-			
 		}
 		if ((input->GetAxis(0).x >= -1 && input->GetAxis(0).x <= 1) && !((input->GetAxis(0).x >= -0.1f) && (input->GetAxis(0).x <= 0.1f)))
 		{

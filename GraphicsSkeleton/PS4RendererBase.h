@@ -37,14 +37,15 @@ struct PS4ScreenBuffer  {
 class PS4Shader;
 class PS4Mesh;
 
-class PS4RendererBase : public RendererBase, public PS4MemoryAware
+class PS4RendererBase : 
+	public RendererBase, public PS4MemoryAware
 {
 public:
 	PS4RendererBase();
 	~PS4RendererBase();
 
 	void UpdateScene(float dt)	override;
-	void RenderScene()override;
+	void RenderScene()			override;
 	void SwapBuffers()			override;
 
 protected:
@@ -65,9 +66,10 @@ private:
 
 	PS4ScreenBuffer* GenerateScreenBuffer(uint width, uint height, bool colour = true, bool depth = true, bool stencil = false);
 
-
+	void DrawMesh2(PS4Mesh& mesh);
 	void DrawMesh(PS4Mesh& mesh);
-
+	void DrawSky(PS4Mesh& mesh);
+	
 
 protected:
 	int currentGPUBuffer;
@@ -90,8 +92,11 @@ protected:
 
 	//default shader
 	PS4Shader*	defaultShader;
+	PS4Shader*	SkyboxShader;
 	PS4Mesh*	defaultMesh;
 	PS4Texture* defaultTexture;
+	PS4Texture* sky;
+	PS4Mesh*	quad;
 
 	//Individual Frames
 	PS4Frame*	frames;
@@ -102,7 +107,6 @@ protected:
 	PS4ScreenBuffer*		currentPS4Buffer;  //Pointer to whichever buffer we're currently using...
 	Gnmx::GnmxGfxContext*	currentGFXContext;
 	PS4Frame*				currentFrame;
-
 protected:
 	PS4Input input = PS4Input();
 	Matrix4 projMatrix;		//Projection matrix

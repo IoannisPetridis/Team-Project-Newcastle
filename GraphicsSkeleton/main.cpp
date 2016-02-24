@@ -9,7 +9,7 @@ int main(void) {
 
 	while (true) {
 		//for the controller
-		
+
 
 
 		renderer.UpdateScene(1.0f);
@@ -17,7 +17,7 @@ int main(void) {
 		renderer.SwapBuffers();
 
 
-		
+
 		//if (input.GetButton(6)) { //L1
 		//	return 1;
 		//}

@@ -51,18 +51,18 @@ void PS4Input::Poll() {
 			axis[1].x = (((data.rightStick.x / 255.0f) * 2) - 1.0f);
 			axis[1].y = (((data.rightStick.y / 255.0f) * 2) - 1.0f);
 
-			axis[2].x  = 0.0f;
+			axis[2].x = 0.0f;
 			axis[2].x += ((data.buttons & SCE_PAD_BUTTON_RIGHT) ? 1.0f : 0.0f);
-			axis[2].x -= ((data.buttons & SCE_PAD_BUTTON_LEFT)  ? 1.0f : 0.0f);
+			axis[2].x -= ((data.buttons & SCE_PAD_BUTTON_LEFT) ? 1.0f : 0.0f);
 
-			axis[2].y  = 0.0f;
-			axis[2].y += ((data.buttons & SCE_PAD_BUTTON_UP)    ? 1.0f : 0.0f);
-			axis[2].y -= ((data.buttons & SCE_PAD_BUTTON_DOWN)  ? 1.0f : 0.0f);
+			axis[2].y = 0.0f;
+			axis[2].y += ((data.buttons & SCE_PAD_BUTTON_UP) ? 1.0f : 0.0f);
+			axis[2].y -= ((data.buttons & SCE_PAD_BUTTON_DOWN) ? 1.0f : 0.0f);
 
 			buttons[0] = ((data.buttons & SCE_PAD_BUTTON_TRIANGLE) ? 1.0f : 0.0f);
-			buttons[1] = ((data.buttons & SCE_PAD_BUTTON_CIRCLE)   ? 1.0f : 0.0f);
-			buttons[2] = ((data.buttons & SCE_PAD_BUTTON_CROSS)    ? 1.0f : 0.0f);
-			buttons[3] = ((data.buttons & SCE_PAD_BUTTON_SQUARE)   ? 1.0f : 0.0f);
+			buttons[1] = ((data.buttons & SCE_PAD_BUTTON_CIRCLE) ? 1.0f : 0.0f);
+			buttons[2] = ((data.buttons & SCE_PAD_BUTTON_CROSS) ? 1.0f : 0.0f);
+			buttons[3] = ((data.buttons & SCE_PAD_BUTTON_SQUARE) ? 1.0f : 0.0f);
 
 			buttons[4] = data.analogButtons.l2 / 255.0f;
 			buttons[5] = data.analogButtons.r2 / 255.0f;

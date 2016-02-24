@@ -1,9 +1,11 @@
+#pragma once
 #include "PS4RendererBase.h"
 #include <video_out.h>	//Video System
 #include "PS4Shader.h"
 #include "PS4Mesh.h"
 #include <gnmx\basegfxcontext.h>
-#include <iostream>
+#include "OBJMesh.h"
+
 PS4RendererBase::PS4RendererBase()
 	:
 	_MaxCMDBufferCount(3),
@@ -24,14 +26,21 @@ PS4RendererBase::PS4RendererBase()
 	InitialiseGCMRendering();
 	InitialiseVideoSystem();
 
+	SkyboxShader = PS4Shader::GenerateShader(
+		"/app0/SkyboxVertex.sb",
+		"/app0/SkyboxPixel.sb"
+	);
+
 	defaultShader = PS4Shader::GenerateShader(
 		"/app0/VertexShader.sb",
 		"/app0/PixelShader.sb"
-	);
-	camera = new Camera(0.0f, 0.0f, Vector4(0, 0, 0,0));
-	defaultMesh		= PS4Mesh::GenerateTriangle();
+		);
+	camera = new Camera(0.0f, 0.0f, Vector4(0, 0, 0, 0));
+	//defaultMesh		= PS4Mesh::GenerateTriangle();
+	quad = PS4Mesh::GenerateQuad();
+	defaultMesh =	new OBJMesh("/app0/sphereMinimal2.obj");
 	defaultTexture	= PS4Texture::LoadTextureFromFile("/app0/doge.gnf");
-
+	sky = PS4Texture::LoadTextureFromFile("/app0/texture/skyBox/sky_pos_x.gnf");
 	SwapBuffers();
 }
 
@@ -91,7 +100,7 @@ void	PS4RendererBase::InitialiseMemoryAllocators() {
 	this->onionAllocator	= Gnmx::Toolkit::GetInterface(&stackAllocators[ONION]);
 	Gnm::registerOwner(&ownerHandle, "PS4RendererBase");
 }
-
+                          
 PS4ScreenBuffer*	PS4RendererBase::GenerateScreenBuffer(uint width, uint height, bool colour, bool depth, bool stencil) {
 	PS4ScreenBuffer* buffer = new PS4ScreenBuffer();
 
@@ -162,14 +171,13 @@ void	PS4RendererBase::DestroyVideoSystem() {
 }
 
 void PS4RendererBase::UpdateScene(float dt)	{
-
 	input.Poll();
 
 	if (input.GetButtonDown(0)) { //triangle
 		//std::cout << "0 BUTTON" << std::endl;
-		
-		std::cout << input.GetAxis(0).x <<"   "<< input.GetAxis(0).y << '\n';
-	
+
+		std::cout << input.GetAxis(0).x << "   " << input.GetAxis(0).y << '\n';
+
 	}
 	if (input.GetButton(1)) { //circle
 		std::cout << "1 BUTTON" << std::endl;
@@ -218,37 +226,33 @@ void PS4RendererBase::UpdateScene(float dt)	{
 	//}
 
 
-	camera->UpdateCamera(dt,&input);
-
+	camera->UpdateCamera(dt, &input);
 }
 
 void PS4RendererBase::RenderScene()			{
-	
 	currentFrame->StartFrame();	
 
 	currentGFXContext->waitUntilSafeForRendering(videoHandle, currentGPUBuffer);
 	SetRenderBuffer(currentPS4Buffer, true, true, true);
-
-	defaultShader->SubmitShaderSwitch(*currentGFXContext);
+	
+	SkyboxShader->SubmitShaderSwitch(*currentGFXContext);
 
 	//Primitive Setup State
 	Gnm::PrimitiveSetup primitiveSetup;
 	primitiveSetup.init();
 	primitiveSetup.setCullFace(Gnm::kPrimitiveSetupCullFaceNone);
 	primitiveSetup.setFrontFace(Gnm::kPrimitiveSetupFrontFaceCcw);
-	//primitiveSetup.setPolygonMode(,);
+	//primitiveSetup.setPolygonMode()
 	currentGFXContext->setPrimitiveSetup(primitiveSetup);
 
 	//Screen Access State
 	Gnm::DepthStencilControl dsc;
 	dsc.init();
-	dsc.setDepthControl(Gnm::kDepthControlZWriteEnable, Gnm::kCompareFuncLessEqual);
-	dsc.setDepthEnable(true);
+	dsc.setDepthControl(Gnm::kDepthControlZWriteEnable, Gnm::kCompareFuncAlways);
+	dsc.setDepthEnable(false);
 	currentGFXContext->setDepthStencilControl(dsc);
-	
-	
 	currentGFXContext->setupScreenViewport(0, 0, currentPS4Buffer->colourTarget.getWidth(), currentPS4Buffer->colourTarget.getHeight(), 0.5f, 0.5f);
-	
+
 	Gnm::Sampler trilinearSampler;
 	trilinearSampler.init();
 	trilinearSampler.setMipFilterMode(Gnm::kMipFilterModeLinear);
@@ -258,13 +262,41 @@ void PS4RendererBase::RenderScene()			{
 
 	currentGFXContext->setTextures(Gnm::kShaderStagePs, 0, 1, &defaultTexture->GetAPITexture());
 	currentGFXContext->setSamplers(Gnm::kShaderStagePs, 0, 1, &trilinearSampler);
-	modelMatrix.identity();
-	modelMatrix = Matrix4::translation(Vector3(0, 0, -5));
+	
+	//DrawSky(*quad);
+
+	//DrawMesh(*quad);
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	defaultShader->SubmitShaderSwitch(*currentGFXContext);
+
+	//Primitive Setup State
+	primitiveSetup.init();
+	primitiveSetup.setCullFace(Gnm::kPrimitiveSetupCullFaceNone);
+	primitiveSetup.setFrontFace(Gnm::kPrimitiveSetupFrontFaceCcw);
+	//primitiveSetup.setPolygonMode()
+	currentGFXContext->setPrimitiveSetup(primitiveSetup);
+
+	//Screen Access State
+	dsc.init();
+	dsc.setDepthControl(Gnm::kDepthControlZWriteEnable, Gnm::kCompareFuncLessEqual);
+	dsc.setDepthEnable(true);
+	currentGFXContext->setDepthStencilControl(dsc);
+	currentGFXContext->setupScreenViewport(0, 0, currentPS4Buffer->colourTarget.getWidth(), currentPS4Buffer->colourTarget.getHeight(), 0.5f, 0.5f);
+
+	trilinearSampler.init();
+	trilinearSampler.setMipFilterMode(Gnm::kMipFilterModeLinear);
+
+	//trilinearSampler.set
+	trilinearSampler.setXyFilterMode(Gnm::kFilterModeBilinear, Gnm::kFilterModeBilinear);
+
+	currentGFXContext->setTextures(Gnm::kShaderStagePs, 0, 1, &defaultTexture->GetAPITexture());
+	currentGFXContext->setSamplers(Gnm::kShaderStagePs, 0, 1, &trilinearSampler);
+
+
 	DrawMesh(*defaultMesh);
 
-	modelMatrix.identity();
-	modelMatrix = Matrix4::translation(Vector3(0, 5, -5));
-	DrawMesh(*defaultMesh);
+
 
 
 	currentFrame->EndFrame();
@@ -276,26 +308,25 @@ float rad = 0.0f;
 
 void PS4RendererBase::DrawMesh(PS4Mesh& mesh) {	
 	rad += 0.01;
-	
-	
-	
-	
+
 	projMatrix = Matrix4::perspective(0.78f, (float)currentPS4Buffer->colourTarget.getWidth() / (float)currentPS4Buffer->colourTarget.getHeight(), 1.0f, 5000.0f);
-	
+
 	viewMatrix = camera->BuildViewMatrix();
-	Matrix4* modelViewProj = (Matrix4*)currentGFXContext->allocateFromCommandBuffer(sizeof(Matrix4)*2, Gnm::kEmbeddedDataAlignment4);
-	//*modelViewProj = Matrix4::rotationZ(rad);
+
+	Matrix4* modelViewProj = (Matrix4*)currentGFXContext->allocateFromCommandBuffer(sizeof(Matrix4), Gnm::kEmbeddedDataAlignment4);
+	modelMatrix = Matrix4::translation(Vector3(0, 0, -5)) * Matrix4::rotationZ(rad);
+
 
 	modelViewProj[0] = projMatrix * viewMatrix * modelMatrix;
 	//*modelViewProj = modelMatrix*viewMatrix*projMatrix;
 
 	modelViewProj[1] = modelMatrix;
-	
+
 	Gnm::Buffer constantBuffer;
 	constantBuffer.initAsConstantBuffer(modelViewProj, sizeof(Matrix4));
 	constantBuffer.setResourceMemoryType(Gnm::kResourceMemoryTypeRO); // it's a constant buffer, so read-only is OK
 
-	
+
 	Matrix4* identityMat = (Matrix4*)currentGFXContext->allocateFromCommandBuffer(sizeof(Matrix4), Gnm::kEmbeddedDataAlignment4);
 	*identityMat = Matrix4::rotationX(rad);
 
@@ -310,7 +341,48 @@ void PS4RendererBase::DrawMesh(PS4Mesh& mesh) {
 	//currentGFXContext->setConstantBuffers(Gnm::kShaderStageVs, indexB, 1, &constantBufferA);
 	currentGFXContext->setConstantBuffers(Gnm::kShaderStagePs, 0, 1, &constantBuffer);
 
-	defaultMesh->SubmitDraw(*currentGFXContext, Gnm::ShaderStage::kShaderStageVs);
+	mesh.SubmitDraw(*currentGFXContext, Gnm::ShaderStage::kShaderStageVs);
+}
+
+void PS4RendererBase::DrawSky(PS4Mesh& mesh) {
+	
+
+	projMatrix = Matrix4::perspective(0.78f, (float)currentPS4Buffer->colourTarget.getWidth() / (float)currentPS4Buffer->colourTarget.getHeight(), 1.0f, 5000.0f);
+	viewMatrix = camera->BuildViewMatrix();
+	//modelMatrix.identity();
+	modelMatrix = Matrix4::translation(Vector3(0, 0, -5)) * Matrix4::rotationZ(rad);
+
+
+
+	Matrix4* modelViewProj = (Matrix4*)currentGFXContext->allocateFromCommandBuffer(sizeof(Matrix4)*4, Gnm::kEmbeddedDataAlignment4);
+
+	
+
+	modelViewProj[0] = modelMatrix;
+	modelViewProj[1] = viewMatrix;
+	modelViewProj[2] = projMatrix;
+	modelViewProj[3] = projMatrix * viewMatrix * modelMatrix;
+
+	Gnm::Buffer constantBuffer;
+	constantBuffer.initAsConstantBuffer(modelViewProj, sizeof(Matrix4)*4);
+	constantBuffer.setResourceMemoryType(Gnm::kResourceMemoryTypeRO); // it's a constant buffer, so read-only is OK
+
+
+	Matrix4* identityMat = (Matrix4*)currentGFXContext->allocateFromCommandBuffer(sizeof(Matrix4), Gnm::kEmbeddedDataAlignment4);
+	*identityMat = projMatrix * viewMatrix * modelMatrix;
+
+	Gnm::Buffer constantBufferA;
+	constantBufferA.initAsConstantBuffer(identityMat, sizeof(Matrix4)*4);
+	constantBufferA.setResourceMemoryType(Gnm::kResourceMemoryTypeRO); // it's a constant buffer, so read-only is OK
+
+	int indexA = SkyboxShader->GetConstantBuffer("ShaderConstants");
+	int indexB = SkyboxShader->GetConstantBuffer("MoreShaderConstants");
+
+	currentGFXContext->setConstantBuffers(Gnm::kShaderStageVs, indexA, 1, &constantBuffer);
+	//currentGFXContext->setConstantBuffers(Gnm::kShaderStageVs, indexB, 1, &constantBufferA);
+	currentGFXContext->setConstantBuffers(Gnm::kShaderStagePs, 0, 1, &constantBuffer);
+
+	mesh.SubmitDraw(*currentGFXContext, Gnm::ShaderStage::kShaderStageVs);
 }
 
 void PS4RendererBase::SwapBuffers()			{

@@ -2,6 +2,7 @@
 
 PS4Mesh::PS4Mesh()
 {
+	//two pointer set to 0
 	indexBuffer		= 0;
 	vertexBuffer	= 0;
 	attributeCount	= 0;
@@ -14,6 +15,7 @@ PS4Mesh::~PS4Mesh()
 }
 
 PS4Mesh* PS4Mesh::GenerateQuad() {
+	//Generate new mesh to push back
 	PS4Mesh* mesh = new PS4Mesh();
 
 	mesh->numVertices	= 4;
@@ -110,6 +112,8 @@ void	PS4Mesh::BufferData() {
 	Gnm::registerResource(nullptr, ownerHandle, indexBuffer , indexDataSize , "IndexData" , Gnm::kResourceTypeIndexBufferBaseAddress, 0);
 	Gnm::registerResource(nullptr, ownerHandle, vertexBuffer, vertexDataSize, "VertexData", Gnm::kResourceTypeIndexBufferBaseAddress, 0);
 
+
+	//int vAt = 0;
 	for (int i = 0; i < numVertices; ++i) {
 		memcpy(&vertexBuffer[i].position,	  &vertices[i],	 sizeof(float) * 3);
 		memcpy(&vertexBuffer[i].textureCoord, &texCoords[i], sizeof(float) * 2);
@@ -131,9 +135,14 @@ void	PS4Mesh::BufferData() {
 }
 
 void	PS4Mesh::InitAttributeBuffer(sce::Gnm::Buffer &buffer, Gnm::DataFormat format, void*offset) {
+	int lolz = sizeof(MeshVertex);
 	buffer.initAsVertexBuffer(offset, format, sizeof(MeshVertex), numVertices);
 	buffer.setResourceMemoryType(Gnm::kResourceMemoryTypeRO);
 }
+
+//void	PS4Mesh::SubmitPreDraw(Gnmx::GnmxGfxContext& cmdList, Gnm::ShaderStage stage) {
+//	
+//}
 
 void PS4Mesh::SubmitDraw(Gnmx::GnmxGfxContext& cmdList, Gnm::ShaderStage stage) {
 	cmdList.setVertexBuffers(stage, 0, attributeCount, attributeBuffers);
@@ -141,3 +150,107 @@ void PS4Mesh::SubmitDraw(Gnmx::GnmxGfxContext& cmdList, Gnm::ShaderStage stage) 
 	cmdList.setIndexSize(indexType);
 	cmdList.drawIndex(numIndices, indexBuffer);
 } 
+
+//need numVertices
+void	PS4Mesh::GenerateNormals()	{
+	if (!normals) {
+		normals = new Vector3[numVertices];
+	}
+	for (int i = 0; i < numVertices; ++i){
+		normals[i] = Vector3();
+	}
+
+	if (indices) {
+		int i = 0;
+
+		int test = 0;
+		for (i = 0; i < numIndices; i += 3){
+			int a = indices[i];
+			int b = indices[i + 1];
+			int c = indices[i + 2];
+
+			
+			Vector3 normal = cross((vertices[b] - vertices[a]), (vertices[c] - vertices[a]));
+			
+			normals[a] += normal;
+			normals[b] += normal;
+			normals[c] += normal;
+
+			test += 3;
+		}
+		bool asdf = true;
+	}
+	else{
+		//It's just a list of triangles, so generate face normals
+		for (int i = 0; i < numVertices; i += 3){
+			Vector3 &a = vertices[i];
+			Vector3 &b = vertices[i + 1];
+			Vector3 &c = vertices[i + 2];
+
+			Vector3 normal = cross(b - a, c - a);
+
+			normals[i] = normal;
+			normals[i + 1] = normal;
+			normals[i + 2] = normal;
+		}
+	}
+
+	for (int i = 0; i < numVertices; ++i){
+		normalize(normals[i]);
+	}
+}
+
+void PS4Mesh::GenerateTangents() {
+	//Extra! stops rare occurrence of this function being called
+	//on a mesh without tex coords, which would break quite badly!
+	if (!texCoords) {
+		return;
+	}
+
+	if (!tangents) {
+		tangents = new Vector3[numVertices];
+	}
+	for (int i = 0; i < numVertices; ++i){
+		tangents[i] = Vector3();
+	}
+
+	if (indices) {
+		for (int i = 0; i < numIndices; i += 3){
+			int a = indices[i];
+			int b = indices[i + 1];
+			int c = indices[i + 2];
+
+			Vector3 tangent = GenerateTangent(vertices[a], vertices[b], vertices[c], texCoords[a], texCoords[b], texCoords[c]);
+
+			tangents[a] += tangent;
+			tangents[b] += tangent;
+			tangents[c] += tangent;
+		}
+	}
+	else{
+		for (int i = 0; i < numVertices; i += 3){
+			Vector3 tangent = GenerateTangent(vertices[i], vertices[i + 1], vertices[i + 2], texCoords[i], texCoords[i + 1], texCoords[i + 2]);
+
+			tangents[i] += tangent;
+			tangents[i + 1] += tangent;
+			tangents[i + 2] += tangent;
+		}
+	}
+	for (int i = 0; i < numVertices; ++i){
+		normalize(tangents[i]);
+	}
+}
+
+Vector3 PS4Mesh::GenerateTangent(const Vector3 &a, const Vector3 &b, const Vector3 &c, const Vector2 &ta, const Vector2 &tb, const Vector2 &tc)	 {
+	Vector2 coord1 = tb - ta;
+	Vector2 coord2 = tc - ta;
+
+	Vector3 vertex1 = b - a;
+	Vector3 vertex2 = c - a;
+
+	Vector3 axis = Vector3(vertex1*coord2.getY() - vertex2*coord1.getY());
+
+	float factor = 1.0f / (coord1.getX() * coord2.getY() - coord2.getX() * coord1.getY());
+
+	return axis * factor;
+}

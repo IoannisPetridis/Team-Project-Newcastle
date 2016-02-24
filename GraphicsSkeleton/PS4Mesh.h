@@ -15,18 +15,31 @@ class PS4Mesh :
 	public Mesh, public PS4MemoryAware
 {
 	friend class PS4RendererBase;
+	friend class ChildMeshInterface;
 public:
 	static PS4Mesh* GenerateTriangle();
 	static PS4Mesh* GenerateQuad();
 	static PS4Mesh* GenerateSinglePoint();
 
+	virtual void	SubmitDraw(Gnmx::GnmxGfxContext& cmdList, Gnm::ShaderStage stage);
 protected:
-	void	SubmitPreDraw(Gnmx::GnmxGfxContext& cmdList, Gnm::ShaderStage stage);
-	void	SubmitDraw(Gnmx::GnmxGfxContext& cmdList, Gnm::ShaderStage stage);
+	virtual void	SubmitPreDraw(Gnmx::GnmxGfxContext& cmdList, Gnm::ShaderStage stage) {};
+	
 
-	void	BufferData();//
+	void	BufferData();
 
+	//fill in a GNM buffer with vertex attribute data
 	void	InitAttributeBuffer(sce::Gnm::Buffer &buffer, Gnm::DataFormat format, void*offset);
+
+protected:
+	//Generates normals for all facets. Assumes geometry type is GL_TRIANGLES...
+	void	GenerateNormals();
+
+	//Generates tangents for all facets. Assumes geometry type is GL_TRIANGLES...
+	void	GenerateTangents();
+	Vector3 GenerateTangent(const Vector3 &a, const Vector3 &b, const Vector3 &c,
+		const Vector2 &ta, const Vector2 &tb, const Vector2 &tc);
+
 
 protected:
 	PS4Mesh();
@@ -42,10 +55,10 @@ protected:
 		float tangent[3];
 	};
 
+	//how many bytes an index takes up
 	sce::Gnm::IndexSize		indexType;
+	//the primiteve type
 	sce::Gnm::PrimitiveType primitiveType;
-
-
 
 	int*		indexBuffer;
 	MeshVertex*	vertexBuffer;
