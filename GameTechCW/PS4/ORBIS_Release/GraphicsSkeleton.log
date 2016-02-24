@@ -1,16 +1,10 @@
-﻿Build started 2/23/2016 5:35:05 PM.
+﻿Build started 2/24/2016 2:31:48 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\GraphicsSkeleton.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         PS4RendererBase.cpp
-         orbis-clang.exe -o ORBIS_Release\PS4RendererBase.o -c -MD -MV -fdiagnostics-format=msvc -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\samples\sample_code\\" -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\host_tools\lib\clang\include" -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\include" -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\include_common" -DNDEBUG -Wall -fno-caret-diagnostics -O2 D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(1,9): warning : #pragma once in main file
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(26,24): warning : implicit conversion of NULL constant to 'int' [-Wnull-conversion]
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(254,32): error : too few arguments to function call, expected 2, have 0
-         D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\include_common\gnm/regs.h(97,4) :  note: 'setPolygonMode' declared here
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(315,6): warning : unused variable 'indexB' [-Wunused-variable]
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(340,9): warning : unused variable 'a' [-Wunused-variable]
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations\OrbisWavePsslc.targets(34,5): warning : Unsupported file suffix on item: SkyboxPixel.pssl
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations\OrbisWavePsslc.targets(34,5): warning : Unsupported file suffix on item: SkyboxVertex.pssl
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\BuildCustomizations\OrbisWavePsslc.targets(35,5): error : Found unsupported file suffix on a shader file.
      1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\GraphicsSkeleton.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:01.15
+Time Elapsed 00:00:00.01

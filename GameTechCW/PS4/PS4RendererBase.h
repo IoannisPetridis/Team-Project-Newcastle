@@ -70,6 +70,7 @@ private:
 
 
 	void DrawMesh(PS4Mesh& mesh);
+	void DrawSky(PS4Mesh& mesh);
 
 
 protected:
@@ -93,8 +94,11 @@ protected:
 
 	//default shader
 	PS4Shader*	defaultShader;
+	PS4Shader*	SkyboxShader;
 	PS4Mesh*	defaultMesh;
 	PS4Mesh*	defaultMesh_2;
+	PS4Texture* sky;
+	PS4Mesh*	quad;
 
 	PS4Texture* defaultTexture;
 

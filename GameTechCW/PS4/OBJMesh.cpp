@@ -242,7 +242,7 @@ bool	OBJMesh::LoadOBJMesh(std::string filename)	{
 
 			//It is triangle, so both of them should be 3
 			m->numVertices	= 3;
-			m->numIndices	= 3;
+			//m->numIndices	= 3;
 			m->indexType	= sce::Gnm::IndexSize::kIndexSize32;
 			m->primitiveType = sce::Gnm::PrimitiveType::kPrimitiveTypeTriList;
 			
