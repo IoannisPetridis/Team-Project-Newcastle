@@ -1,39 +1,28 @@
-﻿Build started 2/24/2016 5:17:56 PM.
+﻿Build started 2/25/2016 4:10:08 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ncltech.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "..\Networking Server\Networking Server\Network.cpp" "..\Networking Server\Networking Server\Server.cpp" ..\Networking\Networking\Client.cpp ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp CylinderCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp PiramidCollisionShape.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp CuboidCollisionShape.cpp GameObject.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PiramidCollisionShape.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         ActionHandler.cpp
+         Generating Code...
+     1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(43): warning C4715: 'ActionHandler::ScoreCheck' : not all control paths return a value
+         Skipping... (no relevant changes detected)
          SphereCollisionShape.cpp
          SimpleMeshObject.cpp
          Scene.cpp
          Player.cpp
          PiramidCollisionShape.cpp
-         PhysicsObject.cpp
          PhysicsEngine.cpp
          OffState.cpp
          Manifold.cpp
-         Hull.cpp
-         GameObject.cpp
-         NCLDebug.cpp
          HomeState.cpp
          GuardState.cpp
          GameObjectMag.cpp
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\gameobjectmag.cpp(18): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         CylinderCollisionShape.cpp
+         GameObject.cpp
          CuboidCollisionShape.cpp
-         Constraint.cpp
          CollisionDetection.cpp
          AssetsManager.cpp
-         Generating Code...
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
-         Compiling...
          ArbitraryAI.cpp
-         ActionHandler.cpp
-         Client.cpp
-         Server.cpp
-         Network.cpp
-         Generating Code...
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(43): warning C4715: 'ActionHandler::ScoreCheck' : not all control paths return a value
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\Physics.lib" /NOLOGO Debug\Network.obj
          Debug\Server.obj
@@ -65,4 +54,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:13.02
+Time Elapsed 00:00:02.34

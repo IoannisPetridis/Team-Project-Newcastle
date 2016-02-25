@@ -92,31 +92,31 @@ bool	OBJMesh::LoadOBJMesh(std::string filename)	{
 			Vector3 vertex;
 			std::string temp;
 			f >> temp;
-			vertex.setX(std::stoi(temp)); 
+			vertex.setX(std::stof(temp)); 
 			f >> temp;
-			vertex.setY(std::stoi(temp));
+			vertex.setY(std::stof(temp));
 			f >> temp;
-			vertex.setZ(std::stoi(temp));
+			vertex.setZ(std::stof(temp));
 			inputVertices.push_back(vertex);
 		}
 		else if(currentLine == OBJNORM) {	//This line is a Normal!
 			Vector3 normal;
 			std::string temp;
 			f >> temp;
-			normal.setX(std::stoi(temp));
+			normal.setX(std::stof(temp));
 			f >> temp;
-			normal.setY(std::stoi(temp));
+			normal.setY(std::stof(temp));
 			f >> temp;
-			normal.setZ(std::stoi(temp));
+			normal.setZ(std::stof(temp));
 			inputNormals.push_back(normal);
 		}
 		else if(currentLine == OBJTEX) {	//This line is a texture coordinate!
 			Vector2 texCoord;
 			std::string temp;
 			f >> temp;
-			texCoord.setX(std::stoi(temp));
+			texCoord.setX(std::stof(temp));
 			f >> temp;
-			texCoord.setY(std::stoi(temp));
+			texCoord.setY(std::stof(temp));
 			inputTexCoords.push_back(texCoord);
 		}
 		//complete 
@@ -202,7 +202,8 @@ bool	OBJMesh::LoadOBJMesh(std::string filename)	{
 			else{	
 				bool a = true;
 			}
-			currentMesh = NULL;
+			
+			//currentMesh = NULL;
 		}
 
 		//all the unrecognized line
@@ -241,10 +242,14 @@ bool	OBJMesh::LoadOBJMesh(std::string filename)	{
 			///////////////////
 
 			//It is triangle, so both of them should be 3
-			m->numVertices	= 3;
+			//m->numVertices	= 3;
 			//m->numIndices	= 3;
+			
+			m->numVertices = sm->vertIndices.size();
+			m->numIndices = sm->vertIndices.size();
+
 			m->indexType	= sce::Gnm::IndexSize::kIndexSize32;
-			m->primitiveType = sce::Gnm::PrimitiveType::kPrimitiveTypeTriList;
+			m->primitiveType = sce::Gnm::PrimitiveType::kPrimitiveTypeTriStrip;
 			
 			//indices 
 			m->indices = new int[m->numIndices];
@@ -267,6 +272,7 @@ bool	OBJMesh::LoadOBJMesh(std::string filename)	{
 			}
 			//use the default uv vector
 			else{
+				m->texCoords = new Vector2[m->numVertices];
 				m->texCoords[0] = Vector2(0.5f, 0.0f);
 				m->texCoords[1] = Vector2(1.0f, 1.0f);
 				m->texCoords[2] = Vector2(0.0f, 1.0f);
@@ -287,7 +293,7 @@ bool	OBJMesh::LoadOBJMesh(std::string filename)	{
 #ifdef OBJ_USE_TANGENTS_BUMPMAPS
 			m->GenerateTangents();
 #endif
-
+		
 			m->BufferData();
 
 			if(i != 0) {

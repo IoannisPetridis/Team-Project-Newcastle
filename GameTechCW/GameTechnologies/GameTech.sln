@@ -19,6 +19,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameTech CW", "GameTech CW\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PS4Setting", "..\PS4\GraphicsSkeleton.vcxproj", "{F344A04F-9537-4B94-93DF-27FE9A492998}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9FD1ABBA-7FDF-451C-BF1F-030F93B1AE7E} = {9FD1ABBA-7FDF-451C-BF1F-030F93B1AE7E}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base", "Base\Base.vcxproj", "{2E756177-49A0-499E-A806-FB94CD89B564}"
 EndProject

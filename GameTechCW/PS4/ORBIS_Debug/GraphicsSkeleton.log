@@ -1,18 +1,18 @@
-﻿Build started 2/24/2016 5:19:24 PM.
+﻿Build started 2/25/2016 4:53:01 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\GraphicsSkeleton.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         PS4RendererBase.cpp
-         orbis-clang.exe -o ORBIS_Debug\PS4RendererBase.o -c -MD -MV -fdiagnostics-format=msvc -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\samples\sample_code\\" -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\host_tools\lib\clang\include" -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\include" -I"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\include_common" -D_DEBUG -g -Wall -fno-caret-diagnostics -O0 D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(1,9): warning : #pragma once in main file
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(26,24): warning : implicit conversion of NULL constant to 'int' [-Wnull-conversion]
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(352,6): warning : unused variable 'indexB' [-Wunused-variable]
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(393,6): warning : unused variable 'indexB' [-Wunused-variable]
-     1>D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\PS4RendererBase.cpp(418,9): warning : unused variable 'a' [-Wunused-variable]
-       Link:
-         D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\host_tools\bin\orbis-ld.exe -o "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\ORBIS_Debug\PS4Setting.elf" -L"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\samples\sample_code\graphics\api_gnm\toolkit" --enc --start-group ORBIS_Debug\Camera.o ORBIS_Debug\InputBase.o ORBIS_Debug\main.o ORBIS_Debug\Mesh.o ORBIS_Debug\OBJMesh.o ORBIS_Debug\PS4AudioSystem.o ORBIS_Debug\PS4ComputeShader.o ORBIS_Debug\PS4Frame.o ORBIS_Debug\PS4Input.o ORBIS_Debug\PS4MemoryAware.o ORBIS_Debug\PS4Mesh.o ORBIS_Debug\PS4RendererBase.o ORBIS_Debug\PS4Shader.o ORBIS_Debug\PS4SoundEmitter.o ORBIS_Debug\PS4Texture.o ORBIS_Debug\RendererBase.o ORBIS_Debug\ShaderBase.o ORBIS_Debug\TextureBase.o libSceDbgVideoOut_stub_weak.a libSceVideoOut_stub_weak.a libSceGnm.a libSceGnm_debug.a libSceGnmx.a libSceGnmx_debug.a libSceGpuAddress.a libSceGnmDriver_stub_weak.a libSceShaderBinary.a libSceGnf.a libSceGnf_debug.a libScePad_stub_weak.a libSceUserService_stub_weak.a libSceSysmodule_stub_weak.a libSceNgs2_stub_weak.a libSceAudioOut_stub_weak.a toolkit_debug.a "-lSceDbgEnC" --end-group
-         GraphicsSkeleton.vcxproj -> D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\ORBIS_Debug\PS4Setting.elf
-     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\GraphicsSkeleton.vcxproj" (Build target(s)).
+     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\GraphicsSkeleton.vcxproj" (1) is building "D:\GIthub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" (2:3) on node 2 (GetResolvedLinkLibs target(s)).
+     2>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (nclgl.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     2>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" (GetResolvedLinkLibs target(s)).
+     1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\GraphicsSkeleton.vcxproj" (1) is building "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (3:3) on node 1 (GetResolvedLinkLibs target(s)).
+     3>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ncltech.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+     3>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (GetResolvedLinkLibs target(s)).
+     1>Link:
+         D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\host_tools\bin\orbis-ld.exe -o "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\ORBIS_Debug\PS4Setting.elf" -L../Qt/lib -L../Qt/plugins/platforms -L../../FMOD/lib/ -L"D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\target\samples\sample_code\graphics\api_gnm\toolkit" --enc --start-group ORBIS_Debug\Camera.o ORBIS_Debug\InputBase.o ORBIS_Debug\main.o ORBIS_Debug\Mesh.o ORBIS_Debug\OBJMesh.o ORBIS_Debug\PS4AudioSystem.o ORBIS_Debug\PS4ComputeShader.o ORBIS_Debug\PS4Frame.o ORBIS_Debug\PS4Input.o ORBIS_Debug\PS4MemoryAware.o ORBIS_Debug\PS4Mesh.o ORBIS_Debug\PS4RendererBase.o ORBIS_Debug\PS4Shader.o ORBIS_Debug\PS4SoundEmitter.o ORBIS_Debug\PS4Texture.o ORBIS_Debug\RendererBase.o ORBIS_Debug\ShaderBase.o ORBIS_Debug\TextureBase.o "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\OpenGL.lib" "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\Physics.lib" libSceDbgVideoOut_stub_weak.a libSceVideoOut_stub_weak.a libSceGnm.a libSceGnm_debug.a libSceGnmx.a libSceGnmx_debug.a libSceGpuAddress.a libSceGnmDriver_stub_weak.a libSceShaderBinary.a libSceGnf.a libSceGnf_debug.a libScePad_stub_weak.a libSceUserService_stub_weak.a libSceSysmodule_stub_weak.a libSceNgs2_stub_weak.a libSceAudioOut_stub_weak.a toolkit_debug.a "-lSceDbgEnC" --end-group
+         orbis-ld 3.00.0.2845 (rel,orbis,3.000,linker,common,src @286380 x64) D:\Program Files (x86)\SCE\ORBIS SDKs\3.000\host_tools\bin\orbis-ld.exe
+     1>Command line : error : L0533: cannot move file "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\ORBIS_Debug\PS4Setting.elf" to "D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\ORBIS_Debug\279C.tmp": The process cannot access the file because it is being used by another process
+     1>Command line : error : L0064: Linking aborted
+     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\PS4\GraphicsSkeleton.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:01.47
+Time Elapsed 00:00:00.20

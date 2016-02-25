@@ -48,10 +48,10 @@ PS4RendererBase::PS4RendererBase()
 
 	camera = new Camera(0.0f, 0.0f, Vector4(0, 0, 0, 0));
 	quad = PS4Mesh::GenerateQuad();
-	defaultMesh =	new OBJMesh("/app0/cube.obj");
 
-	defaultTexture	= PS4Texture::LoadTextureFromFile("/app0/doge.gnf");
-	//sky = PS4Texture::LoadTextureFromFile("/app0/texture/skyBox/sky_pos_x.gnf");
+	defaultMesh =	new OBJMesh("/app0/sphere.obj");
+	defaultTexture	= PS4Texture::LoadTextureFromFile("/app0/sky_pos_x.gnf");
+
 	SwapBuffers();
 }
 
@@ -308,11 +308,7 @@ void PS4RendererBase::RenderScene()			{
 	currentGFXContext->setTextures(Gnm::kShaderStagePs, 0, 1, &defaultTexture->GetAPITexture());
 	currentGFXContext->setSamplers(Gnm::kShaderStagePs, 0, 1, &trilinearSampler);
 
-
 	DrawMesh(*defaultMesh);
-
-
-
 
 	currentFrame->EndFrame();
 
