@@ -355,18 +355,12 @@ void PS4RendererBase::DrawMesh(PS4Mesh& mesh) {
 }
 
 void PS4RendererBase::DrawSky(PS4Mesh& mesh) {
-
-
 	projMatrix = Matrix4::perspective(0.78f, (float)currentPS4Buffer->colourTarget.getWidth() / (float)currentPS4Buffer->colourTarget.getHeight(), 1.0f, 5000.0f);
 	viewMatrix = camera->BuildViewMatrix();
 	//modelMatrix.identity();
 	modelMatrix = Matrix4::translation(Vector3(0, 0, -5)) * Matrix4::rotationZ(rad);
 
-
-
 	Matrix4* modelViewProj = (Matrix4*)currentGFXContext->allocateFromCommandBuffer(sizeof(Matrix4)* 4, Gnm::kEmbeddedDataAlignment4);
-
-
 
 	modelViewProj[0] = modelMatrix;
 	modelViewProj[1] = viewMatrix;
