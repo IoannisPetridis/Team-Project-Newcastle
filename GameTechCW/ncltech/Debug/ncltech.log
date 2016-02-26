@@ -1,0 +1,45 @@
+﻿Build started 26/02/2016 13:35:17.
+     1>Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-Henry-s-Branch(1)\Team-Project-Newcastle-Henry-s-Branch\Henry\TeamWork\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PhysicsEngine.cpp
+         PhysicsEngine.cpp
+     1>d:\team project\team-project-newcastle\team-project-newcastle-henry-s-branch(1)\team-project-newcastle-henry-s-branch\henry\teamwork\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-Henry-s-Branch(1)\Team-Project-Newcastle-Henry-s-Branch\Henry\TeamWork\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
+         Debug\Server.obj
+         Debug\Client.obj
+         Debug\ActionHandler.obj
+         Debug\AggressiveAI.obj
+         Debug\AssetsManager.obj
+         Debug\Block.obj
+         Debug\Chase.obj
+         Debug\CollisionDetection.obj
+         Debug\Constraint.obj
+         Debug\CuboidCollisionShape.obj
+         Debug\CylinderCollisionShape.obj
+         Debug\Defend.obj
+         Debug\DefensiveAI.obj
+         Debug\Dribble.obj
+         Debug\GameObjectMag.obj
+         Debug\NCLDebug.obj
+         Debug\GameObject.obj
+         Debug\Hull.obj
+         Debug\Manifold.obj
+         Debug\NeutralAI.obj
+         Debug\Patrol.obj
+         Debug\PhysicsEngine.obj
+         Debug\PhysicsObject.obj
+         Debug\PiramidCollisionShape.obj
+         Debug\Player.obj
+         Debug\PowerUps.obj
+         Debug\Punt.obj
+         Debug\PuntPlayer.obj
+         Debug\Scene.obj
+         Debug\SimpleMeshObject.obj
+         Debug\SphereCollisionShape.obj
+         ncltech.vcxproj -> D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-Henry-s-Branch(1)\Team-Project-Newcastle-Henry-s-Branch\Henry\TeamWork\GameTechCW\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "D:\Team Project\Team-Project-Newcastle\Team-Project-Newcastle-Henry-s-Branch(1)\Team-Project-Newcastle-Henry-s-Branch\Henry\TeamWork\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.90
