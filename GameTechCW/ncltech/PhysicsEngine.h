@@ -99,6 +99,7 @@ public:
 	//check if there is a collision between objA and objB, if there is, 
 	//return true
 	bool CheckCollision(PhysicsObject* obja, PhysicsObject* objb);
+	std::vector<CollisionPair> m_BroadphaseCollisionPairs;
 
 	//return a copy of narrowphase collision pair list exclude ground to ground collision
 	std::vector<CollisionPair>* GetVPair() { return &VPairList; }
@@ -140,7 +141,7 @@ protected:
 	void OctreeBuild();
 	bool OctreeCheck(PhysicsObject* objA, PhysicsObject* objB);
 	float CollisionDetectionDis;
-
+	
 protected:
 	void ClearCPair() { CPairList.clear(); }
 
@@ -157,7 +158,7 @@ protected:
 	Vector3		m_Gravity;
 	float		m_DampingFactor;
 
-	std::vector<CollisionPair> m_BroadphaseCollisionPairs;
+	//std::vector<CollisionPair> m_BroadphaseCollisionPairs;
 
 	std::vector<PhysicsObject*> m_PhysicsObjects;
 

@@ -30,7 +30,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground");//Floor
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Ground(), false);
 	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Field, false);
-	AssetsManager::GOInstance->SetBumpMap(AssetsManager::m_FieldBUMP, false);
+	//AssetsManager::GOInstance->SetBumpMap(AssetsManager::m_FieldBUMP, false);
 
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 1.0f));

@@ -31,11 +31,13 @@ std::function<bool(PhysicsObject*)> PowerUpCallback = [&](PhysicsObject* otherOb
 		if (AssetsManager::Player_1->GetPowerUpState() == "No PowerUp"){
 			AssetsManager::Player_1->SetPowerUpState(PowerUps::PowerUpSelector());
 			PowerUps::SetPlayerPickup(true);
-			PowerUps::PowerUpBox->Physics()->SetPosition(Vector3(1000.f, 0.f, 0.f));
+			PowerUps::PowerUpBox->Physics()->SetPosition(Vector3(200.f, 0.f, 0.f));
 			PhysicsEngine::Instance()->RemovePhysicsObject(PowerUps::PowerUpBox->Physics());
 			return false;
 		}
 		else{
+			PowerUps::PowerUpBox->Physics()->SetPosition(Vector3(1000.f, 0.f, 0.f));
+			PhysicsEngine::Instance()->RemovePhysicsObject(PowerUps::PowerUpBox->Physics());
 			return false;
 		}
 	}

@@ -37,7 +37,7 @@ AggressiveAI* AssetsManager::AggressiveAI;
 void AssetsManager::InitializeMeshes()
 {
 	m_CheckerboardTex = LoadTexture("wood.jpg");
-	m_CubeTex = LoadTexture("cube.jpg");
+	m_CubeTex = LoadTexture("cube.png");
 	
 	m_TargetTexture = LoadTexture("target.tga");
 	m_ThrowTex = LoadTexture("brick.tga");

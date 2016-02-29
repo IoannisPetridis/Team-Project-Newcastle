@@ -67,6 +67,7 @@ public:
 
 	void SetOnCollisionCallback(std::function<bool(PhysicsObject*)> onCollisionFunction) { m_OnCollisionCallback = onCollisionFunction; }
 
+
 	//<--------- Additional Variables ------------->
 	std::vector<Vector3> verletPos;
 	std::vector<Vector3> verletAcc;
@@ -103,4 +104,5 @@ protected:
 	//<----------COLLISION------------>
 	CollisionShape* m_colShape;
 	std::function<bool(PhysicsObject*)> m_OnCollisionCallback;  //Returns true to process the collision, false to ignore
+	
 };
