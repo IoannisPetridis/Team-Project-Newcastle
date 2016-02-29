@@ -114,6 +114,7 @@ int main()
 	GOM_GamePlay->SetID(1);
 	scene = new MyScene(Window::GetWindow(), GOM_GamePlay);
 
+	
 	//Initialise the ActionHandler Instnace
 	ActionHandler::Instance();
 	ActionHandler::Instance()->SetDefaultScene(scene);
