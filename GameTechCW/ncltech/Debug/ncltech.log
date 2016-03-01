@@ -1,29 +1,7 @@
-﻿Build started 2/25/2016 4:10:08 PM.
+﻿Build started 3/1/2016 3:11:07 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ncltech.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp CuboidCollisionShape.cpp GameObject.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PiramidCollisionShape.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
-         ActionHandler.cpp
-         Generating Code...
-     1>d:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(43): warning C4715: 'ActionHandler::ScoreCheck' : not all control paths return a value
-         Skipping... (no relevant changes detected)
-         SphereCollisionShape.cpp
-         SimpleMeshObject.cpp
-         Scene.cpp
-         Player.cpp
-         PiramidCollisionShape.cpp
-         PhysicsEngine.cpp
-         OffState.cpp
-         Manifold.cpp
-         HomeState.cpp
-         GuardState.cpp
-         GameObjectMag.cpp
-         GameObject.cpp
-         CuboidCollisionShape.cpp
-         CollisionDetection.cpp
-         AssetsManager.cpp
-         ArbitraryAI.cpp
-       Lib:
+     1>Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\Physics.lib" /NOLOGO Debug\Network.obj
          Debug\Server.obj
          Debug\Client.obj
@@ -54,4 +32,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.34
+Time Elapsed 00:00:00.12

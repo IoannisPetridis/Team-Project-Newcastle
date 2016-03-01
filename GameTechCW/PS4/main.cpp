@@ -1,3 +1,5 @@
+#ifdef ORBIS
+
 #include "PS4RendererBase.h"
 #include "PS4Input.h"
 
@@ -20,3 +22,6 @@ int main(void) {
 
 	return 1;
 }
+
+#endif
+

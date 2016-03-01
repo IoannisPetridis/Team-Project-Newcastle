@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include <nclgl\Window.h>
 #include <ncltech\PhysicsEngine.h>
 #include <ncltech\NCLDebug.h>
@@ -171,13 +173,15 @@ int main()
 			{
 				int SC = ActionHandler::Instance()->ScoreCheck();
 				if (SC == 1) {
-					for (int i = 0; i < 50; i++) {
+					for (int i = 0; i < 100; i++) {
 						Loading_scene->RenderScene();
+						Window::GetWindow().GetTimer()->GetTimedMS();
 					}
 				}
 				else if (SC == 2) {
-					for (int i = 0; i < 50; i++) {
+					for (int i = 0; i < 100; i++) {
 						Loading_scene->RenderScene();
+						Window::GetWindow().GetTimer()->GetTimedMS();
 					}
 				}
 			}
@@ -190,3 +194,5 @@ int main()
 	AssetsManager::ReleaseMeshes();
 	return Quit();
 }
+
+#endif

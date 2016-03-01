@@ -1,31 +1,7 @@
-﻿Build started 2/24/2016 5:17:47 PM.
+﻿Build started 3/1/2016 3:11:07 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (nclgl.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp CubeRobot.cpp Frustum.cpp GameTimer.cpp Keyboard.cpp Matrix3.cpp Matrix4.cpp MD5Anim.cpp MD5FileData.cpp MD5Mesh.cpp MD5Node.cpp Mesh.cpp Mouse.cpp OBJMesh.cpp OGLRenderer.cpp Plane.cpp Quaternion.cpp SceneNode.cpp Shader.cpp Window.cpp
-         Window.cpp
-         Shader.cpp
-         SceneNode.cpp
-         Quaternion.cpp
-         Plane.cpp
-         OGLRenderer.cpp
-     1>d:\github\team-project-newcastle\gametechcw\nclgl\oglrenderer.cpp(264): warning C4018: '<' : signed/unsigned mismatch
-         OBJMesh.cpp
-         Mouse.cpp
-         Mesh.cpp
-         MD5Node.cpp
-         MD5Mesh.cpp
-         MD5FileData.cpp
-         MD5Anim.cpp
-         Matrix4.cpp
-         Matrix3.cpp
-         Keyboard.cpp
-         GameTimer.cpp
-         Frustum.cpp
-         CubeRobot.cpp
-         Camera.cpp
-         Generating Code...
-       Lib:
+     1>Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\OpenGL.lib" /NOLOGO Debug\Camera.obj
          Debug\CubeRobot.obj
          Debug\Frustum.obj
@@ -51,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:09.11
+Time Elapsed 00:00:00.52

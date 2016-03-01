@@ -78,7 +78,6 @@
     <ClCompile Include="..\Networking\Networking\Client.cpp" />
     <ClCompile Include="ActionHandler.cpp" />
     <ClCompile Include="ArbitraryAI.cpp" />
-    <ClCompile Include="AssetsManager.cpp" />
     <ClCompile Include="CollisionDetection.cpp" />
     <ClCompile Include="Constraint.cpp" />
     <ClCompile Include="CuboidCollisionShape.cpp" />
@@ -105,7 +104,6 @@
     <ClInclude Include="..\Networking\Networking\Client.h" />
     <ClInclude Include="ActionHandler.h" />
     <ClInclude Include="ArbitraryAI.h" />
-    <ClInclude Include="AssetsManager.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="CollisionShape.h" />

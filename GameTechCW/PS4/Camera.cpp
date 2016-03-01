@@ -53,11 +53,6 @@ void Camera::UpdateCamera(float msec, PS4Input* input)	{
 
 		}
 		
-		
-		
-
-		
-
 
 		/*if (input->GetAxis(0).y == -1) {
 			position += Matrix4::rotationY(yaw) * Vector3(0, 0, -1) * speed;
