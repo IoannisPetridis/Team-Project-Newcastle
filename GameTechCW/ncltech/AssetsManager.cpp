@@ -44,7 +44,7 @@ void AssetsManager::InitializeMeshes()
 	m_Glass = LoadTexture("blue.jpg");
 	m_GlassBUMP = LoadTexture("purple.jpg");
 	m_ThrowTexBUMP = LoadTexture("brickDOT.jpg");
-	m_Field = LoadTexture("freen.jpg");
+	m_Field = LoadTexture("field.tga");
 	m_FieldBUMP = LoadTexture("fieldDOT.tga");
 	m_Loading = LoadTexture("loading.tga");
 	m_Red = LoadTexture("red.jpg");
