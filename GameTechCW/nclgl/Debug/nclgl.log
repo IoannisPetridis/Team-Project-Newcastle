@@ -1,4 +1,4 @@
-﻿Build started 2/23/2016 12:02:37 AM.
+﻿Build started 2/24/2016 2:47:36 PM.
      1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D GLEW_STATIC /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp CubeRobot.cpp Frustum.cpp GameTimer.cpp Keyboard.cpp Matrix3.cpp Matrix4.cpp MD5Anim.cpp MD5FileData.cpp MD5Mesh.cpp MD5Node.cpp Mesh.cpp Mouse.cpp OBJMesh.cpp OGLRenderer.cpp Plane.cpp Quaternion.cpp SceneNode.cpp Shader.cpp Window.cpp
@@ -50,4 +50,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:14.27
+Time Elapsed 00:00:12.66

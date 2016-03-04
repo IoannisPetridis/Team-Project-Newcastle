@@ -15,9 +15,6 @@
     <ClCompile Include="Server.cpp">
       <Filter>Network</Filter>
     </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
     <ClCompile Include="Thread.cpp">
       <Filter>Threads</Filter>
     </ClCompile>
@@ -35,9 +32,6 @@
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="Server.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Client.h">
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="Thread.h">

@@ -17,7 +17,7 @@ public:
 	SOCKET getListeningSocket();
 	SOCKET getIncSocket();
 private:
-	bool all_rdy = true;
+	bool all_rdy = false;
 	SOCKET inc = NULL;
 	struct sockaddr_storage inc_addr;
 	socklen_t inc_size = sizeof(inc_addr);

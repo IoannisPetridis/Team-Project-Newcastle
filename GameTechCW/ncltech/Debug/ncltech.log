@@ -1,4 +1,4 @@
-﻿Build started 2/23/2016 12:02:51 AM.
+﻿Build started 2/24/2016 2:47:48 PM.
      1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
@@ -56,4 +56,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:20.24
+Time Elapsed 00:00:18.16
