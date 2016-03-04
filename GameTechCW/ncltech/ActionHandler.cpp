@@ -143,7 +143,9 @@ void ActionHandler::Flip(SimpleMeshObject *P) {
 }
 
 void ActionHandler::Update(float dt) {
-	NCLDebug::Log(Vector3(0.0f, 0.0f, 0.0f), std::to_string(AssetsManager::Player_1->Physics()->GetLinearVelocity().Length()));
+	if (PhysicsEngine::Instance()->GetDebug()){
+		NCLDebug::Log(Vector3(0.0f, 0.0f, 0.0f), std::to_string(AssetsManager::Player_1->Physics()->GetLinearVelocity().Length()));
+	}
 	
 	{
 		AssetsManager::Player_1->NormalCal();

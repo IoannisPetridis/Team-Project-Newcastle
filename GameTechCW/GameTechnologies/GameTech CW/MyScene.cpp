@@ -151,22 +151,23 @@ void MyScene::UpdateScene(float msec)
 		PowerUps::AddAndroidPowerUp(100, 100, this, "banana");
 	}
 
-
-	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
-		+ " Y:"
-		+ std::to_string((int)m_Camera->GetPosition().y)
-		+ " Z:"
-		+ std::to_string((int)m_Camera->GetPosition().z)
-		+ " Pitch:"
-		+ std::to_string((float)m_Camera->GetPitch())
-		+ " Yaw:"
-		+ std::to_string((float)m_Camera->GetYaw())
-		+ " cord:" 
-		+ std::to_string((float)Proj_dir.x) + " "
-		+ std::to_string((float)Proj_dir.y) + " "
-		+ std::to_string((float)Proj_dir.z) + " "
-		);
-
+	if (PhysicsEngine::Instance()->GetDebug()){
+		NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
+			+ " Y:"
+			+ std::to_string((int)m_Camera->GetPosition().y)
+			+ " Z:"
+			+ std::to_string((int)m_Camera->GetPosition().z)
+			+ " Pitch:"
+			+ std::to_string((float)m_Camera->GetPitch())
+			+ " Yaw:"
+			+ std::to_string((float)m_Camera->GetYaw())
+			+ " cord:"
+			+ std::to_string((float)Proj_dir.x) + " "
+			+ std::to_string((float)Proj_dir.y) + " "
+			+ std::to_string((float)Proj_dir.z) + " "
+			);
+		
+	}
 	if (PhysicsEngine::Instance()->IsPaused()){
 		Audio::channel1->setPaused(true);
 		Audio::channel2->setPaused(true);

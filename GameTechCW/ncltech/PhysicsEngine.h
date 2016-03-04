@@ -96,6 +96,9 @@ public:
 	float GetCollisionDetectionDis()	{ return CollisionDetectionDis; }
 	void  SetCollisionDetectionDis(float n)	{ CollisionDetectionDis = n; }
 
+	bool GetDebug(){ return m_Debug; }
+	void SetDebug(bool a){ m_Debug = a; }
+
 	//check if there is a collision between objA and objB, if there is, 
 	//return true
 	bool CheckCollision(PhysicsObject* obja, PhysicsObject* objb);
@@ -149,6 +152,7 @@ protected:
 	bool		m_IsPaused;
 	bool		m_Gameover;
 	bool		m_Collision;
+	bool		m_Debug;
 
 	std::vector<CollisionPair> CPairList;
 	std::vector<CollisionPair> VPairList;

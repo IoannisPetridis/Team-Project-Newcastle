@@ -32,7 +32,7 @@ Note: Both 'point_radius' (DrawPoint) and 'line_width' (DrawThickLine) are in wo
 #include <mutex>
 
 #define MAX_LOG_SIZE		25
-#define LOG_TEXT_SIZE  		24.0f
+#define LOG_TEXT_SIZE  		12.0f
 #define STATUS_TEXT_SIZE	16.0f
 
 enum TextAlignment
