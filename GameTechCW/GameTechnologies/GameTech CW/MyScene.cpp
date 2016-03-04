@@ -37,7 +37,7 @@ bool MyScene::InitialiseGL()
 	else if (GOM->GetID() == 1) {
 		AssetsManager::InitializeMeshes();
 		GOM->GOM_GamePlay(this);
-	
+
 		AssetsManager::Player_1 = new Player("car");
 		AssetsManager::Player_1->SetScene(this);
 		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
@@ -45,7 +45,7 @@ bool MyScene::InitialiseGL()
 		//3 choices of car texture
 		//these textures are just placeholders from what we had
 		if (MainWindow::playertexture == 1){
-			
+
 			AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
 		}
 
@@ -58,7 +58,7 @@ bool MyScene::InitialiseGL()
 		}
 
 		//4 choices of car size, 1 2 3 4
-		int size= MainWindow::playersize * 0.5;
+		int size = MainWindow::playersize * 0.5;
 		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
 		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
 		AssetsManager::Player_1->SetBoundingRadius((MainWindow::playersize) * (MainWindow::playersize));
@@ -70,22 +70,7 @@ bool MyScene::InitialiseGL()
 		AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
 
 		this->AddGameObject(AssetsManager::Player_1);
-
-
 	}
-
-	{//Player_1
-
-
-		
-
-
-
-
-
-	}
-
-
 
 	//Initialize all game objects
 	Audio_Timer.GetTimedMS();
@@ -181,6 +166,21 @@ void MyScene::UpdateScene(float msec)
 		+ std::to_string((float)Proj_dir.y) + " "
 		+ std::to_string((float)Proj_dir.z) + " "
 		);
+
+	if (PhysicsEngine::Instance()->IsPaused()){
+		Audio::channel1->setPaused(true);
+		Audio::channel2->setPaused(true);
+		Audio::channel3->setPaused(true);
+		Audio::channel4->setPaused(true);
+	}
+	else{
+
+		Audio::channel1->setPaused(false);
+		Audio::channel2->setPaused(false);
+		Audio::channel3->setPaused(false);
+		Audio::channel4->setPaused(false);
+	}
+	
 }
 
 void MyScene::RenderScene()

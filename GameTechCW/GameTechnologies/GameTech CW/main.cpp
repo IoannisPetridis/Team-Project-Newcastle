@@ -173,12 +173,14 @@ int main()
 				if (SC == 1) {
 					for (int i = 0; i < 100; i++) {
 						Loading_scene->RenderScene();
+						NCLDebug::AddStatusEntry2(Vector4(1.0f, 0.0f, 0.0f, 1.0f), "GOAL");
 						Window::GetWindow().GetTimer()->GetTimedMS();
 					}
 				}
 				else if (SC == 2) {
 					for (int i = 0; i < 100; i++) {
 						Loading_scene->RenderScene();
+						NCLDebug::AddStatusEntry2(Vector4(0.0f, 0.0f, 1.0f, 1.0f), "GOAL");
 						Window::GetWindow().GetTimer()->GetTimedMS();
 					}
 				}
