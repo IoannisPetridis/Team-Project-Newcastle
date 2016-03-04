@@ -86,12 +86,12 @@ int main()
 		return Quit(true, "Window failed to initialise!");
 	}
 
-	{
+	
 		GameObjectMag* GOM_Loading = new GameObjectMag();
 		GOM_Loading->SetID(0);
 		Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
 		Loading_scene->RenderScene();
-	}
+	
 
 
 	//~~~QT SHIT~~~ (UNCOMMENT THIS IF THE WINDOW IS ANNOYING YOU)
@@ -114,7 +114,6 @@ int main()
 	GOM_GamePlay->SetID(1);
 	scene = new MyScene(Window::GetWindow(), GOM_GamePlay);
 
-	
 	//Initialise the ActionHandler Instnace
 	ActionHandler::Instance();
 	ActionHandler::Instance()->SetDefaultScene(scene);
@@ -173,6 +172,7 @@ int main()
 				int SC = ActionHandler::Instance()->ScoreCheck();
 				if (SC == 1) {
 					for (int i = 0; i < 50; i++) {
+
 						Loading_scene->RenderScene();
 					}
 				}

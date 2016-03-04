@@ -38,6 +38,7 @@ public:
 	static GLuint m_GlassBUMP;
 	static GLuint m_WoodBUMP;
 	static GLuint m_groundTex;
+	static GLuint m_Red;
 
 	static SimpleMeshObject* GOInstance;
 	static SimpleMeshObject* Camera_Entity;

@@ -15,7 +15,8 @@ std::function<bool(PhysicsObject*)> bananaSpin = [&](PhysicsObject* otherObject)
 		PowerUps::BananaPU->Physics()->SetPosition(Vector3(1000.f, 0.f, 0.f));
 		//PowerUps::BananaPU->RemoveFromScene();
 		PhysicsEngine::Instance()->RemovePhysicsObject(PowerUps::BananaPU->Physics());
-		//PowerUps::BananaPU->deletemesh();
+		//PowerUps::BananaPU->deletemesh(); 
+
 
 		return false;
 	}
@@ -45,6 +46,8 @@ std::function<bool(PhysicsObject*)> PowerUpCallback = [&](PhysicsObject* otherOb
 		return true;
 	}
 };
+
+//create a vector of objects for physics engine to delete  
 
 std::function<bool(PhysicsObject*)> AndroidPowerUpCallback = [&](PhysicsObject* otherObject) {
 	if (otherObject->name == "car"){

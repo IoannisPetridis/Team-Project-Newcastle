@@ -19,7 +19,7 @@ GLuint AssetsManager::m_Field = 0;
 GLuint AssetsManager::m_Loading = 0;
 GLuint AssetsManager::m_Glass = 0;
 GLuint AssetsManager::m_GlassBUMP = 0;
-GLuint AssetsManager::m_WoodBUMP = 0;
+GLuint AssetsManager::m_Red = 0;
 //GameObject Assets
 SimpleMeshObject* AssetsManager::GOInstance;
 SimpleMeshObject* AssetsManager::Camera_Entity;
@@ -36,18 +36,18 @@ AggressiveAI* AssetsManager::AggressiveAI;
 
 void AssetsManager::InitializeMeshes()
 {
-	m_CheckerboardTex = LoadTexture("wood.jpg");
+	m_CheckerboardTex = LoadTexture("white.jpg");
 	m_CubeTex = LoadTexture("cube.png");
 	
 	m_TargetTexture = LoadTexture("target.tga");
 	m_ThrowTex = LoadTexture("brick.tga");
-	m_Glass = LoadTexture("grass.jpg");
-	m_GlassBUMP = LoadTexture("grassDOT.png");
+	m_Glass = LoadTexture("blue.jpg");
+	m_GlassBUMP = LoadTexture("purple.jpg");
 	m_ThrowTexBUMP = LoadTexture("brickDOT.jpg");
-	m_Field = LoadTexture("field.tga");
+	m_Field = LoadTexture("freen.jpg");
 	m_FieldBUMP = LoadTexture("fieldDOT.tga");
 	m_Loading = LoadTexture("loading.tga");
-	m_WoodBUMP = LoadTexture("woodDOT.tga");
+	m_Red = LoadTexture("red.jpg");
 
 	m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pCube = new OBJMesh(MESHDIR"cube.obj");
@@ -65,14 +65,14 @@ void AssetsManager::InitializeMeshes()
 
 	m_pPlane->SetTexture(m_CheckerboardTex);
 	m_pCube->SetTexture(m_CheckerboardTex);
-	m_pSphere->SetTexture(m_CheckerboardTex);
+	m_pSphere->SetTexture(m_GlassBUMP);
 	m_Triangle->SetTexture(m_CheckerboardTex);
 
-	m_pPlane->SetBumpMap(m_WoodBUMP);
+	/*m_pPlane->SetBumpMap(m_WoodBUMP);
 	m_pCube->SetBumpMap(m_WoodBUMP);
 	m_pSphere->SetBumpMap(m_WoodBUMP);
 	m_Triangle->SetBumpMap(m_WoodBUMP);
-
+*/
 
 }
 

@@ -37,43 +37,53 @@ bool MyScene::InitialiseGL()
 	else if (GOM->GetID() == 1) {
 		AssetsManager::InitializeMeshes();
 		GOM->GOM_GamePlay(this);
-	}
 	
-	//{//Player_1
-	//	AssetsManager::Player_1 = new Player("car");
-	//	AssetsManager::Player_1->SetScene(this);
-	//	AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
-	//	//AssetsManager::Player_1->SetColour(Vector4(0.2f, 1.0f, 0.5f, 1.0f));
+		AssetsManager::Player_1 = new Player("car");
+		AssetsManager::Player_1->SetScene(this);
+		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
 
-	//	//3 choices of car texture
-	//	//these textures are just placeholders from what we had
-	//	if (MainWindow::playertexture == 1){
-	//		AssetsManager::Player_1->SetTexture(AssetsManager::m_ThrowTex, false); //wall texture
-	//		AssetsManager::Player_1->SetBumpMap(AssetsManager::m_ThrowTexBUMP, false);
-	//	}
+		//3 choices of car texture
+		//these textures are just placeholders from what we had
+		if (MainWindow::playertexture == 1){
+			
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
+		}
 
-	//	if (MainWindow::playertexture == 2){
-	//		AssetsManager::Player_1->SetTexture(AssetsManager::m_CheckerboardTex, false); //wood texture
-	//	}
+		if (MainWindow::playertexture == 2){
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_CheckerboardTex, false); //wood texture
+		}
 
-	//	if (MainWindow::playertexture == 3){
-	//		AssetsManager::Player_1->SetTexture(AssetsManager::m_Field, false); //grass texture
-	//	}
+		if (MainWindow::playertexture == 3){
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_Field, false); //grass texture
+		}
 
-	//	//4 choices of car size, 1 2 3 4
-	//	AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(MainWindow::playersize, MainWindow::playersize, MainWindow::playersize)));
-	//	AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(MainWindow::playersize, MainWindow::playersize, MainWindow::playersize)));
-	//	AssetsManager::Player_1->SetBoundingRadius(MainWindow::playersize * MainWindow::playersize);
+		//4 choices of car size, 1 2 3 4
+		int size= MainWindow::playersize * 0.5;
+		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
+		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
+		AssetsManager::Player_1->SetBoundingRadius((MainWindow::playersize) * (MainWindow::playersize));
 
-	//	//rest of car
-	//	AssetsManager::Player_1->Physics()->name = "car";
-	//	AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
-	//	AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
-	//	Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
-	//	AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
+		AssetsManager::Player_1->Physics()->name = "car";
+		AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
+		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
+		Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
+		AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
 
-	//	this->AddGameObject(AssetsManager::Player_1);
-	//}
+		this->AddGameObject(AssetsManager::Player_1);
+
+
+	}
+
+	{//Player_1
+
+
+		
+
+
+
+
+
+	}
 
 
 

@@ -164,17 +164,17 @@ void Dialog::skillsliderValueChanged(int value){
 void Dialog::texsliderValueChanged(int value){
 
     if(value == 1){
-    this->texoptions->setText("Checker");
+    this->texoptions->setText("Blue");
     textcubeimg->setPixmap(QPixmap("../../Qt/icons/checkertexture150x125.png"));
     }
 
     if(value == 2){
-    this->texoptions->setText("Something1");
+    this->texoptions->setText("White");
     textcubeimg->setPixmap(QPixmap("../../Qt/icons/checkertexturepink150x125.png"));
     }
 
     if(value == 3){
-    this->texoptions->setText("Something2");
+    this->texoptions->setText("Green");
     textcubeimg->setPixmap(QPixmap("../../Qt/icons/checkertextureblue150x125.png"));
     }
 
