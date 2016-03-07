@@ -28,8 +28,8 @@ public:
 
 	static FMOD_RESULT Result;
 	static FMOD::System *AudioSystem;
-	static FMOD::Channel   *channel1, *channel2, *channel3, *channel4;
-	static FMOD::Sound *Goal;
+	static FMOD::Channel   *channel1, *channel2, *channel3, *channel4, *channel5;
+	static FMOD::Sound *Goal,*Pickup;
 
 protected:
 
@@ -40,7 +40,7 @@ protected:
 	static FMOD_VECTOR CameraVelocity;
 	static FMOD_VECTOR LastPosition;
 
-	static FMOD::Sound *Car, *Crash, *Ball, *Wall; //*Goal;
+	static FMOD::Sound *Car, *Crash, *Ball, *Wall;// , *Pickup; //*Goal;
 	
 
 	static const int   INTERFACE_UPDATETIME;      // 50ms update for interface

@@ -9,13 +9,15 @@ FMOD::Sound* Audio::Car   = 0;
 FMOD::Sound* Audio::Crash = 0;
 FMOD::Sound* Audio::Ball  = 0;
 FMOD::Sound* Audio::Wall  = 0;
-FMOD::Sound* Audio::Goal = 0;
+FMOD::Sound* Audio::Goal  = 0;
+FMOD::Sound* Audio::Pickup= 0;
 
 //Channels
 FMOD::Channel *Audio::channel1 = 0;
 FMOD::Channel *Audio::channel2 = 0;
 FMOD::Channel *Audio::channel3 = 0;
 FMOD::Channel *Audio::channel4 = 0;
+FMOD::Channel *Audio::channel5 = 0;
 
 //Extra Info
 const int   Audio::INTERFACE_UPDATETIME = 50;      // 50ms update for interface
@@ -98,6 +100,7 @@ void Audio::LoadSounds(){
 
 	Result = AudioSystem->createSound(SOUNDSDIR"car.wav", FMOD_3D, 0, &Car);
 	Result = AudioSystem->createSound(SOUNDSDIR"goal.wav", FMOD_DEFAULT, 0, &Goal);
+	Result = AudioSystem->createSound(SOUNDSDIR"pickup-sound.wav", FMOD_3D, 0, &Pickup);
 
 	Result = Car->setMode(FMOD_LOOP_NORMAL);
 	Result = Car->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
