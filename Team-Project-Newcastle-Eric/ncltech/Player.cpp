@@ -64,81 +64,81 @@ void Player::CameraControl() {
 
 	//Camera Penetration Control
 	{
-		Vector3 Camera_Pos = P_camera->GetPosition();
+		//Vector3 Camera_Pos = P_camera->GetPosition();
 
-		float dis_1 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground"));
-		if (dis_1 < 0.4f) {
-			//if (P_camera->GetPitch() > 2.0f) P_camera->SetPitch(2.0f);
-		}
+		//float dis_1 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground"));
+		//if (dis_1 < 0.4f) {
+		//	//if (P_camera->GetPitch() > 2.0f) P_camera->SetPitch(2.0f);
+		//}
 
-		//along the -Z axis
-		float dis_2 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_right_b"));
-		if (dis_2 < 5.0f) {
-			float dir_z = Vector3::Dot(Proj_dir, Vector3(0.0f, 0.0f, -1.0f));
-			float dir_x = Vector3::Dot(Proj_dir, Vector3(1.0f, 0.0f, 0.0f));
-			if (dir_z >= -0.25) {
-				if (P_camera->GetPitch() > 30.0f) P_camera->SetPitch(30.0f);
-					P_camera->SetPosition(this->Physics()->GetPosition()
-					- (Proj_dir * 10.0f));
-			}
-			else {
-				if (dir_x >= 0) 
-				P_camera->SetPosition(this->Physics()->GetPosition() 
-				- (Proj_dir * dis_2) + Vector3(0.0f, 2.0f, -3.0f));
-				else
-				P_camera->SetPosition(this->Physics()->GetPosition()
-				- (Proj_dir * dis_2) + Vector3(0.0f, 2.0f, -3.0f));
-			}
-		}	
-		
-		//along the Z axis
-		float dis_3 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_left_b"));
-		if (dis_3 < 4.0f) { 
-			float dir_z = Vector3::Dot(Proj_dir, Vector3(0.0f, 0.0f, 1.0f));
-			float dir_x = Vector3::Dot(Proj_dir, Vector3(1.0f, 0.0f, 0.0f));
-			if (dir_z >= 0)
-			{
-				if (dir_x >= 0) 
-				P_camera->SetPosition(this->Physics()->GetPosition()
-				- (Proj_dir * dis_3) + Vector3(-4.0f, 2.0f, -3.0f));
-				else 
-				P_camera->SetPosition(this->Physics()->GetPosition()
-				- (Proj_dir * dis_3) + Vector3(4.0f, 2.0f, -3.0f));
-			}
-			else {
-				if (dir_x >= 0)
-				P_camera->SetPosition(this->Physics()->GetPosition()
-				- (Proj_dir * dis_3) + Vector3(-4.0f, 2.0f, 3.0f));
-				else
-				P_camera->SetPosition(this->Physics()->GetPosition()
-				- (Proj_dir * dis_3) + Vector3(4.0f, 2.0f, 3.0f));
-			}
-		}
-		
-		//along the X axis
-		float dis_4 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_front_b"));
-		if (dis_4 < 4.0f) {
-			float dir_4 = Vector3::Dot(Proj_dir, Vector3(1.0f, 0.0f, 0.0f));
-			if (dir_4 >= 0) P_camera->SetPosition(this->Physics()->GetPosition()
-				- (Proj_dir * 5.0f) + Vector3(-3.0f, 2.0f, 0.0f));
-			else {
-				P_camera->SetPosition(this->Physics()->GetPosition()
-					- (Proj_dir * dis_4) + Vector3(3.0f, 2.0f, 1.0f));
-			}
-		}
+		////along the -Z axis
+		//float dis_2 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_right_b"));
+		//if (dis_2 < 5.0f) {
+		//	float dir_z = Vector3::Dot(Proj_dir, Vector3(0.0f, 0.0f, -1.0f));
+		//	float dir_x = Vector3::Dot(Proj_dir, Vector3(1.0f, 0.0f, 0.0f));
+		//	if (dir_z >= -0.25) {
+		//		if (P_camera->GetPitch() > 30.0f) P_camera->SetPitch(30.0f);
+		//			P_camera->SetPosition(this->Physics()->GetPosition()
+		//			- (Proj_dir * 10.0f));
+		//	}
+		//	else {
+		//		if (dir_x >= 0) 
+		//		P_camera->SetPosition(this->Physics()->GetPosition() 
+		//		- (Proj_dir * dis_2) + Vector3(0.0f, 2.0f, -3.0f));
+		//		else
+		//		P_camera->SetPosition(this->Physics()->GetPosition()
+		//		- (Proj_dir * dis_2) + Vector3(0.0f, 2.0f, -3.0f));
+		//	}
+		//}	
+		//
+		////along the Z axis
+		//float dis_3 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_left_b"));
+		//if (dis_3 < 4.0f) { 
+		//	float dir_z = Vector3::Dot(Proj_dir, Vector3(0.0f, 0.0f, 1.0f));
+		//	float dir_x = Vector3::Dot(Proj_dir, Vector3(1.0f, 0.0f, 0.0f));
+		//	if (dir_z >= 0)
+		//	{
+		//		if (dir_x >= 0) 
+		//		P_camera->SetPosition(this->Physics()->GetPosition()
+		//		- (Proj_dir * dis_3) + Vector3(-4.0f, 2.0f, -3.0f));
+		//		else 
+		//		P_camera->SetPosition(this->Physics()->GetPosition()
+		//		- (Proj_dir * dis_3) + Vector3(4.0f, 2.0f, -3.0f));
+		//	}
+		//	else {
+		//		if (dir_x >= 0)
+		//		P_camera->SetPosition(this->Physics()->GetPosition()
+		//		- (Proj_dir * dis_3) + Vector3(-4.0f, 2.0f, 3.0f));
+		//		else
+		//		P_camera->SetPosition(this->Physics()->GetPosition()
+		//		- (Proj_dir * dis_3) + Vector3(4.0f, 2.0f, 3.0f));
+		//	}
+		//}
+		//
+		////along the X axis
+		//float dis_4 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_front_b"));
+		//if (dis_4 < 4.0f) {
+		//	float dir_4 = Vector3::Dot(Proj_dir, Vector3(1.0f, 0.0f, 0.0f));
+		//	if (dir_4 >= 0) P_camera->SetPosition(this->Physics()->GetPosition()
+		//		- (Proj_dir * 5.0f) + Vector3(-3.0f, 2.0f, 0.0f));
+		//	else {
+		//		P_camera->SetPosition(this->Physics()->GetPosition()
+		//			- (Proj_dir * dis_4) + Vector3(3.0f, 2.0f, 1.0f));
+		//	}
+		//}
 
-		//along the -X axis
-		float dis_5 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_back_b"));
-		float lenght_5 = (P_camera->GetPosition() - this->Physics()->GetPosition()).Length() - 1.0f;
-		if (dis_5 < 4.0f) {
-			float dir_5 = Vector3::Dot(Proj_dir, Vector3(-1.0f, 0.0f, 0.0f));
-			if (dir_5 >= 0) P_camera->SetPosition(this->Physics()->GetPosition()
-				- (Proj_dir * 5.0f) + Vector3(3.0f, 2.0f, 0.0f));
-			else {
-				P_camera->SetPosition(this->Physics()->GetPosition()
-					- (Proj_dir * dis_5) + Vector3(-3.0f, 2.0f, 1.0f));
-			}
-		}
+		////along the -X axis
+		//float dis_5 = DisWalltoPlayer(m_Scene->m_RootGameObject->FindGameObject("ground_back_b"));
+		//float lenght_5 = (P_camera->GetPosition() - this->Physics()->GetPosition()).Length() - 1.0f;
+		//if (dis_5 < 4.0f) {
+		//	float dir_5 = Vector3::Dot(Proj_dir, Vector3(-1.0f, 0.0f, 0.0f));
+		//	if (dir_5 >= 0) P_camera->SetPosition(this->Physics()->GetPosition()
+		//		- (Proj_dir * 5.0f) + Vector3(3.0f, 2.0f, 0.0f));
+		//	else {
+		//		P_camera->SetPosition(this->Physics()->GetPosition()
+		//			- (Proj_dir * dis_5) + Vector3(-3.0f, 2.0f, 1.0f));
+		//	}
+		//}
 	}
 }
 

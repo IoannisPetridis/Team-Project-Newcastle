@@ -5,11 +5,11 @@ uniform sampler2D bumpTex;
 
 uniform vec3 cameraPos;
 uniform int lightSize;
-uniform vec4 lightColour[20];
-uniform vec3 lightPos[20];
-uniform float lightRadius[20];
-uniform float bright[20];
-uniform vec3 isOn[20];
+uniform vec4 lightColour[70];
+uniform vec3 lightPos[70];
+uniform float lightRadius[70];
+uniform float bright[70];
+uniform vec3 isOn[70];
 uniform float fadeValue;
 
 
@@ -32,7 +32,7 @@ void main(void){
 	vec3 normal = normalize(TBN*(texture(bumpTex,IN.texCoord).rgb * 2.0 -1.0));
 	//---------------------------------
 	vec3 incident = normalize(lightPos[0]-IN.worldPos);
-		float lambert = max(0.0,dot(incident,IN.normal));
+		float lambert = max(0.0,dot(incident,normal));
 		float dist = length(lightPos[0] - IN.worldPos);
 		float atten = 1.0 - clamp(dist/lightRadius[0],0.0,1.0);
 		
@@ -43,7 +43,7 @@ void main(void){
 		vec3 halfDir = normalize(incident + viewDir);
 
 		//calculate the specular reflection
-		float rFactor = max(0.0,dot(halfDir,IN.normal));
+		float rFactor = max(0.0,dot(halfDir,normal));
 		//shiny
 		float sFactor =pow(rFactor,25.0);
 		
@@ -67,9 +67,9 @@ void main(void){
 	 for(int i=1;i<lightSize;i++)
 	 {
 		 incident = normalize(lightPos[i]-IN.worldPos);
-		 lambert = max(0.0,dot(incident,IN.normal));
+		 lambert = max(0.0,dot(incident,normal));
 		 dist = length(lightPos[i] - IN.worldPos);
-			atten = 1.0 - clamp(dist/lightRadius[i],0.0,1.0);
+		 atten = 1.0 - clamp(dist/lightRadius[i],0.0,1.0);
 		
 		 //view vector
 		 viewDir = normalize(cameraPos - IN.worldPos);
@@ -78,14 +78,10 @@ void main(void){
 		 halfDir = normalize(incident + viewDir);
 
 		 //calculate the specular reflection
-		 rFactor = max(0.0,dot(halfDir,IN.normal));
+		 rFactor = max(0.0,dot(halfDir,normal));
 		 //shiny
 		 sFactor =pow(rFactor,25.0);
-		 shadow = 1.0; // New !
-		 if( IN.shadowProj . w > 0.0) { // New !
-		 shadow = textureProj ( shadowTex1 , IN.shadowProj );
-		 }
-		  lambert *= shadow; // New !
+
 		
 		 colour = (diffuse.rgb * lightColour[i].rgb)*bright[i]*isOn[i];
 	
@@ -99,6 +95,6 @@ void main(void){
 	 gl_FragColor.rgb += (diffuse.rgb * vec4(1,1,1,1).rgb) * 0.5;
 	
 	//fadeing
-	gl_FragColor.a=fadeValue;
+	//gl_FragColor.a=fadeValue;
 	
 }

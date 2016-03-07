@@ -6,6 +6,7 @@ Mesh* AssetsManager::m_pPlane	= NULL;
 Mesh* AssetsManager::m_pCube	= NULL;
 Mesh* AssetsManager::m_pSphere	= NULL;
 Mesh* AssetsManager::m_Tardis	= NULL;
+Mesh* AssetsManager::m_pGround = NULL;
 
 //Texture Assets
 GLuint AssetsManager::m_CheckerboardTex = 0;
@@ -14,7 +15,8 @@ GLuint AssetsManager::m_ThrowTex = 0;
 GLuint AssetsManager::m_ThrowTexBUMP = 0;
 GLuint AssetsManager::m_Glass = 0;
 GLuint AssetsManager::m_GlassBUMP = 0;
-
+GLuint AssetsManager::m_Field = 0;
+GLuint AssetsManager::m_FieldBUMP = 0;
 //GameObject Assets
 SimpleMeshObject* AssetsManager::GOInstance;
 SimpleMeshObject* AssetsManager::Camera_Entity;
@@ -37,15 +39,25 @@ void AssetsManager::InitializeMeshes()
 	m_Glass = LoadTexture("grass.jpg");
 	m_GlassBUMP = LoadTexture("grassDOT.png");
 	m_ThrowTexBUMP = LoadTexture("brickDOT.jpg");
+	m_Field = LoadTexture("Glass.tga");
+	m_FieldBUMP = LoadTexture("field_DOT.tga");
+	
+	
 	
 	
 	m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pCube = new OBJMesh(MESHDIR"cube.obj");
 	m_pSphere = new OBJMesh(MESHDIR"sphere.obj");
 	m_Tardis = new OBJMesh(MESHDIR"tardis.obj");
+	m_pGround = new OBJMesh(MESHDIR"cube.obj");
+
+	m_pGround->SetTexture(m_Glass);
+	
+	m_pGround->SetBumpMap(m_GlassBUMP);
 
 	m_pPlane->SetTexture(m_CheckerboardTex);
 	m_pCube->SetTexture(m_CheckerboardTex);
+	
 	m_pSphere->SetTexture(m_CheckerboardTex);
 	
 }

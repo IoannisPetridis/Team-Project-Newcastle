@@ -116,28 +116,33 @@ void ActionHandler::Update(float dt) {
 		AssetsManager::Player_1->Physics()->SetLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_T)) {
-		m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(-2.0f, 0, 0));
+		m_scene->lightList.at(1).SetPosition(m_scene->lightList.at(1).GetPosition() + Vector3(-2.0f, 0, 0));
 		//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_H)) {
-		m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, 0, 2.0f));
+		m_scene->lightList.at(1).SetPosition(m_scene->lightList.at(1).GetPosition() + Vector3(0, 0, 2.0f));
 		//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_G)) {
-		m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(2.0f, 0, 0));
+		m_scene->lightList.at(1).SetPosition(m_scene->lightList.at(1).GetPosition() + Vector3(2.0f, 0, 0));
 		//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_F)) {
-		m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, 0, -2.0f));
+		m_scene->lightList.at(1).SetPosition(m_scene->lightList.at(1).GetPosition() + Vector3(0, 0, -2.0f));
 		//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_N)) {
-		m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, -2.0f, 0));
+		m_scene->lightList.at(1).SetPosition(m_scene->lightList.at(1).GetPosition() + Vector3(0, -2.0f, 0));
 		//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
 	}
 	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_M)) {
-		m_scene->lightList.at(0).SetPosition(m_scene->lightList.at(0).GetPosition() + Vector3(0, 2.0f, 0));
+		m_scene->lightList.at(1).SetPosition(m_scene->lightList.at(1).GetPosition() + Vector3(0, 2.0f, 0));
 		//m_scene->FindGameObject("light")->Physics()->SetPosition(m_scene->lightList.at(0).GetPosition());
+	}
+
+	if (Window::GetKeyboard()->KeyHeld(KEYBOARD_F1))
+	{
+		cout << m_scene->lightList.at(1).GetPosition();
 	}
 
 	//spawn partical

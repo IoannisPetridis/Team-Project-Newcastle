@@ -95,15 +95,111 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 	lightList.push_back(Light(Vector3(0, 175, 0),//position
 		Vector4(1, 1, 1, 1), //light color
 		600.0f //light radius
-		, 2.0f // brightness
+		, 1.0f // brightness
 		, Vector3(1, 1, 1)
 		));
-	lightList.push_back(Light(Vector3(0, 1.5f, 0),//position
+
+
+	lightList.push_back(Light(Vector3(222, -5, 0),//position
+		Vector4(1, 0, 0, 1), //light color
+		150.0f //light radius
+		, 3.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+
+	lightList.push_back(Light(Vector3(-222, -5, 0),//position
+		Vector4(0, 0, 1, 1), //light color
+		150.0f //light radius
+		, 3.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+
+	lightList.push_back(Light(Vector3(-200,135,145),//position
 		Vector4(1, 1, 1, 1), //light color
-		1.0f //light radius
-		, 50.0f // brightness
+		300.0f //light radius
+		, 1.0f // brightness
 		, Vector3(1, 1, 1)
 		));
+	lightList.push_back(Light(Vector3(-200, 135, -145),//position
+		Vector4(1, 1, 1, 1), //light color
+		300.0f //light radius
+		, 1.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+	lightList.push_back(Light(Vector3(200, 135, 145),//position
+		Vector4(1, 1, 1, 1), //light color
+		300.0f //light radius
+		, 1.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+	lightList.push_back(Light(Vector3(200, 135, -145),//position
+		Vector4(1, 1, 1, 1), //light color
+		300.0f //light radius
+		, 1.0f // brightness
+		, Vector3(1, 1, 1)
+		));
+
+
+
+	//Draw BLUE
+	for (int i = 0; i < 8;i++)
+	{
+		lightList.push_back(Light(Vector3(-200-(i*5), 5.0f+(i*5), 54),//position
+			Vector4(0, 0, 1, 1), //light color
+			4.0f //light radius
+			, 50.0f // brightness
+			, Vector3(1, 1, 1)
+			));
+	}
+	for (int i = 0; i < 13; i++)
+	{
+		lightList.push_back(Light(Vector3(-242, 45.0f, 54- (i * 9)),//position
+			Vector4(0, 0, 1, 1), //light color
+			4.0f //light radius
+			, 50.0f // brightness
+			, Vector3(1, 1, 1)
+			));
+
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		lightList.push_back(Light(Vector3(-200 - (i * 5), 5.0f + (i * 5), -54),//position
+			Vector4(0, 0, 1, 1), //light color
+			4.0f //light radius
+			, 50.0f // brightness
+			, Vector3(1, 1, 1)
+			));
+	}
+
+	//Draw RED
+	for (int i = 0; i < 8; i++)
+	{
+		lightList.push_back(Light(Vector3(200 + (i * 5), 5.0f + (i * 5), 54),//position
+			Vector4(1, 0, 0, 1), //light color
+			4.0f //light radius
+			, 50.0f // brightness
+			, Vector3(1, 1, 1)
+			));
+	}
+	for (int i = 0; i < 13; i++)
+	{
+		lightList.push_back(Light(Vector3(242, 45.0f, 54 - (i * 9)),//position
+			Vector4(1, 0, 0, 1), //light color
+			4.0f //light radius
+			, 50.0f // brightness
+			, Vector3(1, 1, 1)
+			));
+
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		lightList.push_back(Light(Vector3(200 + (i * 5), 5.0f + (i * 5), -54),//position
+			Vector4(1, 0, 0, 1), //light color
+			4.0f //light radius
+			, 50.0f // brightness
+			, Vector3(1, 1, 1)
+			));
+	}
 	
 
 	glGenTextures(1, &shadowTex);
@@ -641,12 +737,16 @@ void Scene::DrawNode(GameObject* n)
 {
 	if (n->GetName() == "ground")
 	{
-		textureMatrix = Matrix4::Scale(Vector3(10.0f, 10.0f, 10.0f));
+		textureMatrix = Matrix4::Scale(Vector3(20.0f, 20.0f, 20.0f));
 	}
 	else
 	{
 		textureMatrix.ToIdentity();
 	}
+
+	//textureMatrix.ToIdentity();
+
+
 	modelMatrix.ToIdentity();
 	Matrix4 temp = (lightList.at(0)).GetlightViewProjMat()  * n->m_WorldTransform;
 	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "textureMatrix"), 1, false, *&textureMatrix.values);
