@@ -148,6 +148,11 @@ void Audio::CollisionSound(PhysicsObject* objectA, PhysicsObject* objectB,  floa
 			FMOD_VECTOR	Velocity = { objectA->GetLinearVelocity().x, objectA->GetLinearVelocity().y, objectA->GetLinearVelocity().z };
 			float volume = objectA->GetLinearVelocity().Length()*0.6f;
 			AddSound(Position, Velocity, channel2, Crash, volume);
+			objectA->HP -= 50;
+			objectB->HP -= 50;
+			if (objectA->HP <= 0){
+
+				}
 			}
 		}
 

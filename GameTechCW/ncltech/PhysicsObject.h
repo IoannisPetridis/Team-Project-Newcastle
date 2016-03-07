@@ -70,6 +70,9 @@ public:
 
 	void SetOnCollisionCallback(std::function<bool(PhysicsObject*)> onCollisionFunction) { m_OnCollisionCallback = onCollisionFunction; }
 
+	//Damage
+	int GetHP(){ return HP; }
+	void SetHP(int a){ HP = a; }
 
 	//<--------- Additional Variables ------------->
 	std::vector<Vector3> verletPos;
@@ -81,6 +84,7 @@ public:
 	int score_counter;
 	std::string name;
 	bool car = false;
+	int HP = 100;
 
 protected:
 	GameObject*			m_Parent;

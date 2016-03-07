@@ -86,6 +86,8 @@ bool MyScene::InitialiseGL()
 	}
 
 
+	
+
 	//Initialize all game objects
 	Audio_Timer.GetTimedMS();
 	return true;
@@ -180,6 +182,11 @@ void MyScene::UpdateScene(float msec)
 		Audio::channel2->setPaused(false);
 		Audio::channel3->setPaused(false);
 		Audio::channel4->setPaused(false);
+	}
+
+	if (AssetsManager::Player_1->Physics()->GetHP() <= 0){
+		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 10.0f, 10.0f));
+		AssetsManager::Player_1->Physics()->SetHP(100.f);
 	}
 
 }
