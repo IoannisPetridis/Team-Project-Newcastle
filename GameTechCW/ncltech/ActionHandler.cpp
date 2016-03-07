@@ -164,6 +164,7 @@ void ActionHandler::Update(float dt) {
 		Gametimer = 0.0f;
 		GameOver = true;
 		PhysicsEngine::Instance()->SetPaused(true);
+		Audio::channel1->setPaused(false);
 		NCLDebug::DrawTextClipSpace(Vector4(0.0f, 0.0f, 0.0f, 1.0f),
 			32.0f,
 			"Game Over!",
@@ -194,7 +195,7 @@ void ActionHandler::Update(float dt) {
 
 	//AI
 
-	//AIUpdates();
+	AIUpdates();
 	
 
 	//spawn partical

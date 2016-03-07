@@ -28,8 +28,8 @@ public:
 
 	static FMOD_RESULT Result;
 	static FMOD::System *AudioSystem;
-	static FMOD::Channel   *channel1, *channel2, *channel3, *channel4, *channel5;
-	static FMOD::Sound *Goal,*Pickup;
+	static FMOD::Channel   *channel1, *channel2, *channel3, *channel4, *channel5, *channel6, *channel7, *channel8, *channel9;
+	static FMOD::Sound *Goal,*Pickup,*AI, *Start,*End,*ButtonSelect, *Background;
 
 protected:
 

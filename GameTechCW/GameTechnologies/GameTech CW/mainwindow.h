@@ -10,6 +10,7 @@
 #include "..\..\Qt\include\QtWidgets\qsizepolicy.h"
 #include "..\..\Qt\include\QtGui\qscreen.h"
 #include "..\..\Qt\include\QtWidgets\qgraphicseffect.h"
+#include "..\..\ncltech\Audio.h"
 
 
 namespace Ui {

@@ -88,16 +88,19 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::play_game(){
+	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
     this->close();
 }
 
 void MainWindow::exit_now(){
+	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
     WannaExit = true;
     this->close();
 }
 
 void MainWindow::create_chara_triggered(){
 
+   Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
    Dialog mDialog;
    mDialog.setModal(true);
    //mDialog.setWindowIcon(QIcon("../../Qt/Icons/sicklogo.bmp"));

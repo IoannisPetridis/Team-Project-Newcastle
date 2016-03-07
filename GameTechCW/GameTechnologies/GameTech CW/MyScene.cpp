@@ -118,9 +118,15 @@ void MyScene::UpdateScene(float msec)
 	CarPosition = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
 	CarVelocity = { AssetsManager::Player_1->Physics()->GetLinearVelocity().x, AssetsManager::Player_1->Physics()->GetLinearVelocity().y, AssetsManager::Player_1->Physics()->GetLinearVelocity().z };
 	float CarSpeed = AssetsManager::Player_1->Physics()->GetLinearVelocity().Length();
+	FMOD_VECTOR AIPosition = { AssetsManager::NeutralAI->Physics()->GetPosition().x, AssetsManager::NeutralAI->Physics()->GetPosition().y, AssetsManager::NeutralAI->Physics()->GetPosition().z };
+	FMOD_VECTOR AIVelocity = { AssetsManager::NeutralAI->Physics()->GetLinearVelocity().x, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().y, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().z };
+	float AIForce = AssetsManager::NeutralAI->Physics()->GetForce().Length();
+	Audio::UpdateSound(AIPosition, AIVelocity, 20000.f + AIForce * 200, 10.f + AIForce, Audio::channel9);
+	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);	
+	Audio::Result = Audio::AudioSystem->update();
 
-	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);
 	Audio::GetCameraInfo(m_Camera);
+	
 	////END AUDIO
 
 
@@ -165,14 +171,11 @@ void MyScene::UpdateScene(float msec)
 	}
 
 	if (PhysicsEngine::Instance()->IsPaused()){
-		Audio::channel1->setPaused(true);
 		Audio::channel2->setPaused(true);
 		Audio::channel3->setPaused(true);
 		Audio::channel4->setPaused(true);
 	}
 	else{
-
-		Audio::channel1->setPaused(false);
 		Audio::channel2->setPaused(false);
 		Audio::channel3->setPaused(false);
 		Audio::channel4->setPaused(false);

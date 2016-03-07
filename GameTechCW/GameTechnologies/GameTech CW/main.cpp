@@ -113,6 +113,7 @@ void Scoring()
 }
 
 int main()
+
 {
 	//-------------------
 	//--- MAIN ENGINE ---
@@ -123,7 +124,6 @@ int main()
 	{
 		return Quit(true, "Window failed to initialise!");
 	}
-
 
 	GameObjectMag* GOM_Loading = new GameObjectMag();
 
@@ -170,16 +170,22 @@ int main()
 	loading.join();
 	
 	//Create main game-loop
+	Audio::AddSound({ 0.f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel6, Audio::Start, 5);
+
 	while (Window::GetWindow().UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
 		
 
 		float dt = Window::GetWindow().GetTimer()->GetTimedMS() * 0.001f;	//How many milliseconds since last update?
 
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_P))
-		{
-			PhysicsEngine::Instance()->SetPaused(!PhysicsEngine::Instance()->IsPaused());
+		{	
+				PhysicsEngine::Instance()->SetPaused(!PhysicsEngine::Instance()->IsPaused());
 		}
-
+	
+		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_M)){
+			Audio::AddSound({ 0.f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel6, Audio::Start, 5);
+		}
+	
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_NUMPAD1)){
 			if (PhysicsEngine::Instance()->GetDebug()){
 				PhysicsEngine::Instance()->SetDebug(false);

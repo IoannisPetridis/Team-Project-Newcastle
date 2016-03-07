@@ -192,7 +192,7 @@ void Dialog::enterplayernameTextEdited(const QString &arg1){
 void Dialog::acceptbuttonClicked(){
 
     MainWindow sendinguserdata;
-
+	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
     sendinguserdata.grabuserdata(sizechoice, skillchoice, texchoice, playerusername);
 
     this->close();
