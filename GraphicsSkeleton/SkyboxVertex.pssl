@@ -1,0 +1,48 @@
+ConstantBuffer ShaderConstants
+{
+	column_major matrix modelMatrix;
+	column_major matrix viewMatrix;
+	column_major matrix projMatrix;
+	column_major matrix MVP;
+};
+
+ConstantBuffer MoreShaderConstants
+{
+	column_major matrix anotherMatrix;
+};
+
+struct VS_INPUT
+{
+	float3 Position		: POSITION0;
+	float2 UV			: TEXCOORD0;
+	float3 Normal		: TEXCOORD1;
+	float3 Tangent		: TEXCOORD2;
+};
+
+struct VS_OUTPUT
+{
+	float4 Position		: S_POSITION;
+	float2 UV			: TEXCOORD0; 
+	float3 Normal		: TEXCOORD1;
+};
+
+VS_OUTPUT main(VS_INPUT Input)
+{
+	VS_OUTPUT Output;
+	
+	float3 tempPos = Input.Position - float3(0,0,1);
+	Output.Normal = mul(transpose(float3x3(viewMatrix)), normalize(tempPos));
+	//OUT.normal = inverse(mat3(viewMatrix))* normalize(tempPos);
+	
+	Output.Position = mul(projMatrix , float4(tempPos,1.0));
+
+
+
+	//Output.Position = mul(mul(m_WorldViewProj,anotherMatrix), float4(Input.Position.xyz, 1));
+	//Output.Position = mul(mul(modelMatrix,mul(projMatrix,viewMatrix)), float4(Input.Position.xyz, 1));
+	//Output.Position = mul(MVP, float4(Input.Position.xyz, 1));
+	//Output.Color = Input.Color;
+	Output.UV = Input.UV;
+
+	return Output;
+}
