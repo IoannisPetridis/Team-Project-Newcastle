@@ -58,6 +58,7 @@ it is removed from the particle list. If it's time to generate some new particle
 that in here, too. Finally, this function resizes our VBOs if necessary. 
 */
 void ParticleEmitter::Update(float msec)	{
+	
 	nextParticleTime -= msec;	//some time has passed!
 
 	/*
@@ -73,7 +74,7 @@ void ParticleEmitter::Update(float msec)	{
 
 	//Now for the particle 'think' function. Particles are so 'lightweight' there's not
 	//much point putting this as a member variable of the Particle struct...
-
+	
 
 	for(std::vector<Particle *>::iterator i = particles.begin(); i != particles.end();/*No I++ here!!! */) {
 		Particle *p = (*i);

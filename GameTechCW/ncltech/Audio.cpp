@@ -142,8 +142,7 @@ void Audio::UpdateSound(FMOD_VECTOR position ,FMOD_VECTOR velocity, float freque
 void Audio::CollisionSound(PhysicsObject* objectA, PhysicsObject* objectB,  float time){
 
 
-		if ((objectA->name == "car" &&  objectB->name == "cube") || 
-			(objectB->name == "car" &&  objectA->name == "cube") ){
+		if ((objectA->GetCar() && objectB->GetCar())){
 			if (time > 50){
 			FMOD_VECTOR	Position = { objectA->GetPosition().x, objectA->GetPosition().y, objectA->GetPosition().z };
 			FMOD_VECTOR	Velocity = { objectA->GetLinearVelocity().x, objectA->GetLinearVelocity().y, objectA->GetLinearVelocity().z };
@@ -152,8 +151,8 @@ void Audio::CollisionSound(PhysicsObject* objectA, PhysicsObject* objectB,  floa
 			}
 		}
 
-		if ((objectA->name == "car" &&  objectB->name == "ball") ||
-			(objectB->name == "car" &&  objectA->name == "ball")){
+		if ((objectA->GetCar()  &&  objectB->name == "ball") ||
+			(objectB->GetCar()  &&  objectA->name == "ball")){
 			if (time > 50){
 				FMOD_VECTOR Position = { objectA->GetPosition().x, objectA->GetPosition().y, objectA->GetPosition().z };
 				FMOD_VECTOR vel = { 0.f, 0.f, 0.f };

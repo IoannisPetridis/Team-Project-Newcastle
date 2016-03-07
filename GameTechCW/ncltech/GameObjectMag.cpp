@@ -488,7 +488,6 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
-
 	AssetsManager::GOInstance = new SimpleMeshObject("ground23"); //Back Right Top
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Triangle(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(20.0, 40.f, 40.f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
@@ -539,10 +538,6 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new PiramidCollisionShape(Vector3(1.0, 44.f, 49.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, -225, -35));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
-
-	
-	
-
 
 	//{//Player_1
 		//AssetsManager::Player_1 = new Player("car");
@@ -651,14 +646,17 @@ void GameObjectMag::AIStuff(Scene* m_scene) {
 
 		AssetsManager::NeutralAI = new NeutralAI("NeutralAI", m_scene);
 		AssetsManager::NeutralAI->SetTexture(AssetsManager::m_Red, false);
+		AssetsManager::NeutralAI->Physics()->SetCar(true);
 		m_scene->AddGameObject(AssetsManager::NeutralAI);
 
 		AssetsManager::DefensiveAI = new DefensiveAI("DefensiveAI", m_scene);
 		AssetsManager::DefensiveAI->SetTexture(AssetsManager::m_Red, false);
+		AssetsManager::DefensiveAI->Physics()->SetCar(true);
 		m_scene->AddGameObject(AssetsManager::DefensiveAI);
 
 		AssetsManager::AggressiveAI = new AggressiveAI("AggressiveAI", m_scene);
 		AssetsManager::AggressiveAI->SetTexture(AssetsManager::m_Red, false);
+		AssetsManager::AggressiveAI->Physics()->SetCar(true);
 		m_scene->AddGameObject(AssetsManager::AggressiveAI);
 	}
 }

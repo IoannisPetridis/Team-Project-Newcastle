@@ -1,8 +1,9 @@
-﻿Build started 07/03/2016 15:44:28.
+﻿Build started 07/03/2016 16:24:56.
      1>Project "D:\Team Project\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp
-         ActionHandler.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameObjectMag.cpp
+         GameObjectMag.cpp
+     1>GameObjectMag.cpp(19): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\Network.obj
          Release\Server.obj
@@ -41,4 +42,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.92
+Time Elapsed 00:00:01.90

@@ -63,7 +63,10 @@ public:
 	void SetInverseInertia(const Matrix3& v)		{ m_InvInertia = v; }
 
 	void SetCollisionShape(CollisionShape* colShape)	{ m_colShape = colShape; }
-
+	
+	//For Collision
+	void SetCar(bool a){ car = a; }
+	bool GetCar(){ return car; }
 
 	void SetOnCollisionCallback(std::function<bool(PhysicsObject*)> onCollisionFunction) { m_OnCollisionCallback = onCollisionFunction; }
 
@@ -77,6 +80,7 @@ public:
 	bool update_con;
 	int score_counter;
 	std::string name;
+	bool car = false;
 
 protected:
 	GameObject*			m_Parent;

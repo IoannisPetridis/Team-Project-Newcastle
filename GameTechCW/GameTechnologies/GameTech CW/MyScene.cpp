@@ -78,7 +78,7 @@ bool MyScene::InitialiseGL()
 		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
 		Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
 		AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
-
+		AssetsManager::Player_1->Physics()->SetCar(true);
 		this->AddGameObject(AssetsManager::Player_1);
 	}
 
@@ -120,6 +120,7 @@ void MyScene::UpdateScene(float msec)
 	float CarSpeed = AssetsManager::Player_1->Physics()->GetLinearVelocity().Length();
 	FMOD_VECTOR AIPosition = { AssetsManager::NeutralAI->Physics()->GetPosition().x, AssetsManager::NeutralAI->Physics()->GetPosition().y, AssetsManager::NeutralAI->Physics()->GetPosition().z };
 	FMOD_VECTOR AIVelocity = { AssetsManager::NeutralAI->Physics()->GetLinearVelocity().x, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().y, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().z };
+	
 	float AIForce = AssetsManager::NeutralAI->Physics()->GetForce().Length();
 	Audio::UpdateSound(AIPosition, AIVelocity, 20000.f + AIForce * 200, 10.f + AIForce, Audio::channel9);
 	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);	
@@ -151,8 +152,8 @@ void MyScene::UpdateScene(float msec)
 		powerupspark->SetSourcePosition(AssetsManager::Player_1->Physics()->GetPosition());
 		this->AddParticleObject(powerupspark);
 		PowerUps::SetPlayerPickup(false);
-		
-	}
+		}
+
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B)){
 		PowerUps::AddRandomPowerUp(this);
 	}
