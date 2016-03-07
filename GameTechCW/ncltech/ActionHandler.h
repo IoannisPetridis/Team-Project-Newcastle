@@ -34,6 +34,9 @@ public:
 
 protected:
 	Scene* m_scene;
+	float Gametimer;
+	int BlueScore;
+	int RedScore;
 	
 	float timer[3];
 	float AAItimer[3];
@@ -42,6 +45,7 @@ protected:
 
 	bool Inair;
 	bool doubleJump;
+	bool GameOver;
 
 	GameTimer engine_timer;
 };

@@ -4,7 +4,7 @@
 #include "MyScene.h"
 #include "dialog.h"
 #include "mainwindow.h"
-
+#include <thread>
 //qt includes
 #include "..\..\Qt\include\QtCore\QtPlugin"
 #include "..\..\Qt\include\QtCore\qcoreapplication.h"
@@ -16,7 +16,11 @@ Scene* scene = NULL;
 Scene* Loading_scene = NULL;
 Scene* Transition_scene = NULL;
 
-int Quit(bool pause = false, const string &reason = "") {
+bool isStillLoad = true;
+bool isScoring = false;
+bool GameStart = false;
+
+int Quit(bool pause = false, const string &reason = "") { 
 	if (scene)
 	{
 		delete scene;
@@ -74,6 +78,40 @@ int main2(int argc, char *argv[])
 //MainWindow::playername
 //= = = = = =
 
+void Loading()
+{
+	GameObjectMag* GOM_Loading = new GameObjectMag();
+
+	GOM_Loading->SetID(0);
+	Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
+	int i = 0;
+
+	while (isStillLoad)
+	{
+		Loading_scene->RenderScene();
+		Loading_scene->GetCamera()->SetYaw(i);
+		NCLDebug::Log(Vector3(1, 1, 1), std::to_string(i));
+		i++;
+	}
+}
+
+void Scoring()
+{
+	GameObjectMag* GOM_Loading = new GameObjectMag();
+
+	GOM_Loading->SetID(0);
+	Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
+	int i = 0;
+
+	while (isScoring)
+	{
+		Loading_scene->RenderScene();
+		Loading_scene->GetCamera()->SetYaw(i);
+		NCLDebug::Log(Vector3(1, 1, 1), std::to_string(i));
+		i++;
+	}
+}
+
 int main()
 {
 	//-------------------
@@ -86,13 +124,14 @@ int main()
 		return Quit(true, "Window failed to initialise!");
 	}
 
-	
-		GameObjectMag* GOM_Loading = new GameObjectMag();
-		GOM_Loading->SetID(0);
-		Loading_scene = new MyScene(Window::GetWindow(), GOM_Loading);
-		Loading_scene->RenderScene();
-	
 
+	GameObjectMag* GOM_Loading = new GameObjectMag();
+
+	GOM_Loading->SetID(0);
+	Transition_scene = new MyScene(Window::GetWindow(), GOM_Loading);
+	
+	thread loading(Loading);     // spawn new thread
+	//thread Scoring(Scoring);
 
 	//~~~QT SHIT~~~ (UNCOMMENT THIS IF THE WINDOW IS ANNOYING YOU)
 	char *argv[] = { "windowinwindow", "arg1", "arg2", NULL };	//argv array with ptrs to strings, given values by the environment
@@ -126,15 +165,21 @@ int main()
 	GameTimer engine_timer;
 
 	std::string PlayerName = MainWindow::playername;
-
+	
+	isStillLoad = false;
+	loading.join();
+	
 	//Create main game-loop
 	while (Window::GetWindow().UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
+		
+
 		float dt = Window::GetWindow().GetTimer()->GetTimedMS() * 0.001f;	//How many milliseconds since last update?
 
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_P))
 		{
 			PhysicsEngine::Instance()->SetPaused(!PhysicsEngine::Instance()->IsPaused());
 		}
+
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_NUMPAD1)){
 			if (PhysicsEngine::Instance()->GetDebug()){
 				PhysicsEngine::Instance()->SetDebug(false);
@@ -145,6 +190,7 @@ int main()
 				PhysicsEngine::Instance()->toggledebugdraw();
 			}
 		}
+
 
 		engine_timer.GetTimedMS();
 
@@ -166,6 +212,21 @@ int main()
 
 			//Debug Data
 			if (PhysicsEngine::Instance()->GetDebug()){
+				/*NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
+					+ " Y:"
+					+ std::to_string((int)m_Camera->GetPosition().y)
+					+ " Z:"
+					+ std::to_string((int)m_Camera->GetPosition().z)
+					+ " Pitch:"p1
+					+ std::to_string((float)m_Camera->GetPitch())
+					+ " Yaw:"
+					+ std::to_string((float)m_Camera->GetYaw())
+					+ " cord:" 
+					+ std::to_string((float)Proj_dir.x) + " "
+					+ std::to_string((float)Proj_dir.y) + " "
+					+ std::to_string((float)Proj_dir.z) + " "
+					);*/
+
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Engine: %s (Press P to toggle)", PhysicsEngine::Instance()->IsPaused() ? "Paused" : "Enabled");
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "--------------------------------");
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Collision Detection Distance: " + std::to_string(PhysicsEngine::Instance()->GetCollisionDetectionDis()));
@@ -174,26 +235,50 @@ int main()
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Update: %5.2fms", physics_ms);
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Scene Update  : %5.2fms", update_ms);
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "CURRENT PLAYER: " + MainWindow::playername);
+				//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "TIME REMAINING: " + std::to_string(MyScene::timeremaining));
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "PowerUp  :" + AssetsManager::Player_1->GetPowerUpState());
+			//	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "SCORE: BLUE " + std::to_string(ActionHandler::BLUESCORE) + " - " + std::to_string(ActionHandler::REDSCORE) + " RED");
+
 			}
-			//Render the Scene
+				//Render the Scene
+
 			scene->RenderScene();
 
 			{
 				int SC = ActionHandler::Instance()->ScoreCheck();
 				if (SC == 1) {
 					for (int i = 0; i < 100; i++) {
-						Loading_scene->RenderScene();
-						NCLDebug::AddStatusEntry2(Vector4(1.0f, 0.0f, 0.0f, 1.0f), "GOAL");
+						Transition_scene->RenderScene();
+						//Scoring.join();
+						isScoring = true;
+						//isStillLoad = true;
+						
+						NCLDebug::DrawTextClipSpace(Vector4(-0.4f, 0.0f, 0.0f, 1.0f),
+							40.0,
+							"Red Team Score !",
+							TEXTALIGN_LEFT,
+							Vector4(1.0, 1.0, 1.0, 1.0));;
 						Window::GetWindow().GetTimer()->GetTimedMS();
 					}
+					isScoring = false;
+					isStillLoad = false;
 				}
 				else if (SC == 2) {
 					for (int i = 0; i < 100; i++) {
-						Loading_scene->RenderScene();
-						NCLDebug::AddStatusEntry2(Vector4(0.0f, 0.0f, 1.0f, 1.0f), "GOAL");
+						Transition_scene->RenderScene();
+						//Scoring.join();
+						isScoring = true;
+						isStillLoad = true;
+
+						NCLDebug::DrawTextClipSpace(Vector4(-0.4f, 0.0f, 0.0f, 1.0f),
+							40.0f,
+							"Blue Team Score !",
+							TEXTALIGN_LEFT,
+							Vector4(1.0, 1.0, 1.0, 1.0));
 						Window::GetWindow().GetTimer()->GetTimedMS();
 					}
+					isScoring = false;
+					isStillLoad = false;
 				}
 			}
 

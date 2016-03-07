@@ -69,7 +69,6 @@ public:
 
 
 	static void AddStatusEntry(const Vector4& colour, const std::string text, ...); ///See "printf" for usuage manual
-	static void AddStatusEntry2(const Vector4& colour, const std::string text, ...); ///attempt at goal text
 	static void Log(const Vector3& colour, const std::string text, ...); ///See "printf" for usuage manual
 	
 protected:

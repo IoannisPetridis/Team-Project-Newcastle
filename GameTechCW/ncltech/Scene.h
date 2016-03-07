@@ -47,6 +47,10 @@ public:
 	
 	std::vector<GameObject*> ReadGroundList() const;
 
+	Camera* GetCamera() { return m_Camera; }
+
+	GLint total_mem_kb = 0;
+
 protected:
 	void	BuildScreenFBO();
 	void	PresentScreenFBO();

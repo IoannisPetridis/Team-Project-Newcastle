@@ -33,11 +33,21 @@ bool MyScene::InitialiseGL()
 	
 	if (GOM->GetID() == 0) {
 		GOM->GOM_Loading(this);
+
+		Vector3* vlist = new Vector3[3];
+		vlist[0] = Vector3(0.0f, 0.5f, 0.0f) * 10.0f;
+		vlist[1] = Vector3(0.5f, -0.5f, 0.0f) * 10.0f;
+		vlist[2] = Vector3(-0.5f, -0.5f, 0.0f) * 10.0f;
+
+		NCLDebug::DrawPolygon(3, vlist);
+
+		delete[] vlist;
 	}
+
 	else if (GOM->GetID() == 1) {
 		AssetsManager::InitializeMeshes();
 		GOM->GOM_GamePlay(this);
-
+	
 		AssetsManager::Player_1 = new Player("car");
 		AssetsManager::Player_1->SetScene(this);
 		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
@@ -45,7 +55,7 @@ bool MyScene::InitialiseGL()
 		//3 choices of car texture
 		//these textures are just placeholders from what we had
 		if (MainWindow::playertexture == 1){
-
+			
 			AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
 		}
 
@@ -58,7 +68,7 @@ bool MyScene::InitialiseGL()
 		}
 
 		//4 choices of car size, 1 2 3 4
-		int size = MainWindow::playersize * 0.5;
+		int size= MainWindow::playersize * 0.5;
 		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
 		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
 		AssetsManager::Player_1->SetBoundingRadius((MainWindow::playersize) * (MainWindow::playersize));
@@ -71,6 +81,10 @@ bool MyScene::InitialiseGL()
 
 		this->AddGameObject(AssetsManager::Player_1);
 	}
+
+	{//Player_1
+	}
+
 
 	//Initialize all game objects
 	Audio_Timer.GetTimedMS();
@@ -96,7 +110,6 @@ void MyScene::UpdateScene(float msec)
 		if (m->objectA->name.find("ground") != string::npos || m->objectB->name.find("ground") != string::npos) {}
 		else{
 			time = Audio_Timer.GetTimedMS();
-			//cout << time << " " << m->objectA->name << " colliding with :  " << m->objectB->name << endl;
 			Audio::CollisionSound(m->objectA, m->objectB, time);
 		}
 	}
@@ -151,23 +164,6 @@ void MyScene::UpdateScene(float msec)
 		PowerUps::AddAndroidPowerUp(100, 100, this, "banana");
 	}
 
-	if (PhysicsEngine::Instance()->GetDebug()){
-		NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
-			+ " Y:"
-			+ std::to_string((int)m_Camera->GetPosition().y)
-			+ " Z:"
-			+ std::to_string((int)m_Camera->GetPosition().z)
-			+ " Pitch:"
-			+ std::to_string((float)m_Camera->GetPitch())
-			+ " Yaw:"
-			+ std::to_string((float)m_Camera->GetYaw())
-			+ " cord:"
-			+ std::to_string((float)Proj_dir.x) + " "
-			+ std::to_string((float)Proj_dir.y) + " "
-			+ std::to_string((float)Proj_dir.z) + " "
-			);
-		
-	}
 	if (PhysicsEngine::Instance()->IsPaused()){
 		Audio::channel1->setPaused(true);
 		Audio::channel2->setPaused(true);
@@ -181,7 +177,7 @@ void MyScene::UpdateScene(float msec)
 		Audio::channel3->setPaused(false);
 		Audio::channel4->setPaused(false);
 	}
-	
+
 }
 
 void MyScene::RenderScene()

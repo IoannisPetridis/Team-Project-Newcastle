@@ -18,8 +18,14 @@ ActionHandler::ActionHandler() {
 	DAItimer[1] = -1.0f;
 	DAItimer[2] = 0.0f;
 
+	Gametimer = 70.0f;
+	BlueScore = 0;
+	RedScore = 0;
+
 	Inair = false;
 	doubleJump = false;
+
+	GameOver = false;
 }
 
 int ActionHandler::ScoreCheck() {
@@ -28,10 +34,14 @@ int ActionHandler::ScoreCheck() {
 		if ((pos.x < -200.0f) &&
 			(pos.z > -50.0f && pos.z < 50.0f) &&
 			(pos.y > 0.0f && pos.z < 40.0f)) {
-			NCLDebug::Log(Vector3(1.0f, 0.0f, 0.0f),
-				"Red Score");
+			//NCLDebug::Log(Vector3(1.0f, 0.0f, 0.0f),
+			//	"Red Score");
+
+			RedScore++;
+
 			m_scene->m_RootGameObject->FindGameObject("ball")
 				->Physics()->SetPosition(Vector3(0.0f, 10.0f, 0.0f));
+
 			FMOD_VECTOR pos = { 0.0f, 0.f, 0.f };
 			Audio::AddSound(pos, pos, Audio::channel4, Audio::Goal, 1.0f);
 			AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 10.0f, 10.0f));
@@ -42,8 +52,11 @@ int ActionHandler::ScoreCheck() {
 		if ((pos.x > 200.0f) &&
 			(pos.z > -50.0f && pos.z < 50.0f) &&
 			(pos.y > 0.0f && pos.z < 40.0f)) {
-			NCLDebug::Log(Vector3(1.0f, 0.0f, 0.0f),
-				"Blue Score");
+			//NCLDebug::Log(Vector3(1.0f, 0.0f, 0.0f),
+			//	"Blue Score");
+
+			BlueScore++; 
+
 			FMOD_VECTOR pos = { 0.0f, 0.f, 0.f };
 			Audio::AddSound(pos, pos, Audio::channel4, Audio::Goal, 1.0f);
 			m_scene->m_RootGameObject->FindGameObject("ball")
@@ -143,10 +156,22 @@ void ActionHandler::Flip(SimpleMeshObject *P) {
 }
 
 void ActionHandler::Update(float dt) {
-	if (PhysicsEngine::Instance()->GetDebug()){
-		NCLDebug::Log(Vector3(0.0f, 0.0f, 0.0f), std::to_string(AssetsManager::Player_1->Physics()->GetLinearVelocity().Length()));
-	}
 	
+	if (Gametimer >= 0) {
+		Gametimer -= dt;
+	}
+	if (Gametimer < 0) {
+		Gametimer = 0.0f;
+		GameOver = true;
+		PhysicsEngine::Instance()->SetPaused(true);
+		NCLDebug::DrawTextClipSpace(Vector4(0.0f, 0.0f, 0.0f, 1.0f),
+			32.0f,
+			"Game Over!",
+			TEXTALIGN_LEFT,
+			Vector4(1.0, 1.0, 1.0, 1.0));
+
+	}
+
 	{
 		AssetsManager::Player_1->NormalCal();
 
@@ -169,7 +194,7 @@ void ActionHandler::Update(float dt) {
 
 	//AI
 
-	AIUpdates();
+	//AIUpdates();
 	
 
 	//spawn partical
@@ -179,6 +204,28 @@ void ActionHandler::Update(float dt) {
 
 	Window::GetWindow().ShowOSPointer(false);
 	Window::GetWindow().LockMouseToWindow(true);
+
+
+	//HUD stats
+
+	if (!PhysicsEngine::Instance()->GetDebug()){
+		NCLDebug::DrawTextClipSpace(Vector4(-0.75f, 0.9f, 0.0f, 1.0f),
+			32.0f,
+			"Blue Team Score : " + std::to_string(BlueScore),
+			TEXTALIGN_LEFT,
+			Vector4(1.0, 1.0, 1.0, 1.0));
+		NCLDebug::DrawTextClipSpace(Vector4(-0.1f, 0.9f, 0.0f, 1.0f),
+			32.0f,
+			std::to_string(Gametimer).substr(0, 5),
+			TEXTALIGN_LEFT,
+			Vector4(1.0, 1.0, 1.0, 1.0));
+		NCLDebug::DrawTextClipSpace(Vector4(0.15f, 0.9f, 0.0f, 1.0f),
+			32.0f,
+			"Red Team Score : " + std::to_string(RedScore),
+			TEXTALIGN_LEFT,
+			Vector4(1.0, 1.0, 1.0, 1.0));
+	}
+
 }
 
 void ActionHandler::AIUpdates() {

@@ -72,6 +72,8 @@ void NCLDebug::DrawMatrix(const Matrix3& mtx, const Vector3& position)
 	DrawHairLine(position, position + mtx.GetCol(2), Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 }
 
+
+
 void NCLDebug::DrawTextClipSpace(const Vector4& cs_pos, const float font_size, const string& text, const TextAlignment alignment, const Vector4 colour)
 {
 	Vector2 screenSize = Window::GetWindow().GetScreenSize();
@@ -181,28 +183,6 @@ void NCLDebug::AddStatusEntry(const Vector4& colour, const std::string text, ...
 	m_NumStatusEntries++;
 }
 
-void NCLDebug::AddStatusEntry2(const Vector4& colour, const std::string text, ...)
-{
-
-	float cs_size_x = (STATUS_TEXT_SIZE*10) / Window::GetWindow().GetScreenSize().x * 2.0f;
-	float cs_size_y = (STATUS_TEXT_SIZE*10) / Window::GetWindow().GetScreenSize().y * 2.0f;
-
-	va_list args;
-	va_start(args, text);
-
-	char buf[1024];
-	int needed = vsnprintf_s(buf, 1023, _TRUNCATE, text.c_str(), args);
-	va_end(args);
-
-	int length = (needed < 0) ? 1024 : needed;
-
-	std::string formatted_text = std::string(buf, (size_t)length);
-
-	DrawTextClipSpace(Vector4(-1.0f + cs_size_x * 0.5f, 1.0f - (m_NumStatusEntries * cs_size_y) - cs_size_y, 0.0f, 1.0f), STATUS_TEXT_SIZE * 10, formatted_text, TEXTALIGN_LEFT, colour);
-	m_NumStatusEntries++;
-}
-
-
 void NCLDebug::Log(const Vector3& colour, const std::string text, ...)
 {
 	va_list args;
@@ -310,7 +290,12 @@ void NCLDebug::DrawDebugLists()
 		float alpha = ((m_LogEntries.size() - i) / (float(MAX_LOG_SIZE)));
 		alpha = 1.0f - (alpha * alpha);
 		Vector3& col3 = m_LogEntries[idx].colour;
-		DrawTextClipSpace(Vector4(-1.0f + cs_size_x * 0.5f, -1.0f + ((log_len - i - 1) * cs_size_y) + cs_size_y, 0.0f, 1.0f), LOG_TEXT_SIZE, m_LogEntries[idx].text, TEXTALIGN_LEFT, Vector4(col3.x, col3.y, col3.z, alpha));
+		DrawTextClipSpace(Vector4(-1.0f + cs_size_x * 0.5f, 
+			-1.0f + ((log_len - i - 1) * cs_size_y) + cs_size_y, 0.0f, 1.0f), 
+			LOG_TEXT_SIZE, 
+			m_LogEntries[idx].text, 
+			TEXTALIGN_LEFT, 
+			Vector4(col3.x, col3.y, col3.z, alpha));
 	}
 
 
