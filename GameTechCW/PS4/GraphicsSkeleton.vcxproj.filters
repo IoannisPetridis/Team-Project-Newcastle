@@ -18,6 +18,9 @@
     <Filter Include="Textures">
       <UniqueIdentifier>{9f927643-97c4-473e-a4ed-a342215cfbf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PS4Physics">
+      <UniqueIdentifier>{2c67c647-f679-4868-9567-611d1cc656e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,15 +77,63 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PS4Physics\CollisionDetection.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Constraint.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\CuboidCollisionShape.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\CylinderCollisionShape.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\GameObject.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Hull.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Manifold.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\NCLDebug.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\PhysicsEngine.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\PhysicsObject.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Scene.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\SimpleMeshObject.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\SphereCollisionShape.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Matrix3.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Matrix4.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Quaternion.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PS4Physics\Plane.cpp">
+      <Filter>PS4Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PS4RendererBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RendererBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PS4Shader.h">
@@ -95,9 +146,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PS4Frame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PS4Texture.h">
@@ -118,9 +166,6 @@
     <ClInclude Include="PS4SoundEmitter.h">
       <Filter>Audio Test</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ChildMeshInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -132,6 +177,87 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\CylinderCollisionShape.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\DistanceConstraint.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\GameObject.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Hull.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Manifold.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\NCLDebug.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\PhysicsEngine.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\PhysicsObject.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Scene.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\SimpleMeshObject.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\SphereCollisionShape.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\TSingleton.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\CollisionDetection.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\CollisionShape.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Constraint.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\CuboidCollisionShape.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Matrix3.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Matrix4.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Quaternion.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Vector2.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Vector3.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Vector4.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\Plane.h">
+      <Filter>PS4Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PS4Physics\common.h">
+      <Filter>PS4Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

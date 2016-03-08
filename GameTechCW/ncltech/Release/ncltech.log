@@ -1,15 +1,24 @@
-﻿Build started 3/4/2016 10:53:30 AM.
+﻿Build started 3/8/2016 11:22:22 AM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (ncltech.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp GameObjectMag.cpp PhysicsEngine.cpp Player.cpp Scene.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp CollisionDetection.cpp GameObject.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
          ActionHandler.cpp
          ArbitraryAI.cpp
+         CollisionDetection.cpp
+         GameObject.cpp
          GameObjectMag.cpp
      1>GameObjectMag.cpp(18): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         GuardState.cpp
+         HomeState.cpp
+         Manifold.cpp
+         OffState.cpp
          PhysicsEngine.cpp
+         PhysicsObject.cpp
          Player.cpp
          Scene.cpp
+         SimpleMeshObject.cpp
+         SphereCollisionShape.cpp
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\Physics.lib" /NOLOGO /LTCG Release\Network.obj
          Release\Server.obj
@@ -40,4 +49,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.77
+Time Elapsed 00:00:07.73

@@ -12,9 +12,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ncltech\AssetsManager.h" />
+    <ClInclude Include="InputBase.h" />
+    <ClInclude Include="RendererBase.h" />
+    <ClInclude Include="ShaderBase.h" />
+    <ClInclude Include="TextureBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\ncltech\AssetsManager.cpp" />
+    <ClCompile Include="InputBase.cpp" />
+    <ClCompile Include="RendererBase.cpp" />
+    <ClCompile Include="ShaderBase.cpp" />
+    <ClCompile Include="TextureBase.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5A51A57D-089F-475C-968F-53F7916E1E15}</ProjectGuid>
