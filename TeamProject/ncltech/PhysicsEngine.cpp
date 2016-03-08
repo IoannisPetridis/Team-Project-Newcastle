@@ -12,7 +12,7 @@ PhysicsEngine::PhysicsEngine()
 	m_UpdateTimestep	= 1.0f / 60.f;
 	m_UpdateAccum		= 0.0f;
 	m_Gravity			=  Vector3(0.0f, -9.81f, 0.0f);
-	m_DampingFactor		= 1.0f;
+	m_DampingFactor		= 0.9f;
 	CollisionDetectionDis = 400.0f;
 
 	DEBUGDRAW_CONSTRAINTS = false;

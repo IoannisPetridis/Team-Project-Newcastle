@@ -1,8 +1,8 @@
-﻿Build started 3/8/2016 12:16:20 PM.
-     1>Project "C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\nclgl\nclgl.vcxproj" on node 2 (Build target(s)).
+﻿Build started 3/8/2016 4:53:24 PM.
+     1>Project "D:\GIthub\Team-Project-Newcastle\TeamProject\nclgl\nclgl.vcxproj" on node 2 (Build target(s)).
      1>Lib:
-         nclgl.vcxproj -> C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\GameTechnologies\Release\nclgl.lib
-     1>Done Building Project "C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\nclgl\nclgl.vcxproj" (Build target(s)).
+         nclgl.vcxproj -> D:\GIthub\Team-Project-Newcastle\TeamProject\GameTechnologies\Release\nclgl.lib
+     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\TeamProject\nclgl\nclgl.vcxproj" (Build target(s)).
 
 Build succeeded.
 

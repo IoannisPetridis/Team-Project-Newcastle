@@ -25,6 +25,29 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	m_scene->AddParticleObject(rainbow);
 	//End
 
+	AssetsManager::Player_1 = new Player("car");
+	//set scene
+	AssetsManager::Player_1->SetScene(m_scene);
+
+	//AssetsManager::Player_1->SetMesh(AssetsManager::Car(), false);
+	AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
+	//settexture&bumpMap
+	AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
+
+	AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
+	AssetsManager::Player_1->SetColour(Vector4(0.2f, 10.0f, 0.5f, 1.0f));
+	AssetsManager::Player_1->SetBoundingRadius(1.0f * 1.0f);
+
+	AssetsManager::Player_1->Physics()->name = "car";
+	AssetsManager::Player_1->Physics()->SetInverseMass(0.1f);
+	AssetsManager::Player_1->Physics()->SetPosition(Vector3(-40.0f, 1.9f, 0.0f));
+	AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
+	Matrix3 inertia(1.0f, 0.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+
+	AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
+
+	m_scene->AddGameObject(AssetsManager::Player_1);
+
 	AssetsManager::GOInstance = new SimpleMeshObject("ground");//Floor
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Ground(), false);
 	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Field, false);
@@ -34,7 +57,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 1.0f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
-	AssetsManager::GOInstance->Physics()->name = "groundcol1";
+	AssetsManager::GOInstance->Physics()->name = "ground";
 	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 150.0f)));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
@@ -543,29 +566,31 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 	{//Player_1
-		AssetsManager::Player_1 = new Player("car");
-		//set scene
-		AssetsManager::Player_1->SetScene(m_scene);
+		//AssetsManager::Player_1 = new Player("car");
+		////set scene
+		//AssetsManager::Player_1->SetScene(m_scene);
 
-		//AssetsManager::Player_1->SetMesh(AssetsManager::Car(), false);
-		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
-		//settexture&bumpMap
-		AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
+		////AssetsManager::Player_1->SetMesh(AssetsManager::Car(), false);
+		//AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
+		////settexture&bumpMap
+		//AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
 
-		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
-		AssetsManager::Player_1->SetColour(Vector4(0.2f, 10.0f, 0.5f, 1.0f));
-		AssetsManager::Player_1->SetBoundingRadius(1.0f * 1.0f);
+		//AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
+		//AssetsManager::Player_1->SetColour(Vector4(0.2f, 10.0f, 0.5f, 1.0f));
+		//AssetsManager::Player_1->SetBoundingRadius(1.0f * 1.0f);
 
-		AssetsManager::Player_1->Physics()->name = "car";
-		AssetsManager::Player_1->Physics()->SetInverseMass(0.1f);
-		AssetsManager::Player_1->Physics()->SetPosition(Vector3(-40.0f, 1.9f, 0.0f));
-		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
+		//AssetsManager::Player_1->Physics()->name = "car";
+		//AssetsManager::Player_1->Physics()->SetInverseMass(0.1f);
+		//AssetsManager::Player_1->Physics()->SetPosition(Vector3(-40.0f, 1.9f, 0.0f));
+		//AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 
-		Matrix3 inertia(0.8f, 0.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 0.0f, 0.8f);
+		//AssetsManager::Player_1->Physics()->SetLinearVelocity(Vector3(100.0f, 0.0f, 0.0f));
 
-		AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
+		//Matrix3 inertia(1.0f, 0.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 0.0f, 1.0f);
 
-		m_scene->AddGameObject(AssetsManager::Player_1);
+		//AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
+
+		//m_scene->AddGameObject(AssetsManager::Player_1);
 
 		//AssetsManager::Wheel = new SimpleMeshObject("wheel");
 		//Matrix3 inertia_2(0.1f, 0.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f, 0.0f, 0.1f);

@@ -1,26 +1,15 @@
-﻿Build started 3/8/2016 3:38:32 PM.
-     1>Project "C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+﻿Build started 3/8/2016 5:37:26 PM.
+     1>Project "D:\GIthub\Team-Project-Newcastle\TeamProject\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp AggressiveAI.cpp AssetsManager.cpp CollisionDetection.cpp DefensiveAI.cpp GameObject.cpp GameObjectMag.cpp Manifold.cpp NeutralAI.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PowerUps.cpp Scene.cpp SoloAI.cpp
-         PhysicsObject.cpp
-         Manifold.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         SoloAI.cpp
-         Scene.cpp
-         PowerUps.cpp
-         Player.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Constraint.cpp GameObjectMag.cpp PhysicsEngine.cpp
          PhysicsEngine.cpp
-         NeutralAI.cpp
          GameObjectMag.cpp
-         GameObject.cpp
-         DefensiveAI.cpp
-         CollisionDetection.cpp
-         AssetsManager.cpp
-         AggressiveAI.cpp
-         ActionHandler.cpp
+     1>d:\github\team-project-newcastle\teamproject\ncltech\gameobjectmag.cpp(19): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         Constraint.cpp
+         Generating Code...
+     1>d:\github\team-project-newcastle\teamproject\ncltech\physicsengine.cpp(333): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\GIthub\Team-Project-Newcastle\TeamProject\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
          Debug\Server.obj
          Debug\Client.obj
          Debug\ActionHandler.obj
@@ -59,9 +48,9 @@
          Debug\SphereCollisionShape.obj
          Debug\SPunt.obj
          Debug\SRetreat.obj
-         ncltech.vcxproj -> C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\GameTechnologies\Debug\ncltech.lib
-     1>Done Building Project "C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\ncltech\ncltech.vcxproj" (Build target(s)).
+         ncltech.vcxproj -> D:\GIthub\Team-Project-Newcastle\TeamProject\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "D:\GIthub\Team-Project-Newcastle\TeamProject\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.26
+Time Elapsed 00:00:01.78

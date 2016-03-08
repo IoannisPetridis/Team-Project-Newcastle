@@ -75,8 +75,6 @@ bool MyScene::InitialiseGL()
 			AssetsManager::Player_1->SetTexture(AssetsManager::m_Field, false); //grass texture
 		}
 
-
-
 		//4 choices of car size, 1 2 3 4
 		int size= MainWindow::playersize * 0.5;
 		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
@@ -104,6 +102,9 @@ void MyScene::UpdateScene(float msec)
 	Proj_dir.z = -cos(m_Camera->GetYaw() * PI / 180.0f);
 	Proj_dir.y = sin(m_Camera->GetPitch() * PI / 180.0f);
 	Proj_dir.Normalise();
+
+	//std::cout << AssetsManager::Player_1->Physics()->GetAngularVelocity()
+		//<< std::endl;
 
 	//Camera Control
 	AssetsManager::Player_1->CameraControl();
@@ -210,20 +211,20 @@ void MyScene::UpdateScene(float msec)
 		Audio::channel4->setPaused(false);
 	}
 
-	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
-		+ " Y:"
-		+ std::to_string((int)m_Camera->GetPosition().y)
-		+ " Z:"
-		+ std::to_string((int)m_Camera->GetPosition().z)
-		+ " Pitch:"
-		+ std::to_string((float)m_Camera->GetPitch())
-		+ " Yaw:"
-		+ std::to_string((float)m_Camera->GetYaw())
-		+ " cord:"
-		+ std::to_string((float)Proj_dir.x) + " "
-		+ std::to_string((float)Proj_dir.y) + " "
-		+ std::to_string((float)Proj_dir.z) + " "
-		);
+	//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
+	//	+ " Y:"
+	//	+ std::to_string((int)m_Camera->GetPosition().y)
+	//	+ " Z:"
+	//	+ std::to_string((int)m_Camera->GetPosition().z)
+	//	+ " Pitch:"
+	//	+ std::to_string((float)m_Camera->GetPitch())
+	//	+ " Yaw:"
+	//	+ std::to_string((float)m_Camera->GetYaw())
+	//	+ " cord:"
+	//	+ std::to_string((float)Proj_dir.x) + " "
+	//	+ std::to_string((float)Proj_dir.y) + " "
+	//	+ std::to_string((float)Proj_dir.z) + " "
+	//	);
 }
 
 void MyScene::RenderScene()

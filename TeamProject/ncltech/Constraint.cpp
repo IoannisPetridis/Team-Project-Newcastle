@@ -64,9 +64,6 @@ void Constraint::ApplyImpulse()
 		min(max(impulseSum + delta, impulseSumMin), impulseSumMax);
 	float realDelta = impulseSum - oldImpulseSum;
 
-
-
-
 	//Reason why we have this condition here is that we want to control the 
 	//rotation of car, when car hitting the ball, it would not rotate
 	if ((objA->name == "car" && objB->name == "ball") ||
