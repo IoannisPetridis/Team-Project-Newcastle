@@ -1,10 +1,22 @@
-﻿Build started 3/4/2016 7:20:41 PM.
+﻿Build started 3/8/2016 11:13:19 AM.
      1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Tutorial1 - Integration.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../../FMOD/inc/ /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Server.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../../FMOD/inc/ /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\ncltech\Audio.cpp Game.cpp main.cpp MyScene.cpp Network.cpp ParticleEmitter.cpp Server.cpp Thread.cpp
+         Thread.cpp
          Server.cpp
-     1>h:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\server.cpp(94): warning C4805: '&' : unsafe mix of type 'bool' and type 'boolean' in operation
+         ParticleEmitter.cpp
+     1>h:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\particleemitter.cpp(137): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>h:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\particleemitter.cpp(138): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         Network.cpp
+         MyScene.cpp
+         main.cpp
+         Game.cpp
+         Audio.cpp
+         Generating Code...
+     1>h:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\server.cpp(80): warning C4715: 'Server::acceptCon' : not all control paths return a value
+     1>h:\github\team-project-newcastle\gametechcw\gametechnologies\gametech cw\server.cpp(188): warning C4715: 'getForemostClientIP' : not all control paths return a value
+     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.exe" /INCREMENTAL /NOLOGO /LIBPATH:../../FMOD/lib/ fmodL64_vc.lib fmodL_vc.lib fmod64_vc.lib fmod_vc.lib ncltech.lib nclgl.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.lib" /MACHINE:X86 Debug\Audio.obj
          Debug\Game.obj
@@ -14,9 +26,9 @@
          Debug\ParticleEmitter.obj
          Debug\Server.obj
          Debug\Thread.obj
-         GameTech CW.vcxproj -> H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\GameTech CW.exe
-     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" (Build target(s)).
+     1>LINK : fatal error LNK1104: cannot open file 'ncltech.lib'
+     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\GameTech CW\GameTech CW.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:04.43
+Time Elapsed 00:00:07.84

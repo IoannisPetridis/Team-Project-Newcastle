@@ -4,11 +4,13 @@
 #include "MyScene.h"*/
 //#include "Game.h"
 #include "Server.h"
-//#include "Client.h"
 
 
 
 int main() {
+
+	//SYNCHRONIZE EVERYTHING WITH LOCAL TIME ! ! !
+
 	Server *server = new Server();
 	std::thread t1(&Server::run, server);
 	t1.join();
@@ -26,5 +28,5 @@ int main() {
 
 	//game->join();
 	//delete game;
-	delete server;
+	//delete server;
 }

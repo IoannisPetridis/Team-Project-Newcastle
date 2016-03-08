@@ -1,6 +1,11 @@
 #pragma once
 #pragma comment(lib, "Ws2_32.lib")
 #pragma comment(lib,"wsock32.lib")
+
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 
@@ -11,6 +16,7 @@
 #include <iostream>
 #include <vector>
 #include <../ncltech/GameObject.h>
+#include <time.h>
 
 
 #define HIGHVERSION 2
@@ -30,13 +36,19 @@ struct gameObjectData {
 	std::string objName;
 	Vector3 position;	//Calculated data
 	Quaternion  orientation;	//Calculated data
-	Vector3 inpForce;	//Before-calculation data
-	Quaternion inpOrientation; //Before-calculation data
+	bool first = false;
+	std::string ballName;
+	Vector3 ballposition;	//Calculated data
+	Quaternion  ballorientation;	//Calculated data
+	//Vector3 inpForce;	//Before-calculation data
+	//Quaternion inpOrientation; //Before-calculation data
 };
 
 struct clientInfo {
 	PCSTR ip;
 	boolean ready = false;
+	std::string min;
+	std::string sec;
 	gameObjectData gameObject;
 	//std::vector<gameObjectData> gameObjects;
 };
@@ -72,4 +84,6 @@ protected:
 	std::vector<PCSTR> *clientList;
 	std::vector<clientInfo*> *clients;
 	PCSTR last_client;	//Server knows the last client's IP
+	time_t rawtime;
+	struct tm *timeinfo;
 };

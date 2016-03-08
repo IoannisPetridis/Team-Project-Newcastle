@@ -18,8 +18,6 @@ int Network::init() {
 		//fprintf(stderr, "WSAStartup failed with error %d. \n", error);
 		return 1;
 	}
-
-
 	//Check version values
 	if (LOBYTE(wsaData.wVersion) != LOWVERSION || HIBYTE(wsaData.wVersion) != HIGHVERSION) {
 		printf("The version requested cannot be supported .\n");

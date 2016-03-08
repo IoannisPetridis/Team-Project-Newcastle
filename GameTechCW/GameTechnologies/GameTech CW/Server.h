@@ -1,16 +1,15 @@
 #include "Network.h"
 #include <thread>
-
 class Server : public Network {
 public:
 	Server();
 	~Server();
 	void _stdcall bindSocket();
 	void _stdcall listenSocket();
-	bool _stdcall acceptCon();
+	SOCKET _stdcall acceptCon();
 	void  run();
-	void notify_client();
-	void thread_run();
+	void notify_client(SOCKET s);
+	void thread_run(SOCKET s);
 	void _stdcall receiveMessage(SOCKET sock);
 	PCSTR _stdcall getLastClient();
 	std::vector<PCSTR> * getClientList();
