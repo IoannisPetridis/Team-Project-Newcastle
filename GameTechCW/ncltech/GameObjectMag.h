@@ -23,12 +23,14 @@ public:
 	void	GOM_GamePlay(Scene* m_scene);
 
 	void AIStuff(Scene* m_scene);
+	void SoloAIStuff(Scene* m_scene);
 
 	void SetID(int i) { id = i; }
 	int GetID() const {
 		return id;
 	}
 
+	bool AIChoice;
 
 protected:
 	int id;

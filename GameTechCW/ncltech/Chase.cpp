@@ -10,7 +10,7 @@ void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the 
 	float MagAINodeDist;
 
 	++iterator;
-
+	//cout << "chase" << endl;
 	if (iterator == 10) {
 		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
 		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
@@ -20,7 +20,7 @@ void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the 
 		ChaseNode = NodeCalculation(Arb);
 		ChaseNode.y = GroundHeight;
 
-		
+
 		iterator = 0;
 	}
 
@@ -34,11 +34,21 @@ void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the 
 }
 
 void Chase::CheckTriggers(NeutralAI* Arb) {
-	Vector3 AINodeVec;
-	float MagDistAINode;
+	Vector3 AINodeVec, AIGoalVec, BallGoalVec;
+	float MagDistAINode, ailength, balllength;
+
+	AIGoalVec = AIPosition - FriendlyGoalPosition;
+	ailength = AIGoalVec.LengthSquared();
+	BallGoalVec = BallPosition - FriendlyGoalPosition;
+	balllength = BallGoalVec.LengthSquared();
 
 	AINodeVec = ChaseNode - AIPosition;
 	MagDistAINode = AINodeVec.LengthSquared();
+
+	if (ailength >= balllength + 700) { //puts AI to off state on keypress (3 integer denotes off state)
+		Arb->SetState(3);
+		return;
+	}
 
 	if (MagDistAINode < 100) { //puts AI to off state on keypress (3 integer denotes off state)
 		Arb->SetState(2);
@@ -57,13 +67,4 @@ Vector3 Chase::NodeCalculation(NeutralAI* Arb) {
 	node = BallPosition + (EnemyGoalBallVec * 10);
 
 	return node;
-}
-
-Vector3 Chase::DirectionCalculation(NeutralAI* Arb, Vector3 node) {
-	Vector3 directionvector;
-
-	directionvector = node - AIPosition;
-	directionvector.Normalise();
-
-	return directionvector;
 }

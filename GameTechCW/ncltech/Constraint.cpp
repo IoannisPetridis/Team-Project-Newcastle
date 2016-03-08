@@ -64,12 +64,30 @@ void Constraint::ApplyImpulse()
 		min(max(impulseSum + delta, impulseSumMin), impulseSumMax);
 	float realDelta = impulseSum - oldImpulseSum;
 
+
 	objA->SetLinearVelocity(objA->GetLinearVelocity()
 		+ (j1 * realDelta) * objA->GetInverseMass());
-	objA->SetAngularVelocity(objA->GetAngularVelocity()
-		+ objA->GetInverseInertia() * (j2 * realDelta));
+	
 	objB->SetLinearVelocity(objB->GetLinearVelocity()
 		+ (j3 * realDelta) * objB->GetInverseMass());
-	objB->SetAngularVelocity(objB->GetAngularVelocity()
-		+ objB->GetInverseInertia() * (j4 * realDelta));
+
+
+	//Reason why we have this condition here is that we want to control the 
+	//rotation of car, when car hitting the ball, it would not rotate
+	if ((objA->name == "car" && objB->name == "ball") ||
+		(objA->name == "ball" && objB->name == "car")) {
+		if (objA->name == "car") 		objB->SetAngularVelocity(objB->GetAngularVelocity()
+			+ objB->GetInverseInertia() * (j4 * realDelta));
+		else 
+			objA->SetAngularVelocity(objA->GetAngularVelocity()
+			+ objA->GetInverseInertia() * (j2 * realDelta));
+	}
+	else {
+		objA->SetAngularVelocity(objA->GetAngularVelocity()
+			+ objA->GetInverseInertia() * (j2 * realDelta));
+		objB->SetAngularVelocity(objB->GetAngularVelocity()
+			+ objB->GetInverseInertia() * (j4 * realDelta));
+	}
+
+	
 }

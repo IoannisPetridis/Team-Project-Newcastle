@@ -89,8 +89,8 @@ void Loading()
 	while (isStillLoad)
 	{
 		Loading_scene->RenderScene();
-		Loading_scene->GetCamera()->SetYaw(i);
-		NCLDebug::Log(Vector3(1, 1, 1), std::to_string(i));
+		Loading_scene->GetCamera()->SetYaw(i * 0.4);
+		//NCLDebug::Log(Vector3(1, 1, 1), std::to_string(i));
 		i++;
 	}
 }
@@ -113,7 +113,6 @@ void Scoring()
 }
 
 int main()
-
 {
 	//-------------------
 	//--- MAIN ENGINE ---
@@ -124,6 +123,7 @@ int main()
 	{
 		return Quit(true, "Window failed to initialise!");
 	}
+
 
 	GameObjectMag* GOM_Loading = new GameObjectMag();
 
@@ -138,11 +138,6 @@ int main()
 	int argc = sizeof(argv) / sizeof(char*)-1; 	//argc is the no. of usable elements in argv inc. the program name
 	main2(argc, argv); 	//call the qt window
 	//~~~ END QT SHIT~~~
-
-	//if they clicked the exit button, don't progress
-	if (MainWindow::WannaExit){
-		return Quit();
-	}
 
 	//Initialise the PhysicsEngine
 	//Create GameObject Iterate Root Node upon which the GameObject List will be built
@@ -170,22 +165,16 @@ int main()
 	loading.join();
 	
 	//Create main game-loop
-	Audio::AddSound({ 0.f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel6, Audio::Start, 5);
-
 	while (Window::GetWindow().UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)){
 		
 
 		float dt = Window::GetWindow().GetTimer()->GetTimedMS() * 0.001f;	//How many milliseconds since last update?
 
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_P))
-		{	
-				PhysicsEngine::Instance()->SetPaused(!PhysicsEngine::Instance()->IsPaused());
+		{
+			PhysicsEngine::Instance()->SetPaused(!PhysicsEngine::Instance()->IsPaused());
 		}
-	
-		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_M)){
-			Audio::AddSound({ 0.f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel6, Audio::Start, 5);
-		}
-	
+
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_NUMPAD1)){
 			if (PhysicsEngine::Instance()->GetDebug()){
 				PhysicsEngine::Instance()->SetDebug(false);
@@ -201,7 +190,8 @@ int main()
 		engine_timer.GetTimedMS();
 
 		if (!PhysicsEngine::Instance()->IsGameover()) {
-			
+
+
 			PhysicsEngine::Instance()->Feedback();
 			ActionHandler::Instance()->Update(dt);
 			PhysicsEngine::Instance()->Update(dt);
@@ -218,21 +208,6 @@ int main()
 
 			//Debug Data
 			if (PhysicsEngine::Instance()->GetDebug()){
-				/*NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
-					+ " Y:"
-					+ std::to_string((int)m_Camera->GetPosition().y)
-					+ " Z:"
-					+ std::to_string((int)m_Camera->GetPosition().z)
-					+ " Pitch:"p1
-					+ std::to_string((float)m_Camera->GetPitch())
-					+ " Yaw:"
-					+ std::to_string((float)m_Camera->GetYaw())
-					+ " cord:" 
-					+ std::to_string((float)Proj_dir.x) + " "
-					+ std::to_string((float)Proj_dir.y) + " "
-					+ std::to_string((float)Proj_dir.z) + " "
-					);*/
-
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Engine: %s (Press P to toggle)", PhysicsEngine::Instance()->IsPaused() ? "Paused" : "Enabled");
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "--------------------------------");
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Collision Detection Distance: " + std::to_string(PhysicsEngine::Instance()->GetCollisionDetectionDis()));
@@ -241,25 +216,83 @@ int main()
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Physics Update: %5.2fms", physics_ms);
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Scene Update  : %5.2fms", update_ms);
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "CURRENT PLAYER: " + MainWindow::playername);
-				//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "TIME REMAINING: " + std::to_string(MyScene::timeremaining));
 				NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "PowerUp  :" + AssetsManager::Player_1->GetPowerUpState());
-			//	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "SCORE: BLUE " + std::to_string(ActionHandler::BLUESCORE) + " - " + std::to_string(ActionHandler::REDSCORE) + " RED");
-
 			}
+
+			if (MainWindow::playerskill == 1){
+				//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "ABILITY: BALL GRAB");
+				NCLDebug::DrawTextClipSpace(Vector4(0.5f, -0.7f, 0.0f, 1.0f),
+					26.0f,
+					"ABILITY: BALL GRAB",
+					TEXTALIGN_LEFT,
+					Vector4(1.0, 1.0, 1.0, 1.0));
+			}
+			if (MainWindow::playerskill == 2){
+				//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "ABILITY: TELEPORT");
+				NCLDebug::DrawTextClipSpace(Vector4(0.5f, -0.7f, 0.0f, 1.0f),
+					26.0f,
+					"ABILITY: TELEPORT",
+					TEXTALIGN_LEFT,
+					Vector4(1.0, 1.0, 1.0, 1.0));
+			}
+			if (MainWindow::playerskill == 3){
+				//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "ABILITY: ?????");
+				NCLDebug::DrawTextClipSpace(Vector4(0.5f, -0.7f, 0.0f, 1.0f),
+					26.0f,
+					"ABILITY: AI STUN",
+					TEXTALIGN_LEFT,
+					Vector4(1.0, 1.0, 1.0, 1.0));
+			}
+
+			if (!MyScene::AbilityUsed){
+				//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "ABILITY: available");
+				NCLDebug::DrawTextClipSpace(Vector4(0.5f, -0.8f, 0.0f, 1.0f),
+					26.0f,
+					"ABILITY: available",
+					TEXTALIGN_LEFT,
+					Vector4(1.0, 1.0, 1.0, 1.0));
+			}
+			if (MyScene::AbilityUsed){
+				//NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "ABILITY: used");
+				NCLDebug::DrawTextClipSpace(Vector4(0.5f, -0.8f, 0.0f, 1.0f),
+					26.0f,
+					"ABILITY: used",
+					TEXTALIGN_LEFT,
+					Vector4(1.0, 1.0, 1.0, 1.0));
+			}
+
+		
 				//Render the Scene
 
 			scene->RenderScene();
 
+			//check if need end game menu
+			if (ActionHandler::Instance()->GameOver){
+				Window::GetWindow().GetTimer()->GetTimedMS();
+
+				MainWindow::isExitWindow = true;
+
+				Window::GetWindow().ShowOSPointer(true);
+
+				char *argv[] = { "windowinwindow", "arg1", "arg2", NULL };
+				int argc = sizeof(argv) / sizeof(char*)-1;
+				main2(argc, argv);
+
+				MyScene::AbilityUsed = false;
+				MyScene::abilitycounter = 200;
+				Window::GetWindow().GetTimer()->GetTimedMS();
+			}
+
+
+			//HUD for scoring 
 			{
 				int SC = ActionHandler::Instance()->ScoreCheck();
 				if (SC == 1) {
 					for (int i = 0; i < 100; i++) {
 						Transition_scene->RenderScene();
-						//Scoring.join();
 						isScoring = true;
-						//isStillLoad = true;
-						
-						NCLDebug::DrawTextClipSpace(Vector4(-0.4f, 0.0f, 0.0f, 1.0f),
+
+						NCLDebug::DrawTextClipSpace(Vector4(-0.3f, 0.0f, 0.0f, 1.0f),
 							40.0,
 							"Red Team Score !",
 							TEXTALIGN_LEFT,
@@ -272,11 +305,10 @@ int main()
 				else if (SC == 2) {
 					for (int i = 0; i < 100; i++) {
 						Transition_scene->RenderScene();
-						//Scoring.join();
 						isScoring = true;
 						isStillLoad = true;
 
-						NCLDebug::DrawTextClipSpace(Vector4(-0.4f, 0.0f, 0.0f, 1.0f),
+						NCLDebug::DrawTextClipSpace(Vector4(-0.3f, 0.0f, 0.0f, 1.0f),
 							40.0f,
 							"Blue Team Score !",
 							TEXTALIGN_LEFT,

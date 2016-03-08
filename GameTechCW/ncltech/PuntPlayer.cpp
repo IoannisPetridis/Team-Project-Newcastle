@@ -10,6 +10,9 @@ PuntPlayer::PuntPlayer(AggressiveAI* Arb) {
 	PuntPlayerNode = NodeCalculation(Arb);
 	PuntPlayerNode.y = GroundHeight;
 	iterator = 9;
+
+	Arb->forward = false;
+	Arb->reverse = false;
 }
 
 void PuntPlayer::ForceCalculator(AggressiveAI* Arb) {
@@ -17,15 +20,27 @@ void PuntPlayer::ForceCalculator(AggressiveAI* Arb) {
 
 	++iterator;
 
+	//cout << "punt player" << endl;
+
 	MagAINodeDist = (PuntPlayerNode - AIPosition).Length();
 
 	Arb->DirectionVector = Arb->DirectionCalculation(PuntPlayerNode, AIPosition);
 	Arb->RotationCalculation(PuntPlayerNode);
-	Arb->ForwardBackwardCalculation(MagAINodeDist);
 
-	//if (iterator == 10) {
-		CheckTriggers(Arb);
-	//}
+	if (Arb->left == 0 && Arb->right == 0) {
+		//cout << "true" << endl;
+		Arb->Charge();
+	}
+
+	/*else {
+	cout << "false" << endl;
+	Arb->
+	}
+
+	Arb->ForwardBackwardCalculation(MagAINodeDist);*/
+
+	CheckTriggers(Arb);
+
 }
 
 void PuntPlayer::CheckTriggers(AggressiveAI* Arb) {
@@ -48,7 +63,7 @@ Vector3 PuntPlayer::NodeCalculation(AggressiveAI* Arb) {
 	AIPlayerVec = AIPlayerVec + Arb->scene->FindGameObject("car")->Physics()->GetLinearVelocity();
 	AIPlayerVec.Normalise();
 
-	node = EnemyPlayer1Position + AIPlayerVec * 20;
+	node = EnemyPlayer1Position /*+ AIPlayerVec*/;
 
 	return node;
 }

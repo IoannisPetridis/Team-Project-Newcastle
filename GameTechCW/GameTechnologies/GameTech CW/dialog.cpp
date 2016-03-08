@@ -149,13 +149,13 @@ void Dialog::sizesliderValueChanged(int value){
 void Dialog::skillsliderValueChanged(int value){
 
     if (value == 1) {
-        skilloptions->setText("Shrink & Boost");
+        skilloptions->setText("Ball Pull");
     }
     if (value == 2) {
-        skilloptions->setText("Gravity Gun");
+        skilloptions->setText("Midpoint Teleport");
     }
     if (value == 3) {
-        skilloptions->setText("Tron");
+        skilloptions->setText("AI Stun");
     }
 
     skillchoice = value;

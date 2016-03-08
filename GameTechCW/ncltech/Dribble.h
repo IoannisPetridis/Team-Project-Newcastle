@@ -12,7 +12,6 @@ public:
 	void CheckTriggers(NeutralAI* Arb) override;
 	void ForceCalculator(NeutralAI* Arb) override;
 	Vector3 NodeCalculation(NeutralAI* Arb);
-	Vector3 DirectionCalculation(NeutralAI* Arb, Vector3 node);
 
 private:
 	Vector3 EnemyGoalPosition, FriendlyGoalPosition, BallPosition, AIPosition, DribbleNode;

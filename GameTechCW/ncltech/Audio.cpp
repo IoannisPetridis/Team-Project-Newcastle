@@ -5,13 +5,13 @@ FMOD_RESULT Audio::Result;
 FMOD::System *Audio::AudioSystem;
 
 //Sounds
-FMOD::Sound* Audio::Car   = 0;
+FMOD::Sound* Audio::Car = 0;
 FMOD::Sound* Audio::AI = 0;
 FMOD::Sound* Audio::Crash = 0;
-FMOD::Sound* Audio::Ball  = 0;
-FMOD::Sound* Audio::Wall  = 0;
-FMOD::Sound* Audio::Goal  = 0;
-FMOD::Sound* Audio::Pickup= 0;
+FMOD::Sound* Audio::Ball = 0;
+FMOD::Sound* Audio::Wall = 0;
+FMOD::Sound* Audio::Goal = 0;
+FMOD::Sound* Audio::Pickup = 0;
 FMOD::Sound* Audio::ButtonSelect = 0;
 FMOD::Sound* Audio::End = 0;
 FMOD::Sound* Audio::Start = 0;
@@ -48,7 +48,7 @@ void Audio::GetCameraInfo(Camera* camera){
 	CameraPosition = { camera->GetPosition().x, camera->GetPosition().y, camera->GetPosition().z };
 	Projdir.x = -sin(camera->GetYaw() * PI / 180.0f);
 	Projdir.z = -cos(camera->GetYaw() * PI / 180.0f);
-	Projdir.y =  sin(camera->GetPitch() * PI / 180.0f);
+	Projdir.y = sin(camera->GetPitch() * PI / 180.0f);
 	Projdir.Normalise();
 	CameraForward = { Projdir.x, Projdir.y, Projdir.z };
 	Vector3 Right = Vector3::Cross(Projdir, Vector3(0.0f, 1.0f, 0.0f));
@@ -58,7 +58,7 @@ void Audio::GetCameraInfo(Camera* camera){
 	CameraVelocity = { 0.0f, 0.0f, 0.0f };
 
 	LastPosition = CameraPosition;
-	Result = AudioSystem->set3DListenerAttributes(0, &CameraPosition,0, &CameraForward, &CameraUp);
+	Result = AudioSystem->set3DListenerAttributes(0, &CameraPosition, 0, &CameraForward, &CameraUp);
 	Result = AudioSystem->update();
 }
 
@@ -78,7 +78,7 @@ FMOD_VECTOR GetPosition(PhysicsObject object){
 
 void GetVelocity(PhysicsObject* object, FMOD_VECTOR velocity){
 	velocity = { object->GetLinearVelocity().x, object->GetLinearVelocity().y, object->GetLinearVelocity().z };
-	
+
 }
 
 void Audio::InitialiseAudio(){
@@ -94,7 +94,7 @@ void Audio::ReleaseAudio(){
 	Result = Crash->release();
 	Result = Ball->release();
 	Result = Wall->release();
-	
+
 	Result = AudioSystem->close();
 	Result = AudioSystem->release();
 
@@ -128,67 +128,48 @@ void Audio::LoadSounds(){
 	Result = AudioSystem->playSound(End, 0, true, &channel1);
 	Result = AudioSystem->playSound(Background, 0, true, &channel8);
 
+
 }
 
-void Audio::UpdateSound(FMOD_VECTOR position ,FMOD_VECTOR velocity, float frequency, float volume,FMOD::Channel* channel){
+void Audio::UpdateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, float frequency, float volume, FMOD::Channel* channel){
 
 	Result = channel3->set3DAttributes(&position, &velocity);
 	Result = channel3->setFrequency(frequency);
 	Result = channel3->setVolume(volume);
 	Result = channel3->setPaused(false);
-	//Result = AudioSystem->update();
+	Result = AudioSystem->update();
 }
 
-void Audio::CollisionSound(PhysicsObject* objectA, PhysicsObject* objectB,  float time){
+void Audio::CollisionSound(PhysicsObject* objectA, PhysicsObject* objectB, float time){
 
 
-		if ((objectA->GetCar() && objectB->GetCar())){
-			if (time > 50){
+	if ((objectA->GetCar() && objectB->GetCar())){
+		if (time > 50){
 			FMOD_VECTOR	Position = { objectA->GetPosition().x, objectA->GetPosition().y, objectA->GetPosition().z };
 			FMOD_VECTOR	Velocity = { objectA->GetLinearVelocity().x, objectA->GetLinearVelocity().y, objectA->GetLinearVelocity().z };
 			float volume = objectA->GetLinearVelocity().Length()*0.6f;
 			AddSound(Position, Velocity, channel2, Crash, volume);
-			objectA->HP -= 50;
-			objectB->HP -= 50;
+			objectA->HP -= 1;
+			objectB->HP -= 1;
 			if (objectA->HP <= 0){
 
-				}
 			}
 		}
+	}
 
-		if ((objectA->GetCar()  &&  objectB->name == "ball") ||
-			(objectB->GetCar()  &&  objectA->name == "ball")){
-			if (time > 50){
-				FMOD_VECTOR Position = { objectA->GetPosition().x, objectA->GetPosition().y, objectA->GetPosition().z };
-				FMOD_VECTOR vel = { 0.f, 0.f, 0.f };
-				float volume = objectA->GetLinearVelocity().Length()*10.f;
-				AddSound(Position, vel, Audio::channel4, Audio::Ball, volume);
+	if ((objectA->GetCar() && objectB->name == "ball") ||
+		(objectB->GetCar() && objectA->name == "ball")){
+		if (time > 50){
+			FMOD_VECTOR Position = { objectA->GetPosition().x, objectA->GetPosition().y, objectA->GetPosition().z };
+			FMOD_VECTOR vel = { 0.f, 0.f, 0.f };
+			float volume = objectA->GetLinearVelocity().Length()*10.f;
+			AddSound(Position, vel, Audio::channel4, Audio::Ball, volume);
 		}
 	}
 }
 
+void Audio::PauseAudio(FMOD::Channel* channel){
 
-
-
-
-
-//	if (m->objectA->name == "car" &&  m->objectB->name == "cube"){
-//		if (time > 50){
-//			CarPosition = { m->objectA->GetPosition().x, m->objectA->GetPosition().y, m->objectA->GetPosition().z };
-//			CarVelocity = { m->objectA->GetLinearVelocity().x, m->objectA->GetLinearVelocity().y, m->objectA->GetLinearVelocity().z };
-//			float volume = m->objectA->GetLinearVelocity().Length()*0.1f;
-//			Audio::AddSound(CarPosition, CarVelocity,  Audio::channel2, Audio::Crash, volume);
-//		}
-//	}
-
-//	if (m->objectA->name == "car" &&  m->objectB->name == "ball"){
-//		if (time > 50){
-//			SoundVelocity = { m->objectA->GetPosition().x, m->objectA->GetPosition().y, m->objectA->GetPosition().z };
-//			FMOD_VECTOR vel = { 0.f, 0.f, 0.f };
-//			float volume = m->objectA->GetLinearVelocity().Length()*10.f;
-//			Audio::AddSound(SoundPosition, vel, Audio::channel4, Audio::Ball, volume);
-//		}
-//	}
-//}
-	
-
+	channel->setPaused(true);
+	Audio::Result = Audio::AudioSystem->update();
+}

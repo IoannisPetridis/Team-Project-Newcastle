@@ -17,9 +17,24 @@ void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 
 	if (iterator == 10) {
 
+		//cout << "defend" << endl;
+
 		AIPosition = Arb->Physics()->GetPosition();
 		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
-		FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
+
+		//
+		FriendlyGoalPositionCalculation(Arb);
+
+		//FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition() + Vector3(0.0f, 0.0f, ballwidthmove);
+
+		//cout << ballwidthmove << endl;
+
+		FriendlyGoalPosition = Vector3(190.0f, 2.0f, 0.0f) + Vector3(0.0f, 0.0f, ballwidthmove);
+
+		//
+
+		Arb->scene->FindGameObject("FriendlyGoal")->Physics()->SetPosition(FriendlyGoalPosition);
+
 		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
 
 		DefendNode = NodeCalculation(Arb);
@@ -48,7 +63,7 @@ void Defend::CheckTriggers(DefensiveAI* Arb) {
 		Arb->SetState(2);
 	}
 
-	if (MagDistBallGoal < (MagGoalDists * 0.1)) {
+	if (MagDistBallGoal < (MagGoalDists * 0.15)) {
 		Arb->SetState(3);
 	}
 }
@@ -69,5 +84,17 @@ Vector3 Defend::NodeCalculation(DefensiveAI* Arb) {
 	defendnode = FriendlyGoalPosition + (GoalBallVec * DistGoalBall * 0.2);
 
 	return defendnode;
+}
+
+void Defend::FriendlyGoalPositionCalculation(DefensiveAI* Arb) {
+	float arenawidth, ballwidthposition, goalwidth, ballwidthpercentage;
+
+	arenawidth = 200;
+	goalwidth = 100;
+	ballwidthposition = BallPosition.z;
+
+	ballwidthpercentage = ballwidthposition / arenawidth;
+
+	ballwidthmove = 150 * ballwidthpercentage;
 }
 

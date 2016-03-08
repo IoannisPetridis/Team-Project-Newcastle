@@ -33,10 +33,10 @@ class Dialog : public QDialog
 
     QLabel *namelabel = new QLabel("Name:  ");
     QLabel *sizelabel = new QLabel("Cube Size:  ");
-    QLabel *skilllabel = new QLabel("Special Ability:  ");
+    QLabel *skilllabel = new QLabel("Special Ability (1 use):  ");
     QLabel *texlabel = new QLabel("Texture:  ");
     QLabel *sizeoptions = new QLabel("Small");
-    QLabel *skilloptions = new QLabel("Shrink & Boost");
+    QLabel *skilloptions = new QLabel("Ball Pull");
     QLabel *texoptions = new QLabel("Checker");
     QLabel *textcubeimg = new QLabel;
 

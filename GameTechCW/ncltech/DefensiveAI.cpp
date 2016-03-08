@@ -23,7 +23,7 @@ DefensiveAI::DefensiveAI(const std::string& name, Scene* m_scene) : SimpleMeshOb
 	SetBoundingRadius(80.0f * 80.f);
 	Physics()->name = name.c_str();
 	Physics()->SetInverseMass(0.06f);
-	Physics()->SetPosition(Vector3(30.0f, 5.0f, 60.0f));
+	Physics()->SetPosition(Vector3(180.0f, 2.0f, 0.0f));
 	Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 
 	scene = m_scene;
@@ -34,6 +34,7 @@ DefensiveAI::DefensiveAI(const std::string& name, Scene* m_scene) : SimpleMeshOb
 	right = false;
 	reverse = false;
 	forward = false;
+	jump = false;
 }
 
 DefensiveAI::~DefensiveAI() {
@@ -76,32 +77,40 @@ void DefensiveAI::RotationCalculation(Vector3 defendnode) {
 	float dotproduct, angle;
 	Vector3 crossproduct;
 
+	int checkint;
+
 	NormalCal();
-	dotproduct = Vector3::Dot(DirectionVector, GetFrontNormal());
-	angle = acos(dotproduct);
-
-	angle = angle * 57.3f;
-
-	if (angle < 1.0f) {
-		right = false;
-		left = false;
-		return;
-	}
 
 	crossproduct = Vector3::Cross(DirectionVector, GetFrontNormal());
 
 	if (crossproduct.y > 0) {
 		right = true;
 		left = false;
+		++rightiterator;
+		leftiterator = 0;
 	}
 
 	if (crossproduct.y <= 0) {
 		right = false;
 		left = true;
+		++leftiterator;
+		rightiterator = 0;
+	}
+
+	checkint = rightiterator - leftiterator;
+
+	if (rightiterator == 1 || leftiterator == 1) {
+		//cout << "true" << endl;
+		right = false;
+		left = false;
+		return;
 	}
 }
 
-
+void DefensiveAI::Charge() {
+	forward = 1;
+	reverse = 0;
+}
 
 void DefensiveAI::ForwardBackwardCalculation(float disttonode) {
 	float currentforwardspeed, currentbackwardspeed, currentleftspeed, currentrightspeed;
@@ -116,7 +125,7 @@ void DefensiveAI::ForwardBackwardCalculation(float disttonode) {
 	currentleftspeed = Vector3::Dot(Physics()->GetLinearVelocity(), GetLeftNormal());
 	currentrightspeed = Vector3::Dot(Physics()->GetLinearVelocity(), GetRightNormal());
 
-	if (currentleftspeed > (maxspeed * 0.7) || currentrightspeed > (maxspeed * 0.7)) {
+	if (currentleftspeed > (maxspeed * 0.5) || currentrightspeed > (maxspeed * 0.5)) {
 		forward = 0;
 		reverse = 0;
 		return;
@@ -143,4 +152,31 @@ void DefensiveAI::ForwardBackwardCalculation(float disttonode) {
 			reverse = 1;
 		}
 	}
+}
+
+void DefensiveAI::JumpCalculation(Vector3 &ballposition){
+	float ballheight, groundheight, ballradius;
+
+	groundheight = 1.0f;
+	ballradius = 4.0f;
+
+	ballheight = ballposition.y - groundheight - ballradius;
+
+	//cout << ballheight << endl;
+
+	if (ballheight > 1.5f) {
+		//cout << jumpiterator << endl;
+
+		if (jumpiterator > 100) {
+			jump = true;
+			jumpiterator = 0;
+			return;
+		}
+
+		++jumpiterator;
+		jump = false;
+		return;
+	}
+
+	else jump = false;
 }

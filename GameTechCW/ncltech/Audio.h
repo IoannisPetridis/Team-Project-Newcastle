@@ -14,7 +14,7 @@ class Audio
 	friend class Scene;
 	friend class MyScene;
 public:
-	
+
 	static void GetCameraInfo(Camera* camera);
 	static void AddSound(FMOD_VECTOR pos, FMOD_VECTOR vel, FMOD::Channel* channel1, FMOD::Sound *sound1, float volume);
 	static void GetVelocity(PhysicsObject* object, FMOD_VECTOR velocity);
@@ -25,11 +25,12 @@ public:
 	static void LoadSounds();
 	static void UpdateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, float frequency, float volume, FMOD::Channel* channel);
 	static void CollisionSound(PhysicsObject* objectA, PhysicsObject* objectB, float time);
+	static void PauseAudio(FMOD::Channel* channel);
 
 	static FMOD_RESULT Result;
 	static FMOD::System *AudioSystem;
 	static FMOD::Channel   *channel1, *channel2, *channel3, *channel4, *channel5, *channel6, *channel7, *channel8, *channel9;
-	static FMOD::Sound *Goal,*Pickup,*AI, *Start,*End,*ButtonSelect, *Background;
+	static FMOD::Sound *Goal, *Pickup, *AI, *Start, *End, *ButtonSelect, *Background;
 
 protected:
 
@@ -41,7 +42,7 @@ protected:
 	static FMOD_VECTOR LastPosition;
 
 	static FMOD::Sound *Car, *Crash, *Ball, *Wall;// , *Pickup; //*Goal;
-	
+
 
 	static const int   INTERFACE_UPDATETIME;      // 50ms update for interface
 	static const float DISTANCEFACTOR;

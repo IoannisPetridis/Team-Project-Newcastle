@@ -14,7 +14,6 @@ Scene::Scene(Window& window) : OGLRenderer(window)
 
 	glGetIntegerv(GL_GPU_MEM_INFO_CURRENT_AVAILABLE_MEM_NVX, &total_mem_kb);
 
-
 	//used as friend class
 	Audio::InitialiseAudio();
 	Audio::LoadSounds();
@@ -517,15 +516,12 @@ void Scene::RenderScene()
 
 	////Swap Buffers and get ready to repeat the process
 	//glUseProgram(0);
-
 	if (PhysicsEngine::Instance()->GetDebug()){
 		GLint cur_avail_mem_kb = 0;
 		glGetIntegerv(GL_GPU_MEM_INFO_CURRENT_AVAILABLE_MEM_NVX, &cur_avail_mem_kb);
 		GLint memory_used_mb = (total_mem_kb - cur_avail_mem_kb) / 1024;
 		NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Memory Used in mb : " + std::to_string((GLint)memory_used_mb));
 	}
-
-
 	SwapBuffers();
 }
 

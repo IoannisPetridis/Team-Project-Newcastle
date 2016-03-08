@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
 	QLabel *title = new QLabel;
     QPushButton *playbutton = new QPushButton("Play");
     QPushButton *createbutton = new QPushButton("Create Character");
+	QPushButton*AIbutton = new QPushButton("AI toggle");
     QPushButton *exitbutton = new QPushButton("Exit");
 
 public:
@@ -40,8 +41,8 @@ public:
     static int playerskill;
     static int playertexture;
     static std::string playername;
-
-    static bool WannaExit;
+	static bool AIchoice;
+	static bool isExitWindow;
 
     //grabs data from dialog (chara creation) window
     void grabuserdata(int size, int skill, int tex, std::string name) {
@@ -67,6 +68,7 @@ public slots:
     void play_game();
     void create_chara_triggered();
     void exit_now();
+	void make_ai();
 
 
 private:

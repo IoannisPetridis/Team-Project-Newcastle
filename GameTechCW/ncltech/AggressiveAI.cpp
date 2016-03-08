@@ -24,10 +24,16 @@ AggressiveAI::AggressiveAI(const std::string& name, Scene* m_scene) : SimpleMesh
 	SetBoundingRadius(80.0f * 80.f);
 	Physics()->name = name.c_str();
 	Physics()->SetInverseMass(0.06f);
-	Physics()->SetPosition(Vector3(30.0f, 5.0f, 60.0f));
+	Physics()->SetPosition(Vector3(40.0f, 2.0f, 0.0f));
 	Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
 
 	scene = m_scene;
+
+	forward = false;
+	reverse = false;
+	left = false;
+	right = false;
+	jump = false;
 
 	currentState = new Block(); //sets the initial current state for the first frame (actually instantiates the state when the state is changed, so you dont have inactive states instantiated and sitting in memory doing nothing, ie rather than creating all states at startup and just changing the pointed, create and delkete states as they are used
 }
@@ -71,32 +77,40 @@ void AggressiveAI::RotationCalculation(Vector3 defendnode) {
 	float dotproduct, angle;
 	Vector3 crossproduct;
 
+	int checkint;
+
 	NormalCal();
-	dotproduct = Vector3::Dot(DirectionVector, GetFrontNormal());
-	angle = acos(dotproduct);
-
-	angle = angle * 57.3f;
-
-	if (angle < 1.0f) {
-		right = false;
-		left = false;
-		return;
-	}
 
 	crossproduct = Vector3::Cross(DirectionVector, GetFrontNormal());
 
 	if (crossproduct.y > 0) {
 		right = true;
 		left = false;
+		++rightiterator;
+		leftiterator = 0;
 	}
 
 	if (crossproduct.y <= 0) {
 		right = false;
 		left = true;
+		++leftiterator;
+		rightiterator = 0;
+	}
+
+	checkint = rightiterator - leftiterator;
+
+	if (rightiterator == 1 || leftiterator == 1) {
+		//cout << "true" << endl;
+		right = false;
+		left = false;
+		return;
 	}
 }
 
-
+void AggressiveAI::Charge() {
+	forward = 1;
+	reverse = 0;
+}
 
 void AggressiveAI::ForwardBackwardCalculation(float disttonode) {
 	float currentforwardspeed, currentbackwardspeed, currentleftspeed, currentrightspeed;
@@ -111,7 +125,7 @@ void AggressiveAI::ForwardBackwardCalculation(float disttonode) {
 	currentleftspeed = Vector3::Dot(Physics()->GetLinearVelocity(), GetLeftNormal());
 	currentrightspeed = Vector3::Dot(Physics()->GetLinearVelocity(), GetRightNormal());
 
-	if (currentleftspeed > (maxspeed * 0.7) || currentrightspeed > (maxspeed * 0.7)) {
+	if (currentleftspeed > (maxspeed * 0.5) || currentrightspeed > (maxspeed * 0.5)) {
 		forward = 0;
 		reverse = 0;
 		return;

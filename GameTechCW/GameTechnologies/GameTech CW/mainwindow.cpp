@@ -2,13 +2,16 @@
 
 #include "dialog.h"
 #include "mainwindow.h"
+#include "../../ncltech/ActionHandler.h"
+#include <iostream>
 
 //stats are initially set to 1 in case creation window is not opened
 int MainWindow::playersize = 1;
 int MainWindow::playerskill = 1;
 int MainWindow::playertexture = 1;
 std::string MainWindow::playername = "Player1";
-bool MainWindow::WannaExit = false;
+bool MainWindow::AIchoice = false;
+bool MainWindow::isExitWindow = false;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
@@ -27,6 +30,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	title->setFont(font);
 	title->setAlignment(Qt::AlignCenter);
 	title->setText("<font color='white'>Rocket League V2.0</font>");
+
+	//create endgame title font
+	QFont endgamefont("CordiaUPC", 70, QFont::Bold);
+
+	//IF THE END GAME SCREEN HAS BEEN TRIGGERED
+	if (isExitWindow){
+		title->setText("<font color='white'>GAME OVER</font>");
+		title->setFont(endgamefont);
+		playbutton->setText("Play Again");
+		createbutton->hide();
+		exitbutton->setText("Quit");
+	}
+
 
 	playbutton->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
 		"stop: 0 white, stop: 1 grey);"
@@ -49,10 +65,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 		"border-color: black;"
 		"border-radius: 15px;}"));
 
+	AIbutton->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+		"stop: 0 white, stop: 1 grey);"
+		"border-style: solid;"
+		"border-width: 2px;"
+		"border-color: black;"
+		"border-radius: 15px;}"));
+
     QFont buttonfont("CordiaUPC", 18);
     playbutton->setFont(buttonfont);
     createbutton->setFont(buttonfont);
     exitbutton->setFont(buttonfont);
+	AIbutton->setFont(buttonfont);
 
     //button sizes
     playbutton->setMinimumSize(200, 40);
@@ -61,17 +85,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     createbutton->setMaximumSize(200, 40);
     exitbutton->setMinimumSize(200, 40);
     exitbutton->setMaximumSize(200, 40);
+	AIbutton->setMinimumSize(200, 40);
+	AIbutton->setMaximumSize(200, 40);
 
     //adds assets to the vertical layout
     vertlayout->addWidget(title, Qt::AlignCenter);
     vertlayout->addWidget(playbutton, 0, Qt::AlignCenter);
     vertlayout->addWidget(createbutton, 0, Qt::AlignCenter);
+	vertlayout->addWidget(AIbutton, 0, Qt::AlignCenter);
     vertlayout->addWidget(exitbutton, 0, Qt::AlignCenter);
 
     //its slots time
     QObject::connect(playbutton, SIGNAL(clicked()), this, SLOT(play_game()));
     QObject::connect(createbutton, SIGNAL(clicked()), this, SLOT(create_chara_triggered()));
     QObject::connect(exitbutton, SIGNAL(clicked()), this, SLOT(exit_now()));
+	QObject::connect(AIbutton, SIGNAL(clicked()), this, SLOT(make_ai()));
 }
 
 MainWindow::~MainWindow()
@@ -87,20 +115,39 @@ MainWindow::~MainWindow()
     delete exitbutton;
 }
 
-void MainWindow::play_game(){
+void MainWindow::play_game(){ //play button is clicked
 	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
-    this->close();
+	this->close();
+
+	if (isExitWindow){
+		ActionHandler::Instance()->ResetGame();
+		isExitWindow = false;
+		ActionHandler::Instance()->GameOver = false;
+	}
 }
 
-void MainWindow::exit_now(){
+void MainWindow::exit_now(){ //exit button clicked
 	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
-    WannaExit = true;
     this->close();
+	exit(0);
 }
 
-void MainWindow::create_chara_triggered(){
+void MainWindow::make_ai(){ //ai button clicked
+	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
+	if (!AIchoice){
+		AIbutton->setText("Three AI Mode");
+		AIchoice = true;
+	}
 
-   Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
+	else {
+		AIbutton->setText("Single AI Mode");
+		AIchoice = false;
+	}
+}
+
+void MainWindow::create_chara_triggered(){ //create chara button
+   
+	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
    Dialog mDialog;
    mDialog.setModal(true);
    //mDialog.setWindowIcon(QIcon("../../Qt/Icons/sicklogo.bmp"));

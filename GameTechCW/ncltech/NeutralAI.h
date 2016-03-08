@@ -20,13 +20,14 @@ public:
 	Vector3 DirectionCalculation(Vector3 to, Vector3 from);
 	void RotationCalculation(Vector3 defendnode);
 	void ForwardBackwardCalculation(float disttonode);
-
+	void JumpCalculation(Vector3 &ballposition);
+	void Charge();
 
 	Scene* scene;
-	bool left, right, reverse, forward;
+	bool left, right, reverse, forward, jump;
 	Vector3 Node, DirectionVector;
 
 private:
 	NeutralBaseState* currentState; //pointer to the current state of the state machine, ie u can use currentState in methods within ArbitraryAI to do broadly the same thing, while the implementation changes depending on which state currentState is actually pointing too
-	int iterator;
+	int iterator, rightiterator, leftiterator, jumpiterator;
 };

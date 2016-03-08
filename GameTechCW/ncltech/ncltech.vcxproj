@@ -101,9 +101,16 @@
     <ClCompile Include="PowerUps.cpp" />
     <ClCompile Include="Punt.cpp" />
     <ClCompile Include="PuntPlayer.cpp" />
+    <ClCompile Include="Retreat.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SChase.cpp" />
+    <ClCompile Include="SDefend.cpp" />
+    <ClCompile Include="SDribble.cpp" />
     <ClCompile Include="SimpleMeshObject.cpp" />
+    <ClCompile Include="SoloAI.cpp" />
     <ClCompile Include="SphereCollisionShape.cpp" />
+    <ClCompile Include="SPunt.cpp" />
+    <ClCompile Include="SRetreat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Networking Server\Networking Server\Network.h" />
@@ -142,9 +149,17 @@
     <ClInclude Include="PowerUps.h" />
     <ClInclude Include="Punt.h" />
     <ClInclude Include="PuntPlayer.h" />
+    <ClInclude Include="Retreat.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SChase.h" />
+    <ClInclude Include="SDefend.h" />
+    <ClInclude Include="SDribble.h" />
     <ClInclude Include="SimpleMeshObject.h" />
+    <ClInclude Include="SoloAI.h" />
+    <ClInclude Include="SoloBaseState.h" />
     <ClInclude Include="SphereCollisionShape.h" />
+    <ClInclude Include="SPunt.h" />
+    <ClInclude Include="SRetreat.h" />
     <ClInclude Include="TSingleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

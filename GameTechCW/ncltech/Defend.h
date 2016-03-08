@@ -11,9 +11,10 @@ public:
 	void CheckTriggers(DefensiveAI* Arb) override;
 	void ForceCalculator(DefensiveAI* Arb) override;
 	Vector3 NodeCalculation(DefensiveAI* Arb);
+	void FriendlyGoalPositionCalculation(DefensiveAI* Arb);
 
 private:
 	Vector3 AIPosition, FriendlyGoalPosition, EnemyGoalPosition, BallPosition, DefendNode;
-	float GroundHeight;
+	float GroundHeight, ballwidthmove;
 	int iterator;
 };

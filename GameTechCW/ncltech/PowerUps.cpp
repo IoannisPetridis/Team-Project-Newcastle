@@ -34,8 +34,7 @@ std::function<bool(PhysicsObject*)> PowerUpCallback = [&](PhysicsObject* otherOb
 			PowerUps::SetPlayerPickup(true);
 			FMOD_VECTOR vel = { 0.f, 0.f, 0.f };
 			FMOD_VECTOR pos = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
-
-			Audio::AddSound(pos,vel, Audio::channel5, Audio::Pickup, 10.f);
+			Audio::AddSound(pos, vel, Audio::channel5, Audio::Pickup, 10.f);
 			PowerUps::PowerUpBox->Physics()->SetPosition(Vector3(200.f, 0.f, 0.f));
 			PhysicsEngine::Instance()->RemovePhysicsObject(PowerUps::PowerUpBox->Physics());
 			return false;

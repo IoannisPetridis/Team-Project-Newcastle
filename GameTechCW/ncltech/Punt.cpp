@@ -10,9 +10,17 @@ void Punt::ForceCalculator(DefensiveAI* Arb) {
 
 	++iterator;
 
+	Arb->forward = 0;
+	Arb->reverse = 0;
+
 	if (iterator == 10) {
+
+		//cout << "punt" << endl;
+
 		AIPosition = Arb->Physics()->GetPosition();
-		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
+		FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
+		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
+		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
 		AIBallVec = BallPosition - AIPosition;
 		MagAIBallDist = AIBallVec.Length();
 		AIBallVec.Normalise();
@@ -20,22 +28,31 @@ void Punt::ForceCalculator(DefensiveAI* Arb) {
 		PuntNode = NodeCalculation(Arb);
 		PuntNode.y = GroundHeight;
 
-		
 		iterator = 0;
 	}
 
 	MagAINodeDist = (PuntNode - AIPosition).Length();
 
+	Arb->JumpCalculation(BallPosition);
 	Arb->DirectionVector = Arb->DirectionCalculation(PuntNode, AIPosition);
 	Arb->RotationCalculation(PuntNode);
-	Arb->ForwardBackwardCalculation(MagAINodeDist);
+
+	if (Arb->left == 0 && Arb->right == 0) {
+		Arb->Charge();
+	}
+
+	//Arb->ForwardBackwardCalculation(MagAINodeDist);
 
 	CheckTriggers(Arb);
 }
 
 void Punt::CheckTriggers(DefensiveAI* Arb) {
+	float MagDistBallGoal, MagGoalDists;
 
-	if (MagAIBallDist < 5) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
+	MagDistBallGoal = (FriendlyGoalPosition - BallPosition).Length();
+	MagGoalDists = (FriendlyGoalPosition - EnemyGoalPosition).Length();
+
+	if (MagDistBallGoal > (MagGoalDists * 0.2)) {
 		Arb->SetState(1);
 	}
 }
@@ -46,9 +63,12 @@ void Punt::CheckTriggers(DefensiveAI* Arb) {
 //Off = 4
 
 Vector3 Punt::NodeCalculation(DefensiveAI* Arb) {
-	Vector3 node, AIBallVec;
+	Vector3 node, goalballdirvec;
 
-	node = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() + (AIBallVec * 50);
+	goalballdirvec = FriendlyGoalPosition - BallPosition;
+	goalballdirvec.Normalise();
+
+	node = BallPosition + (goalballdirvec * 3.0f);
 
 	return node;
 }

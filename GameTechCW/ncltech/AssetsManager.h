@@ -6,6 +6,7 @@
 #include "DefensiveAI.h"
 #include "NeutralAI.h"
 #include "AggressiveAI.h"
+#include "SoloAI.h"
 
 class Scene;
 class Player;
@@ -47,6 +48,7 @@ public:
 	static DefensiveAI* DefensiveAI;
 	static NeutralAI* NeutralAI;
 	static AggressiveAI* AggressiveAI;
+	static SoloAI* SoloAI;
 
 	//AssetsLoader:
 	static GLuint LoadTexture(string Tex_name);

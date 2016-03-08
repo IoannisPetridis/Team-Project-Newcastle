@@ -9,13 +9,17 @@ Dribble::Dribble() {
 void Dribble::ForceCalculator(NeutralAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
-	++iterator;
+	Arb->forward = 0;
+	Arb->reverse = 0;
 
+	++iterator;
+	//cout << "dribble" << endl;
 	if (iterator == 10) {
 		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
 		EnemyGoalPosition = Arb->scene->FindGameObject("EnemyGoal")->Physics()->GetPosition();
 		FriendlyGoalPosition = Arb->scene->FindGameObject("FriendlyGoal")->Physics()->GetPosition();
 		AIPosition = Arb->Physics()->GetPosition();
+
 
 		DribbleNode = NodeCalculation(Arb);
 		DribbleNode.y = GroundHeight;
@@ -25,21 +29,37 @@ void Dribble::ForceCalculator(NeutralAI* Arb) { //here is where you would put th
 
 	MagAINodeDist = (DribbleNode - AIPosition).Length();
 
+	Arb->JumpCalculation(BallPosition);
 	Arb->DirectionVector = Arb->DirectionCalculation(DribbleNode, AIPosition);
 	Arb->RotationCalculation(DribbleNode);
-	Arb->ForwardBackwardCalculation(MagAINodeDist);
+
+	//cout << Arb->left << Arb->right << endl;
+
+	if (Arb->left == 0 && Arb->right == 0) {
+		Arb->Charge();
+	}
 
 	CheckTriggers(Arb);
 }
 
 void Dribble::CheckTriggers(NeutralAI* Arb) {
-	Vector3 AINodeVec;
-	float MagDistAINode;
+	Vector3 AINodeVec, AIGoalVec, BallGoalVec;
+	float MagDistAINode, ailength, balllength;
+
+	AIGoalVec = AIPosition - FriendlyGoalPosition;
+	ailength = AIGoalVec.LengthSquared();
+	BallGoalVec = BallPosition - FriendlyGoalPosition;
+	balllength = BallGoalVec.LengthSquared();
 
 	AINodeVec = DribbleNode - AIPosition;
 	MagDistAINode = AINodeVec.LengthSquared();
 
-	if (MagDistAINode > 100) {
+	if (ailength >= balllength + 700) { //puts AI to off state on keypress (3 integer denotes off state)
+		Arb->SetState(3);
+		return;
+	}
+
+	if (MagDistAINode > 500) {
 		Arb->SetState(1);
 	}
 
@@ -51,19 +71,10 @@ void Dribble::CheckTriggers(NeutralAI* Arb) {
 Vector3 Dribble::NodeCalculation(NeutralAI* Arb) {
 	Vector3 node, goalballdirvec;
 
-	goalballdirvec = BallPosition - EnemyGoalPosition;
+	goalballdirvec = BallPosition - EnemyGoalPosition /*- BallPosition*/;
 	goalballdirvec.Normalise();
 
 	node = BallPosition + (goalballdirvec * 3.0f);
 
 	return node;
-}
-
-Vector3 Dribble::DirectionCalculation(NeutralAI* Arb, Vector3 node) {
-	Vector3 directionvector;
-
-	directionvector = node - AIPosition;
-	directionvector.Normalise();
-
-	return directionvector;
 }

@@ -28,6 +28,7 @@ Player*	AssetsManager::Player_1;
 DefensiveAI* AssetsManager::DefensiveAI;
 NeutralAI* AssetsManager::NeutralAI;
 AggressiveAI* AssetsManager::AggressiveAI;
+SoloAI* AssetsManager::SoloAI;
 
 //Player* Assetsmanager::PlayerInstance;
 //AI*	Assetsmanager::AIInstance;
@@ -66,7 +67,7 @@ void AssetsManager::InitializeMeshes()
 	m_pPlane->SetTexture(m_CheckerboardTex);
 	m_pCube->SetTexture(m_CheckerboardTex);
 	m_pSphere->SetTexture(m_GlassBUMP);
-	m_Triangle->SetTexture(m_CheckerboardTex);
+	//m_Triangle->SetTexture(m_CheckerboardTex);
 
 	/*m_pPlane->SetBumpMap(m_WoodBUMP);
 	m_pCube->SetBumpMap(m_WoodBUMP);

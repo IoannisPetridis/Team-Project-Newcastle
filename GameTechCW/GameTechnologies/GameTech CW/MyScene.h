@@ -33,6 +33,10 @@ public:
 	void RenderScene() override;
 	void UpdateScene(float dt)  override;
 
+	static bool AbilityUsed;
+	static int counter;
+	static int abilitycounter;
+
 protected:	
 	GameObjectMag*		GOM;
 	Vector3 Proj_dir;

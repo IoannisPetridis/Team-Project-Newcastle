@@ -11,6 +11,8 @@ void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put t
 
 	++iterator;
 
+	//cout << "block" << endl;
+
 	if (iterator == 10) {
 		AIPosition = Arb->Physics()->GetPosition();
 		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition();
@@ -19,7 +21,7 @@ void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put t
 		BlockNode = NodeCalculation(Arb);
 		BlockNode.y = GroundHeight;
 
-		 //check state triggers every frame to make sure the state does not need to be changed
+		//check state triggers every frame to make sure the state does not need to be changed
 		iterator = 0;
 	}
 
@@ -39,7 +41,7 @@ void Block::CheckTriggers(AggressiveAI* Arb) {
 	PlayerBallVec = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() - Arb->scene->FindGameObject("car")->Physics()->GetPosition();
 	MagDistPlayerBall = PlayerBallVec.LengthSquared();
 
-	if (MagDistPlayerBall < 400) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
+	if (MagDistPlayerBall < 600) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
 		Arb->SetState(2);
 	}
 }

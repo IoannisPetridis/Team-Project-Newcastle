@@ -19,12 +19,13 @@ public:
 	Vector3 DirectionCalculation(Vector3 to, Vector3 from);
 	void RotationCalculation(Vector3 defendnode);
 	void ForwardBackwardCalculation(float disttonode);
+	void Charge();
 
 	Scene* scene;
 
-	bool left, right, reverse, forward;
+	bool left, right, reverse, forward, jump;
 	Vector3 Node, DirectionVector;
 private:
 	AggressiveBaseState* currentState;
-	int iterator;
+	int iterator, rightiterator, leftiterator;
 };

@@ -12,6 +12,7 @@
 #include "NeutralAI.h"
 #include "Chase.h"
 #include "Dribble.h"
+#include "Retreat.h"
 
 NeutralAI::NeutralAI(const std::string& name, Scene* m_scene) : SimpleMeshObject(name) {
 
@@ -21,12 +22,14 @@ NeutralAI::NeutralAI(const std::string& name, Scene* m_scene) : SimpleMeshObject
 	SetBoundingRadius(80.0f * 80.f);
 	Physics()->name = name.c_str();
 	Physics()->SetInverseMass(0.06f);
-	Physics()->SetPosition(Vector3(30.0f, 5.0f, 60.0f));
+	Physics()->SetPosition(Vector3(100.0f, 2.0f, 0.0f));
 	Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 1.0f, 1.0f)));
+
+	jumpiterator = 500;
 
 	scene = m_scene;
 
-	currentState = new Chase(); //sets the initial current state for the first frame (actually instantiates the state when the state is changed, so you dont have inactive states instantiated and sitting in memory doing nothing, ie rather than creating all states at startup and just changing the pointed, create and delkete states as they are used
+	currentState = new Retreat(); //sets the initial current state for the first frame (actually instantiates the state when the state is changed, so you dont have inactive states instantiated and sitting in memory doing nothing, ie rather than creating all states at startup and just changing the pointed, create and delkete states as they are used
 }
 
 NeutralAI::~NeutralAI() {
@@ -48,6 +51,10 @@ void NeutralAI::SetState(int setStateEnum) { //sets the state of the AI (when yo
 
 	if (setStateEnum == 2) {
 		currentState = new Dribble();
+	}
+
+	if (setStateEnum == 3) {
+		currentState = new Retreat();
 	}
 }
 
@@ -71,29 +78,39 @@ void NeutralAI::RotationCalculation(Vector3 defendnode) {
 	float dotproduct, angle;
 	Vector3 crossproduct;
 
+	int checkint;
+
 	NormalCal();
-	dotproduct = Vector3::Dot(DirectionVector, GetFrontNormal());
-	angle = acos(dotproduct);
-
-	angle = angle * 57.3f;
-
-	if (angle < 1.0f) {
-		right = false;
-		left = false;
-		return;
-	}
 
 	crossproduct = Vector3::Cross(DirectionVector, GetFrontNormal());
 
 	if (crossproduct.y > 0) {
 		right = true;
 		left = false;
+		++rightiterator;
+		leftiterator = 0;
 	}
 
 	if (crossproduct.y <= 0) {
 		right = false;
 		left = true;
+		++leftiterator;
+		rightiterator = 0;
 	}
+
+	checkint = rightiterator - leftiterator;
+
+	if (rightiterator == 1 || leftiterator == 1) {
+		//cout << "true" << endl;
+		right = false;
+		left = false;
+		return;
+	}
+}
+
+void NeutralAI::Charge() {
+	forward = 1;
+	reverse = 0;
 }
 
 
@@ -138,4 +155,31 @@ void NeutralAI::ForwardBackwardCalculation(float disttonode) {
 			reverse = 1;
 		}
 	}
+}
+
+void NeutralAI::JumpCalculation(Vector3 &ballposition) {
+	float ballheight, groundheight, ballradius;
+
+	groundheight = 1.0f;
+	ballradius = 4.0f;
+
+	ballheight = ballposition.y - groundheight - ballradius;
+
+	//cout << ballheight << endl;
+
+	if (ballheight > 1.5f) {
+		//cout << jumpiterator << endl;
+
+		if (jumpiterator > 100) {
+			jump = true;
+			jumpiterator = 0;
+			return;
+		}
+
+		++jumpiterator;
+		jump = false;
+		return;
+	}
+
+	else jump = false;
 }

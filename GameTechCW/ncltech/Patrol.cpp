@@ -23,13 +23,15 @@ void Patrol::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 
 	++iterator;
 
+	//cout << "patrol" << endl;
+
 	if (iterator == 10) {
 		AIPosition = Arb->Physics()->GetPosition();
 		BallPosition = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() * Vector3(1.0f, 0.0f, 1.0f);
 
 		PatrolNode = NodeCalculation(Arb);
 
-		 //check state triggers every frame to make sure the state does not need to be changed
+		//check state triggers every frame to make sure the state does not need to be changed
 		iterator = 0;
 	}
 

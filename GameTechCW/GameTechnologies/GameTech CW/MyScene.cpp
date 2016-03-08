@@ -7,6 +7,10 @@
 #include <map>
 #include "mainwindow.h"
 
+bool MyScene::AbilityUsed = false;
+int MyScene::counter = 0;
+int MyScene::abilitycounter = 200;
+
 #define PI 3.14159265f
 
 MyScene::MyScene(Window& window, GameObjectMag* gom) : Scene(window), GOM(gom)
@@ -25,6 +29,9 @@ MyScene::~MyScene()
 
 bool MyScene::InitialiseGL()
 {
+	ActionHandler::Instance()->AIChoice = MainWindow::AIchoice;
+	GOM->AIChoice = MainWindow::AIchoice;
+
 	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -14.81f, 0.0f));
 	PhysicsEngine::Instance()->SetDampingFactor(0.988f);
 
@@ -48,7 +55,7 @@ bool MyScene::InitialiseGL()
 		AssetsManager::InitializeMeshes();
 		GOM->GOM_GamePlay(this);
 	
-		AssetsManager::Player_1 = new Player("car");
+		//AssetsManager::Player_1 = new Player("car");
 		AssetsManager::Player_1->SetScene(this);
 		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
 
@@ -67,26 +74,21 @@ bool MyScene::InitialiseGL()
 			AssetsManager::Player_1->SetTexture(AssetsManager::m_Field, false); //grass texture
 		}
 
+
+
 		//4 choices of car size, 1 2 3 4
 		int size= MainWindow::playersize * 0.5;
 		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
 		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
 		AssetsManager::Player_1->SetBoundingRadius((MainWindow::playersize) * (MainWindow::playersize));
-
-		AssetsManager::Player_1->Physics()->name = "car";
-		AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
-		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
-		Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
-		AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
 		AssetsManager::Player_1->Physics()->SetCar(true);
-		this->AddGameObject(AssetsManager::Player_1);
+		//AssetsManager::Player_1->Physics()->name = "car";
+		//AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
+		//AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
+		//Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
+		//AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
+		//this->AddGameObject(AssetsManager::Player_1);
 	}
-
-	{//Player_1
-	}
-
-
-	
 
 	//Initialize all game objects
 	Audio_Timer.GetTimedMS();
@@ -120,18 +122,42 @@ void MyScene::UpdateScene(float msec)
 	CarPosition = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
 	CarVelocity = { AssetsManager::Player_1->Physics()->GetLinearVelocity().x, AssetsManager::Player_1->Physics()->GetLinearVelocity().y, AssetsManager::Player_1->Physics()->GetLinearVelocity().z };
 	float CarSpeed = AssetsManager::Player_1->Physics()->GetLinearVelocity().Length();
-	FMOD_VECTOR AIPosition = { AssetsManager::NeutralAI->Physics()->GetPosition().x, AssetsManager::NeutralAI->Physics()->GetPosition().y, AssetsManager::NeutralAI->Physics()->GetPosition().z };
+	/*FMOD_VECTOR AIPosition = { AssetsManager::NeutralAI->Physics()->GetPosition().x, AssetsManager::NeutralAI->Physics()->GetPosition().y, AssetsManager::NeutralAI->Physics()->GetPosition().z };
 	FMOD_VECTOR AIVelocity = { AssetsManager::NeutralAI->Physics()->GetLinearVelocity().x, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().y, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().z };
-	
 	float AIForce = AssetsManager::NeutralAI->Physics()->GetForce().Length();
 	Audio::UpdateSound(AIPosition, AIVelocity, 20000.f + AIForce * 200, 10.f + AIForce, Audio::channel9);
-	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);	
-	Audio::Result = Audio::AudioSystem->update();
-
+	Audio::Result = Audio::AudioSystem->update();*/
+	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);
 	Audio::GetCameraInfo(m_Camera);
-	
 	////END AUDIO
 
+
+	//player special ability
+	int skillchoice = MainWindow::playerskill;
+
+	if (!MyScene::AbilityUsed && Window::GetKeyboard()->KeyHeld(KEYBOARD_Q)) {
+		MyScene::AbilityUsed = true;
+		if (skillchoice == 1){ //ball pull
+			ActionHandler::Instance()->GravityGun();
+		}
+
+		if (skillchoice == 2){ //midpoint teleport
+			AssetsManager::Player_1->Physics()->SetPosition(Vector3(0, 10, 0));
+			MyScene::AbilityUsed = true;
+		}
+
+		if (skillchoice == 3){
+			ActionHandler::Instance()->AIOffAbility = true;
+		}
+	}
+
+	if (AbilityUsed == true) {
+		abilitycounter--;
+		if (abilitycounter == 0) {
+			ActionHandler::Instance()->AIOffAbility = false;
+			ActionHandler::Instance()->RemoveForce();
+		}
+	}
 
 	//PowerUps
 	if (AssetsManager::Player_1->invisible){
@@ -154,8 +180,8 @@ void MyScene::UpdateScene(float msec)
 		powerupspark->SetSourcePosition(AssetsManager::Player_1->Physics()->GetPosition());
 		this->AddParticleObject(powerupspark);
 		PowerUps::SetPlayerPickup(false);
-		}
-
+		
+	}
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B)){
 		PowerUps::AddRandomPowerUp(this);
 	}
@@ -184,10 +210,29 @@ void MyScene::UpdateScene(float msec)
 		Audio::channel4->setPaused(false);
 	}
 
+	/*NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
+		+ " Y:"
+		+ std::to_string((int)m_Camera->GetPosition().y)
+		+ " Z:"
+		+ std::to_string((int)m_Camera->GetPosition().z)
+		+ " Pitch:"
+		+ std::to_string((float)m_Camera->GetPitch())
+		+ " Yaw:"
+		+ std::to_string((float)m_Camera->GetYaw())
+		+ " cord:"
+		+ std::to_string((float)Proj_dir.x) + " "
+		+ std::to_string((float)Proj_dir.y) + " "
+		+ std::to_string((float)Proj_dir.z) + " "
+		);*/
+
+	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "HP : " + std::to_string(AssetsManager::Player_1->Physics()->GetHP()));
+	
 	if (AssetsManager::Player_1->Physics()->GetHP() <= 0){
 		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 10.0f, 10.0f));
 		AssetsManager::Player_1->Physics()->SetHP(100.f);
+		
 	}
+
 
 }
 
