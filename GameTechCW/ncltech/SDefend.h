@@ -5,7 +5,7 @@
 
 class SDefend : public SoloBaseState { // home state, rests above tardis when player far away
 public:
-	SDefend();
+	SDefend(SoloAI* Arb);
 	~SDefend(){};
 
 	void CheckTriggersDefend(SoloAI* Arb) override;

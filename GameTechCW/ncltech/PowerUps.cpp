@@ -4,20 +4,22 @@
 string PowerUps::AndroidPowerUp = "0";
 Vector4 PowerUps::tempcolour;
 GameTimer PowerUps::InvisTimer;
-SimpleMeshObject* PowerUps::BananaPU = NULL;
-SimpleMeshObject* PowerUps::PowerUpBox = NULL;
 bool PowerUps::PlayerPickup = false;
+bool bananaspray = false;
+
 
 std::function<bool(PhysicsObject*)> bananaSpin = [&](PhysicsObject* otherObject) {
-	if (otherObject->name == "car"){
+	if (otherObject->car){
 		otherObject->SetAngularVelocity(Vector3(0.f, 8.f, 0.f));
 		otherObject->SetLinearVelocity(otherObject->GetLinearVelocity()*0.85);
-		PowerUps::BananaPU->Physics()->SetPosition(Vector3(1000.f, 0.f, 0.f));
-		//PowerUps::BananaPU->RemoveFromScene();
-		PhysicsEngine::Instance()->RemovePhysicsObject(PowerUps::BananaPU->Physics());
-		//PowerUps::BananaPU->deletemesh(); 
+		
+			AssetsManager::BananaPU->Physics()->SetPosition(Vector3(AssetsManager::BananaPU->Physics()->GetPosition().x, -10.f, AssetsManager::BananaPU->Physics()->GetPosition().z));
+			AssetsManager::BananaPU2->Physics()->SetPosition(Vector3(AssetsManager::BananaPU->Physics()->GetPosition().x, -10.f, AssetsManager::BananaPU->Physics()->GetPosition().z));
+			AssetsManager::BananaPU3->Physics()->SetPosition(Vector3(AssetsManager::BananaPU->Physics()->GetPosition().x, -10.f, AssetsManager::BananaPU->Physics()->GetPosition().z));
+			AssetsManager::BananaPU4->Physics()->SetPosition(Vector3(AssetsManager::BananaPU->Physics()->GetPosition().x, -10.f, AssetsManager::BananaPU->Physics()->GetPosition().z));
+			AssetsManager::BananaPU5->Physics()->SetPosition(Vector3(AssetsManager::BananaPU->Physics()->GetPosition().x, -10.f, AssetsManager::BananaPU->Physics()->GetPosition().z));
 
-
+		
 		return false;
 	}
 	else{
@@ -35,13 +37,12 @@ std::function<bool(PhysicsObject*)> PowerUpCallback = [&](PhysicsObject* otherOb
 			FMOD_VECTOR vel = { 0.f, 0.f, 0.f };
 			FMOD_VECTOR pos = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
 			Audio::AddSound(pos, vel, Audio::channel5, Audio::Pickup, 10.f);
-			PowerUps::PowerUpBox->Physics()->SetPosition(Vector3(200.f, 0.f, 0.f));
-			PhysicsEngine::Instance()->RemovePhysicsObject(PowerUps::PowerUpBox->Physics());
+			
+			
 			return false;
 		}
 		else{
-			PowerUps::PowerUpBox->Physics()->SetPosition(Vector3(1000.f, 0.f, 0.f));
-			PhysicsEngine::Instance()->RemovePhysicsObject(PowerUps::PowerUpBox->Physics());
+			PowerUps::SetPlayerPickup(true);
 			return false;
 		}
 	}
@@ -67,30 +68,53 @@ std::function<bool(PhysicsObject*)> AndroidPowerUpCallback = [&](PhysicsObject* 
 	}
 };
 
-void PowerUps::LoadPowerUps(Player* player){
-}
 
 void PowerUps::Invisibility(Player* player){
 	InvisTimer.GetTimedMS();
-	player->SetColour(Vector4(player->GetColour().x, player->GetColour().y, player->GetColour().z, 0.0f));
+	player->SetColour(Vector4(player->GetColour().x, player->GetColour().y, player->GetColour().z, 0.2f));
 	player->SetPowerUpState("No PowerUp");
 	player->invisible = true;
 }
 
 void PowerUps::BananaPowerUp(Player* player, Scene* m_Scene){
-	BananaPU = new SimpleMeshObject("powerup_banana");
-	BananaPU->SetMesh(AssetsManager::Banana(), false);
-	BananaPU->SetBoundingRadius(1.0f * 1.f);
-	BananaPU->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
-	BananaPU->Physics()->name = "powerup_banana";
-	BananaPU->Physics()->SetInverseMass(0.06f);
-	BananaPU->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(0.5f, 0.5f, 0.5f)));
-	BananaPU->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
-	BananaPU->Physics()->SetPosition(AssetsManager::Player_1->Physics()->GetPosition() + Vector3(0.0f, 4.0f, 0.0f));
-	BananaPU->Physics()->SetLinearVelocity((AssetsManager::Player_1->Physics()->GetOrientation().ToMatrix3() * Vector3(0.0f, 0.0f, 1.0f)) * 10);
-	BananaPU->Physics()->SetOnCollisionCallback(bananaSpin);
-	m_Scene->AddGameObject(BananaPU);
 	
+	if ((ActionHandler::Instance()->GetRedscore() - ActionHandler::Instance()->GetBluescore()) >= 2){
+		bananaspray = true;
+	}
+	else { bananaspray = false; }
+
+	if (!bananaspray){
+		AssetsManager::BananaPU->Physics()->SetPosition(AssetsManager::Player_1->Physics()->GetPosition() + Vector3(0.0f, 4.0f, 0.0f));
+		AssetsManager::BananaPU->Physics()->SetLinearVelocity((AssetsManager::Player_1->Physics()->GetOrientation().ToMatrix3() * Vector3(0.0f, 0.0f, 1.0f)) * 10);
+		AssetsManager::BananaPU->Physics()->SetOnCollisionCallback(bananaSpin);
+		m_Scene->AddGameObject(AssetsManager::BananaPU);
+		
+	}
+	else {
+		AssetsManager::BananaPU2->Physics()->SetPosition(AssetsManager::Player_1->Physics()->GetPosition() + Vector3(0.0f, 4.0f, 0.0f));
+		AssetsManager::BananaPU2->Physics()->SetLinearVelocity((AssetsManager::Player_1->Physics()->GetOrientation().ToMatrix3() * Vector3(0.0f, 0.0f, 1.0f)) * 10);
+		AssetsManager::BananaPU2->Physics()->SetOnCollisionCallback(bananaSpin);
+		m_Scene->AddGameObject(AssetsManager::BananaPU2);
+		
+	
+		AssetsManager::BananaPU3->Physics()->SetPosition(AssetsManager::Player_1->Physics()->GetPosition() + Vector3(0.0f, 4.0f, 0.0f));
+		AssetsManager::BananaPU3->Physics()->SetLinearVelocity((AssetsManager::Player_1->Physics()->GetOrientation().ToMatrix3() * Vector3(0.0f, 0.0f, 1.0f)) * 10);
+		AssetsManager::BananaPU3->Physics()->SetOnCollisionCallback(bananaSpin);
+		m_Scene->AddGameObject(AssetsManager::BananaPU3);
+		
+		AssetsManager::BananaPU4->Physics()->SetPosition(AssetsManager::Player_1->Physics()->GetPosition() + Vector3(0.0f, 4.0f, 0.0f));
+		AssetsManager::BananaPU4->Physics()->SetLinearVelocity((AssetsManager::Player_1->Physics()->GetOrientation().ToMatrix3() * Vector3(0.0f, 0.0f, 1.0f)) * 10);
+		AssetsManager::BananaPU4->Physics()->SetOnCollisionCallback(bananaSpin);
+		m_Scene->AddGameObject(AssetsManager::BananaPU4);
+
+	
+		AssetsManager::BananaPU5->Physics()->SetPosition(AssetsManager::Player_1->Physics()->GetPosition() + Vector3(0.0f, 4.0f, 0.0f));
+		AssetsManager::BananaPU5->Physics()->SetLinearVelocity((AssetsManager::Player_1->Physics()->GetOrientation().ToMatrix3() * Vector3(0.0f, 0.0f, 1.0f)) * 10);
+		AssetsManager::BananaPU5->Physics()->SetOnCollisionCallback(bananaSpin);
+		m_Scene->AddGameObject(AssetsManager::BananaPU5);
+		
+	}
+
 	AssetsManager::Player_1->SetPowerUpState("No PowerUp");
 }
 
@@ -111,26 +135,43 @@ void PowerUps::UsePowerUp(Player* player, Scene* m_Scene){
 		Boost(player);
 	}
 }
+void PowerUps::AddRandomPowerUp(Scene* m_Scene,SimpleMeshObject* PowerUpBox){
+		int x = (rand() % 360) - 180;
+		int y = 10;
+		int z = (rand() % 240) - 120;
+	
+		PowerUpBox->Physics()->SetPosition(Vector3(x, y, z));
+		PowerUpBox->Physics()->SetOnCollisionCallback(PowerUpCallback);
+	
+		m_Scene->AddGameObject(PowerUpBox);
+	}
 
-void PowerUps::AddRandomPowerUp(Scene* m_Scene){
+void PowerUps::RandomPowerUpPosition(SimpleMeshObject* PowerUpBox){
 	int x = (rand() % 360) - 180;
 	int y = 10;
 	int z = (rand() % 240) - 120;
-	PowerUpBox = new SimpleMeshObject("powerup_powerup");
-	PowerUpBox->SetMesh(AssetsManager::Cube(), false);
-	PowerUpBox->SetBoundingRadius(1.0f);
-	PowerUpBox->SetLocalTransform(Matrix4::Scale(Vector3(1.f, 1.f, 1.f)));
-	PowerUpBox->SetTexture(AssetsManager::m_CubeTex,false);
-	PowerUpBox->Physics()->name = "powerup_powerup";
-	PowerUpBox->Physics()->SetInverseMass(0.06f);
-	PowerUpBox->SetColour(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
-	PowerUpBox->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.f, 1.f, 1.f)));
-	PowerUpBox->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
-	PowerUpBox->Physics()->SetPosition(Vector3(x, y, z));
-	PowerUpBox->Physics()->SetOnCollisionCallback(PowerUpCallback);
 
-	m_Scene->AddGameObject(PowerUpBox);
+	PowerUpBox->Physics()->SetPosition(Vector3(x, y, z));
 }
+
+//void PowerUps::AddRandomPowerUp(Scene* m_Scene){
+//	int x = (rand() % 360) - 180;
+//	int y = 10;
+//	int z = (rand() % 240) - 120;
+//	PowerUpBox = new SimpleMeshObject("powerup_powerup");
+//	PowerUpBox->SetMesh(AssetsManager::Cube(), false);
+//	PowerUpBox->SetBoundingRadius(1.0f);
+//	PowerUpBox->SetLocalTransform(Matrix4::Scale(Vector3(1.f, 1.f, 1.f)));
+//	PowerUpBox->SetTexture(AssetsManager::m_CubeTex,false);
+//	PowerUpBox->Physics()->name = "powerup_powerup";
+//	PowerUpBox->Physics()->SetInverseMass(0.06f);
+//	PowerUpBox->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.f, 1.f, 1.f)));
+//	PowerUpBox->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+//	PowerUpBox->Physics()->SetPosition(Vector3(x, y, z));
+//	PowerUpBox->Physics()->SetOnCollisionCallback(PowerUpCallback);
+//
+//	m_Scene->AddGameObject(PowerUpBox);
+//}
 
 void PowerUps::AddAndroidPowerUp(float x, float z, Scene* m_Scene, string powerupselect){
 	int y = 10;

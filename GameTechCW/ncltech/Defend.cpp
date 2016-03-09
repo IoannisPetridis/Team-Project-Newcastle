@@ -5,11 +5,13 @@
 #define PI 3.14159265
 #define E 2.71828
 
-Defend::Defend() {
+Defend::Defend(DefensiveAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
 
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -53,6 +55,9 @@ void Defend::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 	CheckTriggers(Arb);
 }
 
+
+
+//checks state change triggers
 void Defend::CheckTriggers(DefensiveAI* Arb) {
 	float MagDistBallGoal, MagGoalDists;
 
@@ -73,6 +78,8 @@ void Defend::CheckTriggers(DefensiveAI* Arb) {
 //Punt = 3
 //Off = 4
 
+
+//calculates the position of the node it is trying to get too
 Vector3 Defend::NodeCalculation(DefensiveAI* Arb) {
 	Vector3 GoalBallVec, defendnode;
 	float DistGoalBall;
@@ -86,6 +93,7 @@ Vector3 Defend::NodeCalculation(DefensiveAI* Arb) {
 	return defendnode;
 }
 
+//caluclates the position to defend, moves dynamically with ball so ai defends left side of goal if ball is near the left side
 void Defend::FriendlyGoalPositionCalculation(DefensiveAI* Arb) {
 	float arenawidth, ballwidthposition, goalwidth, ballwidthpercentage;
 

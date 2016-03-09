@@ -1,10 +1,12 @@
 #include "Punt.h"
 
-Punt::Punt() {
+Punt::Punt(DefensiveAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
 
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void Punt::ForceCalculator(DefensiveAI* Arb) {
 	float MagAINodeDist;
 
@@ -46,6 +48,8 @@ void Punt::ForceCalculator(DefensiveAI* Arb) {
 	CheckTriggers(Arb);
 }
 
+
+//checks state change triggers
 void Punt::CheckTriggers(DefensiveAI* Arb) {
 	float MagDistBallGoal, MagGoalDists;
 
@@ -62,6 +66,8 @@ void Punt::CheckTriggers(DefensiveAI* Arb) {
 //Punt = 3
 //Off = 4
 
+
+//calculates the position of the node it is trying to get too
 Vector3 Punt::NodeCalculation(DefensiveAI* Arb) {
 	Vector3 node, goalballdirvec;
 

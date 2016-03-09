@@ -1,11 +1,12 @@
 #include "SChase.h"
 #include <ncltech\Scene.h>
 
-SChase::SChase() {
+SChase::SChase(SoloAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
-
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void SChase::ForceCalculator(SoloAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -42,6 +43,7 @@ void SChase::ForceCalculator(SoloAI* Arb) { //here is where you would put the lo
 	}
 }
 
+//if in defend higher state check defend triggers
 void SChase::CheckTriggersScore(SoloAI* Arb) {
 	Vector3 AINodeVec, AIGoalVec, BallGoalVec;
 	float MagDistAINode, ailength, balllength;
@@ -64,10 +66,12 @@ void SChase::CheckTriggersScore(SoloAI* Arb) {
 	}
 }
 
+//if in score higher state check triggers
 void SChase::CheckTriggersDefend(SoloAI* Arb) {
 	Arb->SetState(4);
 }
 
+//decides which higher state the ai should be in (defensive or trying to score)
 void SChase::SetStateBool(SoloAI* Arb) {
 	Vector3 ballgoalvec, goalgoalvec;
 	float ballgoallength, goalgoallength;
@@ -92,6 +96,7 @@ void SChase::SetStateBool(SoloAI* Arb) {
 //Chase == 1
 //Dribble == 2
 
+//calculates the position of the node it is trying to get too
 Vector3 SChase::NodeCalculation(SoloAI* Arb) {
 	Vector3 node, EnemyGoalBallVec;
 

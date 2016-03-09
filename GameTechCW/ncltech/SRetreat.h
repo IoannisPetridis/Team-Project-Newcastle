@@ -6,7 +6,7 @@
 
 class SRetreat : public SoloBaseState { //guard state, trying to block player from tardis
 public:
-	SRetreat();
+	SRetreat(SoloAI* Arb);
 	~SRetreat() {};
 
 	void CheckTriggersScore(SoloAI* Arb) override;

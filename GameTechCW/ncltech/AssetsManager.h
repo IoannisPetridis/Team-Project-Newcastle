@@ -35,11 +35,12 @@ public:
 	static GLuint m_FieldBUMP;
 	static GLuint m_Loading;
 
-	static GLuint m_Glass;
+	static GLuint m_Blue;
 	static GLuint m_GlassBUMP;
 	static GLuint m_WoodBUMP;
 	static GLuint m_groundTex;
 	static GLuint m_Red;
+	static GLuint m_BlueCat;
 
 	static SimpleMeshObject* GOInstance;
 	static SimpleMeshObject* Camera_Entity;
@@ -54,6 +55,18 @@ public:
 	static GLuint LoadTexture(string Tex_name);
 	static Mesh* LoadMesh(string Mesh_name, string type);
 	static OBJMesh* LoadOBJMesh(string Mesh_name);
+
+	//PowerUps
+	static SimpleMeshObject* PowerUpBox1;
+	static SimpleMeshObject* PowerUpBox2;
+	static SimpleMeshObject* PowerUpBox3;
+	static SimpleMeshObject* PowerUpBox4;
+	static SimpleMeshObject* PowerUpBox5;
+	static SimpleMeshObject* BananaPU;
+	static SimpleMeshObject* BananaPU2;
+	static SimpleMeshObject* BananaPU3;
+	static SimpleMeshObject* BananaPU4;
+	static SimpleMeshObject* BananaPU5;
 
 	static void InitializeMeshes();
 	static void ReleaseMeshes();

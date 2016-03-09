@@ -44,11 +44,12 @@ DefensiveAI::~DefensiveAI() {
 void DefensiveAI::OnUpdateObject(float dt) {
 }
 
+//sets state for new behaviour
 void DefensiveAI::SetState(int setStateEnum) {
 	delete currentState;
 
 	if (setStateEnum == 1) {
-		currentState = new Defend();
+		currentState = new Defend(this);
 	}
 
 	if (setStateEnum == 2) {
@@ -56,14 +57,17 @@ void DefensiveAI::SetState(int setStateEnum) {
 	}
 
 	if (setStateEnum == 3) {
-		currentState = new Punt();
+		currentState = new Punt(this);
 	}
 }
 
+
+//called every frame, different state means different behavioural logic
 void DefensiveAI::UpdateAI() {
 	currentState->ForceCalculator(this);
 }
 
+//calculates the direction from position "from" to position "to"
 Vector3 DefensiveAI::DirectionCalculation(Vector3 to, Vector3 from) {
 	Vector3 directionvector;
 
@@ -73,6 +77,7 @@ Vector3 DefensiveAI::DirectionCalculation(Vector3 to, Vector3 from) {
 	return directionvector;
 }
 
+//calculates if the ai needs to rotate or not, and in which direction
 void DefensiveAI::RotationCalculation(Vector3 defendnode) {
 	float dotproduct, angle;
 	Vector3 crossproduct;
@@ -106,12 +111,13 @@ void DefensiveAI::RotationCalculation(Vector3 defendnode) {
 		return;
 	}
 }
-
+//used for when the ai doesnt need to worry about max speed
 void DefensiveAI::Charge() {
 	forward = 1;
 	reverse = 0;
 }
 
+//used for when ai does need to worry about max speed to prevent overshooting, also accounts for sideways velocity to prevent orbiting
 void DefensiveAI::ForwardBackwardCalculation(float disttonode) {
 	float currentforwardspeed, currentbackwardspeed, currentleftspeed, currentrightspeed;
 	float maxspeed;
@@ -154,6 +160,8 @@ void DefensiveAI::ForwardBackwardCalculation(float disttonode) {
 	}
 }
 
+
+//Calculates if the ai needs to jump, coutns to 200 before can jump again 
 void DefensiveAI::JumpCalculation(Vector3 &ballposition){
 	float ballheight, groundheight, ballradius;
 

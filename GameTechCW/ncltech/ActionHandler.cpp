@@ -22,7 +22,7 @@ ActionHandler::ActionHandler() {
 	SAItimer[1] = -1.0f;
 	SAItimer[2] = 0.0f;
 
-	Gametimer = 25.0f;
+	Gametimer = 120.0f;
 	BlueScore = 0;
 	RedScore = 0;
 
@@ -188,12 +188,23 @@ void ActionHandler::Update(float dt) {
 	
 	if (Gametimer > 0 && !PhysicsEngine::Instance()->IsPaused()) {
 		Gametimer -= dt;
+		powerupspawntimer += dt;
 	}
 	if (Gametimer <= 0) {
 		Gametimer = 0.0f;
 		GameOver = true;
 		PhysicsEngine::Instance()->SetPaused(true);
 		Audio::channel1->setPaused(false);
+	}
+	if (powerupspawntimer > 10){
+
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox1);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox2);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox3);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox4);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox5);
+
+		powerupspawntimer = 0;
 	}
 
 	{
@@ -281,18 +292,21 @@ void ActionHandler::Update(float dt) {
 
 }
 
+
+//ai every frame updates for 3 ai;'s
 void ActionHandler::AIUpdates() {
 	AssetsManager::DefensiveAI->UpdateAI();
 	AssetsManager::AggressiveAI->UpdateAI();
 	AssetsManager::NeutralAI->UpdateAI();
 	AIControllerTemp();
 }
-
+//ai every frame updates for 1 ai;'s
 void ActionHandler::SoloAIUpdates() {
 	AssetsManager::SoloAI->UpdateAI();
 	SoloAIControllerTemp();
 }
 
+//temporary controller for ai's to call the same functions as control the player
 void ActionHandler::AIControllerTemp() {
 	{
 		if (AssetsManager::NeutralAI->left) {
@@ -369,6 +383,8 @@ void ActionHandler::AIControllerTemp() {
 	}
 }
 
+
+//temporary function to call player controlelr methods to move the solo aqi
 void ActionHandler::SoloAIControllerTemp() {
 	{
 		if (AssetsManager::SoloAI->left) {
@@ -395,4 +411,61 @@ void ActionHandler::SoloAIControllerTemp() {
 			AssetsManager::SoloAI->Physics()->SetForce(Vector3(0.0f, 0.0f, 0.0f));
 		}
 	}
+}
+
+void ActionHandler::ResetGame(){
+
+		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.f, 13.f, 10.f));
+		AssetsManager::Player_1->Physics()->SetLinearVelocity(Vector3(0.f, 0.f, 0.f));
+		AssetsManager::Player_1->Physics()->SetAngularVelocity(Vector3(0.f, 0.f, 0.f));
+		AssetsManager::Player_1->Physics()->SetForce(Vector3(0.f, 0.f, 0.f));
+
+
+		m_scene->m_RootGameObject->FindGameObject("ball")->Physics()->SetLinearVelocity(Vector3(0.f, 0.f, 0.f));
+		m_scene->m_RootGameObject->FindGameObject("ball")->Physics()->SetAngularVelocity(Vector3(0.f, 0.f, 0.f));
+		m_scene->m_RootGameObject->FindGameObject("ball")->Physics()->SetForce(Vector3(0.f, 0.f, 0.f));
+		m_scene->m_RootGameObject->FindGameObject("ball")->Physics()->SetPosition(Vector3(0.0f, 13.0f, 0.0f));
+
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox1);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox2);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox3);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox4);
+		PowerUps::RandomPowerUpPosition(AssetsManager::PowerUpBox5);
+
+		powerupspawntimer = 0;
+
+		if (AIChoice){
+
+
+			AssetsManager::NeutralAI->Physics()->SetLinearVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::NeutralAI->Physics()->SetAngularVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::NeutralAI->Physics()->SetForce(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::NeutralAI->Physics()->SetPosition(Vector3(100.0f, 12.0f, 0.0f));
+
+
+			AssetsManager::DefensiveAI->Physics()->SetLinearVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::DefensiveAI->Physics()->SetAngularVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::DefensiveAI->Physics()->SetForce(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::DefensiveAI->Physics()->SetPosition(Vector3(180.0f, 12.0f, 0.0f));
+
+
+			AssetsManager::AggressiveAI->Physics()->SetLinearVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::AggressiveAI->Physics()->SetAngularVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::AggressiveAI->Physics()->SetForce(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::AggressiveAI->Physics()->SetPosition(Vector3(40.0f, 12.0f, 0.0f));
+
+		}
+		else{
+
+			AssetsManager::SoloAI->Physics()->SetLinearVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::SoloAI->Physics()->SetAngularVelocity(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::SoloAI->Physics()->SetForce(Vector3(0.f, 0.f, 0.f));
+			AssetsManager::SoloAI->Physics()->SetPosition(Vector3(30.0f, 15.0f, 60.0f));
+
+		}
+		Gametimer = 25.0f;
+		RedScore = 0;
+		BlueScore = 0;
+		PhysicsEngine::Instance()->SetPaused(false);
+
 }

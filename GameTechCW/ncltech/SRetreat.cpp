@@ -1,11 +1,12 @@
 #include "SRetreat.h"
 #include <ncltech\Scene.h>
 
-SRetreat::SRetreat() {
+SRetreat::SRetreat(SoloAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
-
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void SRetreat::ForceCalculator(SoloAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -44,6 +45,7 @@ void SRetreat::ForceCalculator(SoloAI* Arb) { //here is where you would put the 
 	}
 }
 
+//if in score higher state check defend triggers
 void SRetreat::CheckTriggersScore(SoloAI* Arb) {
 	Vector3 AIGoalVec, BallGoalVec;
 	float ailength, balllength;
@@ -61,10 +63,12 @@ void SRetreat::CheckTriggersScore(SoloAI* Arb) {
 }
 
 
+//if in defend higher state check triggers
 void SRetreat::CheckTriggersDefend(SoloAI* Arb) {
 	Arb->SetState(4);
 }
 
+//decides which higher state the ai should be in (defensive or trying to score)
 void SRetreat::SetStateBool(SoloAI* Arb) {
 	Vector3 ballgoalvec, goalgoalvec;
 	float ballgoallength, goalgoallength;
@@ -89,6 +93,7 @@ void SRetreat::SetStateBool(SoloAI* Arb) {
 //Chase == 1
 //Dribble == 2
 
+//calculates the position of the node it is trying to get too
 Vector3 SRetreat::NodeCalculation(SoloAI* Arb) {
 	Vector3 node, ballgoalvec;
 	float balllength;

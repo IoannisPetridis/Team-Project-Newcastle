@@ -6,7 +6,7 @@
 
 class SPunt : public SoloBaseState { //guard state, trying to block player from tardis
 public:
-	SPunt();
+	SPunt(SoloAI* Arb);
 	~SPunt() {};
 
 	void CheckTriggersDefend(SoloAI* Arb) override;

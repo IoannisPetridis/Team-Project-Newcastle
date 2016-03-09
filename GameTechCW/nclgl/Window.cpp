@@ -7,6 +7,9 @@ Window* Window::window;
 Keyboard*Window::keyboard	= NULL;
 Mouse*Window::mouse			= NULL;
 //GameTimer*Window::timer		= NULL;
+int Window::GetHeight = 0;
+int Window::GetWidth = 0;
+
 
 bool Window::Initialise(std::string title, int sizeX, int sizeY, bool fullScreen)	{
 	window = new Window(title, sizeX, sizeY, fullScreen);
@@ -14,6 +17,10 @@ bool Window::Initialise(std::string title, int sizeX, int sizeY, bool fullScreen
 	if (!window->HasInitialised()) {
 		return false;
 	}
+
+	GetHeight = sizeY;
+	GetWidth = sizeX;
+
 	return true;
 }
 
@@ -100,7 +107,7 @@ Window::Window(std::string title, int sizeX, int sizeY, bool fullScreen)	{
 	position.x = (1920.0f - sizeX) / 2.0f; //1920 - window width, /2
 	position.y = (1080.0f - sizeY) / 2.0f; //1080 - win height /2
 
-	windowHandle = CreateWindowEx(fullScreen ? WS_EX_TOPMOST : NULL,
+	windowHandle = CreateWindowEx(fullScreen ? WS_EX_OVERLAPPEDWINDOW : NULL,
 	WINDOWCLASS,    // name of the window class
 	title.c_str(),   // title of the window
 	fullScreen ? WS_POPUP | WS_VISIBLE : WS_OVERLAPPEDWINDOW|WS_VISIBLE,//S_VISIBLE | WS_SYSMENU | WS_MAXIMIZEBOX | WS_MINIMIZEBOX,    // window style

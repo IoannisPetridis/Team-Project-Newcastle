@@ -68,6 +68,8 @@ public:
 	void SetCar(bool a){ car = a; }
 	bool GetCar(){ return car; }
 	bool car = false;
+	bool shoulddelete = false;
+	bool removemesh = false;
 
 	void SetOnCollisionCallback(std::function<bool(PhysicsObject*)> onCollisionFunction) { m_OnCollisionCallback = onCollisionFunction; }
 

@@ -6,7 +6,7 @@
 
 class Dribble : public NeutralBaseState { //guard state, trying to block player from tardis
 public:
-	Dribble();
+	Dribble(NeutralAI* Arb);
 	~Dribble() {};
 
 	void CheckTriggers(NeutralAI* Arb) override;

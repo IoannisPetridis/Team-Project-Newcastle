@@ -15,6 +15,7 @@ PuntPlayer::PuntPlayer(AggressiveAI* Arb) {
 	Arb->reverse = false;
 }
 
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void PuntPlayer::ForceCalculator(AggressiveAI* Arb) {
 	float MagAINodeDist;
 
@@ -43,6 +44,7 @@ void PuntPlayer::ForceCalculator(AggressiveAI* Arb) {
 
 }
 
+//checks state change triggers
 void PuntPlayer::CheckTriggers(AggressiveAI* Arb) {
 	Vector3 AINodeVec;
 	float MagDistAINode;
@@ -56,6 +58,7 @@ void PuntPlayer::CheckTriggers(AggressiveAI* Arb) {
 	}
 }
 
+//calculates the position of the node it is trying to get too
 Vector3 PuntPlayer::NodeCalculation(AggressiveAI* Arb) {
 	Vector3 node, AIPlayerVec;
 

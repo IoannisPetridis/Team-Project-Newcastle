@@ -1,11 +1,14 @@
 #include "Retreat.h"
 #include <ncltech\Scene.h>
 
-Retreat::Retreat() {
+Retreat::Retreat(NeutralAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
 
+
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void Retreat::ForceCalculator(NeutralAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -34,6 +37,7 @@ void Retreat::ForceCalculator(NeutralAI* Arb) { //here is where you would put th
 	CheckTriggers(Arb);
 }
 
+//checks state change triggers
 void Retreat::CheckTriggers(NeutralAI* Arb) {
 	Vector3 AIGoalVec, BallGoalVec;
 	float ailength, balllength;
@@ -53,6 +57,7 @@ void Retreat::CheckTriggers(NeutralAI* Arb) {
 //Chase == 1
 //Dribble == 2
 
+//calculates the position of the node it is trying to get too
 Vector3 Retreat::NodeCalculation(NeutralAI* Arb) {
 	Vector3 node, ballgoalvec;
 	float balllength;

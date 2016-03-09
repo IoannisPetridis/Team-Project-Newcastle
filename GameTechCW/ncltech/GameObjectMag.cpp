@@ -25,18 +25,31 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	m_scene->AddParticleObject(rainbow);
 	//End
 
+
+	//SHELF
+	AssetsManager::GOInstance = new SimpleMeshObject("ground_shelf");//Floor
+	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 150.0f)));
+	AssetsManager::GOInstance->Physics()->name = "ground_shelf";
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, -12.0f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 150.0f)));
+	m_scene->AddGameObject(AssetsManager::GOInstance);
+
+
+	//STADIUM
+
 	AssetsManager::GOInstance = new SimpleMeshObject("ground");//Floor
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Ground(), false);
 	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Field, false);
 	//AssetsManager::GOInstance->SetBumpMap(AssetsManager::m_FieldBUMP, false);
 
-	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 1.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));
+	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(200.f, 2.0f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.0f, 0.0f)));
 	AssetsManager::GOInstance->SetColour(Vector4(1.0f, 1.0f, 1.f, 1.0f));
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol1";
-	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 1.0f, 150.0f)));
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, -1.0f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(200.f, 2.0f, 150.0f)));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
 
 	AssetsManager::GOInstance = new SimpleMeshObject("ground2");  //Right Bottom
@@ -167,7 +180,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground9_goal_middle"); //Back Goal middle
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 30.f, 50.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false); //test
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false); //test
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol9_goal_middle";
@@ -231,7 +244,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground10"); //Back Middle
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0, 20.f, 150.0f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false);
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol10";
@@ -391,7 +404,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground15"); //Front Right Bottom
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Triangle(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(20.0, 40.f, 40.f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false);
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 	
 
@@ -405,7 +418,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground16");       //Front Right Middle
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 20.f, 49.f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false);
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol16";
@@ -417,7 +430,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground17"); //Front Right Top
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Triangle(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(20.0, 40.f, 40.f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false);
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol17";
@@ -430,7 +443,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground118"); //Front Left Bottom
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Triangle(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(20.0, 40.f, 40.f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false);
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol18";
@@ -443,7 +456,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground19");       //Front Left Middle
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Cube(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 20.f, 49.f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false);
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol19";
@@ -455,7 +468,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance = new SimpleMeshObject("ground20"); //Front Left Top
 	AssetsManager::GOInstance->SetMesh(AssetsManager::Triangle(), false);
 	AssetsManager::GOInstance->SetLocalTransform(Matrix4::Scale(Vector3(20.0, 40.f, 40.f))*Matrix4::Translation(Vector3(0.0f, 0.f, 0.f)));
-	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Glass, false);
+	AssetsManager::GOInstance->SetTexture(AssetsManager::m_Blue, false);
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol20";
@@ -550,10 +563,10 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		//AssetsManager::Player_1->SetMesh(AssetsManager::Car(), false);
 		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
 		//settexture&bumpMap
-		AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
+		//AssetsManager::Player_1->SetTexture(AssetsManager::m_BlueCat, false);
 
 		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
-		AssetsManager::Player_1->SetColour(Vector4(0.2f, 10.0f, 0.5f, 1.0f));
+		//AssetsManager::Player_1->SetColour(Vector4(0.2f, 10.0f, 0.5f, 1.0f));
 		AssetsManager::Player_1->SetBoundingRadius(1.0f * 1.0f);
 
 		AssetsManager::Player_1->Physics()->name = "car";
@@ -594,13 +607,22 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 		AssetsManager::GOInstance->SetBoundingRadius(4.0f * 4.f);
 
 		AssetsManager::GOInstance->Physics()->name = "ball";
-		AssetsManager::GOInstance->Physics()->SetInverseMass(15.0f);
+		AssetsManager::GOInstance->Physics()->SetInverseMass(10.0f);
 		AssetsManager::GOInstance->Physics()->SetPosition(Vector3(0.0f, 4.5f, 0.0f));
 		AssetsManager::GOInstance->Physics()->SetCollisionShape(new SphereCollisionShape(4.0f));
 		AssetsManager::GOInstance->Physics()->SetInverseInertia(
-			AssetsManager::GOInstance->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f));
+		AssetsManager::GOInstance->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f));
 
 		m_scene->AddGameObject(AssetsManager::GOInstance);
+
+		//std::function<bool(PhysicsObject*)> ballHit = [&](PhysicsObject* otherObject){
+		//	Vector3 temp;
+		//	temp = m_scene->m_RootGameObject->FindGameObject("ball")->Physics()->GetForce();
+		//	m_scene->m_RootGameObject->FindGameObject("ball")->Physics()->SetForce(temp - Vector3(0.f, 2.f, 0.f));
+		//	return true;
+		//};
+
+		//AssetsManager::GOInstance->Physics()->SetOnCollisionCallback(ballHit);
 	}
 
 	{//goals for ai
@@ -646,6 +668,13 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	else {
 		SoloAIStuff(m_scene);
 	}
+
+	PowerUpsLoader();
+	PowerUps::AddRandomPowerUp(m_scene, AssetsManager::PowerUpBox1);
+	PowerUps::AddRandomPowerUp(m_scene, AssetsManager::PowerUpBox2);
+	PowerUps::AddRandomPowerUp(m_scene, AssetsManager::PowerUpBox3);
+	PowerUps::AddRandomPowerUp(m_scene, AssetsManager::PowerUpBox4);
+	PowerUps::AddRandomPowerUp(m_scene, AssetsManager::PowerUpBox5);
 }
 
 void	 GameObjectMag::GOM_Loading(Scene* m_scene) {
@@ -671,6 +700,7 @@ void	 GameObjectMag::GOM_Loading(Scene* m_scene) {
 	m_scene->AddGameObject(ground);
 }
 
+//adds single ai
 void GameObjectMag::SoloAIStuff(Scene* m_scene) {
 	AssetsManager::SoloAI = new SoloAI("SoloAI", m_scene);
 	AssetsManager::SoloAI->SetTexture(AssetsManager::m_Red, false);
@@ -678,7 +708,7 @@ void GameObjectMag::SoloAIStuff(Scene* m_scene) {
 	m_scene->AddGameObject(AssetsManager::SoloAI);
 }
 
-
+//adds 3 ai's
 void GameObjectMag::AIStuff(Scene* m_scene) {
 	{
 		AssetsManager::NeutralAI = new NeutralAI("NeutralAI", m_scene);
@@ -696,4 +726,108 @@ void GameObjectMag::AIStuff(Scene* m_scene) {
 		AssetsManager::AggressiveAI->Physics()->SetCar(true);
 		m_scene->AddGameObject(AssetsManager::AggressiveAI);
 	}
+}
+
+void GameObjectMag::PowerUpsLoader(){
+
+	AssetsManager::PowerUpBox1 = new SimpleMeshObject("powerup");
+	AssetsManager::PowerUpBox1->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::PowerUpBox1->SetBoundingRadius(1.0f);
+	AssetsManager::PowerUpBox1->SetLocalTransform(Matrix4::Scale(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox1->SetTexture(AssetsManager::m_CubeTex, false);
+	AssetsManager::PowerUpBox1->Physics()->name = "powerup";
+	AssetsManager::PowerUpBox1->Physics()->SetInverseMass(0.06f);
+	AssetsManager::PowerUpBox1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox1->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+
+	AssetsManager::PowerUpBox2 = new SimpleMeshObject("powerup");
+	AssetsManager::PowerUpBox2->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::PowerUpBox2->SetBoundingRadius(1.0f);
+	AssetsManager::PowerUpBox2->SetLocalTransform(Matrix4::Scale(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox2->SetTexture(AssetsManager::m_CubeTex, false);
+	AssetsManager::PowerUpBox2->Physics()->name = "powerup";
+	AssetsManager::PowerUpBox2->Physics()->SetInverseMass(0.06f);
+	AssetsManager::PowerUpBox2->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox2->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+
+	AssetsManager::PowerUpBox3 = new SimpleMeshObject("powerup");
+	AssetsManager::PowerUpBox3->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::PowerUpBox3->SetBoundingRadius(1.0f);
+	AssetsManager::PowerUpBox3->SetLocalTransform(Matrix4::Scale(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox3->SetTexture(AssetsManager::m_CubeTex, false);
+	AssetsManager::PowerUpBox3->Physics()->name = "powerup";
+	AssetsManager::PowerUpBox3->Physics()->SetInverseMass(0.06f);
+	AssetsManager::PowerUpBox3->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox3->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+
+	AssetsManager::PowerUpBox4 = new SimpleMeshObject("powerup");
+	AssetsManager::PowerUpBox4->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::PowerUpBox4->SetBoundingRadius(1.0f);
+	AssetsManager::PowerUpBox4->SetLocalTransform(Matrix4::Scale(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox4->SetTexture(AssetsManager::m_CubeTex, false);
+	AssetsManager::PowerUpBox4->Physics()->name = "powerup";
+	AssetsManager::PowerUpBox4->Physics()->SetInverseMass(0.06f);
+	AssetsManager::PowerUpBox4->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox4->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+
+	AssetsManager::PowerUpBox5 = new SimpleMeshObject("powerup");
+	AssetsManager::PowerUpBox5->SetMesh(AssetsManager::Cube(), false);
+	AssetsManager::PowerUpBox5->SetBoundingRadius(1.0f);
+	AssetsManager::PowerUpBox5->SetLocalTransform(Matrix4::Scale(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox5->SetTexture(AssetsManager::m_CubeTex, false);
+	AssetsManager::PowerUpBox5->Physics()->name = "powerup";
+	AssetsManager::PowerUpBox5->Physics()->SetInverseMass(0.06f);
+	AssetsManager::PowerUpBox5->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.f, 1.f, 1.f)));
+	AssetsManager::PowerUpBox5->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+
+	AssetsManager::BananaPU = new SimpleMeshObject("powerup_banana");
+	AssetsManager::BananaPU->SetMesh(AssetsManager::Banana(), false);
+	AssetsManager::BananaPU->SetBoundingRadius(1.0f * 1.f);
+	AssetsManager::BananaPU->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU->Physics()->name = "powerup_banana";
+	AssetsManager::BananaPU->Physics()->SetInverseMass(0.06f);
+	AssetsManager::BananaPU->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+	AssetsManager::BananaPU->Physics()->SetPosition(Vector3(0.0f, -10.f, 0.f));
+
+	AssetsManager::BananaPU2 = new SimpleMeshObject("powerup_banana1");
+	AssetsManager::BananaPU2->SetMesh(AssetsManager::Banana(), false);
+	AssetsManager::BananaPU2->SetBoundingRadius(1.0f * 1.f);
+	AssetsManager::BananaPU2->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU2->Physics()->name = "powerup_banana1";
+	AssetsManager::BananaPU2->Physics()->SetInverseMass(0.06f);
+	AssetsManager::BananaPU2->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU2->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+	AssetsManager::BananaPU2->Physics()->SetPosition(Vector3(20.0f, -10.f, 0.f));
+
+	AssetsManager::BananaPU3 = new SimpleMeshObject("powerup_banana2");
+	AssetsManager::BananaPU3->SetMesh(AssetsManager::Banana(), false);
+	AssetsManager::BananaPU3->SetBoundingRadius(1.0f * 1.f);
+	AssetsManager::BananaPU3->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU3->Physics()->name = "powerup_banana2";
+	AssetsManager::BananaPU3->Physics()->SetInverseMass(0.06f);
+	AssetsManager::BananaPU3->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU3->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+	AssetsManager::BananaPU3->Physics()->SetPosition(Vector3(15.0f, -10.f, 0.f));
+
+	AssetsManager::BananaPU4 = new SimpleMeshObject("powerup_banana3");
+	AssetsManager::BananaPU4->SetMesh(AssetsManager::Banana(), false);
+	AssetsManager::BananaPU4->SetBoundingRadius(1.0f * 1.f);
+	AssetsManager::BananaPU4->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU4->Physics()->name = "powerup_banana3";
+	AssetsManager::BananaPU4->Physics()->SetInverseMass(0.06f);
+	AssetsManager::BananaPU4->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU4->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+	AssetsManager::BananaPU4->Physics()->SetPosition(Vector3(10.0f, -10.f, 0.f));
+
+	AssetsManager::BananaPU5 = new SimpleMeshObject("powerup_banana4");
+	AssetsManager::BananaPU5->SetMesh(AssetsManager::Banana(), false);
+	AssetsManager::BananaPU5->SetBoundingRadius(1.0f * 1.f);
+	AssetsManager::BananaPU5->SetLocalTransform(Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU5->Physics()->name = "powerup_banana4";
+	AssetsManager::BananaPU5->Physics()->SetInverseMass(0.06f);
+	AssetsManager::BananaPU5->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(0.5f, 0.5f, 0.5f)));
+	AssetsManager::BananaPU5->Physics()->GetCollisionShape()->BuildInverseInertia(1.0f);
+	AssetsManager::BananaPU5->Physics()->SetPosition(Vector3(5.0f, -10.f, 0.f));
+
 }

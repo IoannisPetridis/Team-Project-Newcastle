@@ -44,6 +44,7 @@ void SimpleMeshObject::SetTexture(GLuint tex, bool deleteOnCleanup)
 {
 	m_Texture = tex;
 	m_DeleteTexOnCleanup = deleteOnCleanup;
+	
 }
 
 void	SimpleMeshObject::OnRenderObject()

@@ -5,7 +5,8 @@
 
 class Defend : public DefensiveBaseState { // home state, rests above tardis when player far away
 public:
-	Defend();
+	Defend(DefensiveAI* Arb
+		);
 	~Defend(){};
 
 	void CheckTriggers(DefensiveAI* Arb) override;

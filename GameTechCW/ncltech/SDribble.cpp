@@ -1,11 +1,12 @@
 #include "SDribble.h"
 #include <ncltech\Scene.h>
 
-SDribble::SDribble() {
+SDribble::SDribble(SoloAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
-
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void SDribble::ForceCalculator(SoloAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -51,6 +52,7 @@ void SDribble::ForceCalculator(SoloAI* Arb) { //here is where you would put the 
 	}
 }
 
+//if in defend higher state check defend triggers
 void SDribble::CheckTriggersScore(SoloAI* Arb) {
 	Vector3 AINodeVec, AIGoalVec, BallGoalVec;
 	float MagDistAINode, ailength, balllength;
@@ -74,10 +76,12 @@ void SDribble::CheckTriggersScore(SoloAI* Arb) {
 
 }
 
+//if in score higher state check triggers
 void SDribble::CheckTriggersDefend(SoloAI* Arb) {
 	Arb->SetState(4);
 }
 
+//decides which higher state the ai should be in (defensive or trying to score)
 void SDribble::SetStateBool(SoloAI* Arb) {
 	Vector3 ballgoalvec, goalgoalvec;
 	float ballgoallength, goalgoallength;
@@ -102,6 +106,7 @@ void SDribble::SetStateBool(SoloAI* Arb) {
 //Chase == 1
 //Dribble == 2
 
+//calculates the position of the node it is trying to get too
 Vector3 SDribble::NodeCalculation(SoloAI* Arb) {
 	Vector3 node, goalballdirvec;
 

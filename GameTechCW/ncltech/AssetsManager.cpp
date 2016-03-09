@@ -17,9 +17,11 @@ GLuint AssetsManager::m_ThrowTexBUMP = 0;
 GLuint AssetsManager::m_FieldBUMP = 0;
 GLuint AssetsManager::m_Field = 0;
 GLuint AssetsManager::m_Loading = 0;
-GLuint AssetsManager::m_Glass = 0;
+GLuint AssetsManager::m_Blue = 0;
 GLuint AssetsManager::m_GlassBUMP = 0;
 GLuint AssetsManager::m_Red = 0;
+GLuint AssetsManager::m_BlueCat = 0;
+
 //GameObject Assets
 SimpleMeshObject* AssetsManager::GOInstance;
 SimpleMeshObject* AssetsManager::Camera_Entity;
@@ -29,6 +31,18 @@ DefensiveAI* AssetsManager::DefensiveAI;
 NeutralAI* AssetsManager::NeutralAI;
 AggressiveAI* AssetsManager::AggressiveAI;
 SoloAI* AssetsManager::SoloAI;
+
+//PowerUps
+SimpleMeshObject* AssetsManager::PowerUpBox1;
+SimpleMeshObject* AssetsManager::PowerUpBox2;
+SimpleMeshObject* AssetsManager::PowerUpBox3;
+SimpleMeshObject* AssetsManager::PowerUpBox4;
+SimpleMeshObject* AssetsManager::PowerUpBox5;
+SimpleMeshObject* AssetsManager::BananaPU;
+SimpleMeshObject* AssetsManager::BananaPU2;
+SimpleMeshObject* AssetsManager::BananaPU3;
+SimpleMeshObject* AssetsManager::BananaPU4;
+SimpleMeshObject* AssetsManager::BananaPU5;
 
 //Player* Assetsmanager::PlayerInstance;
 //AI*	Assetsmanager::AIInstance;
@@ -42,13 +56,15 @@ void AssetsManager::InitializeMeshes()
 	
 	m_TargetTexture = LoadTexture("target.tga");
 	m_ThrowTex = LoadTexture("brick.tga");
-	m_Glass = LoadTexture("blue.jpg");
-	m_GlassBUMP = LoadTexture("purple.jpg");
+	m_Blue = LoadTexture("BlueSeamless.jpg");
+	m_GlassBUMP = LoadTexture("ballTexture.png");
 	m_ThrowTexBUMP = LoadTexture("brickDOT.jpg");
-	m_Field = LoadTexture("field.tga");
+	m_Field = LoadTexture("grassHR.jpg");
 	m_FieldBUMP = LoadTexture("fieldDOT.tga");
 	m_Loading = LoadTexture("loading.tga");
-	m_Red = LoadTexture("red.jpg");
+	m_Red = LoadTexture("RedSeamless.jpg");
+	m_BlueCat = LoadTexture("blueCat.jpg");
+
 
 	m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_pCube = new OBJMesh(MESHDIR"cube.obj");
@@ -88,7 +104,7 @@ void AssetsManager::ReleaseMeshes()
 		glDeleteTextures(1, &m_TargetTexture);
 		glDeleteTextures(1, &m_ThrowTex);
 		glDeleteTextures(1, &m_ThrowTexBUMP);
-		glDeleteTextures(1, &m_Glass);
+		glDeleteTextures(1, &m_Blue);
 		glDeleteTextures(1, &m_GlassBUMP);
 		
 		delete m_pPlane;

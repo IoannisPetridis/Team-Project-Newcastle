@@ -10,6 +10,7 @@
 #include "..\..\Qt\include\QtCore\qcoreapplication.h"
 #include "..\..\Qt\include\QtWidgets\qapplication.h"
 #include "..\..\Qt\include\QtWidgets\qstylefactory.h"
+
 //end
 
 Scene* scene = NULL;
@@ -46,12 +47,20 @@ int main2(int argc, char *argv[])
 	//loads base window
 	MainWindow w;
 	w.setWindowTitle("Rocket League V2");
-	w.setFixedSize(480, 400); //width x height
+
+	int qtwidth, qtheight;
+	qtwidth = Window::GetWidth;
+	qtheight = Window::GetHeight;
+	w.setFixedHeight(qtheight);
+	w.setFixedWidth(qtwidth);
 
 	//w.setWindowOpacity(0.2);
+	//w.setWindowModality(Qt::WindowModal);
 	w.setWindowIcon(QIcon("../../Qt/Icons/sicklogo.bmp"));
+	//Qt::FramelessWindowHint | 
 	w.setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 	w.setAttribute(Qt::WA_TranslucentBackground);
+
 
 	//finds primary screen height and width
 	QScreen *screen = QGuiApplication::primaryScreen();
@@ -65,7 +74,7 @@ int main2(int argc, char *argv[])
 	screencoords.setY(centreY);
 	w.move(screencoords);
 
-	w.show();
+	w.showFullScreen();
 
 	return a.exec();
 }
@@ -119,11 +128,10 @@ int main()
 	//-------------------
 
 	//Initialise the Window
-	if (!Window::Initialise("Engine", 1280, 800, false))
+	if (!Window::Initialise("Engine", 1920, 1080, true))
 	{
 		return Quit(true, "Window failed to initialise!");
 	}
-
 
 	GameObjectMag* GOM_Loading = new GameObjectMag();
 
@@ -280,6 +288,19 @@ int main()
 
 				MyScene::AbilityUsed = false;
 				MyScene::abilitycounter = 200;
+				Window::GetWindow().GetTimer()->GetTimedMS();
+			}
+
+			//QT PAUSE MENU
+			if (PhysicsEngine::Instance()->IsPaused()){
+				Window::GetWindow().GetTimer()->GetTimedMS();
+				MainWindow::isPauseWindow = true;
+				Window::GetWindow().ShowOSPointer(true);
+
+				char *argv[] = { "windowinwindow", "arg1", "arg2", NULL };
+				int argc = sizeof(argv) / sizeof(char*)-1;
+				main2(argc, argv);
+				PhysicsEngine::Instance()->SetPaused(false);
 				Window::GetWindow().GetTimer()->GetTimedMS();
 			}
 

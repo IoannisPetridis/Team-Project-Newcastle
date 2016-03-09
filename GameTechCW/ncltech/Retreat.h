@@ -6,7 +6,7 @@
 
 class Retreat : public NeutralBaseState { //guard state, trying to block player from tardis
 public:
-	Retreat();
+	Retreat(NeutralAI* Arb);
 	~Retreat() {};
 
 	void CheckTriggers(NeutralAI* Arb) override;

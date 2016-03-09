@@ -6,7 +6,7 @@
 
 class Punt : public DefensiveBaseState { //guard state, trying to block player from tardis
 public:
-	Punt();
+	Punt(DefensiveAI* Arb);
 	~Punt() {};
 
 	void CheckTriggers(DefensiveAI* Arb) override;

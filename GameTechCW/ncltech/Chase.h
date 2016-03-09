@@ -6,7 +6,7 @@
 
 class Chase : public NeutralBaseState { //guard state, trying to block player from tardis
 public:
-	Chase();
+	Chase(NeutralAI* Arb);
 	~Chase() {};
 
 	void CheckTriggers(NeutralAI* Arb) override;

@@ -6,7 +6,7 @@
 
 class SDribble : public SoloBaseState { //guard state, trying to block player from tardis
 public:
-	SDribble();
+	SDribble(SoloAI* Arb);
 	~SDribble() {};
 
 	void CheckTriggersScore(SoloAI* Arb) override;

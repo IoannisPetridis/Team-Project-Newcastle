@@ -6,7 +6,7 @@
 
 class SChase : public SoloBaseState { //guard state, trying to block player from tardis
 public:
-	SChase();
+	SChase(SoloAI* Arb);
 	~SChase() {};
 
 	void CheckTriggersScore(SoloAI* Arb) override;

@@ -241,6 +241,20 @@ void PhysicsEngine::NarrowPhaseCollisions()
 				if (cp.objectA->IsEnabled()) { cp.objectA->ToggleEnable(); }
 				if (cp.objectB->IsEnabled()) { cp.objectB->ToggleEnable(); }
 
+				if (cp.objectA->name == "powerup"){//
+
+					if (cp.objectB->name == "car"){
+						cp.objectA->SetPosition(Vector3(cp.objectA->GetPosition().x, -10.f, cp.objectA->GetPosition().x));
+					}
+				}
+				if (cp.objectB->name == "powerup"){
+					if (cp.objectA->name == "car"){
+						cp.objectB->SetPosition(Vector3(cp.objectB->GetPosition().x, -10.f, cp.objectB->GetPosition().x));
+					}
+				}
+
+
+
 				bool okA = cp.objectA->m_OnCollisionCallback(cp.objectB);
 				bool okB = cp.objectB->m_OnCollisionCallback(cp.objectA);
 
@@ -248,6 +262,8 @@ void PhysicsEngine::NarrowPhaseCollisions()
 				{
 					/*if (cp.objectA->name.substr(0, 6) == "ground" || cp.objectB->name.substr(0, 6) == "ground"){
 					}*/
+				
+
 					
 						CPairList.push_back(cp);
 						VPairList.push_back(cp);
@@ -262,11 +278,12 @@ void PhysicsEngine::NarrowPhaseCollisions()
 							delete manifold;
 						}
 					}
+
 				}
-			
-		}
+			}
+		}	
 	}
-}
+
 
 void PhysicsEngine::SolveConstraints()
 {

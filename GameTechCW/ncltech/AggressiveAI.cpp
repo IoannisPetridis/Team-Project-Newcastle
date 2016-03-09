@@ -48,6 +48,8 @@ void AggressiveAI::OnUpdateObject(float dt) {
 	//currentState->ForceCalculator(this); //every frame call the ForceCalculator method of currentState 
 }
 
+
+//sets state for new behaviour
 void AggressiveAI::SetState(int setStateEnum) { //sets the state of the AI (when you call setstate you pass it an integer, and depending on which integer is passed a different state is chosen to be instantiated.
 	delete currentState;
 
@@ -60,10 +62,12 @@ void AggressiveAI::SetState(int setStateEnum) { //sets the state of the AI (when
 	}
 }
 
+//called every frame, different state means different behavioural logic
 void AggressiveAI::UpdateAI() {
 	currentState->ForceCalculator(this);
 }
 
+//calculates the direction from position "from" to position "to"
 Vector3 AggressiveAI::DirectionCalculation(Vector3 to, Vector3 from) {
 	Vector3 directionvector;
 
@@ -73,6 +77,8 @@ Vector3 AggressiveAI::DirectionCalculation(Vector3 to, Vector3 from) {
 	return directionvector;
 }
 
+
+//calculates if the ai needs to rotate or not, and in which direction
 void AggressiveAI::RotationCalculation(Vector3 defendnode) {
 	float dotproduct, angle;
 	Vector3 crossproduct;
@@ -107,11 +113,14 @@ void AggressiveAI::RotationCalculation(Vector3 defendnode) {
 	}
 }
 
+//used for when the ai doesnt need to worry about max speed
 void AggressiveAI::Charge() {
 	forward = 1;
 	reverse = 0;
 }
 
+
+//used for when ai does need to worry about max speed to prevent overshooting, also accounts for sideways velocity to prevent orbiting
 void AggressiveAI::ForwardBackwardCalculation(float disttonode) {
 	float currentforwardspeed, currentbackwardspeed, currentleftspeed, currentrightspeed;
 	float maxspeed;

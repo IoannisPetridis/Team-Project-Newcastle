@@ -1,11 +1,13 @@
 #include "Dribble.h"
 #include <ncltech\Scene.h>
 
-Dribble::Dribble() {
+Dribble::Dribble(NeutralAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
 
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void Dribble::ForceCalculator(NeutralAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -42,6 +44,7 @@ void Dribble::ForceCalculator(NeutralAI* Arb) { //here is where you would put th
 	CheckTriggers(Arb);
 }
 
+//checks state change triggers
 void Dribble::CheckTriggers(NeutralAI* Arb) {
 	Vector3 AINodeVec, AIGoalVec, BallGoalVec;
 	float MagDistAINode, ailength, balllength;
@@ -68,6 +71,7 @@ void Dribble::CheckTriggers(NeutralAI* Arb) {
 //Chase == 1
 //Dribble == 2
 
+//calculates the position of the node it is trying to get too
 Vector3 Dribble::NodeCalculation(NeutralAI* Arb) {
 	Vector3 node, goalballdirvec;
 

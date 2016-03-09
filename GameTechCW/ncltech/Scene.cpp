@@ -635,7 +635,10 @@ void Scene::UpdateParticleList(float dt, ParticleEmitter* cNode)
 {
 	//cNode->OnUpdateObject(dt);
 	for (auto child : cNode->GetChildren()) {
-		child->Update(dt* 100.f);
+		
+			child->Update(dt* 100.f);
+		
+		
 	}
 }
 //
@@ -643,6 +646,8 @@ void Scene::AddParticleObject(ParticleEmitter* particle_object)
 {
 	m_RootParticleList->AddChildParticle(particle_object);
 }
+
+
 
 void Scene::UpdateScene(float dt)
 {
@@ -766,8 +771,28 @@ void Scene::DrawNodes(bool drawTransparentObjects)
 void Scene::DrawNode(GameObject* n)
 {
 	modelMatrix.ToIdentity();
+
 	Matrix4 temp = (lightList.at(0)).GetlightViewProjMat()  * n->m_WorldTransform;
-	//glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "textureMatrix"), 1, false, *&temp.values);
+	
+	if (n->GetName()=="ground")
+	{
+		textureMatrix = Matrix4::Scale(Vector3(10,10,10));
+	}
+	else if (n->GetName() == "ground10" || n->GetName() == "ground13")
+	{
+		textureMatrix = Matrix4::Scale(Vector3(5, 2, 2));
+	}
+	else if (n->GetName() == "ground15" || n->GetName() == "ground17" || n->GetName() == "ground118" || n->GetName() == "ground20" || n->GetName() == "ground21" || n->GetName() == "ground23" || n->GetName() == "ground24" || n->GetName() == "ground26")
+	{
+		textureMatrix = Matrix4::Scale(Vector3(2, 2, 2));
+	}
+	else
+	{
+		textureMatrix.ToIdentity();
+	}
+	
+
+	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "textureMatrix"), 1, false, *&textureMatrix.values);
 
 	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "lightViewProjMat"), 1, false, *&temp.values);
 	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), "modelMatrix"), 1, false, (float*)&n->m_WorldTransform);

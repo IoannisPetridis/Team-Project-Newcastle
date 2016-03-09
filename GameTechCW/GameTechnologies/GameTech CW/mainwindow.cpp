@@ -12,6 +12,7 @@ int MainWindow::playertexture = 1;
 std::string MainWindow::playername = "Player1";
 bool MainWindow::AIchoice = false;
 bool MainWindow::isExitWindow = false;
+bool MainWindow::isPauseWindow = false;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
@@ -26,10 +27,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	vertlayout->setAlignment(Qt::AlignCenter);
 
 	//sets fonts for title & buttons
-	QFont font("CordiaUPC", 50, QFont::Bold);
+	QFont font("CordiaUPC", 50, QFont::Bold, false);
 	title->setFont(font);
 	title->setAlignment(Qt::AlignCenter);
 	title->setText("<font color='white'>Rocket League V2.0</font>");
+	title->setContentsMargins(0, 0, 0, 30);
 
 	//create endgame title font
 	QFont endgamefont("CordiaUPC", 70, QFont::Bold);
@@ -40,9 +42,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 		title->setFont(endgamefont);
 		playbutton->setText("Play Again");
 		createbutton->hide();
+		AIbutton->hide();
 		exitbutton->setText("Quit");
 	}
 
+	if (isPauseWindow){
+		title->setText("<font color='white'>PAUSED</font>");
+		title->setFont(endgamefont);
+		playbutton->setText("Continue");
+		createbutton->hide();
+		AIbutton->hide();
+		exitbutton->setText("Quit?");
+	}
 
 	playbutton->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
 		"stop: 0 white, stop: 1 grey);"
@@ -89,7 +100,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	AIbutton->setMaximumSize(200, 40);
 
     //adds assets to the vertical layout
-    vertlayout->addWidget(title, Qt::AlignCenter);
+    vertlayout->addWidget(title, 0, Qt::AlignCenter);
     vertlayout->addWidget(playbutton, 0, Qt::AlignCenter);
     vertlayout->addWidget(createbutton, 0, Qt::AlignCenter);
 	vertlayout->addWidget(AIbutton, 0, Qt::AlignCenter);
@@ -124,10 +135,20 @@ void MainWindow::play_game(){ //play button is clicked
 		isExitWindow = false;
 		ActionHandler::Instance()->GameOver = false;
 	}
+
+	if (isPauseWindow){
+		Window::GetWindow().ShowOSPointer(false);
+		isPauseWindow = false;
+	}
 }
 
 void MainWindow::exit_now(){ //exit button clicked
 	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
+
+	if (isPauseWindow){
+		isPauseWindow = false;
+	}
+
     this->close();
 	exit(0);
 }

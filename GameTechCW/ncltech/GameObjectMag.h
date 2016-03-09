@@ -24,6 +24,7 @@ public:
 
 	void AIStuff(Scene* m_scene);
 	void SoloAIStuff(Scene* m_scene);
+	void PowerUpsLoader();
 
 	void SetID(int i) { id = i; }
 	int GetID() const {

@@ -5,11 +5,12 @@
 #define PI 3.14159265
 #define E 2.71828
 
-SDefend::SDefend() {
+SDefend::SDefend(SoloAI* Arb) {
 	GroundHeight = 1.0f;
-	iterator = 9;
+	iterator = 9; 
+	Arb->jump = false;
 }
-
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void SDefend::ForceCalculator(SoloAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -60,6 +61,8 @@ void SDefend::ForceCalculator(SoloAI* Arb) { //here is where you would put the l
 	}
 }
 
+
+//if in defend higher state check defend triggers
 void SDefend::CheckTriggersDefend(SoloAI* Arb) {
 	float MagDistBallGoal, MagGoalDists;
 
@@ -71,10 +74,12 @@ void SDefend::CheckTriggersDefend(SoloAI* Arb) {
 	}
 }
 
+//if in score higher state check triggers
 void SDefend::CheckTriggersScore(SoloAI* Arb) {
 	Arb->SetState(1);
 }
 
+//decides which higher state the ai should be in (defensive or trying to score)
 void SDefend::SetStateBool(SoloAI* Arb) {
 	Vector3 ballgoalvec, goalgoalvec;
 	float ballgoallength, goalgoallength;
@@ -101,6 +106,7 @@ void SDefend::SetStateBool(SoloAI* Arb) {
 //Punt = 3
 //Off = 4
 
+//calculates the position of the node it is trying to get too
 Vector3 SDefend::NodeCalculation(SoloAI* Arb) {
 	Vector3 GoalBallVec, defendnode;
 	float DistGoalBall;
@@ -114,6 +120,7 @@ Vector3 SDefend::NodeCalculation(SoloAI* Arb) {
 	return defendnode;
 }
 
+//calculates the position the ai is trying to defend, moves with ball, so if ball is left of goal, ai defends left side of goal
 void SDefend::FriendlyGoalPositionCalculation(SoloAI* Arb) {
 	float arenawidth, ballwidthposition, goalwidth, ballwidthpercentage;
 

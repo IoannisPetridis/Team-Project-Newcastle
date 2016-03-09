@@ -33,7 +33,7 @@ bool MyScene::InitialiseGL()
 	GOM->AIChoice = MainWindow::AIchoice;
 
 	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -14.81f, 0.0f));
-	PhysicsEngine::Instance()->SetDampingFactor(0.988f);
+	PhysicsEngine::Instance()->SetDampingFactor(0.990f);
 
 	m_Camera->SetPosition(Vector3(24.f, 13.f, 9.f));
 	m_Camera->SetYaw(90.0f);
@@ -63,7 +63,7 @@ bool MyScene::InitialiseGL()
 		//these textures are just placeholders from what we had
 		if (MainWindow::playertexture == 1){
 			
-			AssetsManager::Player_1->SetTexture(AssetsManager::m_Glass, false);
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_Blue, false);
 		}
 
 		if (MainWindow::playertexture == 2){
@@ -71,7 +71,7 @@ bool MyScene::InitialiseGL()
 		}
 
 		if (MainWindow::playertexture == 3){
-			AssetsManager::Player_1->SetTexture(AssetsManager::m_Field, false); //grass texture
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_BlueCat, false); //grass texture
 		}
 
 
@@ -170,20 +170,24 @@ void MyScene::UpdateScene(float msec)
 	if (PowerUps::GetPlayerPickup()){
 		ParticleEmitter* powerupspark = new ParticleEmitter();
 
-		powerupspark->SetParticleSize(0.8f);
-		powerupspark->SetParticleVariance(1.0f);
-		powerupspark->SetLaunchParticles(5.0f);
+		powerupspark->SetParticleSize(0.6f);
+		powerupspark->SetParticleVariance(2.0f);
+		powerupspark->SetLaunchParticles(20.0f);
 		powerupspark->SetParticleLifetime(20.0f);
 		powerupspark->SetParticleSpeed(0.3f);
-		powerupspark->SetParticleRate(5.f);
+		powerupspark->SetParticleRate(10.f);
 		powerupspark->SetDirection(Vector3(0.f, 4.f, 0.f));
 		powerupspark->SetSourcePosition(AssetsManager::Player_1->Physics()->GetPosition());
+		powerupspark->SetParticleColour(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+		powerupspark->SetIsTimer(true);
+		powerupspark->SetEmitterLifetime(150.0f);
 		this->AddParticleObject(powerupspark);
+
 		PowerUps::SetPlayerPickup(false);
-		
 	}
+	
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B)){
-		PowerUps::AddRandomPowerUp(this);
+		PowerUps::AddRandomPowerUp(this,AssetsManager::PowerUpBox2);
 	}
 
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_N)){
@@ -230,10 +234,9 @@ void MyScene::UpdateScene(float msec)
 	if (AssetsManager::Player_1->Physics()->GetHP() <= 0){
 		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 10.0f, 10.0f));
 		AssetsManager::Player_1->Physics()->SetHP(100.f);
-		
 	}
 
-
+	
 }
 
 void MyScene::RenderScene()

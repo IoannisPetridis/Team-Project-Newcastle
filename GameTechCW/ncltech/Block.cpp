@@ -6,6 +6,7 @@ Block::Block() {
 	iterator = 9;
 }
 
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -34,6 +35,7 @@ void Block::ForceCalculator(AggressiveAI* Arb) { //here is where you would put t
 	CheckTriggers(Arb);
 }
 
+//checks state change triggers
 void Block::CheckTriggers(AggressiveAI* Arb) {
 	Vector3 PlayerBallVec;
 	float MagDistPlayerBall;
@@ -46,7 +48,7 @@ void Block::CheckTriggers(AggressiveAI* Arb) {
 	}
 }
 
-
+//calculates the position of the node it is trying to get too
 Vector3 Block::NodeCalculation(AggressiveAI* Arb) {
 	Vector3 PlayerBallVec, blocknode;
 	float DistPlayerBall;

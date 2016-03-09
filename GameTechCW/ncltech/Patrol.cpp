@@ -14,9 +14,11 @@ Patrol::Patrol(DefensiveAI* Arb) {
 		PatrolPoint.y = GroundHeight;
 		PatrolNode = PatrolPoint;
 		iterator = 9;
+		Arb->jump = false;
 	}
 }
 
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void Patrol::ForceCalculator(DefensiveAI* Arb) { //here is where you would put the logic behind the state
 	Vector3 AIDistPatrolNode;
 	float MagAINodeDist;
@@ -44,6 +46,7 @@ void Patrol::ForceCalculator(DefensiveAI* Arb) { //here is where you would put t
 	CheckTriggers(Arb);
 }
 
+//checks state change triggers
 void Patrol::CheckTriggers(DefensiveAI* Arb) {
 	float MagDistBallGoal, MagGoalDists;
 
@@ -60,6 +63,7 @@ void Patrol::CheckTriggers(DefensiveAI* Arb) {
 //Punt = 3
 //Off = 4
 
+//calculates the position of the node it is trying to get too
 Vector3 Patrol::NodeCalculation(DefensiveAI* Arb) {
 	Vector3 AIPatrolNodeVec;
 	float MagAIPatrolNodeVec;

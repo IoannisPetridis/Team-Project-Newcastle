@@ -11,6 +11,7 @@
 #include "..\..\Qt\include\QtGui\qscreen.h"
 #include "..\..\Qt\include\QtWidgets\qgraphicseffect.h"
 #include "..\..\ncltech\Audio.h"
+#include "..\..\Qt\include\QtGui\qpainter.h"
 
 
 namespace Ui {
@@ -43,6 +44,7 @@ public:
     static std::string playername;
 	static bool AIchoice;
 	static bool isExitWindow;
+	static bool isPauseWindow;
 
     //grabs data from dialog (chara creation) window
     void grabuserdata(int size, int skill, int tex, std::string name) {

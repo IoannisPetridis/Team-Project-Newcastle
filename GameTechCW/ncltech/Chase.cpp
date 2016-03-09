@@ -1,11 +1,13 @@
 #include "Chase.h"
 #include <ncltech\Scene.h>
 
-Chase::Chase() {
+Chase::Chase(NeutralAI* Arb) {
 	GroundHeight = 1.0f;
 	iterator = 9;
+	Arb->jump = false;
 }
 
+//called every frame, sets variables, calculates the node its trying to get to, and calls functions to move it there, also checks triggers to state change
 void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the logic behind the state
 	float MagAINodeDist;
 
@@ -33,6 +35,8 @@ void Chase::ForceCalculator(NeutralAI* Arb) { //here is where you would put the 
 	CheckTriggers(Arb);
 }
 
+
+//checks state change triggers
 void Chase::CheckTriggers(NeutralAI* Arb) {
 	Vector3 AINodeVec, AIGoalVec, BallGoalVec;
 	float MagDistAINode, ailength, balllength;
@@ -58,6 +62,7 @@ void Chase::CheckTriggers(NeutralAI* Arb) {
 //Chase == 1
 //Dribble == 2
 
+//calculates the position of the node it is trying to get too
 Vector3 Chase::NodeCalculation(NeutralAI* Arb) {
 	Vector3 node, EnemyGoalBallVec;
 
