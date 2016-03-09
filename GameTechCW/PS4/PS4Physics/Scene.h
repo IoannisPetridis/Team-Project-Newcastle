@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #pragma once
 //#include <nclgl/OGLRenderer.h>
 #include <Camera.h>
@@ -98,3 +100,5 @@ protected:
 	GLuint shadowTex;
 	GLuint shadowFBO;
 };
+
+#endif

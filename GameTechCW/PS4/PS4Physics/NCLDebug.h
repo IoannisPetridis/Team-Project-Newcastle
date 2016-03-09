@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 /******************************************************************************
 Class: NCLDebug
 Implements:
@@ -114,3 +116,5 @@ protected:
 
 	static std::mutex m_DebugMutex;
 };
+
+#endif

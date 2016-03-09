@@ -12,7 +12,7 @@ PhysicsEngine::PhysicsEngine()
 	m_Gameover			= false;
 	m_UpdateTimestep	= 1.0f / 60.f;
 	m_UpdateAccum		= 0.0f;
-	m_Gravity			=  Vector3(0.0f, -9.81f, 0.0f);
+	m_Gravity			=  GLMVector3(0.0f, -9.81f, 0.0f);
 	m_DampingFactor		= 1.0f;
 	CollisionDetectionDis = 400.0f;
 
@@ -169,7 +169,7 @@ void PhysicsEngine::UpdatePhysicsObject(PhysicsObject* obj)
 	//}
 
 	//angular rotation
-	Vector3 angularAccel = obj->m_InvInertia * obj->m_Torque;
+	GLMVector3 angularAccel = obj->m_InvInertia * obj->m_Torque;
 	obj->m_AngularVelocity = obj->m_AngularVelocity * m_DampingFactor;
 	obj->m_Orientation = obj->m_Orientation + obj->m_Orientation *
 		(obj->m_AngularVelocity * m_UpdateTimestep * 0.5f);
@@ -193,7 +193,7 @@ void PhysicsEngine::BroadPhaseCollisions()
 			objA = m_PhysicsObjects[i];
 			objB = m_PhysicsObjects[j];
 
-			if (objA->name.find("ground") != string::npos && objB->name.find("ground") != string::npos) continue;
+			if (objA->name.find("ground") != std::string::npos && objB->name.find("ground") != std::string::npos) continue;
 		
 			else {
 				//if (OctreeCheck(objB, objA)) {
@@ -303,7 +303,7 @@ void PhysicsEngine::OctreeBuild() {
 		for (auto sub : m_PhysicsObjects) {
 			if (sub != obj) {
 				//if the object is ground, then always deem it as a child for another object
-				if (sub->name == "ground"){
+				if (sub->name.compare("ground") == 0){
 						str->children.push_back(sub);
 					}
 				else{

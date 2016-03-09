@@ -12,7 +12,7 @@ Hull::~Hull()
 }
 
 
-void Hull::AddVertex(const Vector3& v)
+void Hull::AddVertex(const GLMVector3& v)
 {
 	//every vertex has id and positio
 	HullVertex new_vertex;
@@ -76,7 +76,7 @@ int Hull::ConstructNewEdge(int parent_face_idx, int vert_start, int vert_end)
 	return out_idx;
 }
 
-void Hull::AddFace(const Vector3& normal, int nVerts, const int* verts)
+void Hull::AddFace(const GLMVector3& normal, int nVerts, const int* verts)
 {
 	HullFace new_face;
 	new_face.idx = m_Faces.size();
@@ -138,7 +138,7 @@ void Hull::AddFace(const Vector3& normal, int nVerts, const int* verts)
 }
 
 
-void Hull::GetMinMaxVerticesInAxis(const Vector3& local_axis, int* out_min_vert, int* out_max_vert)
+void Hull::GetMinMaxVerticesInAxis(const GLMVector3& local_axis, int* out_min_vert, int* out_max_vert)
 {
 	float cCorrelation;
 	int minVertex, maxVertex;
@@ -147,7 +147,7 @@ void Hull::GetMinMaxVerticesInAxis(const Vector3& local_axis, int* out_min_vert,
 
 	for (size_t i = 0; i < m_Vertices.size(); ++i)
 	{
-		cCorrelation = Vector3::Dot(local_axis, m_Vertices[i].pos);
+		cCorrelation = GLMVector3::Dot(local_axis, m_Vertices[i].pos);
 
 		if (cCorrelation > maxCorrelation)
 		{
@@ -167,7 +167,7 @@ void Hull::GetMinMaxVerticesInAxis(const Vector3& local_axis, int* out_min_vert,
 }
 
 
-void Hull::DebugDraw(const Matrix4& transform)
+void Hull::DebugDraw(const GLMMatrix4& transform)
 {
 	//Draw all Hull Polygons
 	for (HullFace& face : m_Faces)
@@ -175,14 +175,14 @@ void Hull::DebugDraw(const Matrix4& transform)
 		//Render Polygon as triangle fan
 		if (face.vert_ids.size() > 2)
 		{
-			Vector3 polygon_start = transform * m_Vertices[face.vert_ids[0]].pos;
-			Vector3 polygon_last = transform * m_Vertices[face.vert_ids[1]].pos;
+			GLMVector3 polygon_start = transform * m_Vertices[face.vert_ids[0]].pos;
+			GLMVector3 polygon_last = transform * m_Vertices[face.vert_ids[1]].pos;
 
 			for (size_t idx = 2; idx < face.vert_ids.size(); ++idx)
 			{
-				Vector3 polygon_next = transform * m_Vertices[face.vert_ids[idx]].pos;
+				GLMVector3 polygon_next = transform * m_Vertices[face.vert_ids[idx]].pos;
 
-				NCLDebug::DrawTriangle(polygon_start, polygon_last, polygon_next, Vector4(1.0f, 1.0f, 1.0f, 0.2f));
+				//NCLDebug::DrawTriangle(polygon_start, polygon_last, polygon_next, GLMVector4(1.0f, 1.0f, 1.0f, 0.2f));
 				polygon_last = polygon_next;
 			}
 		}
@@ -191,13 +191,13 @@ void Hull::DebugDraw(const Matrix4& transform)
 	//Draw all Hull Edges
 	for (HullEdge& edge : m_Edges)
 	{
-		NCLDebug::DrawThickLine(transform * m_Vertices[edge.vStart].pos, transform * m_Vertices[edge.vEnd].pos, 0.02f, Vector4(1.0f, 0.2f, 1.0f, 1.0f));
+		//NCLDebug::DrawThickLine(transform * m_Vertices[edge.vStart].pos, transform * m_Vertices[edge.vEnd].pos, 0.02f, GLMVector4(1.0f, 0.2f, 1.0f, 1.0f));
 	}
 
 	//Draw front face normal
-	NCLDebug::DrawThickLine(transform * Vector3(0.0f, 0.0f, -0.5f),
-		transform * Vector3(0.0f, 0.0f, -1.5f), 0.04f, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
-	NCLDebug::DrawThickLine(transform * Vector3(0.0f, 0.0f, 0.5f),
-		transform * Vector3(0.0f, 0.0f, 1.5f), 0.04f, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+	//NCLDebug::DrawThickLine(transform * GLMVector3(0.0f, 0.0f, -0.5f),
+		//transform * GLMVector3(0.0f, 0.0f, -1.5f), 0.04f, GLMVector4(0.0f, 0.0f, 1.0f, 1.0f));
+	//NCLDebug::DrawThickLine(transform * GLMVector3(0.0f, 0.0f, 0.5f),
+		//transform * GLMVector3(0.0f, 0.0f, 1.5f), 0.04f, GLMVector4(1.0f, 0.0f, 0.0f, 1.0f));
 
 }

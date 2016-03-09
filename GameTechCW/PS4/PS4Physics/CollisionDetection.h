@@ -7,8 +7,8 @@
 struct CollisionData
 {
 	float penetration;
-	Vector3 normal;
-	Vector3 pointOnPlane;
+	GLMVector3 normal;
+	GLMVector3 pointOnPlane;
 };
 
 class CollisionDetection : public TSingleton < CollisionDetection >
@@ -24,12 +24,13 @@ public:
 	bool CheckDistance(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, float& penetration) const;
 
 protected:
-	bool CheckCollisionAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const;
+	bool CheckCollisionAxis(const GLMVector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const;
 	
 	//yields the distance between wall and a selected object, called by checkdistance
-	float CheckDisAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2) const;
+	float CheckDisAxis(const GLMVector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2) const;
 
-	Vector3 GetClosestPointOnEdges(const Vector3& target, const std::vector<CollisionEdge>& edges) const;
-	Vector3 PlaneEdgeIntersection(const Plane& plane, const Vector3& start, const Vector3& end) const;
-	void	SutherlandHodgesonClipping(const std::list<Vector3>& input_polygon, int num_clip_planes, const Plane* clip_planes, std::list<Vector3>* out_polygon, bool removePoints) const;
+	GLMVector3 GetClosestPointOnEdges(const GLMVector3& target, const std::vector<CollisionEdge>& edges) const;
+	GLMVector3 PlaneEdgeIntersection(const Plane& plane, const GLMVector3& start, const GLMVector3& end) const;
+	void	SutherlandHodgesonClipping(const std::list<GLMVector3>& input_polygon, int num_clip_planes, const Plane* clip_planes, std::list<GLMVector3>* out_polygon, bool removePoints) const;
+	void AddPossibleCollisionAxis(const GLMVector3& axis, std::vector<GLMVector3>& possible_collision_axes) const;
 };

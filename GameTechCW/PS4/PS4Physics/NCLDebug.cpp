@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "NCLDebug.h"
 #include <algorithm>
 
@@ -453,3 +455,4 @@ void NCLDebug::ReleaseShaders()
 	}
 }
 
+#endif

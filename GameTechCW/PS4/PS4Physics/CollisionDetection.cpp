@@ -27,8 +27,8 @@ bool CollisionDetection::CheckSphereSphereCollision(const PhysicsObject* obj1, c
 	float sum_radius = sphere1->GetRadius() + sphere2->GetRadius();
 	float sum_radius_squared = sum_radius * sum_radius;
 
-	Vector3 ab = obj2->GetPosition() - obj1->GetPosition();
-	float distance_squared = Vector3::Dot(ab, ab);
+	GLMVector3 ab = obj2->GetPosition() - obj1->GetPosition();
+	float distance_squared = GLMVector3::Dot(ab, ab);
 
 	//true meaning collision
 	return (distance_squared <= sum_radius_squared);
@@ -37,24 +37,24 @@ bool CollisionDetection::CheckSphereSphereCollision(const PhysicsObject* obj1, c
 }
 
 
-void AddPossibleCollisionAxis(Vector3& axis, std::vector<Vector3>* possible_collision_axes)
+void CollisionDetection::AddPossibleCollisionAxis(const GLMVector3& axis, std::vector<GLMVector3>& possible_collision_axes) const
 {
 	const float epsilon = 0.0001f;
 
 	//is axis 0,0,0??
-	if (Vector3::Dot(axis, axis) < epsilon)
+	if (GLMVector3::Dot(axis, axis) < epsilon)
 		return;
+	GLMVector3 axisN = axis;
+	axisN.Normalise();
 
-	axis.Normalise();
-
-	for (const Vector3& p_axis : *possible_collision_axes)
+	for (const GLMVector3& p_axis : possible_collision_axes)
 	{
 		//Is axis very close to the same as a previous axis already in the list of axes??
-		if (Vector3::Dot(axis, p_axis) >= 1.0f - epsilon)
+		if (GLMVector3::Dot(axisN, p_axis) >= 1.0f - epsilon)
 			return;
 	}
 
-	possible_collision_axes->push_back(axis);
+	possible_collision_axes.push_back(axisN);
 }
 
 bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const
@@ -65,7 +65,7 @@ bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const Physics
 	best_colData.penetration = -FLT_MAX;
 
 	//first we need the collision axes of both shapes
-	std::vector<Vector3> possible_collision_axes;
+	std::vector<GLMVector3> possible_collision_axes;
 
 	shape1->GetCollisionAxes(obj1, &possible_collision_axes);
 	shape2->GetCollisionAxes(obj2, &possible_collision_axes);
@@ -83,14 +83,13 @@ bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const Physics
 	for (const CollisionEdge& edge1 : shape1_edges) {
 		for (const CollisionEdge& edge2 : shape2_edges)
 		{
-			Vector3 e1 = edge1.posB - edge1.posA;
-			Vector3 e2 = edge2.posB - edge2.posA;
+			GLMVector3 e1 = edge1.posB - edge1.posA;
+			GLMVector3 e2 = edge2.posB - edge2.posA;
 
 			e1.Normalise();
 			e2.Normalise();
 
-			AddPossibleCollisionAxis(Vector3::Cross(e1, e2),
-				&possible_collision_axes);
+			AddPossibleCollisionAxis(GLMVector3::Cross(e1, e2), possible_collision_axes);
 		}
 	}
 
@@ -103,27 +102,27 @@ bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const Physics
 	//if both are spehere, then the only axes we have to
 	//check is between the two centre points
 	if (shape1_isSphere && shape2_isSphere) {
-		Vector3 axis = obj2->GetPosition() - obj1->GetPosition();
+		GLMVector3 axis = obj2->GetPosition() - obj1->GetPosition();
 		axis.Normalise();
-		AddPossibleCollisionAxis(axis, &possible_collision_axes);
+		AddPossibleCollisionAxis(axis, possible_collision_axes);
 	}
 	else if (shape1_isSphere) //only if shape1 is a sphere
 	{
-		Vector3 p =
+		GLMVector3 p =
 			GetClosestPointOnEdges(obj1->GetPosition(), shape2_edges);
 		//NCLDebug::drawPoint(p, 0.1f);
-		Vector3 p_t = obj1->GetPosition() - p;
+		GLMVector3 p_t = obj1->GetPosition() - p;
 		p_t.Normalise();
-		AddPossibleCollisionAxis(p_t, &possible_collision_axes);
+		AddPossibleCollisionAxis(p_t, possible_collision_axes);
 	}
 	else if (shape2_isSphere) //only if shape2 is a sphere
 	{
-		Vector3 p =
+		GLMVector3 p =
 			GetClosestPointOnEdges(obj2->GetPosition(), shape1_edges);
-		Vector3 p_t = obj2->GetPosition() - p;
+		GLMVector3 p_t = obj2->GetPosition() - p;
 		//NCLDebug::DrawPoint(p, 0.1f);
 		p_t.Normalise();
-		AddPossibleCollisionAxis(p_t, &possible_collision_axes);
+		AddPossibleCollisionAxis(p_t, possible_collision_axes);
 	}
 
 
@@ -131,7 +130,7 @@ bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const Physics
 	//between the two objects can be found - such proving the objects
 	//cannot be colliding
 
-	for (const Vector3& axis : possible_collision_axes) {
+	for (const GLMVector3& axis : possible_collision_axes) {
 		//if the collision axis does not intersect then return
 		//immediately as we know that atleast in one direction/axis
 		//the two objects do not intersect
@@ -160,7 +159,7 @@ bool CollisionDetection::CheckDistance(const PhysicsObject* obj1, const PhysicsO
 	float best_penetration = 0;
 	float cur_penetration = 0;
 
-	std::vector<Vector3> possible_collision_axes;
+	std::vector<GLMVector3> possible_collision_axes;
 
 	shape1->GetCollisionAxes(obj1, &possible_collision_axes);
 	shape2->GetCollisionAxes(obj2, &possible_collision_axes);
@@ -173,14 +172,14 @@ bool CollisionDetection::CheckDistance(const PhysicsObject* obj1, const PhysicsO
 	for (const CollisionEdge& edge1 : shape1_edges) {
 		for (const CollisionEdge& edge2 : shape2_edges)
 		{
-			Vector3 e1 = edge1.posB - edge1.posA;
-			Vector3 e2 = edge2.posB - edge2.posA;
+			GLMVector3 e1 = edge1.posB - edge1.posA;
+			GLMVector3 e2 = edge2.posB - edge2.posA;
 
 			e1.Normalise();
 			e2.Normalise();
 
-			AddPossibleCollisionAxis(Vector3::Cross(e1, e2),
-				&possible_collision_axes);
+			AddPossibleCollisionAxis(GLMVector3::Cross(e1, e2),
+				possible_collision_axes);
 		}
 	}
 
@@ -188,28 +187,28 @@ bool CollisionDetection::CheckDistance(const PhysicsObject* obj1, const PhysicsO
 	bool shape2_isSphere = shape2_edges.empty();
 
 	if (shape1_isSphere && shape2_isSphere) {
-		Vector3 axis = obj2->GetPosition() - obj1->GetPosition();
+		GLMVector3 axis = obj2->GetPosition() - obj1->GetPosition();
 		axis.Normalise();
-		AddPossibleCollisionAxis(axis, &possible_collision_axes);
+		AddPossibleCollisionAxis(axis, possible_collision_axes);
 	}
 	else if (shape1_isSphere)
 	{
-		Vector3 p =
+		GLMVector3 p =
 			GetClosestPointOnEdges(obj1->GetPosition(), shape2_edges);
-		Vector3 p_t = obj1->GetPosition() - p;
+		GLMVector3 p_t = obj1->GetPosition() - p;
 		p_t.Normalise();
-		AddPossibleCollisionAxis(p_t, &possible_collision_axes);
+		AddPossibleCollisionAxis(p_t, possible_collision_axes);
 	}
 	else if (shape2_isSphere) 
 	{
-		Vector3 p =
+		GLMVector3 p =
 			GetClosestPointOnEdges(obj2->GetPosition(), shape1_edges);
-		Vector3 p_t = obj2->GetPosition() - p;
+		GLMVector3 p_t = obj2->GetPosition() - p;
 		p_t.Normalise();
-		AddPossibleCollisionAxis(p_t, &possible_collision_axes);
+		AddPossibleCollisionAxis(p_t, possible_collision_axes);
 	}
 
-	for (const Vector3& axis : possible_collision_axes) {
+	for (const GLMVector3& axis : possible_collision_axes) {
 		cur_penetration = CheckDisAxis(axis, obj1, obj2, shape1, shape2);
 		if (cur_penetration >= best_penetration){
 			best_penetration = cur_penetration;
@@ -221,16 +220,16 @@ bool CollisionDetection::CheckDistance(const PhysicsObject* obj1, const PhysicsO
 	return true;
 }
 
-float CollisionDetection::CheckDisAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2) const {
-	Vector3 min1, min2, max1, max2;
+float CollisionDetection::CheckDisAxis(const GLMVector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2) const {
+	GLMVector3 min1, min2, max1, max2;
 
 	shape1->GetMinMaxVertexOnAxis(obj1, axis, &min1, &max1);
 	shape2->GetMinMaxVertexOnAxis(obj2, axis, &min2, &max2);
 
-	float minCorrelation1 = Vector3::Dot(axis, min1);
-	float maxCorrelation1 = Vector3::Dot(axis, max1);
-	float minCorrelation2 = Vector3::Dot(axis, min2);
-	float maxCorrelation2 = Vector3::Dot(axis, max2);
+	float minCorrelation1 = GLMVector3::Dot(axis, min1);
+	float maxCorrelation1 = GLMVector3::Dot(axis, max1);
+	float minCorrelation2 = GLMVector3::Dot(axis, min2);
+	float maxCorrelation2 = GLMVector3::Dot(axis, max2);
 
 	if (minCorrelation1 <= minCorrelation2
 		&& maxCorrelation1 <= minCorrelation2) return (minCorrelation2 - maxCorrelation1);
@@ -240,17 +239,17 @@ float CollisionDetection::CheckDisAxis(const Vector3& axis, const PhysicsObject*
 }
 
 
-bool CollisionDetection::CheckCollisionAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const
+bool CollisionDetection::CheckCollisionAxis(const GLMVector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const
 {
-	Vector3 min1, min2, max1, max2;
+	GLMVector3 min1, min2, max1, max2;
 
 	shape1->GetMinMaxVertexOnAxis(obj1, axis, &min1, &max1);
 	shape2->GetMinMaxVertexOnAxis(obj2, axis, &min2, &max2);
 
-	float minCorrelation1 = Vector3::Dot(axis, min1);
-	float maxCorrelation1 = Vector3::Dot(axis, max1);
-	float minCorrelation2 = Vector3::Dot(axis, min2);
-	float maxCorrelation2 = Vector3::Dot(axis, max2);
+	float minCorrelation1 = GLMVector3::Dot(axis, min1);
+	float maxCorrelation1 = GLMVector3::Dot(axis, max1);
+	float minCorrelation2 = GLMVector3::Dot(axis, min2);
+	float maxCorrelation2 = GLMVector3::Dot(axis, max2);
 
 	if (minCorrelation1 <= minCorrelation2
 		&& maxCorrelation1 >= minCorrelation2) {
@@ -292,8 +291,8 @@ bool CollisionDetection::BuildCollisionManifold(const PhysicsObject* obj1, const
 	//Get the required face information for the two shapes
 	//around the collision normal
 
-	std::list<Vector3> polygon1, polygon2;
-	Vector3 normal1, normal2;
+	std::list<GLMVector3> polygon1, polygon2;
+	GLMVector3 normal1, normal2;
 	std::vector<Plane> adjPlanes1, adjPlanes2;
 
 	shape1->GetIncidentReferencePolygon(obj1, coldata.normal,
@@ -324,15 +323,15 @@ bool CollisionDetection::BuildCollisionManifold(const PhysicsObject* obj1, const
 		//planes
 
 		bool flipped;
-		std::list<Vector3> *incPolygon;
-		Vector3 *incNormal;
+		std::list<GLMVector3> *incPolygon;
+		GLMVector3 *incNormal;
 		std::vector<Plane> *refAdjPlanes;
 		Plane refPlane;
 
 		//Get the incident and reference polygons
-		if (fabs(Vector3::Dot(coldata.normal, normal1)) >
-			fabs(Vector3::Dot(coldata.normal, normal2))) {
-			float planeDist = -Vector3::Dot(-normal1, polygon1.front());
+		if (fabs(GLMVector3::Dot(coldata.normal, normal1)) >
+			fabs(GLMVector3::Dot(coldata.normal, normal2))) {
+			float planeDist = -GLMVector3::Dot(-normal1, polygon1.front());
 			refPlane = Plane(-normal1, planeDist);
 			refAdjPlanes = &adjPlanes1;
 
@@ -343,7 +342,7 @@ bool CollisionDetection::BuildCollisionManifold(const PhysicsObject* obj1, const
 		}
 		else
 		{
-			float planeDist = -Vector3::Dot(-normal2, polygon2.front());
+			float planeDist = -GLMVector3::Dot(-normal2, polygon2.front());
 			refPlane = Plane(-normal2, planeDist);
 			refAdjPlanes = &adjPlanes2;
 
@@ -367,15 +366,15 @@ bool CollisionDetection::BuildCollisionManifold(const PhysicsObject* obj1, const
 		//Now we are left with a selection of valid contact points
 		//to be sued for the manifold 
 
-		Vector3 startPoint = incPolygon->back();
-		for (const Vector3& endPoint : *incPolygon) {
+		GLMVector3 startPoint = incPolygon->back();
+		for (const GLMVector3& endPoint : *incPolygon) {
 			float contact_penetration;
-			Vector3 globalOnA, globalOnB;
+			GLMVector3 globalOnA, globalOnB;
 
 			if (flipped) {
 				// calculate distance to ref plane/face
-				contact_penetration = -(Vector3::Dot(endPoint, coldata.normal)
-					- Vector3::Dot(coldata.normal, polygon2.front()));
+				contact_penetration = -(GLMVector3::Dot(endPoint, coldata.normal)
+					- GLMVector3::Dot(coldata.normal, polygon2.front()));
 
 				//contact_penetration = min(contact_penetration, 0.0f);
 
@@ -386,8 +385,8 @@ bool CollisionDetection::BuildCollisionManifold(const PhysicsObject* obj1, const
 			else{
 				//calculate distance to ref plane/face
 				contact_penetration =
-					Vector3::Dot(endPoint, coldata.normal) -
-					Vector3::Dot(coldata.normal, polygon1.front());
+					GLMVector3::Dot(endPoint, coldata.normal) -
+					GLMVector3::Dot(coldata.normal, polygon1.front());
 
 				//contact_penetration = min(contact_penetration, 0.0f);
 
@@ -411,18 +410,18 @@ bool CollisionDetection::BuildCollisionManifold(const PhysicsObject* obj1, const
 /*
 Additional geometric functions such as clipping point to a line, clipping edges to a series of planes
 */
-Vector3 CollisionDetection::GetClosestPointOnEdges(const Vector3& target, const std::vector<CollisionEdge>& edges) const
+GLMVector3 CollisionDetection::GetClosestPointOnEdges(const GLMVector3& target, const std::vector<CollisionEdge>& edges) const
 {
-	Vector3 closest_point, temp_closest_point;
+	GLMVector3 closest_point, temp_closest_point;
 	float closest_distsq = FLT_MAX;
 
 	for (const CollisionEdge& edge : edges)
 	{
-		Vector3 a_t = target - edge.posA;
-		Vector3 a_b = edge.posB - edge.posA;
+		GLMVector3 a_t = target - edge.posA;
+		GLMVector3 a_b = edge.posB - edge.posA;
 
-		float magnitudeAB = Vector3::Dot(a_b, a_b);   //Magnitude of AB vector (it's length squared)     
-		float ABAPproduct = Vector3::Dot(a_t, a_b);   //The DOT product of a_to_t and a_to_b     
+		float magnitudeAB = GLMVector3::Dot(a_b, a_b);   //Magnitude of AB vector (it's length squared)     
+		float ABAPproduct = GLMVector3::Dot(a_t, a_b);   //The DOT product of a_to_t and a_to_b     
 		float distance = ABAPproduct / magnitudeAB; //The normalized "distance" from a to your closest point  
 
 		if (distance < 0.0f)     //Clamp returned point to be on the line, e.g if the closest point is beyond the AB return either A or B as closest points  
@@ -438,8 +437,8 @@ Vector3 CollisionDetection::GetClosestPointOnEdges(const Vector3& target, const 
 			temp_closest_point = edge.posA + a_b * distance;
 		}
 
-		Vector3 c_t = target - temp_closest_point;
-		float temp_distsq = Vector3::Dot(c_t, c_t);
+		GLMVector3 c_t = target - temp_closest_point;
+		float temp_distsq = GLMVector3::Dot(c_t, c_t);
 
 		if (temp_distsq < closest_distsq)
 		{
@@ -451,21 +450,21 @@ Vector3 CollisionDetection::GetClosestPointOnEdges(const Vector3& target, const 
 	return closest_point;
 }
 
-Vector3 CollisionDetection::PlaneEdgeIntersection(const Plane& plane, const Vector3& start, const Vector3& end) const
+GLMVector3 CollisionDetection::PlaneEdgeIntersection(const Plane& plane, const GLMVector3& start, const GLMVector3& end) const
 {
-	float start_dist = Vector3::Dot(start, plane.GetNormal()) + plane.GetDistance();
-	float end_dist = Vector3::Dot(end, plane.GetNormal()) + plane.GetDistance();
+	float start_dist = GLMVector3::Dot(start, plane.GetNormal()) + plane.GetDistance();
+	float end_dist = GLMVector3::Dot(end, plane.GetNormal()) + plane.GetDistance();
 
-	Vector3 ab = end - start;
+	GLMVector3 ab = end - start;
 
-	float ab_p = Vector3::Dot(plane.GetNormal(), ab);
+	float ab_p = GLMVector3::Dot(plane.GetNormal(), ab);
 
 	if (fabs(ab_p) > 0.0001f)
 	{
-		Vector3 p_co = plane.GetNormal() * (-plane.GetDistance());
+		GLMVector3 p_co = plane.GetNormal() * (-plane.GetDistance());
 
-		Vector3 w = start - p_co;
-		float fac = -Vector3::Dot(plane.GetNormal(), w) / ab_p;
+		GLMVector3 w = start - p_co;
+		float fac = -GLMVector3::Dot(plane.GetNormal(), w) / ab_p;
 		ab = ab * fac;
 
 		return start + ab;
@@ -474,13 +473,13 @@ Vector3 CollisionDetection::PlaneEdgeIntersection(const Plane& plane, const Vect
 	return start;
 }
 
-void CollisionDetection::SutherlandHodgesonClipping(const std::list<Vector3>& input_polygon, int num_clip_planes, const Plane* clip_planes, std::list<Vector3>* out_polygon, bool removePoints) const
+void CollisionDetection::SutherlandHodgesonClipping(const std::list<GLMVector3>& input_polygon, int num_clip_planes, const Plane* clip_planes, std::list<GLMVector3>* out_polygon, bool removePoints) const
 {
 	if (!out_polygon)
 		return;
 
-	std::list<Vector3> ppPolygon1, ppPolygon2;
-	std::list<Vector3> *input = &ppPolygon1, *output = &ppPolygon2;
+	std::list<GLMVector3> ppPolygon1, ppPolygon2;
+	std::list<GLMVector3> *input = &ppPolygon1, *output = &ppPolygon2;
 
 	*output = input_polygon;
 	for (int iterations = 0; iterations < num_clip_planes; ++iterations)
@@ -493,8 +492,8 @@ void CollisionDetection::SutherlandHodgesonClipping(const std::list<Vector3>& in
 		std::swap(input, output);
 		output->clear();
 
-		Vector3 startPoint = input->back();
-		for (const Vector3& endPoint : *input)
+		GLMVector3 startPoint = input->back();
+		for (const GLMVector3& endPoint : *input)
 		{
 			bool startInPlane = plane.PointInPlane(startPoint);
 			bool endInPlane = plane.PointInPlane(endPoint);

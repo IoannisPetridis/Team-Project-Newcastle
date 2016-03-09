@@ -25,7 +25,7 @@ _-_-_-_-_-_-_-""  ""
 #include "Matrix4.h"
 #include "Matrix3.h"
 
-class Matrix4;
+class GLMMatrix4;
 
 class Quaternion	{
 public:
@@ -41,24 +41,24 @@ public:
 
 	void	Normalise();
 
-	Matrix4 ToMatrix4() const;
-	Matrix3 ToMatrix3() const;
+	GLMMatrix4 ToMatrix4() const;
+	GLMMatrix3 ToMatrix3() const;
 
 	Quaternion	Conjugate() const;
 	void		GenerateW();	//builds 4th component when loading in shortened, 3 component quaternions
 
 	static Quaternion EulerAnglesToQuaternion(float pitch, float yaw, float roll);
-	static Quaternion AxisAngleToQuaterion(const Vector3& vector, float degrees);
+	static Quaternion AxisAngleToQuaterion(const GLMVector3& vector, float degrees);
 
-	static void RotatePointByQuaternion(const Quaternion &q, Vector3 &point);
+	static void RotatePointByQuaternion(const Quaternion &q, GLMVector3 &point);
 
-	static Quaternion FromMatrix(const Matrix4 &m);
-	static Quaternion FromMatrix(const Matrix3 &m);
+	static Quaternion FromMatrix(const GLMMatrix4 &m);
+	static Quaternion FromMatrix(const GLMMatrix3 &m);
 
 	static float Dot(const Quaternion &a, const Quaternion &b);
 
 	Quaternion operator *(const Quaternion &a) const;
-	Quaternion operator *(const Vector3 &a) const;
+	Quaternion operator *(const GLMVector3 &a) const;
 
 	Quaternion operator+(const Quaternion &a) const {
 		return Quaternion(x + a.x, y + a.y, z + a.z, w + a.w);

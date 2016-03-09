@@ -14,7 +14,7 @@ Constraint::Constraint() {
 }
 
 Constraint::Constraint(PhysicsObject* objA, PhysicsObject* objB,
-	Vector3 j1, Vector3 j2, Vector3 j3, Vector3 j4, float b) {
+	GLMVector3 j1, GLMVector3 j2, GLMVector3 j3, GLMVector3 j4, float b) {
 	this->objA = objA;
 	this->objB = objB;
 
@@ -40,18 +40,18 @@ void Constraint::ApplyImpulse()
 
 	// J * M(-1) * J(t)
 	float contstraint_mass =
-		objA->GetInverseMass() * Vector3::Dot(j1, j1)
-		+ Vector3::Dot(j2, (objA->GetInverseInertia() * j2))
-		+ objB->GetInverseMass() * Vector3::Dot(j3, j3)
-		+ Vector3::Dot(j4, (objB->GetInverseInertia() * j4))
+		objA->GetInverseMass() * GLMVector3::Dot(j1, j1)
+		+ GLMVector3::Dot(j2, (objA->GetInverseInertia() * j2))
+		+ objB->GetInverseMass() * GLMVector3::Dot(j3, j3)
+		+ GLMVector3::Dot(j4, (objB->GetInverseInertia() * j4))
 		+ softness; 
 
 	if (contstraint_mass > 0.00001f) {
 		//JV
-		float jv = Vector3::Dot(j1, objA->GetLinearVelocity())
-			+ Vector3::Dot(j2, objA->GetAngularVelocity())
-			+ Vector3::Dot(j3, objB->GetLinearVelocity())
-			+ Vector3::Dot(j4, objB->GetAngularVelocity());
+		float jv = GLMVector3::Dot(j1, objA->GetLinearVelocity())
+			+ GLMVector3::Dot(j2, objA->GetAngularVelocity())
+			+ GLMVector3::Dot(j3, objB->GetLinearVelocity())
+			+ GLMVector3::Dot(j4, objB->GetAngularVelocity());
 
 		float denom = -(jv + b);
 		delta = denom / contstraint_mass;

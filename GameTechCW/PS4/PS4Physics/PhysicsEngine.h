@@ -85,8 +85,8 @@ public:
 	void SetUpdateTimestep(float updateTimestep) { m_UpdateTimestep = updateTimestep; }
 	float GetUpdateTimestep()			{ return m_UpdateTimestep; }
 
-	const Vector3& GetGravity()			{ return m_Gravity; }
-	void SetGravity(const Vector3& g)	{ m_Gravity = g; }
+	const GLMVector3& GetGravity()			{ return m_Gravity; }
+	void SetGravity(const GLMVector3& g)	{ m_Gravity = g; }
 
 	float GetDampingFactor()			{ return m_DampingFactor; }
 	void  SetDampingFactor(float d)		{ m_DampingFactor = d; }
@@ -159,7 +159,7 @@ protected:
 
 	float		m_UpdateTimestep, m_UpdateAccum;
 	
-	Vector3		m_Gravity;
+	GLMVector3		m_Gravity;
 	float		m_DampingFactor;
 
 	//std::vector<CollisionPair> m_BroadphaseCollisionPairs;

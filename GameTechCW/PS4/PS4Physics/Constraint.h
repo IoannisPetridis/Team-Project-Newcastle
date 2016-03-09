@@ -26,7 +26,7 @@ public:
 	Constraint();
 
 	Constraint(PhysicsObject* objA, PhysicsObject* objB,
-		Vector3 j1, Vector3 j2, Vector3 j3, Vector3 j4, float b);
+		GLMVector3 j1, GLMVector3 j2, GLMVector3 j3, GLMVector3 j4, float b);
 
 
 	void ApplyImpulse();	//Apply Delta Update
@@ -40,7 +40,7 @@ public:
 	PhysicsObject *objA, *objB;
 
 	
-	Vector3 j1, j2, j3, j4; //Jacobian diagonals
+	GLMVector3 j1, j2, j3, j4; //Jacobian diagonals
 	float b;				//Bias term
 
 	float delta;			//Constraint Delta

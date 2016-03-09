@@ -1,4 +1,4 @@
-﻿Build started 3/8/2016 11:22:15 AM.
+﻿Build started 3/9/2016 8:52:44 PM.
      1>Project "D:\GIthub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (nclgl.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -48,4 +48,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:07.31
+Time Elapsed 00:00:07.57

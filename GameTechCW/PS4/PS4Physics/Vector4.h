@@ -14,27 +14,27 @@ _-_-_-_-_-_-_-""  ""
 
 #include "Vector3.h"
 
-class Vector4	{
-public:
-	Vector4(void) {
-		x = y = z = w = 1.0f;
-	}
-	Vector4(float x, float y, float z, float w) {
-		this->x = x;
-		this->y = y;
-		this->z = z;
-		this->w = w;
-	}
+	class GLMVector4	{
+	public:
+		GLMVector4(void) {
+			x = y = z = w = 1.0f;
+		}
+		GLMVector4(float x, float y, float z, float w) {
+			this->x = x;
+			this->y = y;
+			this->z = z;
+			this->w = w;
+		}
 
-	Vector3 ToVector3() const {
-		return Vector3(x, y, z);
-	}
+		GLMVector3 ToVector3() const {
+			return GLMVector3(x, y, z);
+		}
 
-	~Vector4(void){}
+		~GLMVector4(void){}
 
-	float x;
-	float y;
-	float z;
-	float w;
-};
+		float x;
+		float y;
+		float z;
+		float w;
+	};
 

@@ -57,27 +57,27 @@ void Manifold::UpdateConstraint(Contact& contact)
 	/*
 	TUTORIAL 10 CODE - Collision Resolution
 	*/
-	Vector3 r1 = contact.relPosA;
-	Vector3 r2 = contact.relPosB;
+	GLMVector3 r1 = contact.relPosA;
+	GLMVector3 r2 = contact.relPosB;
 
-	Vector3 v1 = m_NodeA->GetLinearVelocity()
-		+ Vector3::Cross(m_NodeA->GetAngularVelocity(), r1);
-	Vector3 v2 = m_NodeB->GetLinearVelocity()
-		+ Vector3::Cross(m_NodeB->GetAngularVelocity(), r2);
+	GLMVector3 v1 = m_NodeA->GetLinearVelocity()
+		+ GLMVector3::Cross(m_NodeA->GetAngularVelocity(), r1);
+	GLMVector3 v2 = m_NodeB->GetLinearVelocity()
+		+ GLMVector3::Cross(m_NodeB->GetAngularVelocity(), r2);
 	
-	Vector3 dv = v2 - v1;
-	Vector3 tangent1 = dv - (contact.collisionNormal * Vector3::Dot(dv, contact.collisionNormal));
-	if (Vector3::Dot(tangent1, tangent1) < 0.001f) {
-		tangent1 = Vector3::Cross(contact.collisionNormal, Vector3(1, 0, 0));
-		if (Vector3::Dot(tangent1, tangent1) < 0.001f) {
-			tangent1 = Vector3::Cross(contact.collisionNormal, Vector3(0, 0, 1));
+	GLMVector3 dv = v2 - v1;
+	GLMVector3 tangent1 = dv - (contact.collisionNormal * GLMVector3::Dot(dv, contact.collisionNormal));
+	if (GLMVector3::Dot(tangent1, tangent1) < 0.001f) {
+		tangent1 = GLMVector3::Cross(contact.collisionNormal, GLMVector3(1, 0, 0));
+		if (GLMVector3::Dot(tangent1, tangent1) < 0.001f) {
+			tangent1 = GLMVector3::Cross(contact.collisionNormal, GLMVector3(0, 0, 1));
 		}
 	}
 
 	tangent1.Normalise();
 
-	Vector3 tangent2 =
-		Vector3::Cross(contact.collisionNormal, tangent1);
+	GLMVector3 tangent2 =
+		GLMVector3::Cross(contact.collisionNormal, tangent1);
 	tangent2.Normalise();
 
 	//Normal collision constraint
@@ -100,11 +100,11 @@ void Manifold::UpdateConstraint(Contact& contact)
 		const float elasticity_slop = 0.5f;
 
 		float elatisity_term =
-			elasticity * Vector3::Dot(contact.collisionNormal,
+			elasticity * GLMVector3::Dot(contact.collisionNormal,
 			-m_NodeA->GetLinearVelocity()
-			- Vector3::Cross(r1, m_NodeA->GetAngularVelocity())
+			- GLMVector3::Cross(r1, m_NodeA->GetAngularVelocity())
 			+ m_NodeB->GetLinearVelocity()
-			+ Vector3::Cross(r2, m_NodeB->GetAngularVelocity())
+			+ GLMVector3::Cross(r2, m_NodeB->GetAngularVelocity())
 			);
 
 		b += min(elatisity_term + elasticity_slop, 0.0f);
@@ -114,32 +114,32 @@ void Manifold::UpdateConstraint(Contact& contact)
 	float friction = (m_NodeA->GetFriction() * m_NodeB->GetFriction());
 	contact.normal = Constraint(m_NodeA, m_NodeB,
 		-contact.collisionNormal,
-		Vector3::Cross(-r1, contact.collisionNormal),
+		GLMVector3::Cross(-r1, contact.collisionNormal),
 		contact.collisionNormal,
-		Vector3::Cross(r2, contact.collisionNormal),
+		GLMVector3::Cross(r2, contact.collisionNormal),
 		b);
 
 	contact.normal.impulseSumMin = 0.0f;
 
 	contact.friction1 = Constraint(m_NodeA, m_NodeB,
 		-tangent1 * friction,
-		Vector3::Cross(-r1, tangent1) * friction,
+		GLMVector3::Cross(-r1, tangent1) * friction,
 		tangent1 * friction,
-		Vector3::Cross(r2, tangent1) * friction,
+		GLMVector3::Cross(r2, tangent1) * friction,
 		0.0f);
 
 	contact.friction2 = Constraint(m_NodeA, m_NodeB,
 		-tangent2 * friction,
-		Vector3::Cross(-r1, tangent2) * friction,
+		GLMVector3::Cross(-r1, tangent2) * friction,
 		tangent2 * friction,
-		Vector3::Cross(r2, tangent2) * friction,
+		GLMVector3::Cross(r2, tangent2) * friction,
 		0.0f);
 }
 
-void Manifold::AddContact(const Vector3& globalOnA, const Vector3& globalOnB, const Vector3& normal, const float& penetration)
+void Manifold::AddContact(const GLMVector3& globalOnA, const GLMVector3& globalOnB, const GLMVector3& normal, const float& penetration)
 {
-	Vector3 r1 = (globalOnA - m_NodeA->GetPosition());
-	Vector3 r2 = (globalOnB - m_NodeB->GetPosition());
+	GLMVector3 r1 = (globalOnA - m_NodeA->GetPosition());
+	GLMVector3 r2 = (globalOnB - m_NodeB->GetPosition());
 
 
 	Contact contact;
@@ -157,16 +157,16 @@ void Manifold::DebugDraw() const
 	{
 		const Contact& c = m_Contacts.back();
 
-		Vector3 globalOnA1 = m_NodeA->GetPosition() +  m_Contacts.back().relPosA;
+		GLMVector3 globalOnA1 = m_NodeA->GetPosition() +  m_Contacts.back().relPosA;
 		for (const Contact& contact : m_Contacts)
 		{
-			Vector3 globalOnA2 = m_NodeA->GetPosition() + contact.relPosA;
-			Vector3 globalOnB = m_NodeB->GetPosition() + contact.relPosB;
+			GLMVector3 globalOnA2 = m_NodeA->GetPosition() + contact.relPosA;
+			GLMVector3 globalOnB = m_NodeB->GetPosition() + contact.relPosB;
 
-			NCLDebug::DrawThickLine(globalOnA1, globalOnA2, 0.02f, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
-			NCLDebug::DrawPoint(globalOnA2, 0.05f, Vector4(0.0f, 0.5f, 0.0f, 1.0f));
+			//NCLDebug::DrawThickLine(globalOnA1, globalOnA2, 0.02f, GLMVector4(0.0f, 1.0f, 0.0f, 1.0f));
+			//NCLDebug::DrawPoint(globalOnA2, 0.05f, GLMVector4(0.0f, 0.5f, 0.0f, 1.0f));
 
-			NCLDebug::DrawThickLine(globalOnB, globalOnA2, 0.01f, Vector4(1.0f, 0.0f, 1.0f, 1.0f));
+			//NCLDebug::DrawThickLine(globalOnB, globalOnA2, 0.01f, GLMVector4(1.0f, 0.0f, 1.0f, 1.0f));
 
 			globalOnA1 = globalOnA2;
 		}

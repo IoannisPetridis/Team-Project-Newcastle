@@ -8,7 +8,7 @@ Hull CuboidCollisionShape::m_CubeHull = Hull();
 
 CuboidCollisionShape::CuboidCollisionShape()
 {
-	m_CuboidHalfDimensions = Vector3(0.5f, 0.5f, 0.5f);
+	m_CuboidHalfDimensions = GLMVector3(0.5f, 0.5f, 0.5f);
 
 	if (m_CubeHull.GetNumVertices() == 0)
 	{
@@ -16,7 +16,7 @@ CuboidCollisionShape::CuboidCollisionShape()
 	}
 }
 
-CuboidCollisionShape::CuboidCollisionShape(const Vector3& halfdims)
+CuboidCollisionShape::CuboidCollisionShape(const GLMVector3& halfdims)
 {
 	m_CuboidHalfDimensions = halfdims;
 
@@ -31,11 +31,11 @@ CuboidCollisionShape::~CuboidCollisionShape()
 
 }
 
-Matrix3 CuboidCollisionShape::BuildInverseInertia(float invMass) const
+GLMMatrix3 CuboidCollisionShape::BuildInverseInertia(float invMass) const
 {
-	Matrix3 inertia;
+	GLMMatrix3 inertia;
 
-	Vector3 dimsSq = (m_CuboidHalfDimensions + m_CuboidHalfDimensions);
+	GLMVector3 dimsSq = (m_CuboidHalfDimensions + m_CuboidHalfDimensions);
 	dimsSq = dimsSq * dimsSq;
 
 	inertia._11 = 12.f * invMass * 1.f / (dimsSq.y + dimsSq.z);
@@ -45,14 +45,14 @@ Matrix3 CuboidCollisionShape::BuildInverseInertia(float invMass) const
 	return inertia;
 }
 
-void CuboidCollisionShape::GetCollisionAxes(const PhysicsObject* currentObject, std::vector<Vector3>* out_axes) const
+void CuboidCollisionShape::GetCollisionAxes(const PhysicsObject* currentObject, std::vector<GLMVector3>* out_axes) const
 {
 	if (out_axes)
 	{
-		Matrix3 objOrientation = currentObject->GetOrientation().ToMatrix3();
-		out_axes->push_back(objOrientation * Vector3(1.0f, 0.0f, 0.0f)); //X - Axis
-		out_axes->push_back(objOrientation * Vector3(0.0f, 1.0f, 0.0f)); //Y - Axis
-		out_axes->push_back(objOrientation * Vector3(0.0f, 0.0f, 1.0f)); //Z - Axis
+		GLMMatrix3 objOrientation = currentObject->GetOrientation().ToMatrix3();
+		out_axes->push_back(objOrientation * GLMVector3(1.0f, 0.0f, 0.0f)); //X - Axis
+		out_axes->push_back(objOrientation * GLMVector3(0.0f, 1.0f, 0.0f)); //Y - Axis
+		out_axes->push_back(objOrientation * GLMVector3(0.0f, 0.0f, 1.0f)); //Z - Axis
 	}
 }
 
@@ -60,24 +60,24 @@ void CuboidCollisionShape::GetEdges(const PhysicsObject* currentObject, std::vec
 {
 	if (out_edges)
 	{
-		Matrix4 transform = currentObject->GetWorldSpaceTransform() * Matrix4::Scale(Vector3(m_CuboidHalfDimensions));
+		GLMMatrix4 transform = currentObject->GetWorldSpaceTransform() * GLMMatrix4::Scale(GLMVector3(m_CuboidHalfDimensions));
 		for (unsigned int i = 0; i < m_CubeHull.GetNumEdges(); ++i)
 		{
 			const HullEdge& edge = m_CubeHull.GetEdge(i);
-			Vector3 A = transform * m_CubeHull.GetVertex(edge.vStart).pos;
-			Vector3 B = transform * m_CubeHull.GetVertex(edge.vEnd).pos;
+			GLMVector3 A = transform * m_CubeHull.GetVertex(edge.vStart).pos;
+			GLMVector3 B = transform * m_CubeHull.GetVertex(edge.vEnd).pos;
 
 			out_edges->push_back(CollisionEdge(A, B));
 		}
 	}
 }
 
-void CuboidCollisionShape::GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const Vector3& axis, Vector3* out_min, Vector3* out_max) const
+void CuboidCollisionShape::GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const GLMVector3& axis, GLMVector3* out_min, GLMVector3* out_max) const
 {
-	Matrix4 wsTransform = currentObject->GetWorldSpaceTransform() * Matrix4::Scale(m_CuboidHalfDimensions);
+	GLMMatrix4 wsTransform = currentObject->GetWorldSpaceTransform() * GLMMatrix4::Scale(m_CuboidHalfDimensions);
 
-	Matrix3 invNormalMatrix = Matrix3::Transpose(Matrix3(wsTransform));
-	Vector3 local_axis = invNormalMatrix * axis;
+	GLMMatrix3 invNormalMatrix = GLMMatrix3::Transpose(GLMMatrix3(wsTransform));
+	GLMVector3 local_axis = invNormalMatrix * axis;
 
 	int vMin, vMax;
 	m_CubeHull.GetMinMaxVerticesInAxis(local_axis, &vMin, &vMax);
@@ -86,14 +86,14 @@ void CuboidCollisionShape::GetMinMaxVertexOnAxis(const PhysicsObject* currentObj
 	if (out_max) *out_max = wsTransform * m_CubeHull.GetVertex(vMax).pos;
 }
 
-void CuboidCollisionShape::GetIncidentReferencePolygon(const PhysicsObject* currentObject, const Vector3& axis, std::list<Vector3>* out_face, Vector3* out_normal, std::vector<Plane>* out_adjacent_planes) const
+void CuboidCollisionShape::GetIncidentReferencePolygon(const PhysicsObject* currentObject, const GLMVector3& axis, std::list<GLMVector3>* out_face, GLMVector3* out_normal, std::vector<Plane>* out_adjacent_planes) const
 {
-	Matrix4 wsTransform = currentObject->GetWorldSpaceTransform() * Matrix4::Scale(m_CuboidHalfDimensions);
+	GLMMatrix4 wsTransform = currentObject->GetWorldSpaceTransform() * GLMMatrix4::Scale(m_CuboidHalfDimensions);
 
-	Matrix3 invNormalMatrix = Matrix3::Inverse(Matrix3(wsTransform));
-	Matrix3 normalMatrix = Matrix3::Transpose(invNormalMatrix);
+	GLMMatrix3 invNormalMatrix = GLMMatrix3::Inverse(GLMMatrix3(wsTransform));
+	GLMMatrix3 normalMatrix = GLMMatrix3::Transpose(invNormalMatrix);
 	
-	Vector3 local_axis = invNormalMatrix * axis;
+	GLMVector3 local_axis = invNormalMatrix * axis;
 
 	int minVertex, maxVertex;
 	m_CubeHull.GetMinMaxVerticesInAxis(local_axis, &minVertex, &maxVertex);
@@ -105,7 +105,7 @@ void CuboidCollisionShape::GetIncidentReferencePolygon(const PhysicsObject* curr
 	for (int faceIdx : vert.enclosing_faces)
 	{
 		const HullFace* face = &m_CubeHull.GetFace(faceIdx);
-		float temp_correlation = Vector3::Dot(local_axis, face->normal);
+		float temp_correlation = GLMVector3::Dot(local_axis, face->normal);
 		if (temp_correlation > best_correlation)
 		{
 			best_correlation = temp_correlation;
@@ -131,10 +131,10 @@ void CuboidCollisionShape::GetIncidentReferencePolygon(const PhysicsObject* curr
 	if (out_adjacent_planes)
 	{
 		//Add the reference face itself to the list of adjacent planes
-		Vector3 wsPointOnPlane = wsTransform * m_CubeHull.GetVertex(m_CubeHull.GetEdge(best_face->edge_ids[0]).vStart).pos;
-		Vector3 planeNrml = -(normalMatrix * best_face->normal);
+		GLMVector3 wsPointOnPlane = wsTransform * m_CubeHull.GetVertex(m_CubeHull.GetEdge(best_face->edge_ids[0]).vStart).pos;
+		GLMVector3 planeNrml = -(normalMatrix * best_face->normal);
 		planeNrml.Normalise();
-		float planeDist = -Vector3::Dot(planeNrml, wsPointOnPlane);
+		float planeDist = -GLMVector3::Dot(planeNrml, wsPointOnPlane);
 
 		out_adjacent_planes->push_back(Plane(planeNrml, planeDist));
 		
@@ -153,7 +153,7 @@ void CuboidCollisionShape::GetIncidentReferencePolygon(const PhysicsObject* curr
 
 					planeNrml = -(normalMatrix * adjFace.normal);
 					planeNrml.Normalise();
-					planeDist = -Vector3::Dot(planeNrml, wsPointOnPlane);
+					planeDist = -GLMVector3::Dot(planeNrml, wsPointOnPlane);
 
 					out_adjacent_planes->push_back(Plane(planeNrml, planeDist));
 				}
@@ -165,22 +165,22 @@ void CuboidCollisionShape::GetIncidentReferencePolygon(const PhysicsObject* curr
 
 void CuboidCollisionShape::DebugDraw(const PhysicsObject* currentObject) const
 {
-	Matrix4 transform = currentObject->GetWorldSpaceTransform() * Matrix4::Scale(m_CuboidHalfDimensions);
+	GLMMatrix4 transform = currentObject->GetWorldSpaceTransform() * GLMMatrix4::Scale(m_CuboidHalfDimensions);
 	m_CubeHull.DebugDraw(transform);
 }
 
 void CuboidCollisionShape::ConstructCubeHull()
 {
 	//Vertices
-	m_CubeHull.AddVertex(Vector3(-1.0f, -1.0f, -1.0f));		// 0
-	m_CubeHull.AddVertex(Vector3(-1.0f,  1.0f, -1.0f));		// 1
-	m_CubeHull.AddVertex(Vector3( 1.0f,  1.0f, -1.0f));		// 2
-	m_CubeHull.AddVertex(Vector3( 1.0f, -1.0f, -1.0f));		// 3
+	m_CubeHull.AddVertex(GLMVector3(-1.0f, -1.0f, -1.0f));		// 0
+	m_CubeHull.AddVertex(GLMVector3(-1.0f,  1.0f, -1.0f));		// 1
+	m_CubeHull.AddVertex(GLMVector3( 1.0f,  1.0f, -1.0f));		// 2
+	m_CubeHull.AddVertex(GLMVector3( 1.0f, -1.0f, -1.0f));		// 3
 
-	m_CubeHull.AddVertex(Vector3(-1.0f, -1.0f,  1.0f));		// 4
-	m_CubeHull.AddVertex(Vector3(-1.0f,  1.0f,  1.0f));		// 5
-	m_CubeHull.AddVertex(Vector3( 1.0f,  1.0f,  1.0f));		// 6
-	m_CubeHull.AddVertex(Vector3( 1.0f, -1.0f,  1.0f));		// 7
+	m_CubeHull.AddVertex(GLMVector3(-1.0f, -1.0f,  1.0f));		// 4
+	m_CubeHull.AddVertex(GLMVector3(-1.0f,  1.0f,  1.0f));		// 5
+	m_CubeHull.AddVertex(GLMVector3( 1.0f,  1.0f,  1.0f));		// 6
+	m_CubeHull.AddVertex(GLMVector3( 1.0f, -1.0f,  1.0f));		// 7
 
 
 	int face1[] = { 0, 1, 2, 3 };
@@ -191,10 +191,10 @@ void CuboidCollisionShape::ConstructCubeHull()
 	int face6[] = { 4, 5, 1, 0 };
 
 	//Faces
-	m_CubeHull.AddFace(Vector3(0.0f, 0.0f, -1.0f), 4, face1);
-	m_CubeHull.AddFace(Vector3(0.0f, 0.0f, 1.0f), 4, face2);
-	m_CubeHull.AddFace(Vector3(0.0f, 1.0f, 0.0f), 4, face3);
-	m_CubeHull.AddFace(Vector3(0.0f, -1.0f, 0.0f), 4, face4);
-	m_CubeHull.AddFace(Vector3(1.0f, 0.0f, 0.0f), 4, face5);
-	m_CubeHull.AddFace(Vector3(-1.0f, 0.0f, 0.0f), 4, face6);
+	m_CubeHull.AddFace(GLMVector3(0.0f, 0.0f, -1.0f), 4, face1);
+	m_CubeHull.AddFace(GLMVector3(0.0f, 0.0f, 1.0f), 4, face2);
+	m_CubeHull.AddFace(GLMVector3(0.0f, 1.0f, 0.0f), 4, face3);
+	m_CubeHull.AddFace(GLMVector3(0.0f, -1.0f, 0.0f), 4, face4);
+	m_CubeHull.AddFace(GLMVector3(1.0f, 0.0f, 0.0f), 4, face5);
+	m_CubeHull.AddFace(GLMVector3(-1.0f, 0.0f, 0.0f), 4, face6);
 }

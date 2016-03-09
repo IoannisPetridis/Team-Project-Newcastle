@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #pragma once
 //#include "Audio.h"
 #include "Scene.h"
@@ -773,3 +775,5 @@ void Scene::UpdateNode(float dt, GameObject* cNode)
 		UpdateNode(dt, child);
 	}
 }
+
+#endif

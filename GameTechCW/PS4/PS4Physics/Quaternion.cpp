@@ -47,7 +47,7 @@ Quaternion Quaternion::operator *(const Quaternion &b) const{
 	return ans;
 }
 
-Quaternion Quaternion::operator *(const Vector3 &b) const{
+Quaternion Quaternion::operator *(const GLMVector3 &b) const{
 	/*Quaternion ans;
 
 	ans.w = -(x * b.x) - (y * b.y) - (z * b.z);
@@ -71,8 +71,8 @@ Quaternion Quaternion::operator *(const Vector3 &b) const{
 	return ans;
 }
 
-Matrix4 Quaternion::ToMatrix4() const{
-	Matrix4 mat;
+GLMMatrix4 Quaternion::ToMatrix4() const{
+	GLMMatrix4 mat;
 
 	float yy = y*y;
 	float zz = z*z;
@@ -99,8 +99,8 @@ Matrix4 Quaternion::ToMatrix4() const{
 	return mat;
 }
 
-Matrix3 Quaternion::ToMatrix3() const{
-	Matrix3 mat;
+GLMMatrix3 Quaternion::ToMatrix3() const{
+	GLMMatrix3 mat;
 
 	float yy = y*y;
 	float zz = z*z;
@@ -152,7 +152,7 @@ Quaternion Quaternion::EulerAnglesToQuaternion(float pitch, float yaw, float rol
 	return q;
 };
 
-Quaternion Quaternion::AxisAngleToQuaterion(const Vector3& vector, float degrees)	{
+Quaternion Quaternion::AxisAngleToQuaterion(const GLMVector3& vector, float degrees)	{
 	float theta = (float)DegToRad(degrees);
 	float result = (float)sin(theta / 2.0f);
 
@@ -174,7 +174,7 @@ Quaternion Quaternion::Conjugate() const
 	return Quaternion(-x, -y, -z, w);
 }
 
-Quaternion Quaternion::FromMatrix(const Matrix4 &m)	{
+Quaternion Quaternion::FromMatrix(const GLMMatrix4 &m)	{
 	Quaternion q;
 
 	q.w = sqrt(max(0.0f, (1.0f + m.values[0] + m.values[5] + m.values[10]))) / 2;
@@ -182,9 +182,9 @@ Quaternion Quaternion::FromMatrix(const Matrix4 &m)	{
 	q.y = sqrt(max(0.0f, (1.0f - m.values[0] + m.values[5] - m.values[10]))) / 2;
 	q.z = sqrt(max(0.0f, (1.0f - m.values[0] - m.values[5] + m.values[10]))) / 2;
 
-	q.x = (float)_copysign(q.x, m.values[9] - m.values[6]);
-	q.y = (float)_copysign(q.y, m.values[2] - m.values[8]);
-	q.z = (float)_copysign(q.z, m.values[4] - m.values[1]);
+	q.x = (float)copysign(q.x, m.values[9] - m.values[6]);
+	q.y = (float)copysign(q.y, m.values[2] - m.values[8]);
+	q.z = (float)copysign(q.z, m.values[4] - m.values[1]);
 
 	return q;
 }

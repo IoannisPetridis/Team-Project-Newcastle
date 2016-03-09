@@ -8,25 +8,25 @@
 
 struct CySide {
 	int* list4 = new int[4]();
-	Vector3 normal;
+	GLMVector3 normal;
 };
 
 class CylinderCollisionShape : public CollisionShape
 {
 public:
 	CylinderCollisionShape();
-	CylinderCollisionShape(const float length, const float radius, Vector3 halfdim);
+	CylinderCollisionShape(const float length, const float radius, GLMVector3 halfdim);
 	~CylinderCollisionShape();
 
 	//Collision Shape Functionality
-	virtual Matrix3 BuildInverseInertia(float invMass) const override ;
+	virtual GLMMatrix3 BuildInverseInertia(float invMass) const override ;
 
-	virtual void GetCollisionAxes(const PhysicsObject* currentObject, std::vector<Vector3>* out_axes) const override ;
+	virtual void GetCollisionAxes(const PhysicsObject* currentObject, std::vector<GLMVector3>* out_axes) const override ;
 	virtual void GetEdges(const PhysicsObject* currentObject, std::vector<CollisionEdge>* out_edges) const override ;
 
-	virtual void GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const Vector3& axis, Vector3* out_min, Vector3* out_max) const override ;
-	virtual void GetIncidentReferencePolygon(const PhysicsObject* currentObject, const Vector3& axis, std::list<Vector3>* out_face,
-		Vector3* out_normal, std::vector<Plane>* out_adjacent_planes) const override ;
+	virtual void GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const GLMVector3& axis, GLMVector3* out_min, GLMVector3* out_max) const override ;
+	virtual void GetIncidentReferencePolygon(const PhysicsObject* currentObject, const GLMVector3& axis, std::list<GLMVector3>* out_face,
+		GLMVector3* out_normal, std::vector<Plane>* out_adjacent_planes) const override ;
 
 	virtual void DebugDraw(const PhysicsObject* currentObject) const override ;
 
@@ -45,7 +45,7 @@ protected:
 	int* list3_Bottom;
 	CySide* cyside;
 
-	Vector3 m_CuboidHalfDimensions;
+	GLMVector3 m_CuboidHalfDimensions;
 	
 };
 

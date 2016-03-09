@@ -52,12 +52,12 @@ public:
 	void				AddChildObject(GameObject* child);
 
 
-	void			SetLocalTransform(const Matrix4& transform)			{ m_LocalTransform = transform; }
-	const Matrix4&  GetLocalTransform()									{ return m_LocalTransform; }
+	void			SetLocalTransform(const GLMMatrix4& transform)			{ m_LocalTransform = transform; }
+	const GLMMatrix4&  GetLocalTransform()									{ return m_LocalTransform; }
 
 
-	void			SetColour(const Vector4& colour)	{ m_Colour = colour; }
-	const Vector4&	GetColour()							{ return m_Colour; }
+	void			SetColour(const GLMVector4& colour)	{ m_Colour = colour; }
+	const GLMVector4&	GetColour()							{ return m_Colour; }
 
 	void			SetBoundingRadius(float radius)		{ m_BoundingRadius = radius; }
 	float			GetBoundingRadius()					{ return m_BoundingRadius; }
@@ -77,8 +77,8 @@ protected:
 
 	PhysicsObject*				m_PhysicsObject;
 
-	Vector4						m_Colour;
+	GLMVector4						m_Colour;
 	float						m_BoundingRadius;	//For Frustum Culling
-	Matrix4						m_LocalTransform;
-	Matrix4						m_WorldTransform;
+	GLMMatrix4						m_LocalTransform;
+	GLMMatrix4						m_WorldTransform;
 };

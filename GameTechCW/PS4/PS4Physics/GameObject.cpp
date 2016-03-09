@@ -7,7 +7,7 @@ GameObject::GameObject(const std::string& name)
 	m_Parent = NULL;
 	m_Name = name;
 
-	m_Colour = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Colour = GLMVector4(1.0f, 1.0f, 1.0f, 1.0f);
 	m_BoundingRadius = 1.f;
 
 	m_LocalTransform.ToIdentity();

@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "SimpleMeshObject.h"
 
 SimpleMeshObject::SimpleMeshObject(const std::string& name) :
@@ -77,3 +79,5 @@ void SimpleMeshObject::NormalCal() {
 	Bottom_normal = this->Physics()->GetOrientation().ToMatrix3() * Vector3(0.0f, -1.0f, 0.0f);
 	Bottom_normal.Normalise();
 }
+
+#endif

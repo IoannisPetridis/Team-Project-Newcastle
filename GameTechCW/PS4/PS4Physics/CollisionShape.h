@@ -25,10 +25,10 @@ class PhysicsObject;
 
 struct CollisionEdge
 {
-	CollisionEdge(const Vector3& a, const Vector3& b) : posA(a), posB(b) {}
+	CollisionEdge(const GLMVector3& a, const GLMVector3& b) : posA(a), posB(b) {}
 
-	Vector3 posA;
-	Vector3 posB;
+	GLMVector3 posA;
+	GLMVector3 posB;
 };
 
 class CollisionShape
@@ -40,12 +40,12 @@ public:
 	/* Constructs an inverse inertia matrix of the given collision volume. This is the equivilant of the inverse mass of an object for rotation,
 	   a good source for non-inverse inertia matricies can be found here: https://en.wikipedia.org/wiki/List_of_moments_of_inertia
 	*/
-	virtual Matrix3 BuildInverseInertia(float invMass) const = 0;
+	virtual GLMMatrix3 BuildInverseInertia(float invMass) const = 0;
 
 	/* Returns a list of all possible axes that need to be checked when doing the collision detection. 
 	   These are equivilant to a list of all the face normals without duplicates, and parallel vectors.
 	*/
-	virtual void GetCollisionAxes(const PhysicsObject* currentObject, std::vector<Vector3>* out_axes) const = 0;
+	virtual void GetCollisionAxes(const PhysicsObject* currentObject, std::vector<GLMVector3>* out_axes) const = 0;
 
 	/* Returns a list of all edges AB that form the convex hull of the collision shape. These are
 		used to check edge/edge collisions aswell as finding the closest point to a sphere. */
@@ -53,11 +53,11 @@ public:
 
 	/* Returns the minimum and maximum vertex along the given axis. 
 	*/
-	virtual void GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const Vector3& axis, Vector3* out_min, Vector3* out_max) const  = 0;
+	virtual void GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const GLMVector3& axis, GLMVector3* out_min, GLMVector3* out_max) const  = 0;
 
 	/* Computes the face that is closest to parallel to that of the given axis, returning the face (as a list of vertices), face normal and the planes of all adjacent faces for clipping against.
 	*/
-	virtual void GetIncidentReferencePolygon(const PhysicsObject* currentObject, const Vector3& axis, std::list<Vector3>* out_face, Vector3* out_normal, std::vector<Plane>* out_adjacent_planes) const = 0;
+	virtual void GetIncidentReferencePolygon(const PhysicsObject* currentObject, const GLMVector3& axis, std::list<GLMVector3>* out_face, GLMVector3* out_normal, std::vector<Plane>* out_adjacent_planes) const = 0;
 
 	/* Draws this collision shape to the debug renderer
 	*/

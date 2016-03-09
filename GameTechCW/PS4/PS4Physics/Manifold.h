@@ -38,11 +38,11 @@ struct Contact
 	Constraint friction1;		//Friction force constraint 1 (friction1 and friction2 act along the plane of contact (e.g normal force is up, then friction1 and friction two would be along the x and z axes respectively)
 	Constraint friction2;		//Friction force constraint 2
 
-	Vector3 collisionNormal;
+	GLMVector3 collisionNormal;
 	float	collisionPenetration;
 
-	Vector3 relPosA;			//Position relative to objectA
-	Vector3 relPosB;			//Position relative to objectB
+	GLMVector3 relPosA;			//Position relative to objectA
+	GLMVector3 relPosB;			//Position relative to objectB
 };
 
 
@@ -54,7 +54,7 @@ public:
 	~Manifold();
 
 	//Called whenever a new collision contact between A & B are found
-	void AddContact(const Vector3& globalOnA, const Vector3& globalOnB, const Vector3& normal, const float& penetration);	
+	void AddContact(const GLMVector3& globalOnA, const GLMVector3& globalOnB, const GLMVector3& normal, const float& penetration);	
 
 	//Sequentially solves each contact constraint
 	void ApplyImpulse();

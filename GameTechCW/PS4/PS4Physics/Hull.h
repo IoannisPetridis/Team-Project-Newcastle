@@ -40,7 +40,7 @@ struct HullFace;
 struct HullVertex
 {
 	int idx;
-	Vector3 pos;
+	GLMVector3 pos;
 	std::vector<int> enclosing_edges;
 	std::vector<int> enclosing_faces;
 };
@@ -56,7 +56,7 @@ struct HullEdge
 struct HullFace
 {
 	int idx;
-	Vector3 normal;
+	GLMVector3 normal;
 	std::vector<int> vert_ids;
 	std::vector<int> edge_ids;
 	std::vector<int> adjoining_face_ids;
@@ -68,11 +68,11 @@ public:
 	Hull();
 	~Hull();
 
-	void AddVertex(const Vector3& v);
+	void AddVertex(const GLMVector3& v);
 	
 
-	void AddFace(const Vector3& normal, int nVerts, const int* verts);
-	void AddFace(const Vector3& normal, const std::vector<int>& vert_ids)		{ AddFace(normal, vert_ids.size(), &vert_ids[0]); }
+	void AddFace(const GLMVector3& normal, int nVerts, const int* verts);
+	void AddFace(const GLMVector3& normal, const std::vector<int>& vert_ids)		{ AddFace(normal, vert_ids.size(), &vert_ids[0]); }
 
 
 	int FindEdge(int v0_idx, int v1_idx);
@@ -87,10 +87,10 @@ public:
 	size_t GetNumFaces()					{ return m_Faces.size(); }
 
 
-	void GetMinMaxVerticesInAxis(const Vector3& local_axis, int* out_min_vert, int* out_max_vert);
+	void GetMinMaxVerticesInAxis(const GLMVector3& local_axis, int* out_min_vert, int* out_max_vert);
 
 
-	void DebugDraw(const Matrix4& transform);
+	void DebugDraw(const GLMMatrix4& transform);
 
 protected:
 	int ConstructNewEdge(int parent_face_idx, int vert_start, int vert_end); //Called by AddFace

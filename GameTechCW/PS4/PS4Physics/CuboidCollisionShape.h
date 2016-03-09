@@ -28,17 +28,17 @@ class CuboidCollisionShape : public CollisionShape
 {
 public:
 	CuboidCollisionShape();
-	CuboidCollisionShape(const Vector3& halfdims);
+	CuboidCollisionShape(const GLMVector3& halfdims);
 	~CuboidCollisionShape();
 
 	//Collision Shape Functionality
-	virtual Matrix3 BuildInverseInertia(float invMass) const override;
+	virtual GLMMatrix3 BuildInverseInertia(float invMass) const override;
 
-	virtual void GetCollisionAxes(const PhysicsObject* currentObject, std::vector<Vector3>* out_axes) const override;
+	virtual void GetCollisionAxes(const PhysicsObject* currentObject, std::vector<GLMVector3>* out_axes) const override;
 	virtual void GetEdges(const PhysicsObject* currentObject, std::vector<CollisionEdge>* out_edges) const override;
 
-	virtual void GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const Vector3& axis, Vector3* out_min, Vector3* out_max) const override;
-	virtual void GetIncidentReferencePolygon(const PhysicsObject* currentObject, const Vector3& axis, std::list<Vector3>* out_face, Vector3* out_normal, std::vector<Plane>* out_adjacent_planes) const override;
+	virtual void GetMinMaxVertexOnAxis(const PhysicsObject* currentObject, const GLMVector3& axis, GLMVector3* out_min, GLMVector3* out_max) const override;
+	virtual void GetIncidentReferencePolygon(const PhysicsObject* currentObject, const GLMVector3& axis, std::list<GLMVector3>* out_face, GLMVector3* out_normal, std::vector<Plane>* out_adjacent_planes) const override;
 
 	virtual void DebugDraw(const PhysicsObject* currentObject) const override;
 
@@ -58,7 +58,7 @@ protected:
 	static void ConstructCubeHull();
 
 protected:
-	Vector3				 m_CuboidHalfDimensions;
+	GLMVector3				 m_CuboidHalfDimensions;
 	static Hull			 m_CubeHull;
 }; 
 

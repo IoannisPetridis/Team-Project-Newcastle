@@ -7,14 +7,14 @@ PhysicsObject::PhysicsObject()
 	m_wsTransformInvalidated = true;
 	m_Enabled	= false;
 
-	m_Position = Vector3(0.0f, 0.0f, 0.0f);
-	m_LinearVelocity = Vector3(0.0f, 0.0f, 0.0f);
-	m_Force = Vector3(0.0f, 0.0f, 0.0f);
+	m_Position = GLMVector3(0.0f, 0.0f, 0.0f);
+	m_LinearVelocity = GLMVector3(0.0f, 0.0f, 0.0f);
+	m_Force = GLMVector3(0.0f, 0.0f, 0.0f);
 	m_InvMass = 0.0f;
 
 	m_Orientation = Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
-	m_AngularVelocity = Vector3(0.0f, 0.0f, 0.0f);
-	m_Torque = Vector3(0.0f, 0.0f, 0.0f);
+	m_AngularVelocity = GLMVector3(0.0f, 0.0f, 0.0f);
+	m_Torque = GLMVector3(0.0f, 0.0f, 0.0f);
 	m_InvInertia.ToZero();
 
 	m_colShape = NULL;
@@ -41,7 +41,7 @@ PhysicsObject::~PhysicsObject()
 	verletAcc.clear();
 }
 
-const Matrix4& PhysicsObject::GetWorldSpaceTransform() const 
+const GLMMatrix4& PhysicsObject::GetWorldSpaceTransform() const 
 {
 	if (m_wsTransformInvalidated)
 	{
