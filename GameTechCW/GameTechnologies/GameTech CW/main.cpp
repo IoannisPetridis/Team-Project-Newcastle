@@ -15,6 +15,8 @@ int main() {
 	std::thread t1(&Server::run, server);
 	t1.join();
 
+	//The potential problem is that the last_client variable gets overwritten when the last connection comes in, and just holds the secont client's IP
+
 	/*Client *client = new Client();
 	std::thread t2(&Client::initial_run, client);
 	t2.join();*/
@@ -28,5 +30,5 @@ int main() {
 
 	//game->join();
 	//delete game;
-	//delete server;
+	delete server;
 }

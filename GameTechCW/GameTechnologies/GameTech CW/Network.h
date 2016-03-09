@@ -21,7 +21,6 @@
 
 #define HIGHVERSION 2
 #define LOWVERSION 2
-//#define HOST "127.0.0.1" //ipconfig in cmd and copy the IPV4 command here, YULONG: 10.66.67.181
 #define PORT "4376"
 #define FAMILY AF_UNSPEC
 #define TYPE SOCK_STREAM
@@ -36,7 +35,7 @@ struct gameObjectData {
 	std::string objName;
 	Vector3 position;	//Calculated data
 	Quaternion  orientation;	//Calculated data
-	bool first = false;
+	//bool first = false;
 	std::string ballName;
 	Vector3 ballposition;	//Calculated data
 	Quaternion  ballorientation;	//Calculated data
@@ -45,7 +44,8 @@ struct gameObjectData {
 };
 
 struct clientInfo {
-	PCSTR ip;
+	std::string ip;
+	int player_id;
 	boolean ready = false;
 	std::string min;
 	std::string sec;
@@ -81,9 +81,9 @@ protected:
 	int bytesreceived;
 	char buff[BUFFSIZE];
 	PCSTR HOST = "10.66.67.185"; //pointer to constant string
-	std::vector<PCSTR> *clientList;
+	std::vector<std::string> *clientList;
 	std::vector<clientInfo*> *clients;
-	PCSTR last_client;	//Server knows the last client's IP
+	std::string last_client;	//Server knows the last client's IP
 	time_t rawtime;
 	struct tm *timeinfo;
 };

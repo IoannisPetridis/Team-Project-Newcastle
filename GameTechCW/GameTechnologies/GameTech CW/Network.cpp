@@ -141,7 +141,7 @@ void Network::receiveMessage(SOCKET sock) {
 			//Example message:	string msg = "0*1*car*Vector3*Quaternion";
 			//0 for not ready, 1 for ready
 			for (auto &item : *clients) {
-				if (std::strcmp(item->ip,last_client)) {
+				if (item->ip.compare(last_client)) {
 					if (data.at(1)=="1") {
 						item->ready = true;
 						messageQueue->push_back("Client (" + std::string(last_client) + ") is READY\n");

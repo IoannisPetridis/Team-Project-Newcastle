@@ -1,4 +1,4 @@
-﻿Build started 3/8/2016 11:13:02 AM.
+﻿Build started 3/8/2016 1:04:21 PM.
      1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
@@ -27,11 +27,33 @@
      1>h:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
          Compiling...
          ActionHandler.cpp
-     1>h:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp : fatal error C1041: cannot open program database 'h:\github\team-project-newcastle\gametechcw\ncltech\debug\vc120.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+     1>h:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
          Generating Code...
-     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)) -- FAILED.
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\ActionHandler.obj
+         Debug\ArbitraryAI.obj
+         Debug\AssetsManager.obj
+         Debug\CollisionDetection.obj
+         Debug\Constraint.obj
+         Debug\CuboidCollisionShape.obj
+         Debug\GameObjectMag.obj
+         Debug\GuardState.obj
+         Debug\HomeState.obj
+         Debug\NCLDebug.obj
+         Debug\GameObject.obj
+         Debug\Hull.obj
+         Debug\Manifold.obj
+         Debug\OffState.obj
+         Debug\PhysicsEngine.obj
+         Debug\PhysicsObject.obj
+         Debug\Player.obj
+         Debug\PyramidCollisionShape.obj
+         Debug\Scene.obj
+         Debug\SimpleMeshObject.obj
+         Debug\SphereCollisionShape.obj
+         ncltech.vcxproj -> H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:16.87
+Time Elapsed 00:00:19.77
