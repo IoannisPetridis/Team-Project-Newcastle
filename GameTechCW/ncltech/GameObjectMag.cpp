@@ -226,7 +226,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "ground9_goal_Top";
-	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-257.0f, 27.50f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-256.0f, 28.f, 0.0f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(20.f, 1.0f, 50.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, 45));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
@@ -313,7 +313,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol12_goal_middle";
-	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(249.f, -08.0f, 0.0f));
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(249.f, -7.0f, 0.0f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(1.0f, 30.f, 50.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 0, -45));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
@@ -403,7 +403,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol15";
-	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-217.5f, 36.5f, -167.0f));
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(-217.5f, 36.5f, -166.0f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new PiramidCollisionShape(Vector3(1.0, 44.f, 49.5f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 135, -215));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
@@ -479,7 +479,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol21";
-	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(217.0f, 36.f, -167.0f));
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(217.0f, 36.f, -166.0f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new PiramidCollisionShape(Vector3(1.0, 44.f, 49.2f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 45, 145));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
@@ -505,7 +505,7 @@ void	GameObjectMag::GOM_GamePlay(Scene* m_scene)
 	AssetsManager::GOInstance->SetBoundingRadius(80.0f * 80.f);
 
 	AssetsManager::GOInstance->Physics()->name = "groundcol23";
-	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(217.0f, 145.f, -167.0f));
+	AssetsManager::GOInstance->Physics()->SetPosition(Vector3(216.5f, 145.f, -166.5f));
 	AssetsManager::GOInstance->Physics()->SetCollisionShape(new PiramidCollisionShape(Vector3(1.0, 43.f, 49.0f)));
 	AssetsManager::GOInstance->Physics()->SetOrientation(Quaternion::EulerAnglesToQuaternion(0, 225, -35));
 	m_scene->AddGameObject(AssetsManager::GOInstance);
