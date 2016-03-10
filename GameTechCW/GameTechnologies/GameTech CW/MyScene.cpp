@@ -5,88 +5,93 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include "mainwindow.h"
+
+bool MyScene::AbilityUsed = false;
+int MyScene::counter = 0;
+int MyScene::abilitycounter = 200;
 
 #define PI 3.14159265f
 
-MyScene::MyScene(Window& window) : Scene(window)
+MyScene::MyScene(Window& window, GameObjectMag* gom) : Scene(window), GOM(gom)
 {
 	if (init == true)	{}
 		init = InitialiseGL();
 
 	UpdateWorldMatrices(m_RootGameObject, Matrix4());
-
-	GOM = new GameObjectMag();	//initialize the GOM
-
+	
 	PhysicsEngine::Instance()->SetUpdateTimestep(1.0f / 60.0f);		//60 Updates per second
 }
 
 MyScene::~MyScene()
 {
-	//delete any texture used
-	if (m_TargetTexture)
-	{
-		glDeleteTextures(1, &m_TargetTexture);
-		m_TargetTexture = NULL;
-	}
 }
 
 bool MyScene::InitialiseGL()
 {
-	/*PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -9.81f, 0.0f));*/
+	ActionHandler::Instance()->AIChoice = MainWindow::AIchoice;
+	GOM->AIChoice = MainWindow::AIchoice;
 
-	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -9.81f, 0.0f));
-	PhysicsEngine::Instance()->SetDampingFactor(0.988f);
+	PhysicsEngine::Instance()->SetGravity(Vector3(0.0f, -14.81f, 0.0f));
+	PhysicsEngine::Instance()->SetDampingFactor(0.990f);
 
 	m_Camera->SetPosition(Vector3(24.f, 13.f, 9.f));
 	m_Camera->SetYaw(90.0f);
-
-	//Config file loader to load up the Fucntionality
-	bool shadow = true;
-	bool Motion_blur = true;
-	bool replay = true;
-	Camerefix = true;
-	ai_toggle = true;
-	travese_toggle = true;
-	gameover = false;
-	ai_state = true;
-	cooldown = false;
-	ballnum = 50;
-	diff = 1;
-	T_counter = 0;
-	DebugMode = 2;
-	Str_c = 0;
-	score = 0;
-	friction = 0.5f;
-	start_strong = -1.0f;
-	timer = 0.0f;
-	//end
 	
+	if (GOM->GetID() == 0) {
+		GOM->GOM_Loading(this);
+
+		Vector3* vlist = new Vector3[3];
+		vlist[0] = Vector3(0.0f, 0.5f, 0.0f) * 10.0f;
+		vlist[1] = Vector3(0.5f, -0.5f, 0.0f) * 10.0f;
+		vlist[2] = Vector3(-0.5f, -0.5f, 0.0f) * 10.0f;
+
+		NCLDebug::DrawPolygon(3, vlist);
+
+		delete[] vlist;
+	}
+
+	else if (GOM->GetID() == 1) {
+		AssetsManager::InitializeMeshes();
+		GOM->GOM_GamePlay(this);
+	
+		//AssetsManager::Player_1 = new Player("car");
+		AssetsManager::Player_1->SetScene(this);
+		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
+
+		//3 choices of car texture
+		//these textures are just placeholders from what we had
+		if (MainWindow::playertexture == 1){
+			
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_Blue, false);
+		}
+
+		if (MainWindow::playertexture == 2){
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_CheckerboardTex, false); //wood texture
+		}
+
+		if (MainWindow::playertexture == 3){
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_BlueCat, false); //grass texture
+		}
+
+
+
+		//4 choices of car size, 1 2 3 4
+		int size= MainWindow::playersize * 0.5;
+		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
+		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
+		AssetsManager::Player_1->SetBoundingRadius((MainWindow::playersize) * (MainWindow::playersize));
+		AssetsManager::Player_1->Physics()->SetCar(true);
+		//AssetsManager::Player_1->Physics()->name = "car";
+		//AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
+		//AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
+		//Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
+		//AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
+		//this->AddGameObject(AssetsManager::Player_1);
+	}
+
 	//Initialize all game objects
-	GOM->GOMInit(this);
-
-
-	//audio
-	result = FMOD::System_Create(&system2);
-	result = system2->init(100, FMOD_INIT_3D_RIGHTHANDED, extradriverdata);
-	result = system2->createSound("drumloop.wav", FMOD_3D, 0, &sound1);
-	result = sound1->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
-	result = system2->set3DSettings(1.0, DISTANCEFACTOR, 1.0f);
-	result = system2->playSound(sound1, 0, true, &channel1);
-
-
-	result = system2->createSound("swish.wav", FMOD_DEFAULT, 0, &sound2);
-
-	FMOD_VECTOR LastPosition = { 0.0f, 0.0f, 0.0f };
-	FMOD_VECTOR pos = { 0.0f, 0.0f, 0.0f };
-	FMOD_VECTOR vel = { 0.0f, 0.0f, 0.0f };
-
-
-
-	result = system2->playSound(sound2, 0, true, &channel2);
-	result = channel1->set3DAttributes(&pos, &vel);
-
-	result = channel1->setPaused(false);
-	
+	Audio_Timer.GetTimedMS();
 	return true;
 }
 
@@ -99,50 +104,117 @@ void MyScene::UpdateScene(float msec)
 	Proj_dir.y = sin(m_Camera->GetPitch() * PI / 180.0f);
 	Proj_dir.Normalise();
 
+	//Camera Control
+	AssetsManager::Player_1->CameraControl();
 
+	std::vector<CollisionPair>* temp = PhysicsEngine::Instance()->GetVPair();
 
-	//audio
+	for (auto m = temp->begin(); m != temp->end(); ++m)
 	{
-		//static float t = 0;
-		static FMOD_VECTOR LastPosition = { 0.0f, 0.0f, 0.0f };
+		if (m->objectA->name.find("ground") != string::npos || m->objectB->name.find("ground") != string::npos) {}
+		else{
+			time = Audio_Timer.GetTimedMS();
+			Audio::CollisionSound(m->objectA, m->objectB, time);
+		}
+	}
+	temp->clear();
 
-		FMOD_VECTOR CameraForward = { Proj_dir.x, Proj_dir.y, Proj_dir.z };
+	CarPosition = { AssetsManager::Player_1->Physics()->GetPosition().x, AssetsManager::Player_1->Physics()->GetPosition().y, AssetsManager::Player_1->Physics()->GetPosition().z };
+	CarVelocity = { AssetsManager::Player_1->Physics()->GetLinearVelocity().x, AssetsManager::Player_1->Physics()->GetLinearVelocity().y, AssetsManager::Player_1->Physics()->GetLinearVelocity().z };
+	float CarSpeed = AssetsManager::Player_1->Physics()->GetLinearVelocity().Length();
+	/*FMOD_VECTOR AIPosition = { AssetsManager::NeutralAI->Physics()->GetPosition().x, AssetsManager::NeutralAI->Physics()->GetPosition().y, AssetsManager::NeutralAI->Physics()->GetPosition().z };
+	FMOD_VECTOR AIVelocity = { AssetsManager::NeutralAI->Physics()->GetLinearVelocity().x, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().y, AssetsManager::NeutralAI->Physics()->GetLinearVelocity().z };
+	float AIForce = AssetsManager::NeutralAI->Physics()->GetForce().Length();
+	Audio::UpdateSound(AIPosition, AIVelocity, 20000.f + AIForce * 200, 10.f + AIForce, Audio::channel9);
+	Audio::Result = Audio::AudioSystem->update();*/
+	Audio::UpdateSound(CarPosition, CarVelocity, 20000.f + CarSpeed * 200, 10.f + CarSpeed, Audio::channel3);
+	Audio::GetCameraInfo(m_Camera);
+	////END AUDIO
 
-		Vector3 Right = Vector3::Cross(Proj_dir, Vector3(0.0f, 1.0f, 0.0f));
-		Vector3 Up = Vector3::Cross(Right, Proj_dir);
 
-		FMOD_VECTOR CameraUp = { Up.x, Up.y, Up.z };
-		FMOD_VECTOR CameraVelocity = { 0.0f, 0.0f, 0.0f };
-		FMOD_VECTOR CameraPosition = { m_Camera->GetPosition().x, m_Camera->GetPosition().y, m_Camera->GetPosition().z };
+	//player special ability
+	int skillchoice = MainWindow::playerskill;
 
-		CameraVelocity.x = (CameraPosition.x - LastPosition.x) * (1000 / INTERFACE_UPDATETIME);
-		CameraVelocity.y = (CameraPosition.y - LastPosition.y) * (1000 / INTERFACE_UPDATETIME);
-		CameraVelocity.z = (CameraPosition.z - LastPosition.z) * (1000 / INTERFACE_UPDATETIME);
+	if (!MyScene::AbilityUsed && Window::GetKeyboard()->KeyHeld(KEYBOARD_Q)) {
+		MyScene::AbilityUsed = true;
+		if (skillchoice == 1){ //ball pull
+			ActionHandler::Instance()->GravityGun();
+		}
 
-		LastPosition = CameraPosition;
+		if (skillchoice == 2){ //midpoint teleport
+			AssetsManager::Player_1->Physics()->SetPosition(Vector3(0, 10, 0));
+			MyScene::AbilityUsed = true;
+		}
 
-		result = system2->set3DListenerAttributes(0, &CameraPosition, &CameraVelocity, &CameraForward, &CameraUp);
-
+		if (skillchoice == 3){
+			ActionHandler::Instance()->AIOffAbility = true;
+		}
 	}
 
-	//	audio->GetCameraInfo(m_Camera , result ,system2 , CameraPosition, CameraForward , CameraUp , CameraVelocity , LastPosition);
-
-	FMOD_VECTOR pos = { 0.0f,0.0f,0.0f};
-	FMOD_VECTOR vel = { 0.0f, 0.0f, 0.0f };
-	result = channel1->set3DAttributes(&pos, &vel);
-	result = system2->update();
-
-
-
-	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_1)) {
-		Camerefix = !Camerefix;
-	}
-	if (Camerefix) {
-		m_Camera->SetPosition(this->FindGameObject("car")->Physics()->GetPosition() -
-			Proj_dir * 15.0f);
+	if (AbilityUsed == true) {
+		abilitycounter--;
+		if (abilitycounter == 0) {
+			ActionHandler::Instance()->AIOffAbility = false;
+			ActionHandler::Instance()->RemoveForce();
+		}
 	}
 
-	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
+	//PowerUps
+	if (AssetsManager::Player_1->invisible){
+		if (PowerUps::InvisTimer.GetLastTime() > 20000){
+			AssetsManager::Player_1->SetColour(Vector4(AssetsManager::Player_1->GetColour().x, AssetsManager::Player_1->GetColour().y, AssetsManager::Player_1->GetColour().z, 1.f));
+			AssetsManager::Player_1->invisible = false;
+		}
+	}
+
+	if (PowerUps::GetPlayerPickup()){
+		ParticleEmitter* powerupspark = new ParticleEmitter();
+
+		powerupspark->SetParticleSize(0.6f);
+		powerupspark->SetParticleVariance(2.0f);
+		powerupspark->SetLaunchParticles(20.0f);
+		powerupspark->SetParticleLifetime(20.0f);
+		powerupspark->SetParticleSpeed(0.3f);
+		powerupspark->SetParticleRate(10.f);
+		powerupspark->SetDirection(Vector3(0.f, 4.f, 0.f));
+		powerupspark->SetSourcePosition(AssetsManager::Player_1->Physics()->GetPosition());
+		powerupspark->SetParticleColour(Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+		powerupspark->SetIsTimer(true);
+		powerupspark->SetEmitterLifetime(150.0f);
+		this->AddParticleObject(powerupspark);
+
+		PowerUps::SetPlayerPickup(false);
+	}
+	
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B)){
+		PowerUps::AddRandomPowerUp(this,AssetsManager::PowerUpBox2);
+	}
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_N)){
+		PowerUps::UsePowerUp(AssetsManager::Player_1, this);
+	}
+
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_I)){
+		AssetsManager::Player_1->SetPowerUpState("banana");
+	}
+
+	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_Z)){
+		PowerUps::AddAndroidPowerUp(100, 100, this, "banana");
+	}
+
+	if (PhysicsEngine::Instance()->IsPaused()){
+		Audio::channel2->setPaused(true);
+		Audio::channel3->setPaused(true);
+		Audio::channel4->setPaused(true);
+	}
+	else{
+		Audio::channel2->setPaused(false);
+		Audio::channel3->setPaused(false);
+		Audio::channel4->setPaused(false);
+	}
+
+	/*NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "Camera X:" + std::to_string((int)m_Camera->GetPosition().x)
 		+ " Y:"
 		+ std::to_string((int)m_Camera->GetPosition().y)
 		+ " Z:"
@@ -151,12 +223,20 @@ void MyScene::UpdateScene(float msec)
 		+ std::to_string((float)m_Camera->GetPitch())
 		+ " Yaw:"
 		+ std::to_string((float)m_Camera->GetYaw())
-		+ " cord:" 
+		+ " cord:"
 		+ std::to_string((float)Proj_dir.x) + " "
 		+ std::to_string((float)Proj_dir.y) + " "
 		+ std::to_string((float)Proj_dir.z) + " "
-		);
+		);*/
 
+	NCLDebug::AddStatusEntry(Vector4(1.0f, 1.0f, 1.0f, 1.0f), "HP : " + std::to_string(AssetsManager::Player_1->Physics()->GetHP()));
+	
+	if (AssetsManager::Player_1->Physics()->GetHP() <= 0){
+		AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 10.0f, 10.0f));
+		AssetsManager::Player_1->Physics()->SetHP(100.f);
+	}
+
+	
 }
 
 void MyScene::RenderScene()

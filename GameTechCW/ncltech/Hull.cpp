@@ -193,4 +193,11 @@ void Hull::DebugDraw(const Matrix4& transform)
 	{
 		NCLDebug::DrawThickLine(transform * m_Vertices[edge.vStart].pos, transform * m_Vertices[edge.vEnd].pos, 0.02f, Vector4(1.0f, 0.2f, 1.0f, 1.0f));
 	}
+
+	//Draw front face normal
+	NCLDebug::DrawThickLine(transform * Vector3(0.0f, 0.0f, -0.5f),
+		transform * Vector3(0.0f, 0.0f, -1.5f), 0.04f, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
+	NCLDebug::DrawThickLine(transform * Vector3(0.0f, 0.0f, 0.5f),
+		transform * Vector3(0.0f, 0.0f, 1.5f), 0.04f, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+
 }

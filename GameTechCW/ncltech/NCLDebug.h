@@ -83,11 +83,11 @@ protected:
 	static void SetDebugDrawData(const Matrix4& projViewMatrix, const Vector3& camera_pos)
 	{ 
 		m_ProjView = projViewMatrix;
-		m_CameraPosition = camera_pos;
+		P_cameraPosition = camera_pos;
 	}
 
 protected:
-	static Vector3	m_CameraPosition;
+	static Vector3	P_cameraPosition;
 	static Matrix4	m_ProjView;
 
 	static int m_NumStatusEntries;

@@ -27,6 +27,8 @@ public:
 	//How many milliseconds have passed since GetTimedMS was last called
 	float	GetTimedMS();
 
+	//How many milliseconds have passed since GetTimedMS was last called without resetting it
+	float	GetLastTime();
 protected:
 	LARGE_INTEGER	start;			//Start of timer
 	LARGE_INTEGER	frequency;		//Ticks Per Second

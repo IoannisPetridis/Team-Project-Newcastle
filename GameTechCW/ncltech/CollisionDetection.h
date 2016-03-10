@@ -20,9 +20,15 @@ public:
 	bool CheckSphereSphereCollision(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata = NULL) const;
 	bool CheckCollision(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata = NULL) const;
 	bool BuildCollisionManifold(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, const CollisionData& coldata, Manifold* out_manifold) const;
+	
+	//yields the distance between wall and a seleted object
+	bool CheckDistance(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, float& penetration) const;
 
 protected:
 	bool CheckCollisionAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const;
+	
+	//yields the distance between wall and a selected object, called by checkdistance
+	float CheckDisAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2) const;
 
 	Vector3 GetClosestPointOnEdges(const Vector3& target, const std::vector<CollisionEdge>& edges) const;
 	Vector3 PlaneEdgeIntersection(const Plane& plane, const Vector3& start, const Vector3& end) const;

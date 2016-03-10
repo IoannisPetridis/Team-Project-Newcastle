@@ -39,7 +39,6 @@ it is fine!
 
 #define SOLVER_ITERATIONS 20
 
-
 #define FALSE	0
 #define TRUE	1
 
@@ -70,6 +69,9 @@ public:
 	//Update Physics Engine
 	void Update(float deltaTime);			//Remember DeltaTime is 'seconds' since last update not milliseconds
 	
+	//NEWNEWNEW
+	void Feedback();				//feedback collision data before actually resolve and integration 
+
 	//Debug draw all physics objects, manifolds and constraints
 	void DebugRender();
 
@@ -94,12 +96,26 @@ public:
 	float GetCollisionDetectionDis()	{ return CollisionDetectionDis; }
 	void  SetCollisionDetectionDis(float n)	{ CollisionDetectionDis = n; }
 
+	bool GetDebug(){ return m_Debug; }
+	void SetDebug(bool a){ m_Debug = a; }
+
+	//check if there is a collision between objA and objB, if there is, 
+	//return true
+	bool CheckCollision(PhysicsObject* obja, PhysicsObject* objb);
+	std::vector<CollisionPair> m_BroadphaseCollisionPairs;
+
+	//return a copy of narrowphase collision pair list exclude ground to ground collision
+	std::vector<CollisionPair>* GetVPair() { return &VPairList; }
+	std::vector<CollisionPair> GetCPair() { return CPairList; }
+
+	//Clear all per-frame data
+	void PhysicsEngineClear();
+
 	void toggledebugdraw() {
 		DEBUGDRAW_CONSTRAINTS = !DEBUGDRAW_CONSTRAINTS;
 		DEBUGDRAW_MANIFOLDS = !DEBUGDRAW_MANIFOLDS;
 		DEBUGDRAW_COLLISIONVOLUMES = !DEBUGDRAW_COLLISIONVOLUMES;
 	}
-
 
 protected:
 	PhysicsEngine();
@@ -115,7 +131,6 @@ protected:
 	void NarrowPhaseCollisions();
 	void NarrowPhaseCollisionsBatch(size_t batch_start, size_t batch_end); //<--- The worker function for multithreading
 
-
 	//Updates all physics objects position, orientation, velocity etc (default method uses symplectic euler integration)
 	void UpdatePhysicsObjects();	
 	void UpdatePhysicsObjectsBatch(size_t batch_start, size_t batch_end);  //<--- The worker function for multithreading
@@ -129,20 +144,30 @@ protected:
 	void OctreeBuild();
 	bool OctreeCheck(PhysicsObject* objA, PhysicsObject* objB);
 	float CollisionDetectionDis;
+	
+protected:
+	void ClearCPair() { CPairList.clear(); }
 
 protected:
 	bool		m_IsPaused;
 	bool		m_Gameover;
-	float		m_UpdateTimestep, m_UpdateAccum;
+	bool		m_Collision;
+	bool		m_Debug;
 
+	std::vector<CollisionPair> CPairList;
+	std::vector<CollisionPair> VPairList;
+
+	float		m_UpdateTimestep, m_UpdateAccum;
+	
 	Vector3		m_Gravity;
 	float		m_DampingFactor;
 
-	std::vector<CollisionPair> m_BroadphaseCollisionPairs;
+	//std::vector<CollisionPair> m_BroadphaseCollisionPairs;
 
 	std::vector<PhysicsObject*> m_PhysicsObjects;
 
 	std::vector<Constraint*>	m_Constraints;			// Misc constraints between pairs of objects
+	
 	std::vector<Manifold*>		m_Manifolds;			// Contact constraints between pairs of objects
 
 	std::mutex					m_ManifoldsMutex;

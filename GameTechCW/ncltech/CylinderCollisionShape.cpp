@@ -6,7 +6,7 @@ CylinderCollisionShape::CylinderCollisionShape(const float length, const float r
 m_Radius(radius), m_length(length), m_CuboidHalfDimensions(halfdim)
 {
 	m_Invprecision = 30.0f;
-	m_CuboidHalfDimensions = Vector3(1.0f, 1.0f, 1.0f);
+	m_CuboidHalfDimensions = Vector3(1.0f , 1.0f, 1.0f);
 
 	cyside = new CySide;
 	list3_Top = new int[static_cast<int>(360.0f / m_Invprecision)]();
@@ -33,7 +33,7 @@ void CylinderCollisionShape::ConstructCubeHull() {
 	int j = 0;
 	int k = 0;
 	for (float i = 0; i <= 2 * PI; i += angle) {
-
+	
 		float first_x = sin(i) * m_Radius;
 		float first_z = -cos(i) * m_Radius;
 		float last_x = sin(i + angle) * m_Radius;
@@ -207,3 +207,4 @@ void CylinderCollisionShape::DebugDraw(const PhysicsObject* currentObject) const
 	Matrix4 transform = currentObject->GetWorldSpaceTransform() * Matrix4::Scale(m_CuboidHalfDimensions);
 	m_CubeHull.DebugDraw(transform);
 }
+

@@ -12,6 +12,8 @@
 Constructor, which sets everything to some 'sensible' defaults.
 */
 ParticleEmitter::ParticleEmitter(void)	{
+	isTimer = false;
+	LifeTimeofEmitter = 1;
 	particleRate = 10.0f;
 	particleLifetime = 500.0f;
 	particleSize = 24.0f;
@@ -58,7 +60,17 @@ it is removed from the particle list. If it's time to generate some new particle
 that in here, too. Finally, this function resizes our VBOs if necessary. 
 */
 void ParticleEmitter::Update(float msec)	{
-	nextParticleTime -= msec;	//some time has passed!
+	
+	if (isTimer)
+	{
+		LifeTimeofEmitter -= msec;
+	}
+	
+	if (LifeTimeofEmitter >= 0)
+	{
+		nextParticleTime -= msec;	//some time has passed!
+	}
+	
 
 	/*
 	Enough time might have passed that more than 1 'launch' of particles is necessary...
@@ -130,16 +142,16 @@ Particle* ParticleEmitter::GetFreeParticle()	{
 	//free list, it'll still have the values of its 'previous life'
 
 
-
-	p->colour		= Vector4(RAND(),RAND(),RAND(),1.0);
+	p->colour = Vector4(1.0f, 1.0f, 1.0f, 1.0);
+	//p->colour		= Vector4(RAND(),RAND(),RAND(),1.0);
 	p->direction	= initialDirection;
 
-	p->direction.x = 1.0* particleVariance;
-	p->direction.y = (1.0 - RAND())* particleVariance;
-	p->direction.z = (RAND() - RAND())* particleVariance;
-	/*p->direction.x += ((RAND()-RAND()) * particleVariance);
-	p->direction.y += ((RAND()-RAND()) * particleVariance);
-	p->direction.z += ((RAND()-RAND()) * particleVariance);*/
+	p->direction.x += 1.0* particleVariance;
+	p->direction.y += (1.0 - RAND())* particleVariance;
+	p->direction.z += (RAND() - RAND())* particleVariance;
+	//p->direction.x += ((RAND()-RAND()) * particleVariance);
+	//p->direction.y += ((RAND()-RAND()) * particleVariance);
+	//p->direction.z += ((RAND()-RAND()) * particleVariance);
 
 	p->direction.Normalise();	//Keep its direction normalised!
 	//p->position.ToZero();

@@ -17,6 +17,8 @@
 //#include <ncltech\CollisionDetection.h>
 #include <FMOD\inc\fmod.hpp>
 #include "../../ncltech/GameObjectMag.h"
+#include <ncltech\Audio.h>
+#include <ncltech\PowerUps.h>
 
 class GameObjectMag;
 
@@ -24,36 +26,20 @@ class MyScene : public Scene
 {
 	friend class GameObjectMag;
 public:
-	MyScene(Window& window);
+	MyScene(Window& window, GameObjectMag* gom);
 	~MyScene();
 
 	bool InitialiseGL()	override;
 	void RenderScene() override;
 	void UpdateScene(float dt)  override;
 
-protected:
-	GLuint				m_TargetTexture;
-	GLuint				m_ThrowTex;
+	static bool AbilityUsed;
+	static int counter;
+	static int abilitycounter;
 
-	SimpleMeshObject*	m_Sphere;
-	SimpleMeshObject*	throw_S;
-	SimpleMeshObject*	target;
-	SimpleMeshObject*	goal;
-	Plane*				plane;
-
-	GameObjectMag* GOM;
-	
-	std::vector<Vector3> m_TrajectoryPoints;
-	std::vector<string> LB_name;
-	std::vector<string> LB_score;
-	std::vector<GameObject*> subshapes;
-
+protected:	
+	GameObjectMag*		GOM;
 	Vector3 Proj_dir;
-	Vector3	Target_Pos;
-	Vector3 GK_Pos;
-	
-	Vector3 planenormal;
-	Vector3 GK_Init_Pos;
 
 	int T_counter;
 	int Str_c;
@@ -75,26 +61,11 @@ protected:
 
 	string filename;
 	GameTimer engine_timer;
+	GameTimer Audio_Timer;
 
+	FMOD_VECTOR CarPosition;
+	FMOD_VECTOR CarVelocity;
 
-
-	FMOD_RESULT result;
-	FMOD::System *system2;
-
-	FMOD::Sound *sound1, *sound2;
-
-	FMOD::Channel   *channel1 = 0, *channel2 = 0;
-	void            *extradriverdata = 0;
-	bool             listenerflag = true;
-	
-
-	FMOD_VECTOR LastPosition;
-	FMOD_VECTOR CameraPosition;
-	FMOD_VECTOR CameraForward;
-	FMOD_VECTOR CameraUp;
-	FMOD_VECTOR CameraVelocity;
-
-	const int   INTERFACE_UPDATETIME = 50;      // 50ms update for interface
-	const float DISTANCEFACTOR = 1.0f;
-
+	float damage = 0.0f;
+	float time;
 };

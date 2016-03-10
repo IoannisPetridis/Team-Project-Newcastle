@@ -1,7 +1,7 @@
 #include "NCLDebug.h"
 #include <algorithm>
 
-Vector3	NCLDebug::m_CameraPosition;
+Vector3	NCLDebug::P_cameraPosition;
 Matrix4	NCLDebug::m_ProjView;
 
 int NCLDebug::m_NumStatusEntries = 0;
@@ -34,7 +34,7 @@ void NCLDebug::DrawThickLine(const Vector3& start, const Vector3& end, float lin
 {
 	//For Depth Sorting
 	Vector3 midPoint = (start + end) * 0.5f;
-	float camDist = Vector3::Dot(midPoint - m_CameraPosition, midPoint - m_CameraPosition);
+	float camDist = Vector3::Dot(midPoint - P_cameraPosition, midPoint - P_cameraPosition);
 
 	//Add to Data Structures
 	m_ThickLines.push_back(Vector4(start.x, start.y, start.z, line_width));
@@ -71,6 +71,8 @@ void NCLDebug::DrawMatrix(const Matrix3& mtx, const Vector3& position)
 	DrawHairLine(position, position + mtx.GetCol(1), Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 	DrawHairLine(position, position + mtx.GetCol(2), Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 }
+
+
 
 void NCLDebug::DrawTextClipSpace(const Vector4& cs_pos, const float font_size, const string& text, const TextAlignment alignment, const Vector4 colour)
 {
@@ -140,7 +142,7 @@ void NCLDebug::DrawTriangle(const Vector3& v0, const Vector3& v1, const Vector3&
 {
 	//For Depth Sorting
 	Vector3 midPoint = (v0 + v1 + v2) * 0.3333333333f;
-	float camDist = Vector3::Dot(midPoint - m_CameraPosition, midPoint - m_CameraPosition);
+	float camDist = Vector3::Dot(midPoint - P_cameraPosition, midPoint - P_cameraPosition);
 
 	//Add to data structures
 	m_Tris.push_back(Vector4(v0.x, v0.y, v0.z, camDist));
@@ -248,8 +250,8 @@ void NCLDebug::SortDebugLists()
 		PointVertex* points = reinterpret_cast<PointVertex*>(&m_Points[0].x);
 		std::sort(points, points + m_Points.size() / 2, [&](const PointVertex& a, const PointVertex& b)
 		{
-			float a2 = Vector3::Dot(a.pos.ToVector3() - m_CameraPosition, a.pos.ToVector3() - m_CameraPosition);
-			float b2 = Vector3::Dot(b.pos.ToVector3() - m_CameraPosition, b.pos.ToVector3() - m_CameraPosition);
+			float a2 = Vector3::Dot(a.pos.ToVector3() - P_cameraPosition, a.pos.ToVector3() - P_cameraPosition);
+			float b2 = Vector3::Dot(b.pos.ToVector3() - P_cameraPosition, b.pos.ToVector3() - P_cameraPosition);
 			return (a2 > b2);
 		});
 	}
@@ -288,7 +290,12 @@ void NCLDebug::DrawDebugLists()
 		float alpha = ((m_LogEntries.size() - i) / (float(MAX_LOG_SIZE)));
 		alpha = 1.0f - (alpha * alpha);
 		Vector3& col3 = m_LogEntries[idx].colour;
-		DrawTextClipSpace(Vector4(-1.0f + cs_size_x * 0.5f, -1.0f + ((log_len - i - 1) * cs_size_y) + cs_size_y, 0.0f, 1.0f), LOG_TEXT_SIZE, m_LogEntries[idx].text, TEXTALIGN_LEFT, Vector4(col3.x, col3.y, col3.z, alpha));
+		DrawTextClipSpace(Vector4(-1.0f + cs_size_x * 0.5f, 
+			-1.0f + ((log_len - i - 1) * cs_size_y) + cs_size_y, 0.0f, 1.0f), 
+			LOG_TEXT_SIZE, 
+			m_LogEntries[idx].text, 
+			TEXTALIGN_LEFT, 
+			Vector4(col3.x, col3.y, col3.z, alpha));
 	}
 
 

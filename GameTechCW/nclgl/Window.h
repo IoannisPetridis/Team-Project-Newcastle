@@ -47,6 +47,8 @@ public:
 	static Mouse*		GetMouse()		{return mouse;}
 
 	GameTimer*   GetTimer()		{return timer;}
+	static int GetHeight;
+	static int GetWidth;
 
 protected:
 	void	CheckMessages(MSG &msg);

@@ -70,7 +70,14 @@ public:
 	How often we spit out some new particles!
 	*/
 	float	GetParticleRate()				{return particleRate;}
-	void	SetParticleRate(float rate)		{particleRate = rate;}
+	void	SetParticleRate(float rate)		{ particleRate = rate; }
+
+	//get  istime
+	bool	GetIsTimer()				{ return isTimer; }
+	void	SetIsTimer(bool in)		{ isTimer = in; }
+
+	float	GetEmitterLifetime()			{ return LifeTimeofEmitter; }
+	void	SetEmitterLifetime(float life) { LifeTimeofEmitter = life; }
 
 	/*
 	How long each particle lives for!
@@ -111,6 +118,10 @@ public:
 	void	SetDirection(const Vector3 dir) {initialDirection = dir;}
 	Vector3 GetDirection()					{return initialDirection;}
 
+	//colour
+	Vector4 GetParticleColour(){ return colour; }
+	void SetParticleColour(Vector4 col){ colour = col; }
+
 	void	SetSourcePosition(Vector3 dir) { sourcePos = dir; }
 	Vector3 GetSourcePosition()					{ return sourcePos; }
 	std::vector<ParticleEmitter*>& GetChildren() { return m_Children; }
@@ -126,13 +137,15 @@ protected:
 	Resizes our vertex buffers
 	*/
 	void	ResizeArrays();
-
+	bool	isTimer;//is it need to be check for the life time
+	float LifeTimeofEmitter;
 	float particleRate;
 	float particleLifetime;
 	float particleSize;
 	float particleVariance;
 	float particleSpeed;
 	int	  numLaunchParticles;
+	Vector4 colour;
 
 	Vector3 initialDirection;
 

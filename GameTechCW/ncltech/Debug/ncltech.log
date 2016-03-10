@@ -1,41 +1,51 @@
-﻿Build started 17/12/2015 20:04:30.
-     1>Project "D:\Dropbox Disk\Dropbox\CSC8503 Framework\GameTech CW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+﻿Build started 3/8/2016 1:57:32 PM.
+     1>Project "C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt CollisionDetection.cpp CommonMeshes.cpp Constraint.cpp CuboidCollisionShape.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp PhysicsEngine.cpp PhysicsObject.cpp Scene.cpp SimpleMeshObject.cpp Source.cpp SphereCollisionShape.cpp
-         SphereCollisionShape.cpp
-         Source.cpp
-         SimpleMeshObject.cpp
-         Scene.cpp
-         PhysicsObject.cpp
-         PhysicsEngine.cpp
-         Manifold.cpp
-         Hull.cpp
-         GameObject.cpp
-         NCLDebug.cpp
-         CuboidCollisionShape.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Constraint.cpp
          Constraint.cpp
-         CommonMeshes.cpp
-         CollisionDetection.cpp
-         Generating Code...
-     1>d:\dropbox disk\dropbox\csc8503 framework\gametech cw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
        Lib:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Dropbox Disk\Dropbox\CSC8503 Framework\GameTech CW\Game Technologies\Debug\ncltech.lib" /NOLOGO Debug\CollisionDetection.obj
-         Debug\CommonMeshes.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\Network.obj
+         Debug\Server.obj
+         Debug\Client.obj
+         Debug\ActionHandler.obj
+         Debug\AggressiveAI.obj
+         Debug\AssetsManager.obj
+         Debug\Block.obj
+         Debug\Chase.obj
+         Debug\CollisionDetection.obj
          Debug\Constraint.obj
          Debug\CuboidCollisionShape.obj
+         Debug\CylinderCollisionShape.obj
+         Debug\Defend.obj
+         Debug\DefensiveAI.obj
+         Debug\Dribble.obj
+         Debug\GameObjectMag.obj
          Debug\NCLDebug.obj
          Debug\GameObject.obj
          Debug\Hull.obj
          Debug\Manifold.obj
+         Debug\NeutralAI.obj
+         Debug\Patrol.obj
          Debug\PhysicsEngine.obj
          Debug\PhysicsObject.obj
+         Debug\PiramidCollisionShape.obj
+         Debug\Player.obj
+         Debug\PowerUps.obj
+         Debug\Punt.obj
+         Debug\PuntPlayer.obj
+         Debug\Retreat.obj
          Debug\Scene.obj
+         Debug\SChase.obj
+         Debug\SDefend.obj
+         Debug\SDribble.obj
          Debug\SimpleMeshObject.obj
-         Debug\Source.obj
+         Debug\SoloAI.obj
          Debug\SphereCollisionShape.obj
-         ncltech.vcxproj -> D:\Dropbox Disk\Dropbox\CSC8503 Framework\GameTech CW\Game Technologies\Debug\ncltech.lib
-     1>Done Building Project "D:\Dropbox Disk\Dropbox\CSC8503 Framework\GameTech CW\ncltech\ncltech.vcxproj" (Build target(s)).
+         Debug\SPunt.obj
+         Debug\SRetreat.obj
+         ncltech.vcxproj -> C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\GameTechnologies\Debug\ncltech.lib
+     1>Done Building Project "C:\Users\CMDAdmin\Desktop\TeamProject, 07-03-2016\WithTimer\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:07.43
+Time Elapsed 00:00:00.79

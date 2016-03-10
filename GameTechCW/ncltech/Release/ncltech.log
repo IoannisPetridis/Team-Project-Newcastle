@@ -1,35 +1,52 @@
-﻿Build started 18/02/2016 15:15:41.
+﻿Build started 10/03/2016 15:41:17.
      1>Project "D:\Team Project\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameObjectMag.cpp
          GameObjectMag.cpp
-     1>GameObjectMag.cpp(462): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>GameObjectMag.cpp(561): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>GameObjectMag.cpp(19): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
        Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\ActionHandler.obj
-         Release\ArbitraryAI.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\Network.obj
+         Release\Server.obj
+         Release\Client.obj
+         Release\ActionHandler.obj
+         Release\AggressiveAI.obj
          Release\AssetsManager.obj
+         Release\Block.obj
+         Release\Chase.obj
          Release\CollisionDetection.obj
          Release\Constraint.obj
          Release\CuboidCollisionShape.obj
          Release\CylinderCollisionShape.obj
+         Release\Defend.obj
+         Release\DefensiveAI.obj
+         Release\Dribble.obj
          Release\GameObjectMag.obj
-         Release\GuardState.obj
-         Release\HomeState.obj
          Release\NCLDebug.obj
          Release\GameObject.obj
          Release\Hull.obj
          Release\Manifold.obj
-         Release\OffState.obj
+         Release\NeutralAI.obj
+         Release\Patrol.obj
          Release\PhysicsEngine.obj
          Release\PhysicsObject.obj
-         Release\PyramidCollisionShape.obj
+         Release\PiramidCollisionShape.obj
+         Release\Player.obj
+         Release\PowerUps.obj
+         Release\Punt.obj
+         Release\PuntPlayer.obj
+         Release\Retreat.obj
          Release\Scene.obj
+         Release\SChase.obj
+         Release\SDefend.obj
+         Release\SDribble.obj
          Release\SimpleMeshObject.obj
+         Release\SoloAI.obj
          Release\SphereCollisionShape.obj
+         Release\SPunt.obj
+         Release\SRetreat.obj
          ncltech.vcxproj -> D:\Team Project\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib
      1>Done Building Project "D:\Team Project\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.41
+Time Elapsed 00:00:02.17

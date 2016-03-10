@@ -20,9 +20,7 @@ Manifold::~Manifold()
 
 void Manifold::ApplyImpulse()
 {
-	/*
-	TUTORIAL 10 CODE - Collision Resolution
-	*/
+
 	float softness = (m_NodeA->GetInverseMass()
 		+ m_NodeB->GetInverseMass()) / m_Contacts.size();
 

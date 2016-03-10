@@ -49,6 +49,42 @@
     <Filter Include="Source Files\Network">
       <UniqueIdentifier>{c86b0ca8-3bac-4e02-aee6-4ca956eb303b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AI\AggressiveAI">
+      <UniqueIdentifier>{bac6231e-0ecb-4c49-8bb1-b343b26b95ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\NeutralAI">
+      <UniqueIdentifier>{0307d0e3-d942-4046-9117-bf44f1803c17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\AggressiveAI">
+      <UniqueIdentifier>{9e9c3d74-adf3-4cd5-88e0-9e27477c38dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\NeutralAI">
+      <UniqueIdentifier>{ac84c993-be69-44f2-a05e-5a82083743ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\DefensiveAI">
+      <UniqueIdentifier>{3d601c75-4249-4141-880a-8b0569006a3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\DefensiveAI">
+      <UniqueIdentifier>{d2ecb485-83fd-4038-bdc7-64eec10bad7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\SoloAI">
+      <UniqueIdentifier>{3ead90b9-4533-4e48-bde5-4f88c508f70b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\SoloAI\DefendStates">
+      <UniqueIdentifier>{efd7ec79-1416-4b57-b04a-e3c1ca933db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI\SoloAI\ScoreStates">
+      <UniqueIdentifier>{60c1d123-ed2b-4dba-8f40-39dc93e4115b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\SoloAI">
+      <UniqueIdentifier>{fe6c2a8c-d8bb-4760-9b23-a3d8278928b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\SoloAI\DefendStates">
+      <UniqueIdentifier>{979b8cb6-fd8e-414f-b6a2-eac2a63b1fe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AI\SoloAI\ScoreStates">
+      <UniqueIdentifier>{c85a3ff2-0f0e-44ec-b3d1-ba3a18d6afe2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene.cpp">
@@ -96,23 +132,77 @@
     <ClCompile Include="ActionHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArbitraryAI.cpp">
-      <Filter>Source Files\AI</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GuardState.cpp">
-      <Filter>Source Files\AI</Filter>
+    <ClCompile Include="..\Networking Server\Networking Server\Network.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="HomeState.cpp">
-      <Filter>Source Files\AI</Filter>
+    <ClCompile Include="..\Networking Server\Networking Server\Server.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="OffState.cpp">
-      <Filter>Source Files\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="PyramidCollisionShape.cpp">
-      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    <ClCompile Include="..\Networking\Networking\Client.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
     <ClCompile Include="CylinderCollisionShape.cpp">
       <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="PiramidCollisionShape.cpp">
+      <Filter>Source Files\Physics\CollisionShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="AggressiveAI.cpp">
+      <Filter>Source Files\AI\AggressiveAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files\AI\AggressiveAI</Filter>
+    </ClCompile>
+    <ClCompile Include="PuntPlayer.cpp">
+      <Filter>Source Files\AI\AggressiveAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Chase.cpp">
+      <Filter>Source Files\AI\NeutralAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Dribble.cpp">
+      <Filter>Source Files\AI\NeutralAI</Filter>
+    </ClCompile>
+    <ClCompile Include="NeutralAI.cpp">
+      <Filter>Source Files\AI\NeutralAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Defend.cpp">
+      <Filter>Source Files\AI\DefensiveAI</Filter>
+    </ClCompile>
+    <ClCompile Include="DefensiveAI.cpp">
+      <Filter>Source Files\AI\DefensiveAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Patrol.cpp">
+      <Filter>Source Files\AI\DefensiveAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Punt.cpp">
+      <Filter>Source Files\AI\DefensiveAI</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDefend.cpp">
+      <Filter>Source Files\AI\SoloAI\DefendStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SPunt.cpp">
+      <Filter>Source Files\AI\SoloAI\DefendStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SChase.cpp">
+      <Filter>Source Files\AI\SoloAI\ScoreStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SDribble.cpp">
+      <Filter>Source Files\AI\SoloAI\ScoreStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SRetreat.cpp">
+      <Filter>Source Files\AI\SoloAI\ScoreStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SoloAI.cpp">
+      <Filter>Source Files\AI\SoloAI</Filter>
+    </ClCompile>
+    <ClCompile Include="Retreat.cpp">
+      <Filter>Source Files\AI\NeutralAI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,26 +266,89 @@
     <ClInclude Include="ActionHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArbitraryAI.h">
-      <Filter>Header Files\AI</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseState.h">
-      <Filter>Header Files\AI</Filter>
+    <ClInclude Include="..\Networking Server\Networking Server\Network.h">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="GuardState.h">
-      <Filter>Header Files\AI</Filter>
+    <ClInclude Include="..\Networking Server\Networking Server\Server.h">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="HomeState.h">
-      <Filter>Header Files\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="OffState.h">
-      <Filter>Header Files\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="PyramidCOllisionShape.h">
-      <Filter>Header Files\Physics\CollisionShapes</Filter>
+    <ClInclude Include="..\Networking\Networking\Client.h">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
     <ClInclude Include="CylinderCollisionShape.h">
       <Filter>Header Files\Physics\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="PiramidCollisionShape.h">
+      <Filter>Header Files\Physics\CollisionShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="AggressiveAI.h">
+      <Filter>Header Files\AI\AggressiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="AggressiveBaseState.h">
+      <Filter>Header Files\AI\AggressiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Header Files\AI\AggressiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="PuntPlayer.h">
+      <Filter>Header Files\AI\AggressiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Chase.h">
+      <Filter>Header Files\AI\NeutralAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Dribble.h">
+      <Filter>Header Files\AI\NeutralAI</Filter>
+    </ClInclude>
+    <ClInclude Include="NeutralAI.h">
+      <Filter>Header Files\AI\NeutralAI</Filter>
+    </ClInclude>
+    <ClInclude Include="NeutralBaseState.h">
+      <Filter>Header Files\AI\NeutralAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Defend.h">
+      <Filter>Header Files\AI\DefensiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="DefensiveAI.h">
+      <Filter>Header Files\AI\DefensiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="DefensiveBaseState.h">
+      <Filter>Header Files\AI\DefensiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Patrol.h">
+      <Filter>Header Files\AI\DefensiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Punt.h">
+      <Filter>Header Files\AI\DefensiveAI</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDefend.h">
+      <Filter>Header Files\AI\SoloAI\DefendStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SPunt.h">
+      <Filter>Header Files\AI\SoloAI\DefendStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SChase.h">
+      <Filter>Header Files\AI\SoloAI\ScoreStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SDribble.h">
+      <Filter>Header Files\AI\SoloAI\ScoreStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SRetreat.h">
+      <Filter>Header Files\AI\SoloAI\ScoreStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SoloAI.h">
+      <Filter>Header Files\AI\SoloAI</Filter>
+    </ClInclude>
+    <ClInclude Include="SoloBaseState.h">
+      <Filter>Header Files\AI\SoloAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Retreat.h">
+      <Filter>Header Files\AI\NeutralAI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

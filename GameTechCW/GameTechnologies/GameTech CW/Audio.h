@@ -2,47 +2,50 @@
 
 
 #include "../../FMOD/inc/fmod.hpp"
+#include "../../FMOD/inc/fmod_errors.h"
 #include "string.h"
 #include "../nclgl/Camera.h"
+#include "../../ncltech/PhysicsObject.h"
+#include "../../ncltech/PhysicsEngine.h"
 
 
-class Audio 
+class Audio
 {
-
+	friend class Scene;
+	friend class MyScene;
 public:
-	Audio();
-	~Audio();
-
-	void GetCameraPosition(Camera* camera, FMOD_VECTOR Position);
-	void GetCameraForward(Camera* camera, FMOD_VECTOR CameraForward);
-	void GetCameraUp(Camera* camera, FMOD_VECTOR CameraUp);
-	void GetCameraVeloicity(Camera* camera, FMOD_VECTOR CameraVelocity, FMOD_VECTOR CameraPosition, FMOD_VECTOR LastPosition);
-
-	void GetCameraInfo(Camera* camera, FMOD_RESULT result, FMOD::System* system, FMOD_VECTOR CameraPosition, FMOD_VECTOR CameraForward, FMOD_VECTOR CameraUp, FMOD_VECTOR CameraVelocity, FMOD_VECTOR LastPosition);
-	void CreateSystem(FMOD_RESULT result, FMOD::System *system);
-	void LoadSound(const char* file, FMOD::Sound *sound, FMOD_RESULT result ,FMOD::System* system);
-	void AddSound(FMOD_VECTOR pos, FMOD_VECTOR vel, FMOD_RESULT result, FMOD::System* system, FMOD::Channel* channel1, FMOD::Sound *sound1);
-
-
-	/*FMOD_VECTOR CameraPosition;
-	FMOD_VECTOR CameraForward;
-	FMOD_VECTOR CameraUp;
-	FMOD_VECTOR CameraVelocity;
-	FMOD_VECTOR LastPosition;*/
-	/*FMOD::Sound *sound1, *sound2;
 	
-	FMOD::Channel   *channel1 = 0, *channel2 = 0;
-	void            *extradriverdata = 0;
-	bool             listenerflag = true;
-*/
-	const int   INTERFACE_UPDATETIME = 50;      // 50ms update for interface
-	const float DISTANCEFACTOR = 1.0f;          // Units per meter.  I.e feet would = 3.28.  centimeters would = 100.
+	static void GetCameraInfo(Camera* camera);
+	static void AddSound(FMOD_VECTOR pos, FMOD_VECTOR vel, FMOD::Channel* channel1, FMOD::Sound *sound1, float volume);
+	static void GetVelocity(PhysicsObject* object, FMOD_VECTOR velocity);
+	static  FMOD_VECTOR GetPosition(PhysicsObject* object);
 
+	static void InitialiseAudio();
+	static void ReleaseAudio();
+	static void LoadSounds();
+	static void UpdateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, float frequency, float volume, FMOD::Channel* channel);
+	static void CollisionSound(PhysicsObject* objectA, PhysicsObject* objectB, float time);
+
+	static FMOD_RESULT Result;
+	static FMOD::System *AudioSystem;
+	static FMOD::Channel   *channel1, *channel2, *channel3, *channel4;
 
 protected:
+
+	static Vector3 Projdir;
+	static FMOD_VECTOR CameraPosition;
+	static FMOD_VECTOR CameraForward;
+	static FMOD_VECTOR CameraUp;
+	static FMOD_VECTOR CameraVelocity;
+	static FMOD_VECTOR LastPosition;
+
+	static FMOD::Sound *Car, *Crash, *Ball, *Wall;
 	
-	Vector3 Projdir;
-	
+
+	static const int   INTERFACE_UPDATETIME;      // 50ms update for interface
+	static const float DISTANCEFACTOR;
+	static void   *extradriverdata;
+
 private:
-	
+
 };

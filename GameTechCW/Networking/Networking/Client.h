@@ -4,7 +4,8 @@ class Client : public Network {
 public:
 	Client();
 	~Client();
-	void _stdcall connection();
+	bool _stdcall connection();
+	SOCKET getListeningSocket();
 	SOCKET getIncSocket();
 private:
 	SOCKET inc = NULL;

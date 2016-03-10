@@ -62,11 +62,6 @@ void AddPossibleCollisionAxis(Vector3& axis, std::vector<Vector3>* possible_coll
 
 bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const
 {
-	/* 
-	TUTORIAL 6 CODE - Seperating Axis Theorem 1
-	TUTORIAL 7 CODE - Seperating Axis Theorem 2
-	*/
-
 	CollisionData cur_colData;
 	CollisionData best_colData;
 	//in case the overhead
@@ -154,8 +149,8 @@ bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const Physics
 		}
 	}
 
-	NCLDebug::DrawHairLine(obj2->GetPosition(), obj2->GetPosition() + best_colData.normal,
-		Vector4(1.0f, .0f, 1.f, 1.f));
+	//NCLDebug::DrawHairLine(obj2->GetPosition(), obj2->GetPosition() + best_colData.normal,
+	//	Vector4(1.0f, .0f, 1.f, 1.f));
 
 	if (out_coldata)
 		*out_coldata = best_colData;
@@ -163,14 +158,94 @@ bool CollisionDetection::CheckCollision(const PhysicsObject* obj1, const Physics
 	return true;
 }
 
-bool CollisionDetection::CheckCollisionAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const
+bool CollisionDetection::CheckDistance(const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, float& penetration) const
 {
-	/*
-	TUTORIAL 6 CODE - Seperating Axis Theorem 1
-	*/
+	float best_penetration = 0;
+	float cur_penetration = 0;
+
+	std::vector<Vector3> possible_collision_axes;
+
+	shape1->GetCollisionAxes(obj1, &possible_collision_axes);
+	shape2->GetCollisionAxes(obj2, &possible_collision_axes);
+
+	std::vector<CollisionEdge> shape1_edges;
+	std::vector<CollisionEdge> shape2_edges;
+	shape1->GetEdges(obj1, &shape1_edges);
+	shape2->GetEdges(obj2, &shape2_edges);
+
+	for (const CollisionEdge& edge1 : shape1_edges) {
+		for (const CollisionEdge& edge2 : shape2_edges)
+		{
+			Vector3 e1 = edge1.posB - edge1.posA;
+			Vector3 e2 = edge2.posB - edge2.posA;
+
+			e1.Normalise();
+			e2.Normalise();
+
+			AddPossibleCollisionAxis(Vector3::Cross(e1, e2),
+				&possible_collision_axes);
+		}
+	}
+
+	bool shape1_isSphere = shape1_edges.empty();
+	bool shape2_isSphere = shape2_edges.empty();
+
+	if (shape1_isSphere && shape2_isSphere) {
+		Vector3 axis = obj2->GetPosition() - obj1->GetPosition();
+		axis.Normalise();
+		AddPossibleCollisionAxis(axis, &possible_collision_axes);
+	}
+	else if (shape1_isSphere)
+	{
+		Vector3 p =
+			GetClosestPointOnEdges(obj1->GetPosition(), shape2_edges);
+		Vector3 p_t = obj1->GetPosition() - p;
+		p_t.Normalise();
+		AddPossibleCollisionAxis(p_t, &possible_collision_axes);
+	}
+	else if (shape2_isSphere) 
+	{
+		Vector3 p =
+			GetClosestPointOnEdges(obj2->GetPosition(), shape1_edges);
+		Vector3 p_t = obj2->GetPosition() - p;
+		p_t.Normalise();
+		AddPossibleCollisionAxis(p_t, &possible_collision_axes);
+	}
+
+	for (const Vector3& axis : possible_collision_axes) {
+		cur_penetration = CheckDisAxis(axis, obj1, obj2, shape1, shape2);
+		if (cur_penetration >= best_penetration){
+			best_penetration = cur_penetration;
+		}
+	}
+	
+	penetration = best_penetration;
+
+	return true;
+}
+
+float CollisionDetection::CheckDisAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2) const {
 	Vector3 min1, min2, max1, max2;
 
-	//get the min/max vertices along the axis from shape1 and shape2
+	shape1->GetMinMaxVertexOnAxis(obj1, axis, &min1, &max1);
+	shape2->GetMinMaxVertexOnAxis(obj2, axis, &min2, &max2);
+
+	float minCorrelation1 = Vector3::Dot(axis, min1);
+	float maxCorrelation1 = Vector3::Dot(axis, max1);
+	float minCorrelation2 = Vector3::Dot(axis, min2);
+	float maxCorrelation2 = Vector3::Dot(axis, max2);
+
+	if (minCorrelation1 <= minCorrelation2
+		&& maxCorrelation1 <= minCorrelation2) return (minCorrelation2 - maxCorrelation1);
+	if (minCorrelation2 <= minCorrelation1
+		&& maxCorrelation2 <= minCorrelation1) return (minCorrelation1 - maxCorrelation2);
+	else return 0;
+}
+
+
+bool CollisionDetection::CheckCollisionAxis(const Vector3& axis, const PhysicsObject* obj1, const PhysicsObject* obj2, const CollisionShape* shape1, const CollisionShape* shape2, CollisionData* out_coldata) const
+{
+	Vector3 min1, min2, max1, max2;
 
 	shape1->GetMinMaxVertexOnAxis(obj1, axis, &min1, &max1);
 	shape2->GetMinMaxVertexOnAxis(obj2, axis, &min2, &max2);

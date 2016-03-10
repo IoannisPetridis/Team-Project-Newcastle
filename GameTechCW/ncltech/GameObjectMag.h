@@ -1,15 +1,12 @@
 #pragma once
-//#include "GameObject.h"
+
 #include "AssetsManager.h"
-//#include "SimpleMeshObject.h"
 #include "../nclgl/OBJMesh.h"
 #include "../nclgl/Mesh.h"
 #include "../ncltech/CollisionShape.h"
 #include "../ncltech/CuboidCollisionShape.h"
 #include "../ncltech/SphereCollisionShape.h"
-#include "../ncltech//PyramidCOllisionShape.h"
-#include "../ncltech/CylinderCollisionShape.h"
-//#include "Scene.h"
+#include <ncltech\PiramidCollisionShape.h>
 #include "ActionHandler.h"
 #include <ncltech\PhysicsEngine.h>
 #include <ncltech\NCLDebug.h>
@@ -22,18 +19,23 @@ class MyScene;
 
 class GameObjectMag {
 public:
-	void	GOMInit(Scene* m_scene);
-	
-	void	BuildNodeLists(GameObject* node, Scene* m_scene);
-	void	SortNodeLists(Scene* m_scene);
-	void	ClearNodeLists(Scene* m_scene);
+	void	GOM_Loading(Scene* m_scene);
+	void	GOM_GamePlay(Scene* m_scene);
 
-	void		AddGameObject(GameObject* game_object);
-	void		RemoveGameObject(GameObject* game_object);
+	void AIStuff(Scene* m_scene);
+	void SoloAIStuff(Scene* m_scene);
+	void PowerUpsLoader();
 
-	GameObject* FindGameObject(const std::string& name);
+	void SetID(int i) { id = i; }
+	int GetID() const {
+		return id;
+	}
+
+	bool AIChoice;
 
 protected:
+	int id;
+
 	void	GOphysicsSetting(
 		bool Gravity,
 		bool CollisionCheck
@@ -44,6 +46,4 @@ protected:
 		bool Effect2,
 		bool Effect3
 		);
-
-	GameObject*	 m_RootGameObject;
 };

@@ -22,3 +22,10 @@ float	 GameTimer::GetTimedMS() {
 	lastTime	= a;
 	return b;
 }
+
+float GameTimer::GetLastTime(){
+
+	float a = GetMS();
+	float b = a - lastTime;
+	return b;
+}

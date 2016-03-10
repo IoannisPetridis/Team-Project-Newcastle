@@ -64,8 +64,15 @@ public:
 
 	void SetCollisionShape(CollisionShape* colShape)	{ m_colShape = colShape; }
 
+	//For Collision
+	void SetCar(bool a){ car = a; }
+	bool GetCar(){ return car; }
+	bool car = false;
+	bool shoulddelete = false;
+	bool removemesh = false;
 
 	void SetOnCollisionCallback(std::function<bool(PhysicsObject*)> onCollisionFunction) { m_OnCollisionCallback = onCollisionFunction; }
+
 
 	//<--------- Additional Variables ------------->
 	std::vector<Vector3> verletPos;
@@ -76,6 +83,12 @@ public:
 	bool update_con;
 	int score_counter;
 	std::string name;
+
+
+	//Damage
+	int GetHP(){ return HP; }
+	void SetHP(int a){ HP = a; }
+	int HP = 100;
 
 protected:
 	GameObject*			m_Parent;
@@ -103,4 +116,5 @@ protected:
 	//<----------COLLISION------------>
 	CollisionShape* m_colShape;
 	std::function<bool(PhysicsObject*)> m_OnCollisionCallback;  //Returns true to process the collision, false to ignore
+	
 };
