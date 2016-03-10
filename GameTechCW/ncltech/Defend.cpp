@@ -88,7 +88,7 @@ Vector3 Defend::NodeCalculation(DefensiveAI* Arb) {
 	DistGoalBall = GoalBallVec.Length();
 	GoalBallVec.Normalise();
 
-	defendnode = FriendlyGoalPosition + (GoalBallVec * DistGoalBall * 0.2);
+	defendnode = FriendlyGoalPosition + (GoalBallVec * DistGoalBall * 0.4);
 
 	return defendnode;
 }

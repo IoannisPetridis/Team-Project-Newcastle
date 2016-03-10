@@ -1,5 +1,6 @@
 #include "SDribble.h"
 #include <ncltech\Scene.h>
+#include "AssetsManager.h"
 
 SDribble::SDribble(SoloAI* Arb) {
 	GroundHeight = 1.0f;
@@ -98,7 +99,7 @@ void SDribble::SetStateBool(SoloAI* Arb) {
 		Arb->statebool = true;
 	}
 
-	if (ballgoallength < goalgoallength * 0.35) {
+	if (ballgoallength < goalgoallength * 0.35 && !AssetsManager::Player_1->GetInvisible()) {
 		Arb->statebool = false;
 	}
 }

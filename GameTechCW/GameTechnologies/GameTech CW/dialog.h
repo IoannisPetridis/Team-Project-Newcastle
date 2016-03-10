@@ -37,7 +37,7 @@ class Dialog : public QDialog
     QLabel *texlabel = new QLabel("Texture:  ");
     QLabel *sizeoptions = new QLabel("Small");
     QLabel *skilloptions = new QLabel("Ball Pull");
-    QLabel *texoptions = new QLabel("Checker");
+    QLabel *texoptions = new QLabel("Blue Team");
     QLabel *textcubeimg = new QLabel;
 
     QPushButton *acceptbutton = new QPushButton("Accept");
@@ -46,7 +46,7 @@ class Dialog : public QDialog
     QSlider *skillslider = new QSlider;
     QSlider *texslider = new QSlider;
 
-    QFont dialogfont = QFont("CordiaUPC", 16);
+	QFont dialogfont = QFont("Lucida Console", 10);
 
 public:
     explicit Dialog(QWidget *parent = 0);

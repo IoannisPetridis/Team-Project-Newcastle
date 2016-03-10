@@ -21,6 +21,7 @@ GLuint AssetsManager::m_Blue = 0;
 GLuint AssetsManager::m_GlassBUMP = 0;
 GLuint AssetsManager::m_Red = 0;
 GLuint AssetsManager::m_BlueCat = 0;
+GLuint AssetsManager::m_Lightning = 0;
 
 //GameObject Assets
 SimpleMeshObject* AssetsManager::GOInstance;
@@ -64,6 +65,7 @@ void AssetsManager::InitializeMeshes()
 	m_Loading = LoadTexture("loading.tga");
 	m_Red = LoadTexture("RedSeamless.jpg");
 	m_BlueCat = LoadTexture("blueCat.jpg");
+	m_Lightning = LoadTexture("bluelightning.jpg");
 
 
 	m_pPlane = Mesh::GenerateQuadTexCoordCol(Vector2(1.f, 1.f), Vector2(0.0f, 1.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));

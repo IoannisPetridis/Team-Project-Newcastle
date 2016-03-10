@@ -55,39 +55,29 @@ bool MyScene::InitialiseGL()
 		AssetsManager::InitializeMeshes();
 		GOM->GOM_GamePlay(this);
 	
-		//AssetsManager::Player_1 = new Player("car");
 		AssetsManager::Player_1->SetScene(this);
 		AssetsManager::Player_1->SetMesh(AssetsManager::Cube(), false);
 
 		//3 choices of car texture
-		//these textures are just placeholders from what we had
 		if (MainWindow::playertexture == 1){
 			
 			AssetsManager::Player_1->SetTexture(AssetsManager::m_Blue, false);
 		}
 
 		if (MainWindow::playertexture == 2){
-			AssetsManager::Player_1->SetTexture(AssetsManager::m_CheckerboardTex, false); //wood texture
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_Lightning, false);
 		}
 
 		if (MainWindow::playertexture == 3){
-			AssetsManager::Player_1->SetTexture(AssetsManager::m_BlueCat, false); //grass texture
+			AssetsManager::Player_1->SetTexture(AssetsManager::m_BlueCat, false);
 		}
 
-
-
 		//4 choices of car size, 1 2 3 4
-		int size= MainWindow::playersize * 0.5;
-		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
-		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3((MainWindow::playersize), (MainWindow::playersize), (MainWindow::playersize))));
-		AssetsManager::Player_1->SetBoundingRadius((MainWindow::playersize) * (MainWindow::playersize));
+		float size = (MainWindow::playersize * 0.5);
+		AssetsManager::Player_1->SetLocalTransform(Matrix4::Scale(Vector3(size, size, size)));
+		AssetsManager::Player_1->Physics()->SetCollisionShape(new CuboidCollisionShape(Vector3(size, size, size)));
+		AssetsManager::Player_1->SetBoundingRadius(size * size);
 		AssetsManager::Player_1->Physics()->SetCar(true);
-		//AssetsManager::Player_1->Physics()->name = "car";
-		//AssetsManager::Player_1->Physics()->SetInverseMass(0.06f);
-		//AssetsManager::Player_1->Physics()->SetPosition(Vector3(10.0f, 5.0f, 10.0f));
-		//Matrix3 inertia(0.1f, 0.0f, 0.0f, 0.0f, 1.1f, 0.0f, 0.0f, 0.0f, 0.1f);
-		//AssetsManager::Player_1->Physics()->SetInverseInertia(inertia);
-		//this->AddGameObject(AssetsManager::Player_1);
 	}
 
 	//Initialize all game objects
@@ -161,7 +151,7 @@ void MyScene::UpdateScene(float msec)
 
 	//PowerUps
 	if (AssetsManager::Player_1->invisible){
-		if (PowerUps::InvisTimer.GetLastTime() > 20000){
+		if (PowerUps::InvisTimer.GetLastTime() > 17500){
 			AssetsManager::Player_1->SetColour(Vector4(AssetsManager::Player_1->GetColour().x, AssetsManager::Player_1->GetColour().y, AssetsManager::Player_1->GetColour().z, 1.f));
 			AssetsManager::Player_1->invisible = false;
 		}
@@ -196,7 +186,7 @@ void MyScene::UpdateScene(float msec)
 
 
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_I)){
-		AssetsManager::Player_1->SetPowerUpState("banana");
+		AssetsManager::Player_1->SetPowerUpState("invisibility");
 	}
 
 	if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_Z)){

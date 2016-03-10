@@ -20,6 +20,7 @@ Scene* Transition_scene = NULL;
 bool isStillLoad = true;
 bool isScoring = false;
 bool GameStart = false;
+bool StartMenuPassed = false;
 
 int Quit(bool pause = false, const string &reason = "") { 
 	if (scene)
@@ -274,7 +275,22 @@ int main()
 
 			scene->RenderScene();
 
-			//check if need end game menu
+			//QT START MENU
+			if (!StartMenuPassed){
+				Window::GetWindow().GetTimer()->GetTimedMS();
+				MainWindow::isStartWindow = true;
+				Window::GetWindow().ShowOSPointer(true);
+
+				char *argv[] = { "windowinwindow", "arg1", "arg2", NULL };
+				int argc = sizeof(argv) / sizeof(char*)-1;
+				main2(argc, argv);
+
+				StartMenuPassed = true;
+				PhysicsEngine::Instance()->SetPaused(false);
+				Window::GetWindow().GetTimer()->GetTimedMS();
+			}
+
+			//QT END GAME MENU
 			if (ActionHandler::Instance()->GameOver){
 				Window::GetWindow().GetTimer()->GetTimedMS();
 
@@ -303,7 +319,6 @@ int main()
 				PhysicsEngine::Instance()->SetPaused(false);
 				Window::GetWindow().GetTimer()->GetTimedMS();
 			}
-
 
 			//HUD for scoring 
 			{

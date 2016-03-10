@@ -125,7 +125,6 @@ void Audio::LoadSounds(){
 	Result = AI->set3DMinMaxDistance(0.5f * DISTANCEFACTOR, 1000.0f * DISTANCEFACTOR);
 	Result = AudioSystem->playSound(AI, 0, true, &channel9);
 
-	Result = AudioSystem->playSound(End, 0, true, &channel1);
 	Result = AudioSystem->playSound(Background, 0, true, &channel8);
 
 

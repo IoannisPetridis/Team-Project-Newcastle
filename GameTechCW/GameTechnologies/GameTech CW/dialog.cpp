@@ -88,7 +88,7 @@ Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
 	texslider->setStyleSheet("border: 0px solid white");
 
     //pixmap
-    textcubeimg->setPixmap(QPixmap("../../Qt/icons/checkertexture150x125.png"));
+    textcubeimg->setPixmap(QPixmap("../../Qt/icons/blue.png"));
 	textcubeimg->setStyleSheet("border: 0px solid white");
 
     //horizontal layouts
@@ -152,7 +152,7 @@ void Dialog::skillsliderValueChanged(int value){
         skilloptions->setText("Ball Pull");
     }
     if (value == 2) {
-        skilloptions->setText("Midpoint Teleport");
+        skilloptions->setText("Teleport");
     }
     if (value == 3) {
         skilloptions->setText("AI Stun");
@@ -164,18 +164,18 @@ void Dialog::skillsliderValueChanged(int value){
 void Dialog::texsliderValueChanged(int value){
 
     if(value == 1){
-    this->texoptions->setText("Blue");
-    textcubeimg->setPixmap(QPixmap("../../Qt/icons/checkertexture150x125.png"));
+    this->texoptions->setText("Blue Team");
+    textcubeimg->setPixmap(QPixmap("../../Qt/icons/blue.png"));
     }
 
     if(value == 2){
-    this->texoptions->setText("White");
-    textcubeimg->setPixmap(QPixmap("../../Qt/icons/checkertexturepink150x125.png"));
+    this->texoptions->setText("Lightning");
+    textcubeimg->setPixmap(QPixmap("../../Qt/icons/lightning.png"));
     }
 
     if(value == 3){
-    this->texoptions->setText("Green");
-    textcubeimg->setPixmap(QPixmap("../../Qt/icons/checkertextureblue150x125.png"));
+    this->texoptions->setText("Space Cats");
+    textcubeimg->setPixmap(QPixmap("../../Qt/icons/cat.png"));
     }
 
     texchoice = value;

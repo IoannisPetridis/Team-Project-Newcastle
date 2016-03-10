@@ -10,7 +10,7 @@ bool bananaspray = false;
 
 std::function<bool(PhysicsObject*)> bananaSpin = [&](PhysicsObject* otherObject) {
 	if (otherObject->car){
-		otherObject->SetAngularVelocity(Vector3(0.f, 8.f, 0.f));
+		otherObject->SetAngularVelocity(Vector3(0.f, 10.f, 0.f));
 		otherObject->SetLinearVelocity(otherObject->GetLinearVelocity()*0.85);
 		
 			AssetsManager::BananaPU->Physics()->SetPosition(Vector3(AssetsManager::BananaPU->Physics()->GetPosition().x, -10.f, AssetsManager::BananaPU->Physics()->GetPosition().z));

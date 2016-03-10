@@ -1,5 +1,6 @@
 #include "PuntPlayer.h"
 #include <ncltech\Scene.h>
+#include "ActionHandler.h"
 
 PuntPlayer::PuntPlayer(AggressiveAI* Arb) {
 	GroundHeight = 1.0f;
@@ -52,6 +53,10 @@ void PuntPlayer::CheckTriggers(AggressiveAI* Arb) {
 	AIPosition = Arb->scene->FindGameObject("AggressiveAI")->Physics()->GetPosition();
 	AINodeVec = AIPosition - PuntPlayerNode;
 	MagDistAINode = AINodeVec.LengthSquared();
+
+	if (AssetsManager::Player_1->GetInvisible()) {
+		Arb->SetState(3);
+	}
 
 	if (MagDistAINode < 100) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
 		Arb->SetState(1);

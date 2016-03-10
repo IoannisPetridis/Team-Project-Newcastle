@@ -194,7 +194,7 @@ void ActionHandler::Update(float dt) {
 		Gametimer = 0.0f;
 		GameOver = true;
 		PhysicsEngine::Instance()->SetPaused(true);
-		Audio::channel1->setPaused(false);
+		Audio::AddSound({ 0.f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel1, Audio::End, 5);
 	}
 	if (powerupspawntimer > 10){
 
@@ -463,7 +463,7 @@ void ActionHandler::ResetGame(){
 			AssetsManager::SoloAI->Physics()->SetPosition(Vector3(30.0f, 15.0f, 60.0f));
 
 		}
-		Gametimer = 25.0f;
+		Gametimer = 120.0f;
 		RedScore = 0;
 		BlueScore = 0;
 		PhysicsEngine::Instance()->SetPaused(false);

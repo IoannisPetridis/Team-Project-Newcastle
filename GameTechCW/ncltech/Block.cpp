@@ -1,5 +1,6 @@
 #include "Block.h"
 #include <ncltech\Scene.h>
+#include "AssetsManager.h"
 
 Block::Block() {
 	GroundHeight = 1.0f;
@@ -42,6 +43,10 @@ void Block::CheckTriggers(AggressiveAI* Arb) {
 
 	PlayerBallVec = Arb->scene->FindGameObject("ball")->Physics()->GetPosition() - Arb->scene->FindGameObject("car")->Physics()->GetPosition();
 	MagDistPlayerBall = PlayerBallVec.LengthSquared();
+
+	if (AssetsManager::Player_1->GetInvisible()) {
+		Arb->SetState(3);
+	}
 
 	if (MagDistPlayerBall < 600) {//if turned off returns to home state, which will then trigger guard state instantly if appropriate
 		Arb->SetState(2);

@@ -1,9 +1,70 @@
-﻿Build started 09/03/2016 19:57:55.
-     1>Project "D:\Team Project\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
+﻿Build started 10/03/2016 14:23:52.
+     1>Project "D:\Team Project\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GameObjectMag.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "..\Networking Server\Networking Server\Network.cpp" "..\Networking Server\Networking Server\Server.cpp" ..\Networking\Networking\Client.cpp ActionHandler.cpp AggressiveAI.cpp AssetsManager.cpp Block.cpp Chase.cpp CollisionDetection.cpp Confused.cpp Constraint.cpp CuboidCollisionShape.cpp CylinderCollisionShape.cpp Defend.cpp DefensiveAI.cpp Dribble.cpp GameObjectMag.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp NeutralAI.cpp Patrol.cpp PhysicsEngine.cpp PhysicsObject.cpp PiramidCollisionShape.cpp Player.cpp PowerUps.cpp Punt.cpp PuntPlayer.cpp Retreat.cpp Scene.cpp SChase.cpp SDefend.cpp SDribble.cpp SimpleMeshObject.cpp SoloAI.cpp SphereCollisionShape.cpp SPunt.cpp SRetreat.cpp
+         Network.cpp
+         Server.cpp
+         Client.cpp
+         ActionHandler.cpp
+         AggressiveAI.cpp
+     1>AggressiveAI.cpp(88): warning C4101: 'angle' : unreferenced local variable
+     1>AggressiveAI.cpp(88): warning C4101: 'dotproduct' : unreferenced local variable
+         AssetsManager.cpp
+         Block.cpp
+         Chase.cpp
+         CollisionDetection.cpp
+         Confused.cpp
+         Constraint.cpp
+         CuboidCollisionShape.cpp
+         CylinderCollisionShape.cpp
+         Defend.cpp
+     1>Defend.cpp(91): warning C4305: 'argument' : truncation from 'double' to 'const float'
+         DefensiveAI.cpp
+     1>DefensiveAI.cpp(82): warning C4101: 'angle' : unreferenced local variable
+     1>DefensiveAI.cpp(82): warning C4101: 'dotproduct' : unreferenced local variable
+         Dribble.cpp
          GameObjectMag.cpp
      1>GameObjectMag.cpp(19): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         NCLDebug.cpp
+         GameObject.cpp
+         Hull.cpp
+         Compiling...
+         Manifold.cpp
+         NeutralAI.cpp
+     1>NeutralAI.cpp(83): warning C4101: 'angle' : unreferenced local variable
+     1>NeutralAI.cpp(83): warning C4101: 'dotproduct' : unreferenced local variable
+         Patrol.cpp
+     1>Patrol.cpp(77): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Patrol.cpp(78): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Patrol.cpp(79): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+         PhysicsEngine.cpp
+         PhysicsObject.cpp
+         PiramidCollisionShape.cpp
+         Player.cpp
+         PowerUps.cpp
+     1>PowerUps.cpp(14): warning C4305: 'argument' : truncation from 'double' to 'const float'
+     1>PowerUps.cpp(143): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>PowerUps.cpp(154): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>PowerUps.cpp(185): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+         Punt.cpp
+         PuntPlayer.cpp
+         Retreat.cpp
+     1>Retreat.cpp(68): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Retreat.cpp(70): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+         Scene.cpp
+         SChase.cpp
+         SDefend.cpp
+     1>SDefend.cpp(119): warning C4305: 'argument' : truncation from 'double' to 'const float'
+         SDribble.cpp
+         SimpleMeshObject.cpp
+         SoloAI.cpp
+     1>SoloAI.cpp(95): warning C4101: 'angle' : unreferenced local variable
+     1>SoloAI.cpp(95): warning C4101: 'dotproduct' : unreferenced local variable
+         SphereCollisionShape.cpp
+         SPunt.cpp
+         SRetreat.cpp
+     1>SRetreat.cpp(105): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>SRetreat.cpp(107): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"D:\Team Project\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib" /NOLOGO /LTCG Release\Network.obj
          Release\Server.obj
@@ -14,6 +75,7 @@
          Release\Block.obj
          Release\Chase.obj
          Release\CollisionDetection.obj
+         Release\Confused.obj
          Release\Constraint.obj
          Release\CuboidCollisionShape.obj
          Release\CylinderCollisionShape.obj
@@ -45,8 +107,8 @@
          Release\SPunt.obj
          Release\SRetreat.obj
          ncltech.vcxproj -> D:\Team Project\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\ncltech.lib
-     1>Done Building Project "D:\Team Project\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Build target(s)).
+     1>Done Building Project "D:\Team Project\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.11
+Time Elapsed 00:00:20.03

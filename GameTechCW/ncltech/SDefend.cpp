@@ -1,6 +1,7 @@
 #include "SDefend.h"
 #include "Math.h"
 #include "NCLDebug.h"
+#include "AssetsManager.h"
 
 #define PI 3.14159265
 #define E 2.71828
@@ -92,11 +93,11 @@ void SDefend::SetStateBool(SoloAI* Arb) {
 
 	//cout << ballgoallength << " " << (goalgoallength) << endl;
 
-	if (ballgoallength >= goalgoallength * 0.4) {
+	if (ballgoallength >= goalgoallength * 0.4 || AssetsManager::Player_1->GetInvisible()) {
 		Arb->statebool = true;
 	}
 
-	if (ballgoallength < goalgoallength * 0.35) {
+	if (ballgoallength < goalgoallength * 0.35 && !AssetsManager::Player_1->GetInvisible()) {
 		Arb->statebool = false;
 	}
 }
@@ -115,7 +116,7 @@ Vector3 SDefend::NodeCalculation(SoloAI* Arb) {
 	DistGoalBall = GoalBallVec.Length();
 	GoalBallVec.Normalise();
 
-	defendnode = FriendlyGoalPosition + (GoalBallVec * DistGoalBall * 0.2);
+	defendnode = FriendlyGoalPosition + (GoalBallVec * DistGoalBall * 0.4);
 
 	return defendnode;
 }

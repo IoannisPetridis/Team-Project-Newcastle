@@ -31,7 +31,7 @@ public:
 	string GetPowerUpState(){ return PowerUpState; }
 	Vector3 GetPlayerRearNormal(){ return Rear_normal; }
 	bool invisible = false;
-
+	bool GetInvisible(){ return invisible; }
 	//Initialization data
 protected:
 	Camera* P_camera;
@@ -55,7 +55,7 @@ protected:
 	Vector3 Proj_dir;
 
 	void CameraFollowPlayerFunc();
-	bool CameraFollowPlayer = false;
+	bool CameraFollowPlayer = true;
 
 	void CameraTrackObjFunc(GameObject* go);
 	bool CameraTrackObj = false;

@@ -12,6 +12,7 @@
 #include "AggressiveAI.h"
 #include "Block.h"
 #include "PuntPlayer.h"
+#include "Confused.h"
 
 AggressiveAI::AggressiveAI(const std::string& name, Scene* m_scene) : SimpleMeshObject(name) {
 
@@ -59,6 +60,10 @@ void AggressiveAI::SetState(int setStateEnum) { //sets the state of the AI (when
 
 	if (setStateEnum == 2) {
 		currentState = new PuntPlayer(this);
+	}
+
+	if (setStateEnum == 3) {
+		currentState = new Confused(this);
 	}
 }
 

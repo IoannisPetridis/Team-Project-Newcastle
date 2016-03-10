@@ -10,9 +10,12 @@ int MainWindow::playersize = 1;
 int MainWindow::playerskill = 1;
 int MainWindow::playertexture = 1;
 std::string MainWindow::playername = "Player1";
+
+//window choices (start as main menu so false0
 bool MainWindow::AIchoice = false;
 bool MainWindow::isExitWindow = false;
 bool MainWindow::isPauseWindow = false;
+bool MainWindow::isStartWindow = false;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
 	ui->setupUi(this);
@@ -26,35 +29,38 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 	vertlayout = new QVBoxLayout(centralwidget);
 	vertlayout->setAlignment(Qt::AlignCenter);
 
-	//sets fonts for title & buttons
-	QFont font("CordiaUPC", 50, QFont::Bold, false);
-	title->setFont(font);
 	title->setAlignment(Qt::AlignCenter);
-	title->setText("<font color='white'>Rocket League V2.0</font>");
+	title->setPixmap(QPixmap("../../Qt/icons/cubeofduty2.png"));
 	title->setContentsMargins(0, 0, 0, 30);
-
-	//create endgame title font
-	QFont endgamefont("CordiaUPC", 70, QFont::Bold);
 
 	//IF THE END GAME SCREEN HAS BEEN TRIGGERED
 	if (isExitWindow){
-		title->setText("<font color='white'>GAME OVER</font>");
-		title->setFont(endgamefont);
+		title->setPixmap(QPixmap("../../Qt/icons/gameover.png"));
 		playbutton->setText("Play Again");
 		createbutton->hide();
 		AIbutton->hide();
 		exitbutton->setText("Quit");
 	}
 
+	//IF THE PAUSE SCREEN HAS BEEN TRIGGERED
 	if (isPauseWindow){
-		title->setText("<font color='white'>PAUSED</font>");
-		title->setFont(endgamefont);
+		title->setPixmap(QPixmap("../../Qt/icons/paused.png"));
 		playbutton->setText("Continue");
 		createbutton->hide();
 		AIbutton->hide();
 		exitbutton->setText("Quit?");
 	}
 
+	//IF THE START MENU HAS BEEN CALLED
+	if (isStartWindow){
+		title->setPixmap(QPixmap("../../Qt/icons/begingame.png"));
+		playbutton->setText("START");
+		createbutton->hide();
+		AIbutton->hide();
+		exitbutton->hide();
+	}
+
+	//buttton style sheets
 	playbutton->setStyleSheet(QString::fromUtf8("QPushButton{background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
 		"stop: 0 white, stop: 1 grey);"
 		"border-style: solid;"
@@ -83,7 +89,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 		"border-color: black;"
 		"border-radius: 15px;}"));
 
-    QFont buttonfont("CordiaUPC", 18);
+	//button font
+    QFont buttonfont("Lucida Console", 14);
     playbutton->setFont(buttonfont);
     createbutton->setFont(buttonfont);
     exitbutton->setFont(buttonfont);
@@ -121,12 +128,15 @@ MainWindow::~MainWindow()
     //delete vertlayout
 
     delete title;
+
     delete playbutton;
     delete createbutton;
+	delete AIbutton;
     delete exitbutton;
 }
 
-void MainWindow::play_game(){ //play button is clicked
+//this is called when play button clicked
+void MainWindow::play_game(){ 
 	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
 	this->close();
 
@@ -140,9 +150,15 @@ void MainWindow::play_game(){ //play button is clicked
 		Window::GetWindow().ShowOSPointer(false);
 		isPauseWindow = false;
 	}
+
+	if (isStartWindow){
+		Window::GetWindow().ShowOSPointer(false);
+		isStartWindow = false;
+	}
 }
 
-void MainWindow::exit_now(){ //exit button clicked
+//called when exit button clicked
+void MainWindow::exit_now(){
 	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
 
 	if (isPauseWindow){
@@ -153,7 +169,8 @@ void MainWindow::exit_now(){ //exit button clicked
 	exit(0);
 }
 
-void MainWindow::make_ai(){ //ai button clicked
+//called when ai button clicked
+void MainWindow::make_ai(){
 	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
 	if (!AIchoice){
 		AIbutton->setText("Three AI Mode");
@@ -166,12 +183,12 @@ void MainWindow::make_ai(){ //ai button clicked
 	}
 }
 
-void MainWindow::create_chara_triggered(){ //create chara button
+//called when create character button clicked
+void MainWindow::create_chara_triggered(){
    
 	Audio::AddSound({ 0.0f, 0.f, 0.f }, { 0.f, 0.f, 0.f }, Audio::channel7, Audio::ButtonSelect, 5);
    Dialog mDialog;
    mDialog.setModal(true);
-   //mDialog.setWindowIcon(QIcon("../../Qt/Icons/sicklogo.bmp"));
    mDialog.setWindowTitle("Character Creation");
    mDialog.setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
    mDialog.setMinimumSize(480, 400);
@@ -183,7 +200,7 @@ void MainWindow::create_chara_triggered(){ //create chara button
    int centreX = (screensize.width() - mDialog.width()) / 2.f;
    int centreY = (screensize.height() - mDialog.height()) / 2.f;
 
-   //sets qt window to centre of screen
+   //sets window to centre of screen
    QPoint screencoords;
    screencoords.setX(centreX);
    screencoords.setY(centreY);

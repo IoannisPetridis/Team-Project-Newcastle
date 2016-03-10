@@ -41,6 +41,7 @@ public:
 	static GLuint m_groundTex;
 	static GLuint m_Red;
 	static GLuint m_BlueCat;
+	static GLuint m_Lightning;
 
 	static SimpleMeshObject* GOInstance;
 	static SimpleMeshObject* Camera_Entity;

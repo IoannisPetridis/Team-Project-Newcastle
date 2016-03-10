@@ -1,4 +1,5 @@
 #include "SPunt.h"
+#include "AssetsManager.h"
 
 SPunt::SPunt(SoloAI* Arb) {
 	GroundHeight = 1.0f;
@@ -83,11 +84,11 @@ void SPunt::SetStateBool(SoloAI* Arb) {
 
 	//cout << ballgoallength << " " << (goalgoallength) << endl;
 
-	if (ballgoallength >= goalgoallength * 0.4) {
+	if (ballgoallength >= goalgoallength * 0.4 || AssetsManager::Player_1->GetInvisible()) {
 		Arb->statebool = true;
 	}
 
-	if (ballgoallength < goalgoallength * 0.35) {
+	if (ballgoallength < goalgoallength * 0.35 && !AssetsManager::Player_1->GetInvisible()) {
 		Arb->statebool = false;
 	}
 }

@@ -42,9 +42,14 @@ public:
     static int playerskill;
     static int playertexture;
     static std::string playername;
+
+	//ai toggle
 	static bool AIchoice;
+
+	//mainwindow is the main menu, start screen, end screen & pause screen
 	static bool isExitWindow;
 	static bool isPauseWindow;
+	static bool isStartWindow;
 
     //grabs data from dialog (chara creation) window
     void grabuserdata(int size, int skill, int tex, std::string name) {

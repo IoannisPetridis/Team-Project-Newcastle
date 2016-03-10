@@ -1,5 +1,6 @@
 #include "SRetreat.h"
 #include <ncltech\Scene.h>
+#include "AssetsManager.h"
 
 SRetreat::SRetreat(SoloAI* Arb) {
 	GroundHeight = 1.0f;
@@ -85,7 +86,7 @@ void SRetreat::SetStateBool(SoloAI* Arb) {
 		Arb->statebool = true;
 	}
 
-	if (ballgoallength < goalgoallength * 0.35) {
+	if (ballgoallength < goalgoallength * 0.35 && !AssetsManager::Player_1->GetInvisible()) {
 		Arb->statebool = false;
 	}
 }

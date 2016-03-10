@@ -81,6 +81,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Chase.cpp" />
     <ClCompile Include="CollisionDetection.cpp" />
+    <ClCompile Include="Confused.cpp" />
     <ClCompile Include="Constraint.cpp" />
     <ClCompile Include="CuboidCollisionShape.cpp" />
     <ClCompile Include="CylinderCollisionShape.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="CollisionDetection.h" />
     <ClInclude Include="CollisionShape.h" />
     <ClInclude Include="ConfigFileLoader.h" />
+    <ClInclude Include="Confused.h" />
     <ClInclude Include="Constraint.h" />
     <ClInclude Include="ControlHandler.h" />
     <ClInclude Include="CuboidCollisionShape.h" />

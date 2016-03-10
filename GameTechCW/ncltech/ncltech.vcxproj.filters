@@ -204,6 +204,9 @@
     <ClCompile Include="Retreat.cpp">
       <Filter>Source Files\AI\NeutralAI</Filter>
     </ClCompile>
+    <ClCompile Include="Confused.cpp">
+      <Filter>Source Files\AI\AggressiveAI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="Retreat.h">
       <Filter>Header Files\AI\NeutralAI</Filter>
+    </ClInclude>
+    <ClInclude Include="Confused.h">
+      <Filter>Header Files\AI\AggressiveAI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
