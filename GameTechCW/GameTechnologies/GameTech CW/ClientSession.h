@@ -31,7 +31,7 @@ public:
 		client_sock = socket;
 	}
 protected:
-	bool RecieveMessage();
+	bool ReceiveMessage();
 
 	bool InitializeConnection(const packet_data& data);
 	bool ReceivePhysicsUpdatePacket(const packet_data& data);

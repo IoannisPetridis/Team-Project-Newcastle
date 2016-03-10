@@ -26,14 +26,14 @@ void ClientSession::HandleConnection()
 {
 	while (is_open)
 	{
-		if (RecieveMessage())
+		if (ReceiveMessage())
 		{
 			//Yay It worked!! :D
 		}
 	}
 }
 
-bool ClientSession::RecieveMessage()
+bool ClientSession::ReceiveMessage()
 {
 	char packet_length[4];
 	int length;

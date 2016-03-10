@@ -35,12 +35,9 @@ struct gameObjectData {
 	std::string objName;
 	Vector3 position,velocity,angular;	//Calculated data
 	Quaternion  orientation;	//Calculated data
-	//bool first = false;
 	std::string ballName;
 	Vector3 ballposition,ballvelocity,ballangular;	//Calculated data
 	Quaternion  ballorientation;	//Calculated data
-	//Vector3 inpForce;	//Before-calculation data
-	//Quaternion inpOrientation; //Before-calculation data
 };
 
 struct clientInfo {
@@ -50,7 +47,6 @@ struct clientInfo {
 	std::string min;
 	std::string sec;
 	gameObjectData gameObject;
-	//std::vector<gameObjectData> gameObjects;
 };
 
 
@@ -79,10 +75,7 @@ protected:
 
 	char *message;
 	std::vector<std::string> *messageQueue;
-
 	PCSTR HOST = "10.66.67.185"; //pointer to constant string
-
-
 	time_t rawtime;
 	struct tm *timeinfo;
 };
