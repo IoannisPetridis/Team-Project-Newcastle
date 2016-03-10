@@ -33,11 +33,11 @@
 
 struct gameObjectData {
 	std::string objName;
-	Vector3 position;	//Calculated data
+	Vector3 position,velocity,angular;	//Calculated data
 	Quaternion  orientation;	//Calculated data
 	//bool first = false;
 	std::string ballName;
-	Vector3 ballposition;	//Calculated data
+	Vector3 ballposition,ballvelocity,ballangular;	//Calculated data
 	Quaternion  ballorientation;	//Calculated data
 	//Vector3 inpForce;	//Before-calculation data
 	//Quaternion inpOrientation; //Before-calculation data
@@ -76,14 +76,13 @@ protected:
 	WSAData wsaData;
 	struct addrinfo *addr;
 	SOCKET listening_sock = NULL;
+
 	char *message;
 	std::vector<std::string> *messageQueue;
-	int bytesreceived;
-	char buff[BUFFSIZE];
+
 	PCSTR HOST = "10.66.67.185"; //pointer to constant string
-	std::vector<std::string> *clientList;
-	std::vector<clientInfo*> *clients;
-	std::string last_client;	//Server knows the last client's IP
+
+
 	time_t rawtime;
 	struct tm *timeinfo;
 };

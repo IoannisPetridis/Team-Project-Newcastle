@@ -1,23 +1,39 @@
+#pragma once
 #include "Network.h"
 #include <thread>
+#include "ClientSession.h"
+#include <mutex>
+
+#define VERBOSE_MODE FALSE
+
+#define NUM_PLAYERS 4
+
 class Server : public Network {
 public:
 	Server();
 	~Server();
+
 	void _stdcall bindSocket();
 	void _stdcall listenSocket();
-	SOCKET acceptCon();
-	void  run();
-	void notify_client(SOCKET s);
-	void thread_run(SOCKET s);
-	void _stdcall receiveMessage(SOCKET sock);
-	std::string _stdcall getLastClient();
-	std::vector<std::string> * getClientList();
+
+	ClientSession* acceptCon();
+
+
+	const std::vector<ClientSession*>& getClientList();
 	SOCKET getListeningSocket();
-	SOCKET getIncSocket();
+
+	void run();
+
+	void TSUpdateReadyStatus();
+
+	void sendUpdateLoop();
+	void SendStartGamePacket();
+	std::string GetWorldPacket();
 private:
+	std::mutex mutex;
+	int ready_count = 0;
+
 	bool all_rdy = false;
-	SOCKET inc = NULL;
-	struct sockaddr_storage inc_addr;
-	socklen_t inc_size = sizeof(inc_addr);
+	std::vector<ClientSession*> clients;
+	ClientSession* foremostClient = NULL;
 };

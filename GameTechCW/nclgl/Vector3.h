@@ -113,7 +113,13 @@ public:
 	inline Vector3  operator/(const Vector3  &a) const{
 		return Vector3(x / a.x,y / a.y, z / a.z);
 	};
-
+	
+	inline void operator *= (const float v)
+	{
+		x *= v;
+		y *= v;
+		z *= v;
+	}
 	inline Vector3  operator/(const float v) const{
 		return Vector3(x / v,y / v, z / v);
 	};

@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\ncltech\Audio.cpp" />
+    <ClCompile Include="ClientSession.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyScene.cpp" />
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ncltech\Audio.h" />
+    <ClInclude Include="ClientSession.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="MyScene.h" />
     <ClInclude Include="Network.h" />

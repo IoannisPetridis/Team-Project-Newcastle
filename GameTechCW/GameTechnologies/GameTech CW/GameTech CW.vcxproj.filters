@@ -19,6 +19,9 @@
       <Filter>Threads</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ClientSession.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyScene.h" />
@@ -38,6 +41,9 @@
       <Filter>Threads</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ClientSession.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="APP">

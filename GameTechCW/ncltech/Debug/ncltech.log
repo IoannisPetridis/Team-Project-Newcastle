@@ -1,7 +1,11 @@
-﻿Build started 3/8/2016 1:04:21 PM.
+﻿Build started 3/10/2016 4:53:12 PM.
      1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\ncltech\ncltech.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp NCLDebug.cpp GameObject.cpp Hull.cpp Manifold.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ActionHandler.cpp ArbitraryAI.cpp AssetsManager.cpp CollisionDetection.cpp Constraint.cpp CuboidCollisionShape.cpp GameObject.cpp GameObjectMag.cpp GuardState.cpp HomeState.cpp Hull.cpp Manifold.cpp NCLDebug.cpp OffState.cpp PhysicsEngine.cpp PhysicsObject.cpp Player.cpp PyramidCollisionShape.cpp Scene.cpp SimpleMeshObject.cpp SphereCollisionShape.cpp
+         ActionHandler.cpp
+     1>h:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Generating Code...
+         Skipping... (no relevant changes detected)
          SphereCollisionShape.cpp
          SimpleMeshObject.cpp
          Scene.cpp
@@ -10,25 +14,18 @@
          PhysicsObject.cpp
          PhysicsEngine.cpp
          OffState.cpp
+         NCLDebug.cpp
          Manifold.cpp
          Hull.cpp
-         GameObject.cpp
-         NCLDebug.cpp
          HomeState.cpp
          GuardState.cpp
          GameObjectMag.cpp
-     1>h:\github\team-project-newcastle\gametechcw\ncltech\gameobjectmag.cpp(24): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+         GameObject.cpp
          CuboidCollisionShape.cpp
          Constraint.cpp
          CollisionDetection.cpp
          AssetsManager.cpp
          ArbitraryAI.cpp
-         Generating Code...
-     1>h:\github\team-project-newcastle\gametechcw\ncltech\physicsengine.cpp(332): warning C4715: 'PhysicsEngine::OctreeCheck' : not all control paths return a value
-         Compiling...
-         ActionHandler.cpp
-     1>h:\github\team-project-newcastle\gametechcw\ncltech\actionhandler.cpp(30): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Generating Code...
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Debug\ncltech.lib" /NOLOGO Debug\ActionHandler.obj
          Debug\ArbitraryAI.obj
@@ -56,4 +53,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:19.77
+Time Elapsed 00:00:06.29
