@@ -1,17 +1,20 @@
-﻿Build started 3/10/2016 4:51:11 PM.
-     1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" on node 2 (Build target(s)).
+﻿Build started 3/11/2016 1:34:10 AM.
+     1>Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D GLEW_STATIC /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp CubeRobot.cpp Frustum.cpp MD5Anim.cpp MD5FileData.cpp MD5Mesh.cpp MD5Node.cpp Matrix3.cpp Matrix4.cpp Mesh.cpp OBJMesh.cpp OGLRenderer.cpp Plane.cpp Quaternion.cpp SceneNode.cpp Shader.cpp Window.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D GLEW_STATIC /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp CubeRobot.cpp Frustum.cpp GameTimer.cpp Keyboard.cpp Matrix3.cpp Matrix4.cpp MD5Anim.cpp MD5FileData.cpp MD5Mesh.cpp MD5Node.cpp Mesh.cpp Mouse.cpp OBJMesh.cpp OGLRenderer.cpp Plane.cpp Quaternion.cpp SceneNode.cpp Shader.cpp Window.cpp
          Camera.cpp
          CubeRobot.cpp
          Frustum.cpp
+         GameTimer.cpp
+         Keyboard.cpp
+         Matrix3.cpp
+         Matrix4.cpp
          MD5Anim.cpp
          MD5FileData.cpp
          MD5Mesh.cpp
          MD5Node.cpp
-         Matrix3.cpp
-         Matrix4.cpp
          Mesh.cpp
+         Mouse.cpp
          OBJMesh.cpp
          OGLRenderer.cpp
      1>OGLRenderer.cpp(264): warning C4018: '<' : signed/unsigned mismatch
@@ -42,8 +45,8 @@
          Release\Shader.obj
          Release\Window.obj
          nclgl.vcxproj -> H:\GitHub\Team-Project-Newcastle\GameTechCW\GameTechnologies\Release\nclgl.lib
-     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" (Build target(s)).
+     1>Done Building Project "H:\GitHub\Team-Project-Newcastle\GameTechCW\nclgl\nclgl.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:17.30
+Time Elapsed 00:00:14.03

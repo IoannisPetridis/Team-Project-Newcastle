@@ -32,6 +32,7 @@
 
 
 struct gameObjectData {
+	int player_id;
 	std::string objName;
 	Vector3 position,velocity,angular;	//Calculated data
 	Quaternion  orientation;	//Calculated data

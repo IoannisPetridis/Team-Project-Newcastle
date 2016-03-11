@@ -6,7 +6,7 @@
 
 #define VERBOSE_MODE FALSE
 
-#define NUM_PLAYERS 4
+#define NUM_PLAYERS 1
 
 class Server : public Network {
 public:
